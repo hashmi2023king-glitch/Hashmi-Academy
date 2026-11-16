@@ -9,7 +9,7 @@
 <link rel="manifest" href="manifest.json">
 <title>Sir Haroon Javaid Hashmi Academy and College</title>
 <style>
-* { box-sizing: border-box; max-width: 100%; }
+* { box-sizing: border-box; }
 html, body {
   margin: 0;
   padding: 0;
@@ -34,6 +34,9 @@ body {
 img, video, audio, iframe, svg {
   max-width: 100%;
   height: auto;
+}
+input, select, textarea {
+  max-width: 100%;
 }
 header {
   background: linear-gradient(135deg, #071021 0%, #162e52 50%, #071021 100%);
@@ -553,82 +556,31 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
     <tr><th>Grade / Program</th><th>3 Compulsory Subjects</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
     <tr><td>Grade 9 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
     <tr><td>Grade 10 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
-    <tr><td>Grade 11 / 1st Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, PakistanMah Noor Irfan — 981 Marks (2026) 🏆</div>
-  <div style="font-size: 14px; margin-top: 8px;">Learn Today, Earn Tomorrow | 20+ Years Academic Excellence | International Tuition — $35 / $25 Per Hour</div>
-  <div style="margin-top: 14px; background: rgba(5, 11, 22, 0.82); padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.35);">
-    <p style="font-size: 14px; margin: 0 0 8px 0; color: #ffd700;">🔊 Official Academy Audio Announcement — Voice Narration & Background Music</p>
-    <button type="button" id="playAdBtn" onclick="playVoiceAd()" style="width: auto; background: #ffd700; color: #050b16; padding: 10px 18px;">▶️ Play Audio Announcement</button>
-    <button type="button" onclick="stopVoiceAd()" style="width: auto; background: #ef4444; color: #fff; padding: 10px 18px; margin-left: 6px;">⏹️ Stop Audio</button>
-    <label style="color: #cbd5e1; font-size: 13px;">Background Music Volume</label>
-    <input type="range" id="musicVol" min="0" max="100" value="20" onchange="changeMusicVol()">
-    <label style="color: #cbd5e1; font-size: 13px;">Voice Accent Selection</label>
-    <select id="voiceLang">
-      <option value="en-US">English — Standard International Accent</option>
-      <option value="en-GB">English — British Academic Accent</option>
-    </select>
-  </div>
-  <div style="margin-top: 14px;">
-    <button type="button" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})" style="width: auto; background: #ffd700; color: #050b16; padding: 10px 18px;">📝 Apply for Admission</button>
-    <button type="button" onclick="window.open('https://wa.me/923341140082?text=Greetings%20Sir%20Haroon%20Javaid%20Hashmi,%20I%20would%20like%20to%20inquire%20about%20admission%20at%20Sir%20Haroon%20Javaid%20Hashmi%20Academy%20and%20College.','_blank')" style="width: auto; background: #22c55e; color: #fff; padding: 10px 18px; margin-left: 6px;">💬 WhatsApp Inquiry</button>
-    <button type="button" onclick="window.location.href='mailto:mibraheem23king@gmail.com?subject=Admission%20Inquiry'" style="width: auto; background: #0f172a; color: #ffd700; border: 1px solid #ffd700; padding: 10px 18px; margin-left: 6px;">📧 Send Email</button>
-  </div>
-</div>
-<audio id="bgMusic" loop preload="auto"><source src="soft-music.mp3" type="audio/mpeg"></audio>
-
-<!-- MODULE 2 : ACADEMY OVERVIEW -->
-<div id="home" class="card">
-  <div style="text-align:center;">
-    <img src="Director-Sir-Haroon-Javaid-Hashmi.png" alt="Portrait of featured speaker in gold frame" class="director-photo" onerror="handleDirectorImgError(this)">
-    <h2 style="border:none; margin: 8px 0 2px 0;">Welcome to Sir Haroon Javaid Hashmi Academy and College</h2>
-    <p style="font-weight:bold; margin:2px 0; color:#ffd700;">Sir Haroon Javaid Hashmi — Founder & Director</p>
-    <p style="font-size:13px; margin:2px 0; color:#94a3b8;">Senior IELTS & English Language Trainer | 20+ Years Experience | Dhandala / Dinga, Pakistan</p>
-  </div>
-  <p><b>Our Mission:</b> Learn with discipline, speak with confidence, and work with honesty. If you learn today, you will earn tomorrow.</p>
-  <p><b>100% Board Examination Distinction:</b> Mah Noor Irfan — 981 Marks (2026) | Syed Atta Shah — 808 Marks (2025)</p>
-  <div class="gold">
-    <b>Official Institutional Credentials & Banking Information:</b><br>
-    Director: Sir Haroon Javaid Hashmi | Phone / WhatsApp: +92 334 1140082 | Email: mibraheem23king@gmail.com<br>
-    Meezan Bank Account: 98250109780704 | IBAN: PK07MEZN0098250109780704 | Title: HAROON JAVAID HASHMI (Dinga Branch)<br>
-    EasyPaisa Account: 0334-1140082 | Title: HAROON JAVAID HASHMI<br>
-    International Tuition Rates (UK/USA/Europe): Nursery–Grade 3: $35/Hour | Grade 4–8: $25/Hour | National Rates: Nursery–Grade 4: PKR 5,000/Month | Grade 5–8: PKR 6,000/Month
-  </div>
-  <p class="small"><b>Director Portrait Note:</b> Linked to file <b>Director-Sir-Haroon-Javaid-Hashmi.png</b> in your project folder.</p>
-</div>
-
-<!-- MODULE 3 : COMPLETE ACADEMIC PROGRAMS (28 COURSES) -->
-<div id="courses" class="card">
-  <h2>Academic Programs & Fee Structure — Complete Master Catalog (28 Courses)</h2>
-
-  <h3>1. Matriculation & Intermediate — National Board Classes</h3>
-  <table>
-    <tr><th>Grade / Program</th><th>3 Compulsory Subjects</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
-    <tr><td>Grade 9 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
-    <tr><td>Grade 10 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
     <tr><td>Grade 11 / 1st Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
     <tr><td>Grade 12 / 2nd Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
     <tr><td>Matric Intensive Revision (From November)</td><td>-</td><td>PKR 6,000</td><td>Complete Syllabus Revision + Past Papers + Mock Test Series</td></tr>
     <tr><td>Intermediate Intensive Revision (From January)</td><td>-</td><td>PKR 7,500</td><td>Complete Syllabus Revision + Past Papers + Mock Test Series</td></tr>
     <tr><td>Matric Supplementary Preparation</td><td>-</td><td>PKR 6,000</td><td>Fast-Track Supplementary Exam Preparation</td></tr>
     <tr><td>Intermediate Supplementary Preparation</td><td>-</td><td>PKR 7,500</td><td>Fast-Track Supplementary Exam Preparation</td></tr>
-  </table>
+  </table></div>
 
   <h3>2. Cambridge International — O-Level & A-Level</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Program</th><th>3 Subjects Package</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
     <tr><td>Cambridge O-Level</td><td>PKR 15,000</td><td>PKR 22,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer Science, Islamiyat, Pakistan Studies</td></tr>
     <tr><td>Cambridge A-Level</td><td>PKR 18,000</td><td>PKR 26,500</td><td>English, Mathematics, Physics, Chemistry, Biology, Computer Science, Economics, Business Studies</td></tr>
-  </table>
+  </table></div>
 
   <h3>3. Quranic Studies</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Program</th><th>Monthly Fee</th><th>Curriculum Details</th></tr>
     <tr><td>Quran Nazra</td><td>PKR 2,000</td><td>Fluent Quranic Recitation with Accurate Pronunciation</td></tr>
     <tr><td>Quran Tajweed</td><td>PKR 4,500</td><td>Complete Rules of Tajweed & Phonetics under Certified Qari</td></tr>
     <tr><td>Hifz-ul-Quran</td><td>PKR 5,500</td><td>Complete Memorization with Tajweed & Translation</td></tr>
-  </table>
+  </table></div>
 
   <h3>4. Languages & IELTS Certification</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Program</th><th>Course Fee</th><th>Curriculum Details</th></tr>
     <tr><td>IELTS Spoken Fluency</td><td>PKR 15,000 (Full Course)</td><td>Daily Speaking & Listening Practice + Fluency Confidence</td></tr>
     <tr><td>IELTS Academic</td><td>PKR 50,000 (Full Course)</td><td>Academic Reading, Writing, Listening & Speaking — Band 7+ Target</td></tr>
@@ -637,16 +589,16 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
     <tr><td>Spanish Spoken Language</td><td>PKR 15,000 (Full Course)</td><td>Spanish Conversation — Basic + Intermediate Levels</td></tr>
     <tr><td>Urdu Spoken & Grammar</td><td>PKR 10,000 (Full Course)</td><td>Fluency, Writing & Classical Grammar</td></tr>
     <tr><td>English Spoken & Grammar</td><td>PKR 15,000 (Full Course)</td><td>Executive English Speaking, Grammar & Public Confidence</td></tr>
-  </table>
+  </table></div>
 
   <h3>5. Competitive & Professional Entry Tests</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Program</th><th>Course Fee</th><th>Curriculum Details</th></tr>
     <tr><td>CSS / PMS Civil Services</td><td>PKR 35,000 (Full Course)</td><td>Compulsory & Optional Subjects + English Essay, Precis & Current Affairs</td></tr>
     <tr><td>Tehsildar Examination</td><td>PKR 25,000 (Full Course)</td><td>General Knowledge, English, Urdu & Quantitative Mathematics</td></tr>
     <tr><td>MDCAT (Medical Entry)</td><td>PKR 25,000 (Full Course)</td><td>Biology, Chemistry, Physics & English Logical Reasoning</td></tr>
     <tr><td>ECAT (Engineering Entry)</td><td>PKR 25,000 (Full Course)</td><td>Mathematics, Physics, Chemistry & English</td></tr>
-  </table>
+  </table></div>
 </div>
 
 <!-- MODULE 3-B : INTERNATIONAL DIASPORA TUITION -->
@@ -655,153 +607,41 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   <p><b>Dedicated One-on-One Online Tuition for Families Living in the UK, USA, and Europe — Sir Haroon Javaid Hashmi</b></p>
 
   <h3>1. United Kingdom Curriculum (England — EYFS, Key Stage 1, Key Stage 2 & Key Stage 3)</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Equivalent Level</th><th>UK Year Group</th><th>Core Subjects</th></tr>
     <tr><td>Nursery / KG</td><td>Reception / EYFS</td><td>Phonics, Numeracy, Early Literacy & Communication</td></tr>
     <tr><td>Grade 1 – 2</td><td>Year 1 – Year 2 (Key Stage 1)</td><td>English Phonics, Mathematics, Science, Reading & Writing</td></tr>
     <tr><td>Grade 3</td><td>Year 3 (Key Stage 2)</td><td>English, Mathematics, Science & SATs Foundation</td></tr>
     <tr><td>Grade 4 – 5</td><td>Year 4 – Year 5 (Key Stage 2)</td><td>English, Mathematics, Science & SATs Preparation</td></tr>
     <tr><td>Grade 6 – 8</td><td>Year 6 – Year 8 (Key Stage 3)</td><td>English, Mathematics, Science, History, Geography, SATs & 11+ Exam</td></tr>
-  </table>
+  </table></div>
 
   <h3>2. United States Curriculum (Common Core Standards — Pre-K to Grade 8)</h3>
-  <table>
-    <tr><th>Equivalent Level</th>yle="font-size: 14px; margin-top: 8px;">Learn Today, Earn Tomorrow | 20+ Years Academic Excellence | International Tuition — $35 / $25 Per Hour</div>
-  <div style="margin-top: 14px; background: rgba(5, 11, 22, 0.82); padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.35);">
-    <p style="font-size: 14px; margin: 0 0 8px 0; color: #ffd700;">🔊 Official Academy Audio Announcement — Voice Narration & Background Music</p>
-    <button type="button" id="playAdBtn" onclick="playVoiceAd()" style="width: auto; background: #ffd700; color: #050b16; padding: 10px 18px;">▶️ Play Audio Announcement</button>
-    <button type="button" onclick="stopVoiceAd()" style="width: auto; background: #ef4444; color: #fff; padding: 10px 18px; margin-left: 6px;">⏹️ Stop Audio</button>
-    <label style="color: #cbd5e1; font-size: 13px;">Background Music Volume</label>
-    <input type="range" id="musicVol" min="0" max="100" value="20" onchange="changeMusicVol()">
-    <label style="color: #cbd5e1; font-size: 13px;">Voice Accent Selection</label>
-    <select id="voiceLang">
-      <option value="en-US">English — Standard International Accent</option>
-      <option value="en-GB">English — British Academic Accent</option>
-    </select>
-  </div>
-  <div style="margin-top: 14px;">
-    <button type="button" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})" style="width: auto; background: #ffd700; color: #050b16; padding: 10px 18px;">📝 Apply for Admission</button>
-    <button type="button" onclick="window.open('https://wa.me/923341140082?text=Greetings%20Sir%20Haroon%20Javaid%20Hashmi,%20I%20would%20like%20to%20inquire%20about%20admission%20at%20Sir%20Haroon%20Javaid%20Hashmi%20Academy%20and%20College.','_blank')" style="width: auto; background: #22c55e; color: #fff; padding: 10px 18px; margin-left: 6px;">💬 WhatsApp Inquiry</button>
-    <button type="button" onclick="window.location.href='mailto:mibraheem23king@gmail.com?subject=Admission%20Inquiry'" style="width: auto; background: #0f172a; color: #ffd700; border: 1px solid #ffd700; padding: 10px 18px; margin-left: 6px;">📧 Send Email</button>
-  </div>
-</div>
-<audio id="bgMusic" loop preload="auto"><source src="soft-music.mp3" type="audio/mpeg"></audio>
-
-<!-- MODULE 2 : ACADEMY OVERVIEW -->
-<div id="home" class="card">
-  <div style="text-align:center;">
-    <img src="Director-Sir-Haroon-Javaid-Hashmi.png" alt="Portrait of featured speaker in gold frame" class="director-photo" onerror="handleDirectorImgError(this)">
-    <h2 style="border:none; margin: 8px 0 2px 0;">Welcome to Sir Haroon Javaid Hashmi Academy and College</h2>
-    <p style="font-weight:bold; margin:2px 0; color:#ffd700;">Sir Haroon Javaid Hashmi — Founder & Director</p>
-    <p style="font-size:13px; margin:2px 0; color:#94a3b8;">Senior IELTS & English Language Trainer | 20+ Years Experience | Dhandala / Dinga, Pakistan</p>
-  </div>
-  <p><b>Our Mission:</b> Learn with discipline, speak with confidence, and work with honesty. If you learn today, you will earn tomorrow.</p>
-  <p><b>100% Board Examination Distinction:</b> Mah Noor Irfan — 981 Marks (2026) | Syed Atta Shah — 808 Marks (2025)</p>
-  <div class="gold">
-    <b>Official Institutional Credentials & Banking Information:</b><br>
-    Director: Sir Haroon Javaid Hashmi | Phone / WhatsApp: +92 334 1140082 | Email: mibraheem23king@gmail.com<br>
-    Meezan Bank Account: 98250109780704 | IBAN: PK07MEZN0098250109780704 | Title: HAROON JAVAID HASHMI (Dinga Branch)<br>
-    EasyPaisa Account: 0334-1140082 | Title: HAROON JAVAID HASHMI<br>
-    International Tuition Rates (UK/USA/Europe): Nursery–Grade 3: $35/Hour | Grade 4–8: $25/Hour | National Rates: Nursery–Grade 4: PKR 5,000/Month | Grade 5–8: PKR 6,000/Month
-  </div>
-  <p class="small"><b>Director Portrait Note:</b> Linked to file <b>Director-Sir-Haroon-Javaid-Hashmi.png</b> in your project folder.</p>
-</div>
-
-<!-- MODULE 3 : COMPLETE ACADEMIC PROGRAMS (28 COURSES) -->
-<div id="courses" class="card">
-  <h2>Academic Programs & Fee Structure — Complete Master Catalog (28 Courses)</h2>
-
-  <h3>1. Matriculation & Intermediate — National Board Classes</h3>
-  <table>
-    <tr><th>Grade / Program</th><th>3 Compulsory Subjects</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
-    <tr><td>Grade 9 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
-    <tr><td>Grade 10 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
-    <tr><td>Grade 11 / 1st Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
-    <tr><td>Grade 12 / 2nd Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
-    <tr><td>Matric Intensive Revision (From November)</td><td>-</td><td>PKR 6,000</td><td>Complete Syllabus Revision + Past Papers + Mock Test Series</td></tr>
-    <tr><td>Intermediate Intensive Revision (From January)</td><td>-</td><td>PKR 7,500</td><td>Complete Syllabus Revision + Past Papers + Mock Test Series</td></tr>
-    <tr><td>Matric Supplementary Preparation</td><td>-</td><td>PKR 6,000</td><td>Fast-Track Supplementary Exam Preparation</td></tr>
-    <tr><td>Intermediate Supplementary Preparation</td><td>-</td><td>PKR 7,500</td><td>Fast-Track Supplementary Exam Preparation</td></tr>
-  </table>
-
-  <h3>2. Cambridge International — O-Level & A-Level</h3>
-  <table>
-    <tr><th>Program</th><th>3 Subjects Package</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
-    <tr><td>Cambridge O-Level</td><td>PKR 15,000</td><td>PKR 22,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer Science, Islamiyat, Pakistan Studies</td></tr>
-    <tr><td>Cambridge A-Level</td><td>PKR 18,000</td><td>PKR 26,500</td><td>English, Mathematics, Physics, Chemistry, Biology, Computer Science, Economics, Business Studies</td></tr>
-  </table>
-
-  <h3>3. Quranic Studies</h3>
-  <table>
-    <tr><th>Program</th><th>Monthly Fee</th><th>Curriculum Details</th></tr>
-    <tr><td>Quran Nazra</td><td>PKR 2,000</td><td>Fluent Quranic Recitation with Accurate Pronunciation</td></tr>
-    <tr><td>Quran Tajweed</td><td>PKR 4,500</td><td>Complete Rules of Tajweed & Phonetics under Certified Qari</td></tr>
-    <tr><td>Hifz-ul-Quran</td><td>PKR 5,500</td><td>Complete Memorization with Tajweed & Translation</td></tr>
-  </table>
-
-  <h3>4. Languages & IELTS Certification</h3>
-  <table>
-    <tr><th>Program</th><th>Course Fee</th><th>Curriculum Details</th></tr>
-    <tr><td>IELTS Spoken Fluency</td><td>PKR 15,000 (Full Course)</td><td>Daily Speaking & Listening Practice + Fluency Confidence</td></tr>
-    <tr><td>IELTS Academic</td><td>PKR 50,000 (Full Course)</td><td>Academic Reading, Writing, Listening & Speaking — Band 7+ Target</td></tr>
-    <tr><td>IELTS General Training</td><td>PKR 50,000 (Full Course)</td><td>General Module for International Immigration & Employment</td></tr>
-    <tr><td>German Spoken Language</td><td>PKR 15,000 (Full Course)</td><td>German Conversation & Grammar — A1 + A2 Levels</td></tr>
-    <tr><td>Spanish Spoken Language</td><td>PKR 15,000 (Full Course)</td><td>Spanish Conversation — Basic + Intermediate Levels</td></tr>
-    <tr><td>Urdu Spoken & Grammar</td><td>PKR 10,000 (Full Course)</td><td>Fluency, Writing & Classical Grammar</td></tr>
-    <tr><td>English Spoken & Grammar</td><td>PKR 15,000 (Full Course)</td><td>Executive English Speaking, Grammar & Public Confidence</td></tr>
-  </table>
-
-  <h3>5. Competitive & Professional Entry Tests</h3>
-  <table>
-    <tr><th>Program</th><th>Course Fee</th><th>Curriculum Details</th></tr>
-    <tr><td>CSS / PMS Civil Services</td><td>PKR 35,000 (Full Course)</td><td>Compulsory & Optional Subjects + English Essay, Precis & Current Affairs</td></tr>
-    <tr><td>Tehsildar Examination</td><td>PKR 25,000 (Full Course)</td><td>General Knowledge, English, Urdu & Quantitative Mathematics</td></tr>
-    <tr><td>MDCAT (Medical Entry)</td><td>PKR 25,000 (Full Course)</td><td>Biology, Chemistry, Physics & English Logical Reasoning</td></tr>
-    <tr><td>ECAT (Engineering Entry)</td><td>PKR 25,000 (Full Course)</td><td>Mathematics, Physics, Chemistry & English</td></tr>
-  </table>
-</div>
-
-<!-- MODULE 3-B : INTERNATIONAL DIASPORA TUITION -->
-<div id="international" class="card">
-  <h2>🌍 International Online Tuition — Nursery to Grade 8 — UK / USA / Europe Curriculum</h2>
-  <p><b>Dedicated One-on-One Online Tuition for Families Living in the UK, USA, and Europe — Sir Haroon Javaid Hashmi</b></p>
-
-  <h3>1. United Kingdom Curriculum (England — EYFS, Key Stage 1, Key Stage 2 & Key Stage 3)</h3>
-  <table>
-    <tr><th>Equivalent Level</th><th>UK Year Group</th><th>Core Subjects</th></tr>
-    <tr><td>Nursery / KG</td><td>Reception / EYFS</td><td>Phonics, Numeracy, Early Literacy & Communication</td></tr>
-    <tr><td>Grade 1 – 2</td><td>Year 1 – Year 2 (Key Stage 1)</td><td>English Phonics, Mathematics, Science, Reading & Writing</td></tr>
-    <tr><td>Grade 3</td><td>Year 3 (Key Stage 2)</td><td>English, Mathematics, Science & SATs Foundation</td></tr>
-    <tr><td>Grade 4 – 5</td><td>Year 4 – Year 5 (Key Stage 2)</td><td>English, Mathematics, Science & SATs Preparation</td></tr>
-    <tr><td>Grade 6 – 8</td><td>Year 6 – Year 8 (Key Stage 3)</td><td>English, Mathematics, Science, History, Geography, SATs & 11+ Exam</td></tr>
-  </table>
-
-  <h3>2. United States Curriculum (Common Core Standards — Pre-K to Grade 8)</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Equivalent Level</th><th>USA Grade Level</th><th>Core Subjects</th></tr>
     <tr><td>Nursery / KG</td><td>Pre-K / Kindergarten</td><td>Phonics, Numbers, Early Reading & Speaking</td></tr>
     <tr><td>Grade 1 – 2</td><td>Grade 1 – Grade 2</td><td>English Language Arts (ELA), Common Core Math, Science</td></tr>
     <tr><td>Grade 3</td><td>Grade 3</td><td>English Language Arts (ELA), Common Core Math, Science, Social Studies</td></tr>
     <tr><td>Grade 4 – 5</td><td>Grade 4 – Grade 5</td><td>English Language Arts (ELA), Common Core Math, Science, Social Studies</td></tr>
     <tr><td>Grade 6 – 8</td><td>Grade 6 – Grade 8 (Middle School)</td><td>English, Pre-Algebra / Algebra, Science, Social Studies, History</td></tr>
-  </table>
+  </table></div>
 
   <h3>3. European Curriculum (Germany / France / Spain / Italy)</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Equivalent Level</th><th>European School Level</th><th>Core Subjects</th></tr>
     <tr><td>Nursery</td><td>Kindergarten / Vorschule</td><td>Phonics, Early Numeracy & Spoken English</td></tr>
     <tr><td>Grade 1 – 3</td><td>Primary School / Grundschule</td><td>English, Mathematics, Science, Basic German / French</td></tr>
     <tr><td>Grade 4 – 8</td><td>Primary & Secondary / Gymnasium</td><td>English, Mathematics, Science, German / French / Spanish</td></tr>
-  </table>
+  </table></div>
 
   <h3>⭐ Official International & National Tuition Fee Schedule ⭐</h3>
-  <table>
+  <div class="table-responsive"><table>
     <tr><th>Student Location</th><th>Grade Level</th><th>Tuition Rate</th><th>Academic Structure</th></tr>
     <tr><td><b>UK / USA / Europe</b></td><td><b>Nursery to Grade 3</b></td><td><b>$35 / Hour</b></td><td>Intensive early-years foundational guidance and individual attention</td></tr>
     <tr><td><b>UK / USA / Europe</b></td><td><b>Grade 4 to Grade 8</b></td><td><b>$25 / Hour</b></td><td>Structured subject mastery, homework support, and exam readiness</td></tr>
     <tr><td><b>National (Pakistan)</b></td><td><b>Nursery to Grade 4</b></td><td><b>PKR 5,000 / Month</b></td><td>Comprehensive monthly tuition package</td></tr>
     <tr><td><b>National (Pakistan)</b></td><td><b>Grade 5 to Grade 8</b></td><td><b>PKR 6,000 / Month</b></td><td>Comprehensive monthly tuition package</td></tr>
-  </table>
+  </table></div>
 
   <label>International Tuition Calculator — Select Program Tier</label>
   <select id="intlType">
@@ -842,27 +682,43 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   <div class="gold" style="font-size:18px;"><b>Total Tuition Fee: PKR <span id="total">6,000</span></b></div>
 </div>
 
-<!-- MODULE 5 : FEE PAYMENT & RECEIPT GENERATOR (AUTO-ARCHIVES TO ADMIN WORKING MODULE) -->
+<!-- MODULE 5 : FEE PAYMENT & RECEIPT GENERATOR (GATED BY ADMIN APPROVAL & FEE REQUEST) -->
 <div id="payment" class="card">
-  <h2>Fee Payment & Official Receipt Generator</h2>
-  <label>Select Payment Method</label>
-  <select id="payMethod">
-    <option value="easypaisa">EasyPaisa Mobile Account / QR Scan</option>
-    <option value="bank">Meezan Bank Transfer (Local & IBAN)</option>
-    <option value="wise">Wise / Remitly / Western Union (International Remittance)</option>
-  </select>
-  <div id="payDetails" class="gold" style="margin: 10px 0;"></div>
-  <label>Student Full Name</label><input id="payName" placeholder="Enter Student Full Name">
-  <label>Enrolled Course / Grade</label><input id="payCourse" placeholder="Example: Grade 9 Full Course / International Year 3 UK">
-  <label>Amount Paid (PKR or USD)</label><input type="number" id="payAmount" placeholder="Example: 6000 or 35">
-  <label>Sender Mobile Number</label><input id="senderNo" placeholder="+92 3XX-XXXXXXX">
-  <label>Transaction Reference ID (TID)</label><input id="payTID" placeholder="Enter Official Transaction ID">
-  <div class="notice">
-    <b>Fee Policy Declaration:</b> Do you confirm your tuition payment? Once paid, tuition fees are strictly non-refundable and non-adjustable.<br>
-    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="agreePay" style="width: auto;"> I agree and confirm this payment transaction.</label><br>
-    <label>Authorized Signature (Full Name)</label><input id="paySign" placeholder="Type Full Name as Digital Signature">
+  <h2>Fee Payment & Official Receipt Generator (Approval-Gated Portal)</h2>
+  <p class="small"><b>Important Notice:</b> Tuition fees cannot be submitted via Bank or EasyPaisa until the Director/Administration approves your admission and issues an official <b>Fee Request</b>. In case of disapproval, any submitted fee is automatically subject to <b>Auto-Return</b>.</p>
+
+  <div class="gold" style="margin-bottom: 14px;">
+    <h3 style="margin-top:0; color:#ffd700;">Step 1: Verify Your Admission & Fee Request Status</h3>
+    <label>Enter Your Registered Student Full Name or Admission ID</label>
+    <input id="verifyStudentKey" placeholder="Enter Student Full Name (Exact as in Admission Form)">
+    <button type="button" onclick="checkStudentFeeGate()">🔍 Check Admission Approval & Fee Request Status</button>
+    <div id="feeGateStatusBox" style="margin-top:10px;"></div>
   </div>
-  <button type="button" onclick="generateBill()">Submit Payment & Archive Receipt in Administrative Working Module</button>
+
+  <div id="unlockedPaymentSection" class="hidden">
+    <div class="notice" style="margin-bottom:12px;">
+      ✅ <b>Admission Approved & Fee Request Active!</b> You may now proceed with your Bank or EasyPaisa payment below.
+    </div>
+    <label>Select Payment Method</label>
+    <select id="payMethod">
+      <option value="easypaisa">EasyPaisa Mobile Account / QR Scan</option>
+      <option value="bank">Meezan Bank Transfer (Local & IBAN)</option>
+      <option value="wise">Wise / Remitly / Western Union (International Remittance)</option>
+    </select>
+    <div id="payDetails" class="gold" style="margin: 10px 0;"></div>
+    <label>Student Full Name (Verified)</label><input id="payName" readonly>
+    <label>Enrolled Class & Board (Verified)</label><input id="payCourse" readonly>
+    <label>Approved Fee Request Amount (PKR or USD)</label><input type="number" id="payAmount" placeholder="Example: 6000 or 35">
+    <label>Sender Mobile Number</label><input id="senderNo" placeholder="+92 3XX-XXXXXXX">
+    <label>Transaction Reference ID (TID)</label><input id="payTID" placeholder="Enter Official Transaction ID">
+    <div class="notice">
+      <b>Fee Policy Declaration:</b> Do you confirm your tuition payment? Once paid, tuition fees are strictly non-refundable and non-adjustable.<br>
+      <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="agreePay" style="width: auto;"> I agree and confirm this payment transaction.</label><br>
+      <label>Authorized Signature (Full Name)</label><input id="paySign" placeholder="Type Full Name as Digital Signature">
+    </div>
+    <button type="button" onclick="generateBill()">Submit Payment & Confirm Enrollment ("Haan Ji, Proceed")</button>
+  </div>
+
   <p id="billMsg" class="small"></p>
   <div id="billBox" class="hidden" style="border: 2px dashed #ffd700; padding: 18px; border-radius: 12px; margin-top: 12px; background: rgba(5, 11, 22, 0.9);">
     <h3 style="text-align: center; color: #ffd700;">SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE — OFFICIAL FEE RECEIPT</h3>
@@ -966,15 +822,48 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   <button type="button" onclick="sendSyllabusToTeacher()">Archive Syllabus Breakup in Subject Library</button>
 </div>
 
-<!-- MODULE 8 : STUDENT ADMISSION REGISTRATION (AUTO-ARCHIVES TO ADMIN WORKING MODULE) -->
+<!-- MODULE 8 : STUDENT ADMISSION REGISTRATION (BOARD SELECTION + RULES LINK + APPROVAL GATE) -->
 <div id="admission" class="card">
   <h2>Official Student Admission Form — Sir Haroon Javaid Hashmi</h2>
+  <p class="small">After completing the form, please open and read the <b>Rules & Regulations</b> link below and check the mandatory agreement checkbox, otherwise your application will not be forwarded.</p>
+
   <label>Enrollment Mode</label>
   <select id="mode">
     <option>Online Live Classes</option>
     <option>On-Campus (Dinga / Dhandala)</option>
     <option>International Diaspora — UK / USA / Europe (Online)</option>
   </select>
+
+  <label>Select Class / Academic Program</label>
+  <select id="sClassSelect" onchange="updateBoardOptionsForClass()">
+    <option value="Grade 9 (Matric)">Grade 9 (Matriculation)</option>
+    <option value="Grade 10 (Matric)">Grade 10 (Matriculation)</option>
+    <option value="1st Year (Inter - FA/FSc/ICS/ICom)">1st Year (Intermediate - FA/FSc/ICS/ICom)</option>
+    <option value="2nd Year (Inter - FA/FSc/ICS/ICom)">2nd Year (Intermediate - FA/FSc/ICS/ICom)</option>
+    <option value="Cambridge O-Level">Cambridge O-Level</option>
+    <option value="Cambridge A-Level">Cambridge A-Level</option>
+    <option value="Quranic Studies (Nazra / Tajweed / Hifz)">Quranic Studies (Nazra / Tajweed / Hifz)</option>
+    <option value="IELTS & Spoken Languages">IELTS & Spoken Languages</option>
+    <option value="CSS / PMS / Tehsildar / MDCAT / ECAT">Competitive & Entry Tests (CSS / PMS / MDCAT / ECAT)</option>
+    <option value="International Tuition (Nursery to Grade 8)">International Tuition (Nursery to Grade 8 - UK/USA/Europe)</option>
+    <option value="National Primary/Middle (Nursery to Grade 8)">National Primary/Middle (Nursery to Grade 8)</option>
+  </select>
+
+  <label>⭐ Select Board / Examination Body</label>
+  <select id="sBoardSelect">
+    <option value="Punjab Board (BISE Gujranwala)">Punjab Board — BISE Gujranwala</option>
+    <option value="Punjab Board (BISE Lahore)">Punjab Board — BISE Lahore</option>
+    <option value="Punjab Board (Other Punjab Boards)">Punjab Board — Rawalpindi / Faisalabad / Multan / Sargodha</option>
+    <option value="Federal Board (FBISE Islamabad)">Federal Board — FBISE Islamabad</option>
+    <option value="AJK Board (Mirpur)">AJK Board — Mirpur</option>
+    <option value="Karachi / Sindh Board">Karachi / Sindh Board</option>
+    <option value="Cambridge Assessment International (CAIE)">Cambridge Assessment International Education (O/A Levels)</option>
+    <option value="UK National Curriculum (EYFS / KS1-3)">UK National Curriculum (England)</option>
+    <option value="USA Common Core Standards">USA Common Core Standards</option>
+    <option value="European Curriculum (Germany/France/Spain/Italy)">European Curriculum</option>
+    <option value="Academy Internal Certification Board">Academy Internal Certification</option>
+  </select>
+
   <label>Country of Residence</label>
   <select id="country">
     <option>Pakistan</option>
@@ -988,13 +877,171 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   <label>Date of Birth</label><input type="date" id="dob">
   <label>Contact / WhatsApp Number</label><input id="sPhone" placeholder="+92 3XX-XXXXXXX or International Number">
   <label>Email Address</label><input id="sEmail" placeholder="student@example.com">
-  <label>Scheduled Fee Payment Date</label><input type="date" id="feeDate">
-  <div id="rulesBox" class="gold" style="margin:10px 0;"></div>
-  <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="agree2" style="width: auto;"> I have read and agree to abide by all Academy Rules & Regulations.</label>
+  <label>Preferred Fee Payment Date</label><input type="date" id="feeDate">
+
+  <!-- RULES & REGULATIONS LINK + COLLAPSIBLE PAGE + MANDATORY GATE -->
+  <div class="gold" style="margin:14px 0; border: 2px solid #ffd700;">
+    <p style="margin:0 0 8px 0;">
+      📜 <b>Mandatory Step:</b> Please open and read the official
+      <a href="javascript:void(0)" onclick="toggleRulesPage()" style="color:#ffd700; text-decoration:underline; font-weight:bold; font-size:15px;">
+        🔗 Academy Rules & Regulations Page (Click Here to Read)
+      </a>
+    </p>
+    <div id="rulesBox" class="hidden" style="background:rgba(5,11,22,0.92); padding:14px; border-radius:10px; border:1px solid rgba(255,215,0,0.4); margin-bottom:10px;"></div>
+    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; color:#ffd700; font-size:14.5px;">
+      <input type="checkbox" id="agree2" onchange="toggleAdmissionSubmitBtn()" style="width: 18px; height: 18px;">
+      I have read the Rules & Regulations page and agree to abide by all Academy Terms
+    </label>
+  </div>
+
   <label>Student Digital Signature</label><input id="sSign" placeholder="Type Student Full Name">
   <label>Parent / Guardian Digital Signature</label><input id="pSign" placeholder="Type Parent / Guardian Full Name">
-  <button type="button" onclick="submitAdm()">Submit Official Admission & Archive Record</button>
+  <button type="button" id="submitAdmBtn" onclick="submitAdm()" disabled style="opacity:0.5; cursor:not-allowed;">🔒 Check Rules & Regulations Box Above to Forward Admission</button>
   <p id="admMsg" class="small"></p>
+  <div id="admPipelineStatusBox" style="margin-top:10px;"></div>
+</div>
+
+
+<!-- MODULE 8-B : STAFF HIRING & FACULTY RECRUITMENT PORTAL (ALL PAKISTAN) -->
+<div id="staffHiring" class="card">
+  <h2>💼 Hashmi Academy - Online Campus Pakistan — We Are Hiring Teachers (All Pakistan)</h2>
+  <p><b>Hashmi Academy - Online Campus Pakistan | Nationwide Faculty Recruitment (All Pakistan)</b></p>
+  <p>We are hiring qualified and passionate teachers across Pakistan for all programs in our Academy & App. Review the subjects below and submit your CV & Experience Letter directly on this page.</p>
+
+  <div class="gold" style="margin-bottom: 16px;">
+    <h3 style="margin-top:0; color:#ffd700;">📋 Programs & Subjects Open for Faculty Recruitment</h3>
+    <div class="table-responsive"><table>
+      <tr><th>Category</th><th>Programs & Subjects (English & Urdu)</th></tr>
+      <tr>
+        <td><b>1. National - Matric / Inter</b><br><span class="small">Grade 9, 10, 1st Year, 2nd Year (FA / FSc / ICS / ICom)</span></td>
+        <td>
+          <b>Science:</b> English, Urdu, Math, Physics, Chemistry, Biology, Computer, Islamiat, Pak Studies<br>
+          <b>Arts:</b> English, Urdu, Math, General Science, Islamiat, Pak Studies, Education, Geography, History, Economics, Civics, Psychology, Sociology, Accounting, Business<br>
+          <b>Boards:</b> Punjab, Federal, AJK, Gujranwala, Lahore, Karachi<br>
+          <span class="small">National (Matric / Inter): All Science & Arts Subjects — Punjab, Federal, AJK, Gujranwala, Lahore & Karachi Boards</span>
+        </td>
+      </tr>
+      <tr>
+        <td><b>2. Cambridge O Level / A Level</b></td>
+        <td>
+          <b>O Level:</b> English, Urdu, Math, Physics, Chemistry, Biology, Computer, Islamiat, Pak Studies<br>
+          <b>A Level:</b> English, Math, Physics, Chemistry, Biology, Computer, Economics, Business Studies<br>
+          <span class="small">All Cambridge International O-Level & A-Level Subjects</span>
+        </td>
+      </tr>
+      <tr>
+        <td><b>3. Quranic Studies</b></td>
+        <td>
+          Quran Nazra, Quran Tajweed, Hifz-ul-Quran<br>
+          <span class="small">Quran Nazra, Tajweed-ul-Quran, and Hifz-ul-Quran</span>
+        </td>
+      </tr>
+      <tr>
+        <td><b>4. Languages & IELTS</b></td>
+        <td>
+          IELTS Academic, IELTS General, IELTS Spoken Fluency, German A1 + A2, Spanish, Urdu Spoken & Grammar, English Spoken & Grammar<br>
+          <span class="small">Languages & IELTS: Academic, General, Spoken Fluency, German, Spanish, Urdu & English</span>
+        </td>
+      </tr>
+      <tr>
+        <td><b>5. Competitive & Entry Tests</b></td>
+        <td>
+          CSS / PMS, Tehsildar, MDCAT, ECAT<br>
+          <span class="small">Competitive & Entry Tests: CSS / PMS, Tehsildar, MDCAT, and ECAT</span>
+        </td>
+      </tr>
+      <tr>
+        <td><b>6. International (Nursery to Grade 8)</b></td>
+        <td>
+          <b>UK Curriculum:</b> Phonics, Numeracy, English, Math, Science, History, Geography, SATs, 11+ Exam<br>
+          <b>USA Curriculum (Common Core):</b> ELA, Common Core Math, Science, Social Studies, Pre-Algebra / Algebra, History<br>
+          <b>European Curriculum (Germany / France / Spain / Italy):</b> English, Math, Science, German, French, Spanish<br>
+          <span class="small">International Curricula (Nursery to Grade 8): UK, USA & European Standards</span>
+        </td>
+      </tr>
+    </table></div>
+  </div>
+
+  <h3>📝 International Standard Faculty Application Portal — Complete All 4 Steps</h3>
+  <p class="small">Complete your personal profile, attach your CV and academic credentials, review and accept the mandatory Online Campus Faculty Rules & Regulations, and affix your Legal Digital Signature to submit your application.</p>
+
+  <div class="gold" style="margin: 14px 0;">
+    <h4 style="margin:0 0 10px 0; color:#ffd700;">Step 1: Applicant Personal, Academic & Interview Availability Details</h4>
+    <label>Applicant Full Name *</label>
+    <input id="hrName" placeholder="Enter Your Full Legal Name">
+    <label>CNIC / National ID Number *</label>
+    <input id="hrCNIC" placeholder="34201-XXXXXXX-X">
+    <label>City / District & Province (Punjab / All Pakistan) *</label>
+    <input id="hrCity" placeholder="Example: Gujrat, Dinga, Lahore, Islamabad, Karachi...">
+    <label>Phone / WhatsApp Number (Active for Interview Call) *</label>
+    <input id="hrPhone" placeholder="+92 3XX-XXXXXXX">
+    <label>Email Address (Active for Official Correspondence) *</label>
+    <input id="hrEmail" placeholder="teacher@example.com">
+    <label>Highest Qualification & Teaching Experience *</label>
+    <input id="hrQual" placeholder="Example: M.Phil English / BS Physics — 5 Years Teaching Experience">
+    <label>Select Program Category *</label>
+    <select id="hrCategory">
+      <option>1. National - Matric / Inter (Science / Arts - All Boards)</option>
+      <option>2. Cambridge O Level / A Level</option>
+      <option>3. Quranic Studies (Nazra / Tajweed / Hifz)</option>
+      <option>4. Languages & IELTS (Academic / General / German / Spanish / English / Urdu)</option>
+      <option>5. Competitive & Entry Tests (CSS / PMS / Tehsildar / MDCAT / ECAT)</option>
+      <option>6. International Tuition (UK / USA / Europe - Nursery to Grade 8)</option>
+    </select>
+    <label>Subjects You Can Teach *</label>
+    <input id="hrSubjects" placeholder="Example: Physics, Mathematics (9th, 10th, FSc, O-Level)">
+    <label>Preferred Interview Time & Daily Availability Window *</label>
+    <input id="hrPreferredTime" placeholder="Example: Monday to Saturday, 3:00 PM – 8:00 PM PKT (or specify exact date/time)">
+    <label>Online Teaching Setup & Internet Backup *</label>
+    <select id="hrMode">
+      <option>Online Live Campus (Laptop/Tablet + High-Speed Internet & UPS/Backup)</option>
+      <option>Online Live Campus + Academic Coordination</option>
+    </select>
+  </div>
+
+  <div class="gold" style="margin: 14px 0;">
+    <h4 style="margin:0 0 8px 0; color:#ffd700;">Step 2: Mandatory Credentials & Document Attachments</h4>
+    <p class="small">Attach clear copies of your Curriculum Vitae (CV) and supporting academic/professional credentials.</p>
+    <label>1. Attach Your Updated CV / Resume (PDF / Word / Image) *</label>
+    <input type="file" id="hrCVFile" accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateAttachmentSummary()">
+    <label>2. Attach Academic Degrees / Transcripts / Credentials (Multiple Files Allowed) *</label>
+    <input type="file" id="hrCredentialsFile" multiple accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateAttachmentSummary()">
+    <label>3. Attach Experience Letters / CNIC Copy / Teaching Certificates</label>
+    <input type="file" id="hrExpFile" multiple accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateAttachmentSummary()">
+    <div id="hrAttachmentPreview" class="small" style="color:#d1fae5; margin-top:4px;"></div>
+  </div>
+
+  <label>Brief Cover Note / Teaching Summary</label>
+  <textarea id="hrNote" rows="3" placeholder="Briefly describe your teaching methodology, board expertise, and online live teaching readiness..."></textarea>
+
+  <!-- STEP 3: ONLINE CAMPUS FACULTY RULES & REGULATIONS LINK + COLLAPSIBLE LEGAL CLAUSES + MANDATORY CHECKBOX -->
+  <div class="gold" style="margin:14px 0; border: 2px solid #ffd700;">
+    <h4 style="margin:0 0 8px 0; color:#ffd700;">Step 3: Mandatory Online Campus Faculty Rules & Regulations Agreement</h4>
+    <p style="margin:0 0 8px 0;">
+      ⚖️ <b>Mandatory Legal Agreement (Online Campus Only):</b> Open and read the complete
+      <a href="javascript:void(0)" onclick="toggleFacultyRulesPage()" style="color:#ffd700; text-decoration:underline; font-weight:bold; font-size:15px;">
+        🔗 Online Campus Faculty Rules, Leave/Absentee Policy & Legal Clauses (Click Here to Read Full Legal Agreement)
+      </a>
+    </p>
+    <div id="facultyRulesBox" class="hidden" style="background:rgba(5,11,22,0.95); padding:16px; border-radius:10px; border:1px solid rgba(255,215,0,0.45); margin-bottom:12px; line-height:1.6;"></div>
+    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; color:#ffd700; font-size:14.5px;">
+      <input type="checkbox" id="agreeFacultyRules" onchange="toggleFacultySubmitBtn()" style="width: 20px; height: 20px; accent-color: #ffd700;">
+      I have read, understood, and legally accept all Online Campus Faculty Rules & Regulations (including Leave, Absenteeism, Lecture Substitution & Pay Reallocation Clauses).
+    </label>
+  </div>
+
+  <div class="gold" style="margin: 14px 0;">
+    <h4 style="margin:0 0 8px 0; color:#ffd700;">Step 4: Legal Digital Signature & Application Submission</h4>
+    <label>Applicant Legal Digital Signature (Type Your Full Name) *</label>
+    <input id="hrSign" placeholder="Type Your Full Name as Legal Digital Signature">
+    <div class="btn-row">
+      <button type="button" id="submitFacultyBtn" onclick="submitTeacherCV()" disabled style="opacity:0.5; cursor:not-allowed;">🔒 Check Online Campus Rules Box Above to Submit Application</button>
+      <button type="button" onclick="sendCVWhatsApp()" style="background:#22c55e; color:#fff;">💬 Send CV Details via WhatsApp</button>
+    </div>
+  </div>
+
+  <div id="hrWelcomeBanner" class="hidden" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(5, 11, 22, 0.95)); border: 2px solid #22c55e; border-radius: 12px; padding: 18px; margin-top: 14px; color: #f8fafc;"></div>
+  <p id="hrMsg" class="small"></p>
 </div>
 
 <!-- MODULE 9 : SUBJECT LIBRARY (CENTRALIZED ACADEMIC REPOSITORY BY SUBJECT) -->
@@ -1233,6 +1280,35 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
       <div class="stat-box">Feedback Entries<span id="statFeedback">0</span></div>
     </div>
     
+    <!-- FLOATING SPARKLING MESSAGES & BACKGROUND SOUND STUDIO (UPLOAD + LIVE EDIT + BACKUP) -->
+    <div class="gold" style="margin: 16px 0; border: 2px solid #ffd700;">
+      <h3 style="margin-top:0; color:#ffd700;">✨🎵 Floating Sparkling Messages & Background Sound Control Studio</h3>
+      <p class="small">Update your floating sparkling banner messages, upload an MP3/WAV/OGG background music or voice file directly from your phone/PC (or use the built-in Royal Ambient Melody that requires zero external files), and export/restore everything in your Database Backup.</p>
+
+      <label>1. Floating Scrolling Marquee Message (Sparkling Color-Changing Text)</label>
+      <input id="adminFloatingTextInput" value="✨🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | 🌍 International — Nursery to Grade 8 — UK / USA / Europe ✨🏆 100% Board Distinction — Mah Noor Irfan — 981 Marks (2026) ✨">
+
+      <label>2. Blinking Sub-Banner Headline</label>
+      <input id="adminSubBannerInput" value="🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | CSS | 🌍 International — Nursery to Grade 8 — UK / USA / Europe 🔥">
+
+      <label>3. Highlight Achievement Line</label>
+      <input id="adminHighlightInput" value="🏆 100% Board Examination Distinction — Mah Noor Irfan — 981 Marks (2026) 🏆">
+
+      <label>4. Voice Announcement Narration Script (Spoken Automatically When Play is Clicked)</label>
+      <textarea id="adminVoiceScriptInput" rows="3">Welcome to Sir Haroon Javaid Hashmi Academy and College. I am Sir Haroon Javaid Hashmi, Founder and Director. Admissions are now open for Matriculation, Intermediate, Cambridge O-Level, A-Level, IELTS, Quranic Studies, and International Online Tuition from Nursery to Grade 8 for the UK, USA, and European curricula. Learn today, earn tomorrow.</textarea>
+
+      <label>5. Upload Custom Background Sound / Music File (MP3, WAV, OGG, M4A)</label>
+      <input type="file" id="adminAudioFileUpload" accept="audio/*" onchange="handleAdminAudioUpload(event)">
+      <div id="adminAudioUploadStatus" class="small" style="color:#a7f3d0; margin-bottom:8px;">Current Audio Mode: Built-in Royal Ambient Synthesizer + Voice Narration (No external file needed, or upload your own audio above).</div>
+
+      <div class="btn-row">
+        <button type="button" onclick="saveFloatingBannerSettings()" style="background:#22c55e; color:#fff;">✅ Apply & Save Floating Text & Sound</button>
+        <button type="button" onclick="playVoiceAd()" style="background:#ffd700; color:#050b16;">🔊 Test Sound & Voice Preview</button>
+        <button type="button" onclick="resetAudioToBuiltIn()" style="background:#ef4444; color:#fff;">🔄 Reset to Built-in Ambient Melody</button>
+      </div>
+      <p id="adminFloatingSaveMsg" class="small"></p>
+    </div>
+
     <!-- PERMANENT DATA BACKUP & RESTORE TOOL -->
     <div class="gold" style="margin: 16px 0;">
       <h3 style="margin-top:0; color:#ffd700;">💾 Permanent Data Backup & Restore (Prevents Data Loss)</h3>
@@ -1246,6 +1322,58 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
     </div>
 
     <p class="notice">Daily Attendance Summary: Present: 45 | Absent: 5 | Daily Fee Collection: PKR 25,000</p>
+
+    <!-- ADMISSION APPROVAL, FEE REQUEST DISPATCH & AUTO-RETURN WORKFLOW -->
+    <div class="gold" style="margin: 16px 0; border: 2px solid #ffd700;">
+      <h3 style="margin-top:0; color:#ffd700;">🛡️ Admission Approval, Fee Request Dispatch & Auto-Return Control</h3>
+      <p class="small">Review forwarded student admissions below. Without Admin Approval & Fee Request dispatch, students cannot transfer fees. Disapproval automatically triggers Fee Auto-Return.</p>
+      <label>Select Student Admission Application</label>
+      <select id="adminAdmSelect" onchange="loadSelectedAdmDetails()"></select>
+      <div id="adminAdmDetailCard" class="notice" style="margin:10px 0;">No student admission selected.</div>
+      <label>Official Fee Request Amount to Send to Student (PKR or USD)</label>
+      <input type="number" id="adminFeeReqAmount" placeholder="Example: 6000">
+      <div class="btn-row">
+        <button type="button" onclick="adminApproveAndSendFeeReq()" style="background:#22c55e; color:#fff;">✅ Approve Admission & Send Fee Request</button>
+        <button type="button" onclick="adminDisapproveAndAutoReturn()" style="background:#ef4444; color:#fff;">❌ Disapprove & Auto-Return Fee</button>
+      </div>
+      <p id="adminAdmActionMsg" class="small"></p>
+    </div>
+
+    <!-- FACULTY INTERVIEW AUTOMATED SCHEDULING & NOTIFICATION DISPATCH -->
+    <div class="gold" style="margin: 16px 0; border: 2px solid #ffd700;">
+      <h3 style="margin-top:0; color:#ffd700;">💼 Automated Faculty Interview Scheduling & Instant One-Click Broadcast</h3>
+      <p class="small">Select an interview date/time below. Enable <b>Auto-Dispatch on Date Click</b> or use one-click broadcast to immediately send official interview call notifications via SMS/WhatsApp & Email to all expected/pending candidates.</p>
+      
+      <label>Target Candidates Scope</label>
+      <select id="interviewTargetScope" onchange="toggleSingleTeacherSelector()">
+        <option value="ALL_PENDING">🌟 All Pending / Shortlisted Interview Candidates (Batch Dispatch)</option>
+        <option value="SINGLE">👤 Specific Selected Applicant (Individual Dispatch)</option>
+      </select>
+
+      <div id="singleTeacherBox" class="hidden">
+        <label>Select Specific Applicant Teacher / Faculty Member</label>
+        <select id="adminTeacherSelect" onchange="loadSelectedTeacherDetails()"></select>
+      </div>
+      <div id="adminTeacherDetailCard" class="notice" style="margin:10px 0;">Ready to broadcast interview calls to all pending applicants.</div>
+
+      <label>Interview Venue / Online Platform Link</label>
+      <input id="interviewVenue" value="Online Live Campus / Director Office (Dhandala/Dinga)">
+
+      <label>📅 Click / Select Interview Date & Time (Auto-Dispatches Upon Selection)</label>
+      <input type="datetime-local" id="interviewDateTime" onchange="onInterviewDateSelected()">
+
+      <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; color:#ffd700; margin-top:4px;">
+        <input type="checkbox" id="autoTriggerOnDateClick" checked style="width:18px; height:18px;">
+        ⚡ Auto-Send Interview Call Immediately Upon Date Selection
+      </label>
+
+      <div class="btn-row" style="margin-top: 12px;">
+        <button type="button" onclick="dispatchInterviewCallSMS()" style="background:#22c55e; color:#fff;">📢 Instant Broadcast Interview Call Now</button>
+        <button type="button" onclick="dispatchInterviewRegretSMS()" style="background:#ef4444; color:#fff;">❌ Send Regret / Application Closure Notice</button>
+      </div>
+      <div id="interviewDispatchLog" class="notice" style="margin-top:10px; display:none;"></div>
+      <p id="adminTeacherActionMsg" class="small"></p>
+    </div>
 
     <div id="directorOnlyBox">
       <h3>Faculty Payroll & Deduction Calculator</h3>
@@ -1333,6 +1461,7 @@ function exportDatabase() {
   var data = {
     subjectLibrary: subjectLibraryItems,
     adminWorking: adminWorkingItems,
+    floatingBannerConfig: floatingBannerConfig,
     stats: stats,
     exportDate: new Date().toLocaleString('en-US')
   };
@@ -1362,6 +1491,11 @@ function importDatabase(event) {
         adminWorkingItems = data.adminWorking;
         localStorage.setItem('shjh_admin_working', JSON.stringify(adminWorkingItems));
       }
+      if (data.floatingBannerConfig) {
+        floatingBannerConfig = data.floatingBannerConfig;
+        localStorage.setItem('shjh_floating_banner_cfg', JSON.stringify(floatingBannerConfig));
+        applyFloatingBannerConfigToDOM();
+      }
       if (data.stats) {
         stats = data.stats;
         localStorage.setItem('lea_adm', stats.admissions);
@@ -1371,6 +1505,7 @@ function importDatabase(event) {
       }
       renderSubjectLibrary();
       renderAdminWorkingModule();
+  refreshAdminAdmDropdown();
       updateStats();
       alert('Database successfully restored from backup file!');
     } catch (err) {
@@ -1566,11 +1701,30 @@ function showPayDetails() {
 function generateBill() {
   var agree = el('agreePay');
   if (agree && !agree.checked) { alert('Please check the payment confirmation declaration box first.'); return; }
-  var name = safeVal('payName', '');
+  var name = safeVal('payName', '').trim();
   var amt = safeVal('payAmount', '');
-  var tid = safeVal('payTID', '');
-  var sign = safeVal('paySign', '');
+  var tid = safeVal('payTID', '').trim();
+  var sign = safeVal('paySign', '').trim();
   if (!name || !amt || !tid || !sign) { alert('Please enter Student Name, Amount, Transaction ID, and Digital Signature.'); return; }
+
+  // Final security check against workflow database
+  var matched = null;
+  for (var i = 0; i < studentAdmissionsWorkflow.length; i++) {
+    if (studentAdmissionsWorkflow[i].name.toLowerCase() === name.toLowerCase()) {
+      matched = studentAdmissionsWorkflow[i];
+      break;
+    }
+  }
+  if (!matched || matched.status !== 'Approved' || !matched.feeRequestSent) {
+    alert('Security Block: Fee cannot be processed without Director Admission Approval & active Fee Request. If disapproved, fee is Auto-Returned.');
+    return;
+  }
+
+  matched.paymentCompleted = true;
+  matched.proceedConfirmed = true;
+  matched.status = 'Enrolled & Fee Paid (Proceed Confirmed)';
+  saveWorkflowDB();
+
   var method = safeVal('payMethod', 'easypaisa');
   var course = safeVal('payCourse', '');
   var billNo = 'LEA-' + Math.floor(1000 + Math.random() * 9000);
@@ -1579,17 +1733,17 @@ function generateBill() {
   if (box) box.classList.remove('hidden');
   var bt = el('billText');
   if (bt) {
-    bt.innerHTML = '<b>Receipt Number:</b> ' + billNo + '<br><b>Date & Time:</b> ' + now + '<br><b>Student Name:</b> ' + name + '<br><b>Program:</b> ' + course + '<br><b>Payment Channel:</b> ' + method.toUpperCase() + '<br><b>Amount Paid:</b> ' + amt + '<br><b>Transaction ID:</b> ' + tid + '<br><b>Beneficiary:</b> HAROON JAVAID HASHMI — Meezan Bank 98250109780704 / EasyPaisa 0334-1140082<br><b>Authorized Signature:</b> ' + sign + '<br><b>Policy Notice:</b> Once paid, tuition fees are strictly non-refundable and non-adjustable.';
+    bt.innerHTML = '<b>Receipt Number:</b> ' + billNo + '<br><b>Admission ID:</b> ' + matched.id + '<br><b>Date & Time:</b> ' + now + '<br><b>Student Name:</b> ' + name + '<br><b>Program & Board:</b> ' + course + '<br><b>Payment Channel:</b> ' + method.toUpperCase() + '<br><b>Amount Paid:</b> ' + amt + '<br><b>Transaction ID:</b> ' + tid + '<br><b>Enrollment Status:</b> ✅ APPROVED & PROCEEDED ("Haan Ji, Proceed Confirmed")<br><b>Beneficiary:</b> HAROON JAVAID HASHMI — Meezan Bank 98250109780704 / EasyPaisa 0334-1140082<br><b>Authorized Signature:</b> ' + sign;
   }
-  safeSet('billMsg', 'Official Receipt Generated & Archived: ' + billNo);
+  safeSet('billMsg', '✅ Payment Verified & Proceed Confirmed! Official Receipt: ' + billNo);
   stats.bills++;
   persistAndLogAdminWork({
     id: billNo,
     category: 'Fee & Accounts Voucher',
     role: 'Accounts & Finance Office',
-    title: 'Official Fee Receipt ' + billNo + ' — ' + name,
+    title: 'Official Fee Receipt & Proceed Confirmed ' + billNo + ' — ' + name,
     party: name + ' (' + course + ')',
-    details: 'Amount: ' + amt + ' | Channel: ' + method.toUpperCase() + ' | TID: ' + tid + ' | Signed by: ' + sign,
+    details: 'Amount: ' + amt + ' | Channel: ' + method.toUpperCase() + ' | TID: ' + tid + ' | Status: Approved & Proceeded | Signed by: ' + sign,
     fileName: billNo + '.pdf',
     url: '',
     date: now
@@ -1597,39 +1751,461 @@ function generateBill() {
   saveToSheet('Fee', billNo, name, course, method, amt, tid, sign);
 }
 
+var studentAdmissionsWorkflow = JSON.parse(localStorage.getItem('shjh_admissions_workflow') || '[]');
+
+function saveWorkflowDB() {
+  localStorage.setItem('shjh_admissions_workflow', JSON.stringify(studentAdmissionsWorkflow));
+  refreshAdminAdmDropdown();
+}
+
+function updateBoardOptionsForClass() {
+  var cls = safeVal('sClassSelect', '');
+  var bSel = el('sBoardSelect');
+  if (!bSel) return;
+  if (cls.indexOf('Cambridge') !== -1) {
+    bSel.value = 'Cambridge Assessment International (CAIE)';
+  } else if (cls.indexOf('International') !== -1) {
+    bSel.value = 'UK National Curriculum (EYFS / KS1-3)';
+  } else if (cls.indexOf('Quran') !== -1 || cls.indexOf('IELTS') !== -1 || cls.indexOf('CSS') !== -1) {
+    bSel.value = 'Academy Internal Certification Board';
+  } else {
+    bSel.value = 'Punjab Board (BISE Gujranwala)';
+  }
+}
+
+function toggleRulesPage() {
+  var box = el('rulesBox');
+  if (!box) return;
+  showRules();
+  box.classList.toggle('hidden');
+}
+
+function toggleAdmissionSubmitBtn() {
+  var chk = el('agree2');
+  var btn = el('submitAdmBtn');
+  if (!chk || !btn) return;
+  if (chk.checked) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+    btn.innerText = '📤 Forward Official Admission Application to Director';
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+    btn.innerText = '🔒 Check Rules & Regulations Box Above to Forward Admission';
+  }
+}
+
 function showRules() {
   var box = el('rulesBox');
   if (!box) return;
   var mode = safeVal('mode', 'Online Live Classes');
-  var online = '<h3 style="margin-top:0; color:#ffd700;">Academy Rules & Regulations — Sir Haroon Javaid Hashmi</h3><ol><li>Join all scheduled classes punctually with full registered name and student ID.</li><li>Keep camera enabled during live interactive sessions.</li><li>Keep microphone muted unless invited to speak by the instructor.</li><li>Regular attendance is mandatory for academic progression.</li><li>Tuition fees must be cleared before the 10th of each month.</li><li>Once paid, tuition fees are strictly non-refundable and non-adjustable.</li><li>Maintain utmost respect toward faculty, staff, and fellow students.</li><li>All administrative decisions by the Director, Sir Haroon Javaid Hashmi, are final.</li></ol>';
+  var online = '<h3 style="margin-top:0; color:#ffd700;">Academy Rules & Regulations — Sir Haroon Javaid Hashmi</h3><ol><li>Join all scheduled classes punctually with full registered name and student ID.</li><li>Keep camera enabled during live interactive sessions.</li><li>Keep microphone muted unless invited to speak by the instructor.</li><li>Regular attendance is mandatory for academic progression.</li><li>Tuition fees must be cleared before the 10th of each month.</li><li>Once paid, tuition fees are strictly non-refundable and non-adjustable (except Auto-Return on admission disapproval).</li><li>Maintain utmost respect toward faculty, staff, and fellow students.</li><li>All administrative decisions by the Director, Sir Haroon Javaid Hashmi, are final.</li></ol>';
   var campus = '<h3 style="color:#ffd700;">On-Campus Code of Conduct</h3><ol><li>Adhere strictly to the prescribed academy dress code.</li><li>Any damage to academy property will be compensated by the student.</li><li>Mobile devices must remain on silent mode during lectures.</li></ol>';
   var intl = '<h3 style="color:#ffd700;">International Online Tuition Terms (UK / USA / Europe)</h3><ol><li>All sessions are conducted 1-on-1 (1 Dedicated Instructor per Student).</li><li>Hourly rates apply: $35/Hour (Nursery–Grade 3) and $25/Hour (Grade 4–8).</li><li>Tuition is payable in advance on a weekly or monthly schedule.</li><li>One complimentary introductory demo session is provided prior to enrollment.</li></ol>';
   box.innerHTML = online + (mode.indexOf('On-Campus') !== -1 ? campus : '') + (mode.indexOf('International') !== -1 ? intl : '');
 }
 
+function toggleFacultyRulesPage() {
+  var box = el('facultyRulesBox');
+  if (!box) return;
+  box.innerHTML =
+    '<h3 style="margin-top:0; color:#ffd700; border-bottom:1px solid #ffd700; padding-bottom:6px;">⚖️ ONLINE CAMPUS FACULTY SERVICE RULES, LEGAL CLAUSES & REMUNERATION POLICY</h3>' +
+    '<p class="small" style="color:#fde68a;"><b>Jurisdiction & Legal Compliance:</b> Drafted in strict accordance with the Labour, Contract & Digital Service Laws of <b>Punjab</b>, <b>Islamic Republic of Pakistan (PECA / Contract Act 1872)</b>, and <b>International Remote Employment Standards (UK / USA / EU)</b>. Applicable exclusively to <b>Online Live Campus Operations</b> (not on-site physical campus).</p>' +
+    '<ol style="font-size:13.5px; color:#e2e8f0; padding-left:20px;">' +
+      '<li><b>Scope of Engagement (Online Live Campus Only):</b> All lectures, assessments, parent briefings, and faculty duties under this agreement pertain strictly to the <b>Online Digital Campus</b> of Sir Haroon Javaid Hashmi Academy and College, and do not govern on-site physical campus operations.</li>' +
+      '<li><b>Punctuality, Technical Readiness & Live Session Conduct:</b> Instructors must join the live virtual classroom at least 5 minutes prior to the scheduled slot with uninterrupted internet, power backup, clear audio/video, and professional attire.</li>' +
+      '<li><b>Leave Policy & Prior Notice Requirement:</b> Planned leave must be applied for in writing to the Director at least <b>24 hours in advance</b>. Uninformed absence or last-minute cancellation without verifiable emergency constitutes a breach of online academic continuity.</li>' +
+      '<li><b>🚨 Absenteeism, Missed Lecture Deduction & Substitute Pay Reallocation Clause:</b> ' +
+        '<span style="color:#fca5a5;">If an assigned instructor misses a scheduled online lecture (due to unapproved absence, late joining, or technical negligence) and the administration assigns a <b>Substitute Teacher</b> to conduct that lecture so students do not suffer academic loss, the <b>full per-lecture fee/deduction for that missed session shall be automatically deducted from the absent teacher’s remuneration and transferred directly to the substitute teacher</b> who delivered the lecture.</span></li>' +
+      '<li><b>Monthly Absenteeism Threshold:</b> More than 2 unexcused absences in a calendar month will trigger proportional per-day salary deductions in addition to substitute lecture reallocations, and repeated violations may lead to immediate contract termination.</li>' +
+      '<li><b>Curriculum Delivery, Syllabus Pacing & Daily Class Diary:</b> Faculty must strictly follow the approved Board/Cambridge/International Syllabus Breakup, assign daily homework, conduct scheduled tests, and submit daily attendance and class diaries on the portal.</li>' +
+      '<li><b>Data Confidentiality & Non-Solicitation (Punjab, Pakistan & International Copyright & Privacy Laws):</b> Student contact details, parent phone numbers, recorded lectures, and academy study materials are confidential institutional assets. Contacting academy students privately or offering external tuition outside the academy platform is strictly prohibited under Pakistani & International Intellectual Property and Non-Solicitation laws, carrying immediate termination and forfeiture of pending dues.</li>' +
+      '<li><b>Credential Verification & Legal Authenticity:</b> All uploaded CVs, degrees, CNIC, and experience certificates must be 100% genuine. Submission of forged credentials will result in immediate disqualification and legal action under applicable laws of Punjab and Pakistan.</li>' +
+      '<li><b>Final Administrative Authority:</b> In all academic, scheduling, substitution, and payroll matters, the decision of the Founder & Director, <b>Sir Haroon Javaid Hashmi</b>, shall be final and binding.</li>' +
+    '</ol>';
+  box.classList.toggle('hidden');
+}
+
+function toggleFacultySubmitBtn() {
+  var chk = el('agreeFacultyRules');
+  var btn = el('submitFacultyBtn');
+  if (!chk || !btn) return;
+  if (chk.checked) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+    btn.innerText = '📤 Submit CV, Credentials & Forward Application to Director';
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+    btn.innerText = '🔒 Check Online Campus Rules Box Above to Submit Application';
+  }
+}
+
+function updateAttachmentSummary() {
+  var cvInput = el('hrCVFile');
+  var credInput = el('hrCredentialsFile');
+  var expInput = el('hrExpFile');
+  var parts = [];
+  if (cvInput && cvInput.files.length > 0) parts.push('CV: ' + cvInput.files[0].name);
+  if (credInput && credInput.files.length > 0) parts.push('Credentials: ' + credInput.files.length + ' file(s)');
+  if (expInput && expInput.files.length > 0) parts.push('Experience/Certs: ' + expInput.files.length + ' file(s)');
+  var box = el('hrAttachmentPreview');
+  if (box) {
+    box.innerHTML = parts.length > 0 ? '✅ Attached Files Ready: <b>' + parts.join(' | ') + '</b>' : '';
+  }
+}
+
+function submitTeacherCV() {
+  var agree = el('agreeFacultyRules');
+  if (!agree || !agree.checked) {
+    alert('Please open the Online Campus Faculty Rules & Regulations link and check the agreement checkbox before submitting.');
+    return;
+  }
+  var name = safeVal('hrName', '').trim();
+  var cnic = safeVal('hrCNIC', '').trim();
+  var city = safeVal('hrCity', '').trim();
+  var phone = safeVal('hrPhone', '').trim();
+  var email = safeVal('hrEmail', '').trim();
+  var qual = safeVal('hrQual', '').trim();
+  var cat = safeVal('hrCategory', '');
+  var subj = safeVal('hrSubjects', '').trim();
+  var prefTime = safeVal('hrPreferredTime', '').trim() || 'As per Academy Interview Schedule';
+  var mode = safeVal('hrMode', '');
+  var note = safeVal('hrNote', '').trim();
+  var sign = safeVal('hrSign', '').trim();
+  var cvInput = el('hrCVFile');
+  var credInput = el('hrCredentialsFile');
+  var expInput = el('hrExpFile');
+
+  if (!name || !phone || !subj || !sign) {
+    alert('Please enter your Full Name, WhatsApp/Phone Number, Teaching Subjects, and Legal Digital Signature.');
+    return;
+  }
+  if (!cvInput || cvInput.files.length === 0) {
+    alert('Please attach your updated CV / Resume file before submitting.');
+    return;
+  }
+
+  var appId = 'FAC-' + Math.floor(10000 + Math.random() * 90000);
+  var cvName = cvInput.files[0].name;
+  var cvURL = URL.createObjectURL(cvInput.files[0]);
+
+  var credNames = [];
+  if (credInput && credInput.files.length > 0) {
+    for (var i = 0; i < credInput.files.length; i++) {
+      credNames.push(credInput.files[i].name);
+    }
+  }
+  var expNames = [];
+  if (expInput && expInput.files.length > 0) {
+    for (var j = 0; j < expInput.files.length; j++) {
+      expNames.push(expInput.files[j].name);
+    }
+  }
+
+  var credSummary = credNames.length > 0 ? credNames.join(', ') : 'None attached';
+  var expSummary = expNames.length > 0 ? expNames.join(', ') : 'None attached';
+
+  persistAndLogAdminWork({
+    id: appId,
+    category: 'Faculty Assignment & Slot Order',
+    role: 'Online Campus Faculty Recruitment — All Pakistan',
+    title: 'Faculty Application & Credentials — ' + name + ' (' + subj + ')',
+    party: name + ' | CNIC: ' + (cnic || 'N/A') + ' | City: ' + (city || 'Pakistan') + ' | Phone: ' + phone,
+    details: 'App ID: ' + appId + ' | Category: ' + cat + ' | Subjects: ' + subj + ' | Qualification: ' + (qual || 'N/A') + ' | Preferred Interview Time: ' + prefTime + ' | Mode: ' + mode + ' | Email: ' + (email || 'N/A') + ' | CV: ' + cvName + ' | Credentials: ' + credSummary + ' | Exp/Certs: ' + expSummary + ' | Online Campus Rules & Substitute Deduction Clause Accepted: YES (Signed: ' + sign + ') | Note: ' + (note || 'N/A'),
+    fileName: cvName,
+    url: cvURL,
+    date: new Date().toLocaleString('en-US')
+  });
+
+  var staffRecord = {
+    id: appId,
+    name: name,
+    cnic: cnic,
+    city: city,
+    phone: phone,
+    email: email,
+    qual: qual,
+    category: cat,
+    subjects: subj,
+    preferredTime: prefTime,
+    mode: mode,
+    cvName: cvName,
+    status: 'Credentials Received — Pending Interview Review',
+    interviewDate: '',
+    date: new Date().toLocaleString('en-US')
+  };
+
+  var staffList = JSON.parse(localStorage.getItem('shjh_staff_applications') || '[]');
+  staffList.unshift(staffRecord);
+  localStorage.setItem('shjh_staff_applications', JSON.stringify(staffList));
+
+  saveToSheet('StaffHiring', name, city, phone, qual, cat, subj, cvName + ' | Creds: ' + credSummary + ' | PrefTime: ' + prefTime);
+
+  var confirmationNotice = 'Welcome to Sir Haroon Javaid Hashmi Academy and College! Dear ' + name + ', you are hereby informed that your faculty application (Reference ID: ' + appId + '), CV, credentials, and signed Online Campus Faculty Rules agreement have been successfully received by our system. After reviewing your application and credentials, our recruitment committee may call you for an interview according to your stated preferred time (' + prefTime + '), following which your hiring confirmation or regret notice will be communicated. Please keep your contact numbers (' + phone + ') active and regularly check your email (' + (email || 'registered address') + ').';
+
+  var banner = el('hrWelcomeBanner');
+  if (banner) {
+    banner.classList.remove('hidden');
+    banner.innerHTML =
+      '<h3 style="margin:0 0 8px 0; color:#22c55e;">🎉 Welcome & Official Application Acknowledgment</h3>' +
+      '<p style="margin:0 0 10px 0; line-height:1.6;">' + confirmationNotice + '</p>' +
+      '<div style="background:rgba(5,11,22,0.75); padding:10px 14px; border-radius:8px; border:1px solid rgba(255,215,0,0.35); font-size:13px;">' +
+        '<b>Application ID:</b> ' + appId + ' | <b>Applicant:</b> ' + name + '<br>' +
+        '<b>Subjects:</b> ' + subj + ' | <b>Preferred Interview Window:</b> ' + prefTime + '<br>' +
+        '<b>Attached Files:</b> ' + cvName + (credNames.length ? ' + ' + credNames.length + ' Credential(s)' : '') + (expNames.length ? ' + ' + expNames.length + ' Certificate(s)' : '') + '<br>' +
+        '<b>Legal Rules Agreement:</b> Signed & Accepted (' + sign + ')' +
+      '</div>';
+    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  safeSet('hrMsg', '✅ Application ' + appId + ' successfully forwarded to Director Sir Haroon Javaid Hashmi.');
+  alert(confirmationNotice);
+  refreshAdminTeacherDropdown();
+  toggleSingleTeacherSelector();
+}
+
+function sendCVWhatsApp() {
+  var name = safeVal('hrName', '');
+  var city = safeVal('hrCity', '');
+  var phone = safeVal('hrPhone', '');
+  var qual = safeVal('hrQual', '');
+  var cat = safeVal('hrCategory', '');
+  var subj = safeVal('hrSubjects', '');
+  var mode = safeVal('hrMode', '');
+
+  if (!name || !subj) {
+    alert('Please enter at least your Full Name and Subjects before sending via WhatsApp.');
+    return;
+  }
+
+  var msg = 'Greetings Sir Haroon Javaid Hashmi,\n' +
+            '*Faculty Hiring Application — Hashmi Academy Online Campus Pakistan*\n' +
+            '*Name:* ' + name + '\n' +
+            '*City:* ' + (city || 'Pakistan') + '\n' +
+            '*Phone:* ' + (phone || 'N/A') + '\n' +
+            '*Qualification:* ' + (qual || 'N/A') + '\n' +
+            '*Category:* ' + cat + '\n' +
+            '*Subjects:* ' + subj + '\n' +
+            '*Mode:* ' + mode + '\n' +
+            '(Attaching my CV PDF here)';
+  window.open('https://wa.me/923341140082?text=' + encodeURIComponent(msg), '_blank');
+}
+
 function submitAdm() {
   var a = el('agree2');
-  if (a && !a.checked) { alert('Please read the Rules & Regulations and check the agreement box.'); return; }
-  var sName = safeVal('sName', '');
-  var pName = safeVal('pName', '');
-  var sPhone = safeVal('sPhone', '');
+  if (!a || !a.checked) {
+    alert('Please open the Rules & Regulations page and check the agreement checkbox before forwarding your admission.');
+    return;
+  }
+  var sName = safeVal('sName', '').trim();
+  var pName = safeVal('pName', '').trim();
+  var sPhone = safeVal('sPhone', '').trim();
+  var sEmail = safeVal('sEmail', '').trim();
+  var cls = safeVal('sClassSelect', 'Grade 9 (Matric)');
+  var board = safeVal('sBoardSelect', 'Punjab Board (BISE Gujranwala)');
   var country = safeVal('country', 'Pakistan');
   var mode = safeVal('mode', 'Online Live Classes');
-  if (!sName || !sPhone) { alert('Please provide the Student Full Name and Contact Number.'); return; }
-  safeSet('admMsg', 'Admission Application Submitted & Archived! Student: ' + sName + ' | Country: ' + country);
+  var sSign = safeVal('sSign', '').trim();
+  var pSign = safeVal('pSign', '').trim();
+
+  if (!sName || !pName || !sPhone || !sSign) {
+    alert('Please complete all required student details (Student Name, Parent Name, Contact Number, and Signature) before forwarding.');
+    return;
+  }
+
+  var admId = 'ADM-' + Math.floor(10000 + Math.random() * 90000);
+  var record = {
+    id: admId,
+    name: sName,
+    parent: pName,
+    phone: sPhone,
+    email: sEmail,
+    cls: cls,
+    board: board,
+    country: country,
+    mode: mode,
+    status: 'Pending Admin Approval',
+    feeRequestSent: false,
+    requestedFeeAmount: 0,
+    paymentCompleted: false,
+    proceedConfirmed: false,
+    date: new Date().toLocaleString('en-US')
+  };
+
+  studentAdmissionsWorkflow.unshift(record);
+  saveWorkflowDB();
+
+  safeSet('admMsg', 'Admission Forwarded! ID: ' + admId + ' | Status: Pending Admin Approval.');
+  var pipeBox = el('admPipelineStatusBox');
+  if (pipeBox) {
+    pipeBox.innerHTML = '<div class="gold"><b>📋 Admission Forwarded to Director Sir Haroon Javaid Hashmi</b><br>' +
+      '<b>Admission ID:</b> ' + admId + ' | <b>Student:</b> ' + sName + '<br>' +
+      '<b>Class & Board:</b> ' + cls + ' — <b>' + board + '</b><br>' +
+      '<b>Current Status:</b> <span style="color:#ffd700;">⏳ Pending Admin Approval (Fee Request not yet issued)</span><br>' +
+      '<span class="small">Once the Director approves your admission, an official Fee Request will be sent to you, unlocking Bank / EasyPaisa fee payment.</span></div>';
+  }
+
   stats.admissions++;
   persistAndLogAdminWork({
-    id: 'ADM-' + Date.now(),
+    id: admId,
     category: 'Admission Verification File',
     role: 'Admissions & Registration Desk',
-    title: 'Student Admission Application — ' + sName,
-    party: sName + ' (Guardian: ' + (pName || 'N/A') + ')',
-    details: 'Mode: ' + mode + ' | Country: ' + country + ' | Contact: ' + sPhone + ' | Email: ' + safeVal('sEmail', 'N/A'),
+    title: 'Admission Forwarded — ' + sName + ' (' + cls + ' | ' + board + ')',
+    party: sName + ' (Guardian: ' + pName + ')',
+    details: 'Board: ' + board + ' | Mode: ' + mode + ' | Country: ' + country + ' | Contact: ' + sPhone + ' | Rules Accepted: YES',
     fileName: 'Admission_' + sName.replace(/\s+/g, '_') + '.pdf',
+    url: '',
+    date: record.date
+  });
+  saveToSheet('Admission', admId, sName, pName, sPhone, cls + ' | ' + board, mode + ' - ' + country, 'Pending Approval');
+}
+
+function refreshAdminAdmDropdown() {
+  var sel = el('adminAdmSelect');
+  if (!sel) return;
+  sel.innerHTML = '';
+  if (studentAdmissionsWorkflow.length === 0) {
+    sel.innerHTML = '<option value="">-- No student admissions forwarded yet --</option>';
+    return;
+  }
+  studentAdmissionsWorkflow.forEach(function(item, idx) {
+    var opt = document.createElement('option');
+    opt.value = idx;
+    opt.text = item.id + ' — ' + item.name + ' (' + item.cls + ' | ' + item.board + ') [' + item.status + ']';
+    sel.appendChild(opt);
+  });
+  loadSelectedAdmDetails();
+}
+
+function loadSelectedAdmDetails() {
+  var sel = el('adminAdmSelect');
+  var card = el('adminAdmDetailCard');
+  if (!sel || !card) return;
+  var idx = sel.value;
+  if (idx === '' || !studentAdmissionsWorkflow[idx]) {
+    card.innerHTML = 'No student admission selected.';
+    return;
+  }
+  var st = studentAdmissionsWorkflow[idx];
+  card.innerHTML = '<b>Student:</b> ' + st.name + ' (ID: ' + st.id + ')<br>' +
+    '<b>Parent:</b> ' + st.parent + ' | <b>Phone:</b> ' + st.phone + '<br>' +
+    '<b>Class & Board:</b> ' + st.cls + ' — <b>' + st.board + '</b><br>' +
+    '<b>Status:</b> <b>' + st.status + '</b> | <b>Fee Request Sent:</b> ' + (st.feeRequestSent ? 'YES (PKR/USD ' + st.requestedFeeAmount + ')' : 'NO') +
+    ' | <b>Payment & Proceed Confirmed:</b> ' + (st.proceedConfirmed ? '✅ YES' : 'Pending');
+}
+
+function adminApproveAndSendFeeReq() {
+  var sel = el('adminAdmSelect');
+  if (!sel || sel.value === '') { alert('Please select a student admission first.'); return; }
+  var idx = parseInt(sel.value, 10);
+  var st = studentAdmissionsWorkflow[idx];
+  var reqAmt = parseFloat(safeVal('adminFeeReqAmount', '0')) || 6000;
+
+  st.status = 'Approved';
+  st.feeRequestSent = true;
+  st.requestedFeeAmount = reqAmt;
+  saveWorkflowDB();
+
+  var msg = 'Dear ' + st.name + ' (Parent: ' + st.parent + '), Congratulations! Your admission (' + st.id + ') for ' + st.cls + ' (' + st.board + ') is APPROVED by Sir Haroon Javaid Hashmi. Official Fee Request of ' + reqAmt + ' is now active. Please complete your Bank/EasyPaisa payment on the portal to proceed.';
+  persistAndLogAdminWork({
+    id: 'FEEREQ-' + Date.now(),
+    category: 'Fee & Accounts Voucher',
+    role: 'Director — Sir Haroon Javaid Hashmi',
+    title: 'Admission Approved & Fee Request Sent — ' + st.name,
+    party: st.name + ' (' + st.phone + ')',
+    details: msg,
+    fileName: 'Fee_Request_' + st.id + '.pdf',
     url: '',
     date: new Date().toLocaleString('en-US')
   });
-  saveToSheet('Admission', sName, pName, sPhone, safeVal('sEmail', ''), mode + ' - ' + country, safeVal('feeDate', ''), safeVal('dob', ''));
+
+  safeSet('adminAdmActionMsg', '✅ Admission Approved & Official Fee Request (' + reqAmt + ') dispatched to ' + st.name + '!');
+  alert('Approved! Fee Request sent to ' + st.name + '. Student can now proceed with Bank/EasyPaisa payment.');
+}
+
+function adminDisapproveAndAutoReturn() {
+  var sel = el('adminAdmSelect');
+  if (!sel || sel.value === '') { alert('Please select a student admission first.'); return; }
+  var idx = parseInt(sel.value, 10);
+  var st = studentAdmissionsWorkflow[idx];
+
+  st.status = 'Disapproved';
+  st.feeRequestSent = false;
+  saveWorkflowDB();
+
+  persistAndLogAdminWork({
+    id: 'RET-' + Date.now(),
+    category: 'Fee & Accounts Voucher',
+    role: 'Director — Sir Haroon Javaid Hashmi',
+    title: 'Admission Disapproved & Fee Auto-Return Triggered — ' + st.name,
+    party: st.name + ' (' + st.phone + ')',
+    details: 'Admission ' + st.id + ' (' + st.cls + ' - ' + st.board + ') was DISAPPROVED. Bank/EasyPaisa fee submission blocked and any attempted fee transfer is set to AUTO-RETURN.',
+    fileName: 'Auto_Return_' + st.id + '.pdf',
+    url: '',
+    date: new Date().toLocaleString('en-US')
+  });
+
+  safeSet('adminAdmActionMsg', '❌ Admission Disapproved for ' + st.name + '. Fee submission is blocked and Auto-Return is active.');
+  alert('Admission Disapproved! Fee submission is blocked and Auto-Return is triggered.');
+}
+
+function checkStudentFeeGate() {
+  var key = safeVal('verifyStudentKey', '').trim().toLowerCase();
+  var statusBox = el('feeGateStatusBox');
+  var unlockSec = el('unlockedPaymentSection');
+  if (!key) { alert('Please enter your Registered Student Full Name or Admission ID.'); return; }
+
+  var found = null;
+  for (var i = 0; i < studentAdmissionsWorkflow.length; i++) {
+    var item = studentAdmissionsWorkflow[i];
+    if (item.name.toLowerCase() === key || item.id.toLowerCase() === key) {
+      found = item;
+      break;
+    }
+  }
+
+  if (!found) {
+    if (unlockSec) unlockSec.classList.add('hidden');
+    if (statusBox) {
+      statusBox.innerHTML = '<div style="background:rgba(239,68,68,0.18); border:1px solid #ef4444; padding:12px; border-radius:8px; color:#fca5a5;">' +
+        '⛔ <b>Access Blocked:</b> No forwarded admission record found for "<b>' + safeVal('verifyStudentKey', '') + '</b>". Please complete the Admission Form, accept Rules & Regulations, and await Admin Approval first.</div>';
+    }
+    return;
+  }
+
+  if (found.status === 'Pending Admin Approval' || !found.feeRequestSent) {
+    if (unlockSec) unlockSec.classList.add('hidden');
+    if (statusBox) {
+      statusBox.innerHTML = '<div style="background:rgba(245,158,11,0.18); border:1px solid #f59e0b; padding:12px; border-radius:8px; color:#fde68a;">' +
+        '⏳ <b>Pending Admin Approval & Fee Request:</b> Your admission (<b>' + found.id + '</b> — ' + found.cls + ' / ' + found.board + ') is awaiting Director approval. Bank/EasyPaisa transfer is locked until the Fee Request reaches you.</div>';
+    }
+    return;
+  }
+
+  if (found.status === 'Disapproved') {
+    if (unlockSec) unlockSec.classList.add('hidden');
+    if (statusBox) {
+      statusBox.innerHTML = '<div style="background:rgba(239,68,68,0.2); border:2px solid #ef4444; padding:14px; border-radius:8px; color:#fca5a5;">' +
+        '❌ <b>Admission Disapproved — FEE AUTO-RETURN ACTIVE:</b><br>' +
+        'Your admission request (<b>' + found.id + '</b> — ' + found.board + ') was disapproved by the administration.<br>' +
+        '<b>Automatic Refund Rule:</b> Bank/EasyPaisa transfer is blocked, and any submitted fee is <b>AUTOMATICALLY RETURNED (Auto-Refunded)</b> to your account.</div>';
+    }
+    return;
+  }
+
+  // APPROVED & FEE REQUEST SENT -> UNLOCK PAYMENT SECTION
+  if (statusBox) {
+    statusBox.innerHTML = '<div class="notice">✅ <b>Verified!</b> Admission <b>' + found.id + '</b> Approved | Fee Request Amount: <b>' + found.requestedFeeAmount + '</b></div>';
+  }
+  if (unlockSec) unlockSec.classList.remove('hidden');
+  if (el('payName')) el('payName').value = found.name;
+  if (el('payCourse')) el('payCourse').value = found.cls + ' — ' + found.board;
+  if (el('payAmount')) el('payAmount').value = found.requestedFeeAmount;
 }
 
 function toggleTTMode() {
@@ -1646,11 +2222,11 @@ function generateTTAuto() {
   var loc = safeVal('ttLocation', 'Online Live Portal');
   var dur = safeVal('ttDuration', '1');
   var slots = ['3:00 PM', '4:30 PM', '6:00 PM', '7:30 PM', '9:00 PM', '10:30 PM'];
-  var html = '<b>Automated Class Timetable — Location: ' + loc + ' | Faculty: ' + teachers + ' | Classes: ' + classes + '</b><br><table><tr><th>Class Group</th><th>Assigned Time Slot</th><th>Duration</th><th>Delivery Mode</th></tr>';
+  var html = '<b>Automated Class Timetable — Location: ' + loc + ' | Faculty: ' + teachers + ' | Classes: ' + classes + '</b><br><div class="table-responsive"><div class="table-responsive"><table><tr><th>Class Group</th><th>Assigned Time Slot</th><th>Duration</th><th>Delivery Mode</th></tr>';
   for (var i = 0; i < classes; i++) {
     html += '<tr><td>Batch ' + (i + 1) + '</td><td>' + (slots[i] || '9:00 PM') + '</td><td>' + dur + ' Hour(s)</td><td>' + loc + '</td></tr>';
   }
-  html += '</table>';
+  html += '</table></div>';
   var box = el('ttResult');
   if (box) box.innerHTML = html;
 
@@ -1730,7 +2306,7 @@ function generateSyllabusAuto() {
   var days = safeVal('daysPerWeek', '5');
   var perMonth = totalCh / months;
   var weeks = months * 4;
-  var html = '<b>Syllabus Pacing Plan — ' + cls + ' (' + subj + ')</b><br>Total Chapters: ' + totalCh + ' | Duration: ' + months + ' Months (' + weeks + ' Weeks) | Schedule: ' + days + ' Days/Week | ' + tests + ' Assessment(s)/Month<br><table><tr><th>Month</th><th>Syllabus Coverage</th><th>Weekly Schedule</th><th>Assessments</th><th>Academic Milestone</th></tr>';
+  var html = '<b>Syllabus Pacing Plan — ' + cls + ' (' + subj + ')</b><br>Total Chapters: ' + totalCh + ' | Duration: ' + months + ' Months (' + weeks + ' Weeks) | Schedule: ' + days + ' Days/Week | ' + tests + ' Assessment(s)/Month<br><div class="table-responsive"><table><tr><th>Month</th><th>Syllabus Coverage</th><th>Weekly Schedule</th><th>Assessments</th><th>Academic Milestone</th></tr>';
   for (var i = 1; i <= months; i++) {
     var start = Math.floor((i - 1) * perMonth) + 1;
     var end = Math.floor(i * perMonth);
@@ -1742,7 +2318,7 @@ function generateSyllabusAuto() {
                   : 'New Chapters & Weekly Practice';
     html += '<tr><td>Month ' + i + '</td><td>Chapter ' + start + ' – Chapter ' + end + '</td><td>' + days + ' Days / Week</td><td>' + tests + ' Test(s)</td><td>' + milestone + '</td></tr>';
   }
-  html += '</table>';
+  html += '</table></div>';
   var box = el('syllabusResult');
   if (box) box.innerHTML = html;
 
@@ -1800,6 +2376,8 @@ function login() {
     if (roleTitle) roleTitle.innerText = 'Executive Director Dashboard — Sir Haroon Javaid Hashmi (Full Access)';
     if (dirBox) dirBox.classList.remove('hidden');
     updateStats();
+    refreshAdminAdmDropdown();
+    refreshAdminTeacherDropdown();
     alert('Welcome Director! Executive Administration Portal Unlocked.');
   } else if (entered === 'Accountant2026@LEA') {
     if (panel) panel.classList.remove('hidden');
@@ -1932,43 +2510,229 @@ function sendEmailForm() {
   safeSet('emailSentMsg', 'Your default email client has opened. Click Send to transmit your message to Sir Haroon Javaid Hashmi.');
 }
 
+// BUILT-IN ROYAL AMBIENT MELODY SYNTHESIZER (WORKS 100% OFFLINE WITH ZERO EXTERNAL MP3 REQUIRED)
+var ambientCtx = null;
+var ambientInterval = null;
+var ambientGainNode = null;
+var isAmbientPlaying = false;
+
+var floatingBannerConfig = JSON.parse(localStorage.getItem('shjh_floating_banner_cfg') || 'null') || {
+  floatingText: '✨🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | 🌍 International — Nursery to Grade 8 — UK / USA / Europe ✨🏆 100% Board Distinction — Mah Noor Irfan — 981 Marks (2026) ✨',
+  subBannerText: '🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | CSS | 🌍 International — Nursery to Grade 8 — UK / USA / Europe 🔥',
+  highlightText: '🏆 100% Board Examination Distinction — Mah Noor Irfan — 981 Marks (2026) 🏆',
+  voiceScript: 'Welcome to Sir Haroon Javaid Hashmi Academy and College. I am Sir Haroon Javaid Hashmi, Founder and Director. Admissions are now open for Matriculation, Intermediate, Cambridge O-Level, A-Level, IELTS, Quranic Studies, and International Online Tuition from Nursery to Grade 8 for the UK, USA, and European curricula. Learn today, earn tomorrow.',
+  customAudioDataUrl: '',
+  customAudioName: ''
+};
+
+function applyFloatingBannerConfigToDOM() {
+  if (el('liveFloatingTicker')) el('liveFloatingTicker').innerText = floatingBannerConfig.floatingText;
+  if (el('liveSubBannerText')) el('liveSubBannerText').innerText = floatingBannerConfig.subBannerText;
+  if (el('liveHighlightBannerText')) el('liveHighlightBannerText').innerText = floatingBannerConfig.highlightText;
+
+  if (el('adminFloatingTextInput')) el('adminFloatingTextInput').value = floatingBannerConfig.floatingText;
+  if (el('adminSubBannerInput')) el('adminSubBannerInput').value = floatingBannerConfig.subBannerText;
+  if (el('adminHighlightInput')) el('adminHighlightInput').value = floatingBannerConfig.highlightText;
+  if (el('adminVoiceScriptInput')) el('adminVoiceScriptInput').value = floatingBannerConfig.voiceScript;
+
+  var music = el('bgMusic');
+  if (music && floatingBannerConfig.customAudioDataUrl) {
+    music.src = floatingBannerConfig.customAudioDataUrl;
+    safeSet('activeAudioSourceBadge', '🎵 Active Sound Engine: Custom Uploaded File (' + (floatingBannerConfig.customAudioName || 'Custom Audio') + ') + Voice Narration');
+    safeSet('adminAudioUploadStatus', '✅ Custom Audio Loaded & Saved: ' + (floatingBannerConfig.customAudioName || 'Custom Audio'));
+  } else {
+    if (music) music.removeAttribute('src');
+    safeSet('activeAudioSourceBadge', '🎵 Active Sound Engine: Built-in Royal Soft Ambient Melody + Voice Narration (Custom Audio Ready)');
+    safeSet('adminAudioUploadStatus', 'Current Audio Mode: Built-in Royal Ambient Synthesizer + Voice Narration (No external file needed, or upload your own audio above).');
+  }
+}
+
+function handleAdminAudioUpload(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 3.5 * 1024 * 1024) {
+    alert('Please select an audio file under 3.5 MB so it can be permanently saved in browser storage and backup JSON.');
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    floatingBannerConfig.customAudioDataUrl = e.target.result;
+    floatingBannerConfig.customAudioName = file.name;
+    localStorage.setItem('shjh_floating_banner_cfg', JSON.stringify(floatingBannerConfig));
+    applyFloatingBannerConfigToDOM();
+    alert('Audio file "' + file.name + '" uploaded and saved! Click "Test Sound & Voice Preview" to listen.');
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetAudioToBuiltIn() {
+  stopVoiceAd();
+  floatingBannerConfig.customAudioDataUrl = '';
+  floatingBannerConfig.customAudioName = '';
+  localStorage.setItem('shjh_floating_banner_cfg', JSON.stringify(floatingBannerConfig));
+  applyFloatingBannerConfigToDOM();
+  safeSet('adminFloatingSaveMsg', '✅ Reset to Built-in Royal Soft Ambient Melody.');
+}
+
+function saveFloatingBannerSettings() {
+  floatingBannerConfig.floatingText = safeVal('adminFloatingTextInput', floatingBannerConfig.floatingText);
+  floatingBannerConfig.subBannerText = safeVal('adminSubBannerInput', floatingBannerConfig.subBannerText);
+  floatingBannerConfig.highlightText = safeVal('adminHighlightInput', floatingBannerConfig.highlightText);
+  floatingBannerConfig.voiceScript = safeVal('adminVoiceScriptInput', floatingBannerConfig.voiceScript);
+  localStorage.setItem('shjh_floating_banner_cfg', JSON.stringify(floatingBannerConfig));
+  applyFloatingBannerConfigToDOM();
+  safeSet('adminFloatingSaveMsg', '✅ Floating Sparkling Text & Sound settings saved and live on banner!');
+  alert('Floating Sparkling Banner & Audio settings updated successfully!');
+}
+
+function startSoftBackgroundSound() {
+  var vol = (parseInt(safeVal('musicVol', '35'), 10) || 35) / 100;
+  var music = el('bgMusic');
+
+  // If custom uploaded audio exists, play it
+  if (music && floatingBannerConfig.customAudioDataUrl) {
+    music.volume = vol;
+    music.play().catch(function() {});
+    isAmbientPlaying = true;
+    return;
+  }
+
+  // Otherwise use built-in Web Audio API Royal Soft Ambient Melody (never fails!)
+  stopSoftBackgroundSound();
+  try {
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    ambientCtx = new AudioCtx();
+    ambientGainNode = ambientCtx.createGain();
+    ambientGainNode.gain.value = vol * 0.22;
+    ambientGainNode.connect(ambientCtx.destination);
+
+    // Gentle peaceful harmonic chord progression (Cmaj7 -> Am7 -> Fmaj7 -> G6)
+    var chords = [
+      [261.63, 329.63, 392.00, 493.88],
+      [220.00, 261.63, 329.63, 392.00],
+      [174.61, 220.00, 261.63, 329.63],
+      [196.00, 246.94, 293.66, 329.63]
+    ];
+    var step = 0;
+
+    function playChord() {
+      if (!ambientCtx || ambientCtx.state === 'closed') return;
+      var notes = chords[step % chords.length];
+      step++;
+      var now = ambientCtx.currentTime;
+      notes.forEach(function(freq) {
+        var osc = ambientCtx.createOscillator();
+        var noteGain = ambientCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        noteGain.gain.setValueAtTime(0.001, now);
+        noteGain.gain.exponentialRampToValueAtTime(0.18, now + 0.6);
+        noteGain.gain.exponentialRampToValueAtTime(0.001, now + 2.8);
+        osc.connect(noteGain);
+        noteGain.connect(ambientGainNode);
+        osc.start(now);
+        osc.stop(now + 2.9);
+      });
+    }
+
+    playChord();
+    ambientInterval = setInterval(playChord, 2800);
+    isAmbientPlaying = true;
+  } catch (e) {}
+}
+
+function stopSoftBackgroundSound() {
+  var music = el('bgMusic');
+  if (music) {
+    music.pause();
+    music.currentTime = 0;
+  }
+  if (ambientInterval) {
+    clearInterval(ambientInterval);
+    ambientInterval = null;
+  }
+  if (ambientCtx && ambientCtx.state !== 'closed') {
+    ambientCtx.close().catch(function() {});
+    ambientCtx = null;
+  }
+  isAmbientPlaying = false;
+  var mBtn = el('playMusicOnlyBtn');
+  if (mBtn) mBtn.innerText = '🎶 Play Soft Background Music';
+}
+
+function toggleBackgroundMusicOnly() {
+  if (isAmbientPlaying) {
+    stopSoftBackgroundSound();
+  } else {
+    startSoftBackgroundSound();
+    var mBtn = el('playMusicOnlyBtn');
+    if (mBtn) mBtn.innerText = '⏸️ Pause Background Music';
+  }
+}
+
 function playVoiceAd() {
   var lang = safeVal('voiceLang', 'en-US');
-  var music = el('bgMusic');
-  var vol = parseInt(safeVal('musicVol', '20'), 10) / 100;
-  if (music) { music.volume = vol; music.play().catch(function() {}); }
-  var announcementText = 'Welcome to Sir Haroon Javaid Hashmi Academy and College. I am Sir Haroon Javaid Hashmi, Founder and Director. Admissions are now open for Matriculation, Intermediate, Cambridge O-Level, A-Level, IELTS, Quranic Studies, and CSS competitive examinations. We also offer dedicated one-on-one International Online Tuition from Nursery to Grade 8 for the UK, USA, and European curricula. Nursery to Grade 3 is 35 Dollars per hour, and Grade 4 to Grade 8 is 25 Dollars per hour. Learn today, earn tomorrow. Our student Mah Noor Irfan achieved 981 marks with 100 percent board examination distinction. Enroll today by contacting plus 9 2, 3 3 4, 1 1 4 0 0 8 2. Located in Dhandala, Dinga, Pakistan.';
-  window.speechSynthesis.cancel();
-  var utter = new SpeechSynthesisUtterance(announcementText);
-  utter.lang = lang;
-  utter.rate = 0.92;
-  utter.pitch = 1;
-  utter.volume = 1;
-  utter.onend = function() {
-    if (music) music.pause();
-    var b = el('playAdBtn');
-    if (b) b.innerText = '▶️ Replay Audio Announcement';
-  };
-  var b2 = el('playAdBtn');
-  if (b2) b2.innerText = '🔊 Playing Announcement...';
-  window.speechSynthesis.speak(utter);
+  startSoftBackgroundSound();
+  var announcementText = floatingBannerConfig.voiceScript || 'Welcome to Sir Haroon Javaid Hashmi Academy and College.';
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    var utter = new SpeechSynthesisUtterance(announcementText);
+    utter.lang = lang;
+    utter.rate = 0.92;
+    utter.pitch = 1;
+    utter.volume = 1;
+    utter.onend = function() {
+      stopSoftBackgroundSound();
+      var b = el('playAdBtn');
+      if (b) b.innerText = '▶️ Replay Sound & Voice Announcement';
+    };
+    var b2 = el('playAdBtn');
+    if (b2) b2.innerText = '🔊 Playing Sound & Voice...';
+    window.speechSynthesis.speak(utter);
+  }
 }
 
 function stopVoiceAd() {
-  window.speechSynthesis.cancel();
-  var music = el('bgMusic');
-  if (music) music.pause();
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  stopSoftBackgroundSound();
   var b = el('playAdBtn');
-  if (b) b.innerText = '▶️ Play Audio Announcement';
+  if (b) b.innerText = '▶️ Play Sound & Voice Announcement';
 }
 
 function changeMusicVol() {
+  var vol = (parseInt(safeVal('musicVol', '35'), 10) || 35) / 100;
   var music = el('bgMusic');
-  if (music) music.volume = parseInt(safeVal('musicVol', '20'), 10) / 100;
+  if (music) music.volume = vol;
+  if (ambientGainNode && ambientCtx) {
+    ambientGainNode.gain.value = vol * 0.22;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   updateClocks();
+  applyFloatingBannerConfigToDOM();
+  // Smart Navigation Handler (Prevents sticky header overlap on mobile & desktop)
+  var navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          navLinks.forEach(function(l) { l.classList.remove('active-nav'); });
+          link.classList.add('active-nav');
+          var navEl = document.querySelector('nav');
+          var navHeight = navEl ? navEl.offsetHeight : 0;
+          var targetTop = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 14;
+          window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+        }
+      }
+    });
+  });
   if (el('feeSel')) el('feeSel').addEventListener('change', calcFee);
   if (el('months')) el('months').addEventListener('input', calcFee);
   if (el('payMethod')) el('payMethod').addEventListener('change', showPayDetails);
@@ -1995,6 +2759,180 @@ document.addEventListener('DOMContentLoaded', function() {
   renderAdminWorkingModule();
   updateStats();
 });
+
+
+var staffApplicationsWorkflow = JSON.parse(localStorage.getItem('shjh_staff_applications') || '[]');
+
+function refreshAdminTeacherDropdown() {
+  var sel = el('adminTeacherSelect');
+  if (!sel) return;
+  sel.innerHTML = '';
+  staffApplicationsWorkflow = JSON.parse(localStorage.getItem('shjh_staff_applications') || '[]');
+  if (staffApplicationsWorkflow.length === 0) {
+    sel.innerHTML = '<option value="">-- No faculty applications submitted yet --</option>';
+    return;
+  }
+  staffApplicationsWorkflow.forEach(function(item, idx) {
+    var opt = document.createElement('option');
+    opt.value = idx;
+    opt.text = item.id + ' — ' + item.name + ' (' + item.subjects + ') [' + item.status + ']';
+    sel.appendChild(opt);
+  });
+  loadSelectedTeacherDetails();
+}
+
+function loadSelectedTeacherDetails() {
+  var sel = el('adminTeacherSelect');
+  var card = el('adminTeacherDetailCard');
+  if (!sel || !card) return;
+  var idx = sel.value;
+  staffApplicationsWorkflow = JSON.parse(localStorage.getItem('shjh_staff_applications') || '[]');
+  if (idx === '' || !staffApplicationsWorkflow[idx]) {
+    card.innerHTML = 'No faculty applicant selected.';
+    return;
+  }
+  var t = staffApplicationsWorkflow[idx];
+  card.innerHTML = '<b>Applicant Name:</b> ' + t.name + ' (ID: ' + t.id + ')<br>' +
+    '<b>Phone/WhatsApp:</b> ' + t.phone + ' | <b>Email:</b> ' + (t.email || 'N/A') + '<br>' +
+    '<b>City:</b> ' + t.city + ' | <b>Qualification:</b> ' + t.qual + '<br>' +
+    '<b>Subjects:</b> ' + t.subjects + '<br>' +
+    '<b>Status:</b> <b>' + t.status + '</b> | <b>Scheduled Interview:</b> ' + (t.interviewDate || 'Not scheduled yet');
+}
+
+function toggleSingleTeacherSelector() {
+  var scope = safeVal('interviewTargetScope', 'ALL_PENDING');
+  var box = el('singleTeacherBox');
+  var card = el('adminTeacherDetailCard');
+  staffApplicationsWorkflow = JSON.parse(localStorage.getItem('shjh_staff_applications') || '[]');
+  if (scope === 'SINGLE') {
+    if (box) box.classList.remove('hidden');
+    loadSelectedTeacherDetails();
+  } else {
+    if (box) box.classList.add('hidden');
+    var pendingCount = staffApplicationsWorkflow.filter(function(x) {
+      return x.status.indexOf('Closed') === -1;
+    }).length;
+    if (card) {
+      card.innerHTML = '<b>Batch Mode Active:</b> <b>' + pendingCount + '</b> expected/pending faculty applicant(s) queued for instant automated interview call notification.';
+    }
+  }
+}
+
+function onInterviewDateSelected() {
+  var autoChk = el('autoTriggerOnDateClick');
+  var dt = safeVal('interviewDateTime', '');
+  if (autoChk && autoChk.checked && dt) {
+    dispatchInterviewCallSMS();
+  }
+}
+
+function dispatchInterviewCallSMS() {
+  var scope = safeVal('interviewTargetScope', 'ALL_PENDING');
+  var dt = safeVal('interviewDateTime', '');
+  var venue = safeVal('interviewVenue', 'Online Live Campus');
+  staffApplicationsWorkflow = JSON.parse(localStorage.getItem('shjh_staff_applications') || '[]');
+
+  if (!dt) { alert('Please select an Interview Date & Time.'); return; }
+  if (staffApplicationsWorkflow.length === 0) {
+    alert('No faculty applications found in the system yet.');
+    return;
+  }
+
+  var formattedDT = dt.replace('T', ' at ');
+  var recipients = [];
+
+  if (scope === 'SINGLE') {
+    var sel = el('adminTeacherSelect');
+    if (!sel || sel.value === '') { alert('Please select a faculty applicant first.'); return; }
+    var idx = parseInt(sel.value, 10);
+    if (staffApplicationsWorkflow[idx]) {
+      recipients.push(staffApplicationsWorkflow[idx]);
+    }
+  } else {
+    recipients = staffApplicationsWorkflow.filter(function(item) {
+      return item.status.indexOf('Closed') === -1;
+    });
+  }
+
+  if (recipients.length === 0) {
+    alert('No eligible pending candidates available for interview scheduling.');
+    return;
+  }
+
+  var logHtml = '<b>⚡ Automated Interview Call Dispatch Report (' + recipients.length + ' Candidate(s)):</b><br>';
+  var hist = el('smsHistory');
+  if (hist && hist.innerText.indexOf('No notifications dispatched yet') !== -1) hist.innerHTML = '';
+
+  recipients.forEach(function(t) {
+    t.status = 'Interview Scheduled';
+    t.interviewDate = formattedDT;
+
+    var notificationText = 'Dear ' + t.name + ', you are cordially invited to an official interview for ' + t.subjects + ' at Sir Haroon Javaid Hashmi Academy and College. Date & Time: ' + formattedDT + '. Venue/Link: ' + venue + '. Please ensure punctuality and keep your original credentials ready. — Director Sir Haroon Javaid Hashmi';
+
+    logHtml += '<div style="border-bottom:1px solid rgba(255,255,255,0.15); padding:6px 0;">✅ <b>' + t.name + '</b> (' + t.phone + ' | ' + t.subjects + ') — Dispatched for <b>' + formattedDT + '</b></div>';
+
+    if (hist) {
+      hist.innerHTML = '<div style="border-bottom: 1px solid rgba(255,255,255,0.15); padding: 6px 0;"><b>[INTERVIEW CALL]</b> To: Faculty — ' + t.name + ' (' + t.phone + ')<br>' + notificationText + '</div>' + hist.innerHTML;
+    }
+    stats.sms++;
+
+    persistAndLogAdminWork({
+      id: 'INT-' + Date.now() + '-' + Math.floor(Math.random()*100),
+      category: 'Faculty Assignment & Slot Order',
+      role: 'Director — Sir Haroon Javaid Hashmi',
+      title: 'Interview Call Dispatched — ' + t.name + ' (' + t.subjects + ')',
+      party: t.name + ' (' + t.phone + ')',
+      details: notificationText,
+      fileName: 'Interview_Call_' + t.id + '.pdf',
+      url: '',
+      date: new Date().toLocaleString('en-US')
+    });
+  });
+
+  localStorage.setItem('shjh_staff_applications', JSON.stringify(staffApplicationsWorkflow));
+  refreshAdminTeacherDropdown();
+  toggleSingleTeacherSelector();
+  updateStats();
+
+  var logBox = el('interviewDispatchLog');
+  if (logBox) {
+    logBox.style.display = 'block';
+    logBox.innerHTML = logHtml;
+  }
+
+  safeSet('adminTeacherActionMsg', '✅ Instant Automated Interview Call sent to ' + recipients.length + ' candidate(s) for ' + formattedDT + '!');
+  alert('Success! Automated Interview Call notifications immediately dispatched to ' + recipients.length + ' expected candidate(s) for ' + formattedDT + '.');
+}
+
+function dispatchInterviewRegretSMS() {
+  var sel = el('adminTeacherSelect');
+  if (!sel || sel.value === '') { alert('Please select a faculty applicant first.'); return; }
+  var idx = parseInt(sel.value, 10);
+  staffApplicationsWorkflow = JSON.parse(localStorage.getItem('shjh_staff_applications') || '[]');
+  var t = staffApplicationsWorkflow[idx];
+
+  t.status = 'Application Closed (Regret Notice)';
+  localStorage.setItem('shjh_staff_applications', JSON.stringify(staffApplicationsWorkflow));
+  refreshAdminTeacherDropdown();
+
+  var regretText = 'Dear ' + t.name + ', thank you for your application to Sir Haroon Javaid Hashmi Academy and College. While your credentials were appreciated, we regret to inform you that we are proceeding with other candidates at this time. We wish you the best in your future endeavors.';
+
+  persistAndLogAdminWork({
+    id: 'REG-' + Date.now(),
+    category: 'Faculty Assignment & Slot Order',
+    role: 'Director — Sir Haroon Javaid Hashmi',
+    title: 'Regret Notice Issued — ' + t.name,
+    party: t.name + ' (' + t.phone + ')',
+    details: regretText,
+    fileName: 'Regret_Notice_' + t.id + '.pdf',
+    url: '',
+    date: new Date().toLocaleString('en-US')
+  });
+
+  safeSet('adminTeacherActionMsg', '❌ Regret notice dispatched to ' + t.name + '. Application process closed.');
+  alert('Regret Notice Sent! Application closed for ' + t.name + '.');
+}
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
