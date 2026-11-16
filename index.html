@@ -290,6 +290,7 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   <a href="#timetableAuto">Timetable</a>
   <a href="#syllabusAuto">Syllabus Planner</a>
   <a href="#admission">Admission</a>
+  <a href="#staffHiring">Staff Hiring (Careers)</a>
   <a href="#subjectLibrary">Subject Library</a>
   <a href="#adminWorkingModule">Admin Working Module</a>
   <a href="#smsCenter">Notifications</a>
@@ -309,6 +310,118 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   <div class="adSub">🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | CSS | 🌍 International — Nursery to Grade 8 — UK / USA / Europe 🔥</div>
   <div style="font-size: 16px; font-weight: bold; color: #d1fae5;">🏆 100% Board Examination Distinction — Mah Noor Irfan — 981 Marks (2026) 🏆</div>
   <div style="font-size: 14px; margin-top: 8px;">Learn Today, Earn Tomorrow | 20+ Years Academic Excellence | International Tuition — $35 / $25 Per Hour</div>
+  <div style="margin-top: 14px; background: rgba(5, 11, 22, 0.82); padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.35);">
+    <p style="font-size: 14px; margin: 0 0 8px 0; color: #ffd700;">🔊 Official Academy Audio Announcement — Voice Narration & Background Music</p>
+    <button type="button" id="playAdBtn" onclick="playVoiceAd()" style="width: auto; background: #ffd700; color: #050b16; padding: 10px 18px;">▶️ Play Audio Announcement</button>
+    <button type="button" onclick="stopVoiceAd()" style="width: auto; background: #ef4444; color: #fff; padding: 10px 18px; margin-left: 6px;">⏹️ Stop Audio</button>
+    <label style="color: #cbd5e1; font-size: 13px;">Background Music Volume</label>
+    <input type="range" id="musicVol" min="0" max="100" value="20" onchange="changeMusicVol()">
+    <label style="color: #cbd5e1; font-size: 13px;">Voice Accent Selection</label>
+    <select id="voiceLang">
+      <option value="en-US">English — Standard International Accent</option>
+      <option value="en-GB">English — British Academic Accent</option>
+    </select>
+  </div>
+  <div style="margin-top: 14px;">
+    <button type="button" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})" style="width: auto; background: #ffd700; color: #050b16; padding: 10px 18px;">📝 Apply for Admission</button>
+    <button type="button" onclick="window.open('https://wa.me/923341140082?text=Greetings%20Sir%20Haroon%20Javaid%20Hashmi,%20I%20would%20like%20to%20inquire%20about%20admission%20at%20Sir%20Haroon%20Javaid%20Hashmi%20Academy%20and%20College.','_blank')" style="width: auto; background: #22c55e; color: #fff; padding: 10px 18px; margin-left: 6px;">💬 WhatsApp Inquiry</button>
+    <button type="button" onclick="window.location.href='mailto:mibraheem23king@gmail.com?subject=Admission%20Inquiry'" style="width: auto; background: #0f172a; color: #ffd700; border: 1px solid #ffd700; padding: 10px 18px; margin-left: 6px;">📧 Send Email</button>
+  </div>
+</div>
+<audio id="bgMusic" loop preload="auto"><source src="soft-music.mp3" type="audio/mpeg"></audio>
+
+<!-- MODULE 2 : ACADEMY OVERVIEW -->
+<div id="home" class="card">
+  <div style="text-align:center;">
+    <img src="Director-Sir-Haroon-Javaid-Hashmi.png" alt="Portrait of featured speaker in gold frame" class="director-photo" onerror="handleDirectorImgError(this)">
+    <h2 style="border:none; margin: 8px 0 2px 0;">Welcome to Sir Haroon Javaid Hashmi Academy and College</h2>
+    <p style="font-weight:bold; margin:2px 0; color:#ffd700;">Sir Haroon Javaid Hashmi — Founder & Director</p>
+    <p style="font-size:13px; margin:2px 0; color:#94a3b8;">Senior IELTS & English Language Trainer | 20+ Years Experience | Dhandala / Dinga, Pakistan</p>
+  </div>
+  <p><b>Our Mission:</b> Learn with discipline, speak with confidence, and work with honesty. If you learn today, you will earn tomorrow.</p>
+  <p><b>100% Board Examination Distinction:</b> Mah Noor Irfan — 981 Marks (2026) | Syed Atta Shah — 808 Marks (2025)</p>
+  <div class="gold">
+    <b>Official Institutional Credentials & Banking Information:</b><br>
+    Director: Sir Haroon Javaid Hashmi | Phone / WhatsApp: +92 334 1140082 | Email: mibraheem23king@gmail.com<br>
+    Meezan Bank Account: 98250109780704 | IBAN: PK07MEZN0098250109780704 | Title: HAROON JAVAID HASHMI (Dinga Branch)<br>
+    EasyPaisa Account: 0334-1140082 | Title: HAROON JAVAID HASHMI<br>
+    International Tuition Rates (UK/USA/Europe): Nursery–Grade 3: $35/Hour | Grade 4–8: $25/Hour | National Rates: Nursery–Grade 4: PKR 5,000/Month | Grade 5–8: PKR 6,000/Month
+  </div>
+  <p class="small"><b>Director Portrait Note:</b> Linked to file <b>Director-Sir-Haroon-Javaid-Hashmi.png</b> in your project folder.</p>
+</div>
+
+<!-- MODULE 3 : COMPLETE ACADEMIC PROGRAMS (28 COURSES) -->
+<div id="courses" class="card">
+  <h2>Academic Programs & Fee Structure — Complete Master Catalog (28 Courses)</h2>
+
+  <h3>1. Matriculation & Intermediate — National Board Classes</h3>
+  <table>
+    <tr><th>Grade / Program</th><th>3 Compulsory Subjects</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
+    <tr><td>Grade 9 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
+    <tr><td>Grade 10 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
+    <tr><td>Grade 11 / 1st Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
+    <tr><td>Grade 12 / 2nd Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
+    <tr><td>Matric Intensive Revision (From November)</td><td>-</td><td>PKR 6,000</td><td>Complete Syllabus Revision + Past Papers + Mock Test Series</td></tr>
+    <tr><td>Intermediate Intensive Revision (From January)</td><td>-</td><td>PKR 7,500</td><td>Complete Syllabus Revision + Past Papers + Mock Test Series</td></tr>
+    <tr><td>Matric Supplementary Preparation</td><td>-</td><td>PKR 6,000</td><td>Fast-Track Supplementary Exam Preparation</td></tr>
+    <tr><td>Intermediate Supplementary Preparation</td><td>-</td><td>PKR 7,500</td><td>Fast-Track Supplementary Exam Preparation</td></tr>
+  </table>
+
+  <h3>2. Cambridge International — O-Level & A-Level</h3>
+  <table>
+    <tr><th>Program</th><th>3 Subjects Package</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
+    <tr><td>Cambridge O-Level</td><td>PKR 15,000</td><td>PKR 22,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer Science, Islamiyat, Pakistan Studies</td></tr>
+    <tr><td>Cambridge A-Level</td><td>PKR 18,000</td><td>PKR 26,500</td><td>English, Mathematics, Physics, Chemistry, Biology, Computer Science, Economics, Business Studies</td></tr>
+  </table>
+
+  <h3>3. Quranic Studies</h3>
+  <table>
+    <tr><th>Program</th><th>Monthly Fee</th><th>Curriculum Details</th></tr>
+    <tr><td>Quran Nazra</td><td>PKR 2,000</td><td>Fluent Quranic Recitation with Accurate Pronunciation</td></tr>
+    <tr><td>Quran Tajweed</td><td>PKR 4,500</td><td>Complete Rules of Tajweed & Phonetics under Certified Qari</td></tr>
+    <tr><td>Hifz-ul-Quran</td><td>PKR 5,500</td><td>Complete Memorization with Tajweed & Translation</td></tr>
+  </table>
+
+  <h3>4. Languages & IELTS Certification</h3>
+  <table>
+    <tr><th>Program</th><th>Course Fee</th><th>Curriculum Details</th></tr>
+    <tr><td>IELTS Spoken Fluency</td><td>PKR 15,000 (Full Course)</td><td>Daily Speaking & Listening Practice + Fluency Confidence</td></tr>
+    <tr><td>IELTS Academic</td><td>PKR 50,000 (Full Course)</td><td>Academic Reading, Writing, Listening & Speaking — Band 7+ Target</td></tr>
+    <tr><td>IELTS General Training</td><td>PKR 50,000 (Full Course)</td><td>General Module for International Immigration & Employment</td></tr>
+    <tr><td>German Spoken Language</td><td>PKR 15,000 (Full Course)</td><td>German Conversation & Grammar — A1 + A2 Levels</td></tr>
+    <tr><td>Spanish Spoken Language</td><td>PKR 15,000 (Full Course)</td><td>Spanish Conversation — Basic + Intermediate Levels</td></tr>
+    <tr><td>Urdu Spoken & Grammar</td><td>PKR 10,000 (Full Course)</td><td>Fluency, Writing & Classical Grammar</td></tr>
+    <tr><td>English Spoken & Grammar</td><td>PKR 15,000 (Full Course)</td><td>Executive English Speaking, Grammar & Public Confidence</td></tr>
+  </table>
+
+  <h3>5. Competitive & Professional Entry Tests</h3>
+  <table>
+    <tr><th>Program</th><th>Course Fee</th><th>Curriculum Details</th></tr>
+    <tr><td>CSS / PMS Civil Services</td><td>PKR 35,000 (Full Course)</td><td>Compulsory & Optional Subjects + English Essay, Precis & Current Affairs</td></tr>
+    <tr><td>Tehsildar Examination</td><td>PKR 25,000 (Full Course)</td><td>General Knowledge, English, Urdu & Quantitative Mathematics</td></tr>
+    <tr><td>MDCAT (Medical Entry)</td><td>PKR 25,000 (Full Course)</td><td>Biology, Chemistry, Physics & English Logical Reasoning</td></tr>
+    <tr><td>ECAT (Engineering Entry)</td><td>PKR 25,000 (Full Course)</td><td>Mathematics, Physics, Chemistry & English</td></tr>
+  </table>
+</div>
+
+<!-- MODULE 3-B : INTERNATIONAL DIASPORA TUITION -->
+<div id="international" class="card">
+  <h2>🌍 International Online Tuition — Nursery to Grade 8 — UK / USA / Europe Curriculum</h2>
+  <p><b>Dedicated One-on-One Online Tuition for Families Living in the UK, USA, and Europe — Sir Haroon Javaid Hashmi</b></p>
+
+  <h3>1. United Kingdom Curriculum (England — EYFS, Key Stage 1, Key Stage 2 & Key Stage 3)</h3>
+  <table>
+    <tr><th>Equivalent Level</th><th>UK Year Group</th><th>Core Subjects</th></tr>
+    <tr><td>Nursery / KG</td><td>Reception / EYFS</td><td>Phonics, Numeracy, Early Literacy & Communication</td></tr>
+    <tr><td>Grade 1 – 2</td><td>Year 1 – Year 2 (Key Stage 1)</td><td>English Phonics, Mathematics, Science, Reading & Writing</td></tr>
+    <tr><td>Grade 3</td><td>Year 3 (Key Stage 2)</td><td>English, Mathematics, Science & SATs Foundation</td></tr>
+    <tr><td>Grade 4 – 5</td><td>Year 4 – Year 5 (Key Stage 2)</td><td>English, Mathematics, Science & SATs Preparation</td></tr>
+    <tr><td>Grade 6 – 8</td><td>Year 6 – Year 8 (Key Stage 3)</td><td>English, Mathematics, Science, History, Geography, SATs & 11+ Exam</td></tr>
+  </table>
+
+  <h3>2. United States Curriculum (Common Core Standards — Pre-K to Grade 8)</h3>
+  <table>
+    <tr><th>Equivalent Level</th>yle="font-size: 14px; margin-top: 8px;">Learn Today, Earn Tomorrow | 20+ Years Academic Excellence | International Tuition — $35 / $25 Per Hour</div>
   <div style="margin-top: 14px; background: rgba(5, 11, 22, 0.82); padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.35);">
     <p style="font-size: 14px; margin: 0 0 8px 0; color: #ffd700;">🔊 Official Academy Audio Announcement — Voice Narration & Background Music</p>
     <button type="button" id="playAdBtn" onclick="playVoiceAd()" style="width: auto; background: #ffd700; color: #050b16; padding: 10px 18px;">▶️ Play Audio Announcement</button>
