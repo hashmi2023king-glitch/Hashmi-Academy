@@ -9,13 +9,19 @@
 <link rel="manifest" href="manifest.json">
 <title>Sir Haroon Javaid Hashmi Academy and College</title>
 <style>
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
+* { box-sizing: border-box; max-width: 100%; }
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #e2e8f0;
   min-height: 100vh;
+  line-height: 1.55;
   background-color: #050b16;
   background-image:
     radial-gradient(circle at 12% 15%, rgba(212, 175, 55, 0.14) 0%, transparent 42%),
@@ -25,51 +31,74 @@ body {
     linear-gradient(160deg, #040914 0%, #0a192f 50%, #102542 100%);
   background-attachment: fixed;
 }
+img, video, audio, iframe, svg {
+  max-width: 100%;
+  height: auto;
+}
 header {
   background: linear-gradient(135deg, #071021 0%, #162e52 50%, #071021 100%);
   border-bottom: 3px solid #d4af37;
   text-align: center;
-  padding: 26px 16px;
+  padding: 24px 16px;
   box-shadow: 0 12px 38px rgba(0, 0, 0, 0.7);
   position: relative;
+  width: 100%;
 }
 header h1 {
-  margin: 10px 0 6px 0;
-  font-size: 29px;
-  letter-spacing: 1px;
+  margin: 10px auto 6px auto;
+  font-size: clamp(20px, 3.2vw, 30px);
+  letter-spacing: 0.8px;
   color: #ffd700;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  max-width: 960px;
 }
-header p { margin: 4px 0; font-weight: 600; color: #cbd5e1; }
+header p {
+  margin: 4px auto;
+  font-weight: 600;
+  color: #cbd5e1;
+  font-size: clamp(13px, 1.8vw, 15px);
+  max-width: 920px;
+}
 .clock-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  gap: 8px;
+  max-width: 960px;
+  margin: 14px auto 0 auto;
 }
 .clock-pill {
-  background: rgba(5, 11, 22, 0.85);
+  background: rgba(5, 11, 22, 0.88);
   border: 1px solid rgba(255, 215, 0, 0.45);
   color: #ffd700;
-  padding: 5px 12px;
+  padding: 6px 10px;
   border-radius: 16px;
   font-size: 12px;
   font-weight: 600;
+  text-align: center;
+}
+.card[id] {
+  scroll-margin-top: 140px;
 }
 nav {
   position: sticky;
   top: 0;
-  background: rgba(6, 13, 26, 0.96);
+  width: 100%;
+  background: rgba(6, 13, 26, 0.97);
   backdrop-filter: blur(12px);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 6px;
-  padding: 10px 8px;
-  z-index: 100;
+  padding: 10px 12px;
+  z-index: 1000;
   border-bottom: 1px solid rgba(212, 175, 55, 0.38);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+}
+nav a.active-nav {
+  background: linear-gradient(135deg, #d4af37, #ffd700) !important;
+  color: #060d1a !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
 }
 nav a {
   color: #ffd700;
@@ -80,6 +109,7 @@ nav a {
   border-radius: 20px;
   font-size: 12.5px;
   font-weight: 600;
+  white-space: nowrap;
   transition: all 0.25s ease;
 }
 nav a:hover {
@@ -87,54 +117,86 @@ nav a:hover {
   color: #060d1a;
   transform: translateY(-1px);
 }
-.wrap { max-width: 1100px; margin: auto; padding: 18px; }
+.wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 16px 20px;
+}
 .card {
-  background: linear-gradient(180deg, rgba(16, 33, 62, 0.93) 0%, rgba(10, 22, 43, 0.95) 100%);
+  width: 100%;
+  background: linear-gradient(180deg, rgba(16, 33, 62, 0.94) 0%, rgba(10, 22, 43, 0.96) 100%);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(212, 175, 55, 0.35);
   border-top: 3px solid #d4af37;
   border-radius: 16px;
-  padding: 24px;
-  margin: 20px 0;
+  padding: 26px 28px;
+  margin: 22px 0;
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.48);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 h2 {
   color: #ffd700;
   border-bottom: 2px solid rgba(212, 175, 55, 0.55);
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   margin-top: 0;
-  font-size: 22px;
+  margin-bottom: 16px;
+  font-size: clamp(18px, 2.4vw, 23px);
+  line-height: 1.35;
 }
-h3 { color: #f8fafc; margin-top: 18px; }
+h3 {
+  color: #f8fafc;
+  margin-top: 22px;
+  margin-bottom: 10px;
+  font-size: clamp(16px, 2vw, 18.5px);
+}
+p, li, div, span {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 14px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(5, 11, 22, 0.55);
+}
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 12px 0;
-  background: rgba(5, 11, 22, 0.5);
-  border-radius: 8px;
-  overflow: hidden;
+  margin: 0;
+  table-layout: auto;
 }
 th, td {
   border: 1px solid rgba(212, 175, 55, 0.24);
-  padding: 10px 12px;
+  padding: 11px 13px;
   text-align: left;
+  vertical-align: top;
   font-size: 14px;
+  line-height: 1.5;
   color: #e2e8f0;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 th {
-  background: rgba(184, 134, 11, 0.38);
+  background: rgba(184, 134, 11, 0.42);
   color: #ffd700;
   font-weight: bold;
+  letter-spacing: 0.3px;
 }
-tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+tr:nth-child(even) td { background: rgba(255, 255, 255, 0.025); }
 input, select, textarea {
   width: 100%;
+  max-width: 100%;
   padding: 11px 13px;
   margin: 6px 0 12px 0;
   border: 1px solid rgba(212, 175, 55, 0.38);
   border-radius: 8px;
   font-size: 15px;
-  background: rgba(5, 11, 22, 0.85);
+  background: rgba(5, 11, 22, 0.88);
   color: #f8fafc;
 }
 input:focus, select:focus, textarea:focus {
@@ -147,7 +209,7 @@ label {
   font-size: 14px;
   color: #cbd5e1;
   display: block;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 button {
   background: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #b8860b 100%);
@@ -165,19 +227,38 @@ button {
 }
 button:hover { filter: brightness(1.08); transform: translateY(-1px); }
 .btn-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 10px;
   margin-top: 10px;
+  width: 100%;
 }
-.btn-row button { width: auto; flex: 1; min-width: 180px; }
-.small { font-size: 13px; color: #94a3b8; }
+.btn-row button, .btn-row input, .btn-row select, .btn-row label {
+  width: 100%;
+  margin-top: 0;
+}
+.banner-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.banner-action-row button {
+  width: auto;
+  min-width: 170px;
+  margin: 0;
+}
+.small { font-size: 13px; color: #94a3b8; line-height: 1.5; }
 .gold {
-  background: rgba(212, 175, 55, 0.15);
+  width: 100%;
+  background: rgba(212, 175, 55, 0.14);
   border: 1px solid rgba(255, 215, 0, 0.42);
-  padding: 15px;
-  border-radius: 10px;
+  padding: 16px 18px;
+  border-radius: 12px;
   color: #f8fafc;
+  line-height: 1.6;
 }
 .badge {
   display: inline-block;
@@ -193,23 +274,26 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
 }
 .hidden { display: none !important; }
 .notice {
+  width: 100%;
   background: rgba(16, 185, 129, 0.13);
-  padding: 15px;
+  padding: 15px 16px;
   border-radius: 10px;
   border: 1px solid rgba(16, 185, 129, 0.38);
   color: #d1fae5;
+  line-height: 1.55;
 }
 .stat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
   margin: 14px 0;
+  width: 100%;
 }
 .stat-box {
-  background: rgba(5, 11, 22, 0.8);
+  background: rgba(5, 11, 22, 0.85);
   border: 1px solid rgba(255, 215, 0, 0.38);
   border-radius: 12px;
-  padding: 15px;
+  padding: 14px 12px;
   text-align: center;
 }
 .stat-box span {
@@ -220,8 +304,8 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   margin-top: 4px;
 }
 .director-photo {
-  width: 140px;
-  height: 140px;
+  width: 136px;
+  height: 136px;
   border-radius: 50%;
   border: 4px solid #ffd700;
   object-fit: cover;
@@ -231,8 +315,8 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   margin: 0 auto 10px auto;
 }
 .director-photo-small {
-  width: 90px;
-  height: 90px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   border: 3px solid #ffd700;
   object-fit: cover;
@@ -250,16 +334,113 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   font-size: 11px;
   font-weight: bold;
   margin-right: 6px;
+  margin-bottom: 4px;
 }
 @keyframes adMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-@keyframes adZoom { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-@keyframes adBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.65; } }
-.adTitle { font-size: 26px; font-weight: bold; color: #ffd700; text-shadow: 2px 2px 6px #000; animation: adZoom 2.4s infinite; }
-.adSub { font-size: 14.5px; color: #fff; background: rgba(5, 11, 22, 0.85); padding: 8px 16px; border-radius: 20px; display: inline-block; margin: 8px 0; border: 1px solid rgba(255, 215, 0, 0.45); animation: adBlink 1.8s infinite; }
+@keyframes adZoom { 0% { transform: scale(1); } 50% { transform: scale(1.015); } 100% { transform: scale(1); } }
+@keyframes adBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.72; } }
+@keyframes sparkleColors {
+  0% { color: #ffd700; text-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00; border-color: #ffd700; }
+  25% { color: #00f5d4; text-shadow: 0 0 10px #00f5d4, 0 0 20px #00bbf9; border-color: #00f5d4; }
+  50% { color: #ff6b6b; text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ffd166; border-color: #ff6b6b; }
+  75% { color: #c77dff; text-shadow: 0 0 10px #c77dff, 0 0 20px #e0aaff; border-color: #c77dff; }
+  100% { color: #ffd700; text-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00; border-color: #ffd700; }
+}
+@keyframes floatTicker {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.floating-marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: rgba(5, 11, 22, 0.92);
+  border: 2px solid #ffd700;
+  border-radius: 30px;
+  padding: 10px 14px;
+  margin: 12px 0;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.35);
+  animation: sparkleColors 4s infinite linear;
+}
+.floating-marquee-text {
+  display: inline-block;
+  max-width: none !important;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  animation: floatTicker 24s linear infinite, sparkleColors 4s infinite linear;
+}
+.floating-marquee-wrap:hover .floating-marquee-text {
+  animation-play-state: paused;
+}
+.adTitle {
+  font-size: clamp(19px, 3vw, 26px);
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 2px 2px 6px #000;
+  animation: adZoom 2.4s infinite;
+}
+.adSub {
+  font-size: 14px;
+  color: #fff;
+  background: rgba(5, 11, 22, 0.88);
+  padding: 10px 16px;
+  border-radius: 16px;
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  animation: adBlink 1.8s infinite;
+}
+
+/* MOBILE & TABLET RESPONSIVE PERFECTION */
+@media (max-width: 768px) {
+  header { padding: 18px 12px; }
+  .clock-bar { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .clock-pill { font-size: 11px; padding: 5px 6px; }
+  nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 8px 10px;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav a {
+    flex: 0 0 auto;
+    font-size: 12px;
+    padding: 6px 11px;
+  }
+  .wrap { padding: 10px 10px; }
+  .card {
+    padding: 16px 14px;
+    margin: 14px 0;
+    border-radius: 14px;
+  }
+  .card[id] { scroll-margin-top: 64px; }
+  .gold, .notice { padding: 12px 12px; }
+  th, td {
+    padding: 8px 9px;
+    font-size: 12.5px;
+    min-width: 105px;
+  }
+  .btn-row { grid-template-columns: 1fr; gap: 8px; }
+  .banner-action-row { flex-direction: column; width: 100%; }
+  .banner-action-row button { width: 100%; margin-left: 0 !important; }
+  .stat-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-box span { font-size: 20px; }
+}
+
+@media (max-width: 420px) {
+  .clock-bar { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr; }
+}
+
 @media print {
   body { background: #fff !important; color: #000 !important; }
   nav, header, #voiceAd, button { display: none !important; }
   .card { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; box-shadow: none !important; }
+  .table-responsive { overflow: visible !important; border: none !important; }
   th, td { color: #000 !important; border: 1px solid #999 !important; }
   th { background: #eee !important; }
 }
@@ -301,14 +482,78 @@ button:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
 <div class="wrap">
 
-<!-- MODULE 1 : AUDIO-VISUAL ANNOUNCEMENT BANNER -->
+<!-- MODULE 1 : AUDIO-VISUAL SPARKLING FLOATING BANNER -->
 <div id="voiceAd" style="background: linear-gradient(135deg, #071021, #9e7308, #162e52, #d4af37, #071021); background-size: 300% 300%; animation: adMove 5s infinite; text-align: center; color: #fff; padding: 24px 16px; border-radius: 16px; margin: 14px 0; border: 2px solid #ffd700; box-shadow: 0 12px 32px rgba(0,0,0,0.6);">
-  <div style="font-size: 20px;">⭐ ⭐ ⭐ ⭐ ⭐</div>
+  <div style="font-size: 20px;">✨ ⭐ ✨ ⭐ ✨</div>
   <img src="Director-Sir-Haroon-Javaid-Hashmi.png" alt="Portrait of featured speaker in gold frame" class="director-photo-small" onerror="handleDirectorImgError(this)">
   <div class="adTitle">SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE</div>
   <div style="font-size: 17px; font-weight: bold; margin: 6px 0; color: #ffd700;">FOUNDER & DIRECTOR: SIR HAROON JAVAID HASHMI</div>
-  <div class="adSub">🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | CSS | 🌍 International — Nursery to Grade 8 — UK / USA / Europe 🔥</div>
-  <div style="font-size: 16px; font-weight: bold; color: #d1fae5;">🏆 100% Board Examination Distinction — Mah Noor Irfan — 981 Marks (2026) 🏆</div>
+
+  <!-- SPARKLING FLOATING TEXT TICKER (EDITABLE FROM ADMIN PORTAL) -->
+  <div class="floating-marquee-wrap">
+    <div id="liveFloatingTicker" class="floating-marquee-text">
+      ✨🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | 🌍 International — Nursery to Grade 8 — UK / USA / Europe ✨🏆 100% Board Distinction — Mah Noor Irfan — 981 Marks (2026) ✨
+    </div>
+  </div>
+
+  <div id="liveSubBannerText" class="adSub">🔥 ADMISSIONS OPEN — Matric | Intermediate | O-Level | A-Level | IELTS | Quran | CSS | 🌍 International — Nursery to Grade 8 — UK / USA / Europe 🔥</div>
+  <div id="liveHighlightBannerText" style="font-size: 16px; font-weight: bold; color: #d1fae5; animation: sparkleColors 5s infinite;">🏆 100% Board Examination Distinction — Mah Noor Irfan — 981 Marks (2026) 🏆</div>
+  <div style="font-size: 14px; margin-top: 8px;">Learn Today, Earn Tomorrow | 20+ Years Academic Excellence | International Tuition — $35 / $25 Per Hour</div>
+
+  <div style="margin-top: 14px; background: rgba(5, 11, 22, 0.85); padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.45);">
+    <p style="font-size: 14px; margin: 0 0 8px 0; color: #ffd700;">🔊 Official Academy Audio Announcement — Voice Narration & Soft Background Music</p>
+    <div id="activeAudioSourceBadge" class="small" style="color:#a7f3d0; margin-bottom:8px;">🎵 Active Sound Engine: Built-in Royal Soft Ambient Melody + Voice Narration (Custom Audio Ready)</div>
+    <div class="banner-action-row">
+      <button type="button" id="playAdBtn" onclick="playVoiceAd()" style="background: #ffd700; color: #050b16; padding: 10px 18px;">▶️ Play Sound & Voice Announcement</button>
+      <button type="button" id="playMusicOnlyBtn" onclick="toggleBackgroundMusicOnly()" style="background: #0ea5e9; color: #fff; padding: 10px 18px;">🎶 Play Soft Background Music</button>
+      <button type="button" onclick="stopVoiceAd()" style="background: #ef4444; color: #fff; padding: 10px 18px;">⏹️ Stop Sound</button>
+    </div>
+    <label style="color: #cbd5e1; font-size: 13px; margin-top:10px;">Background Music Volume</label>
+    <input type="range" id="musicVol" min="0" max="100" value="35" onchange="changeMusicVol()">
+    <label style="color: #cbd5e1; font-size: 13px;">Voice Accent Selection</label>
+    <select id="voiceLang">
+      <option value="en-US">English — Standard International Accent</option>
+      <option value="en-GB">English — British Academic Accent</option>
+    </select>
+  </div>
+  <div class="banner-action-row">
+    <button type="button" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})" style="background: #ffd700; color: #050b16; padding: 10px 18px;">📝 Apply for Admission</button>
+    <button type="button" onclick="window.open('https://wa.me/923341140082?text=Greetings%20Sir%20Haroon%20Javaid%20Hashmi,%20I%20would%20like%20to%20inquire%20about%20admission%20at%20Sir%20Haroon%20Javaid%20Hashmi%20Academy%20and%20College.','_blank')" style="background: #22c55e; color: #fff; padding: 10px 18px;">💬 WhatsApp Inquiry</button>
+    <button type="button" onclick="window.location.href='mailto:mibraheem23king@gmail.com?subject=Admission%20Inquiry'" style="background: #0f172a; color: #ffd700; border: 1px solid #ffd700; padding: 10px 18px;">📧 Send Email</button>
+  </div>
+</div>
+<audio id="bgMusic" loop preload="auto"></audio>
+
+<!-- MODULE 2 : ACADEMY OVERVIEW -->
+<div id="home" class="card">
+  <div style="text-align:center;">
+    <img src="Director-Sir-Haroon-Javaid-Hashmi.png" alt="Portrait of featured speaker in gold frame" class="director-photo" onerror="handleDirectorImgError(this)">
+    <h2 style="border:none; margin: 8px 0 2px 0;">Welcome to Sir Haroon Javaid Hashmi Academy and College</h2>
+    <p style="font-weight:bold; margin:2px 0; color:#ffd700;">Sir Haroon Javaid Hashmi — Founder & Director</p>
+    <p style="font-size:13px; margin:2px 0; color:#94a3b8;">Senior IELTS & English Language Trainer | 20+ Years Experience | Dhandala / Dinga, Pakistan</p>
+  </div>
+  <p><b>Our Mission:</b> Learn with discipline, speak with confidence, and work with honesty. If you learn today, you will earn tomorrow.</p>
+  <p><b>100% Board Examination Distinction:</b> Mah Noor Irfan — 981 Marks (2026) | Syed Atta Shah — 808 Marks (2025)</p>
+  <div class="gold">
+    <b>Official Institutional Credentials & Banking Information:</b><br>
+    Director: Sir Haroon Javaid Hashmi | Phone / WhatsApp: +92 334 1140082 | Email: mibraheem23king@gmail.com<br>
+    Meezan Bank Account: 98250109780704 | IBAN: PK07MEZN0098250109780704 | Title: HAROON JAVAID HASHMI (Dinga Branch)<br>
+    EasyPaisa Account: 0334-1140082 | Title: HAROON JAVAID HASHMI<br>
+    International Tuition Rates (UK/USA/Europe): Nursery–Grade 3: $35/Hour | Grade 4–8: $25/Hour | National Rates: Nursery–Grade 4: PKR 5,000/Month | Grade 5–8: PKR 6,000/Month
+  </div>
+  <p class="small"><b>Director Portrait Note:</b> Linked to file <b>Director-Sir-Haroon-Javaid-Hashmi.png</b> in your project folder.</p>
+</div>
+
+<!-- MODULE 3 : COMPLETE ACADEMIC PROGRAMS (28 COURSES) -->
+<div id="courses" class="card">
+  <h2>Academic Programs & Fee Structure — Complete Master Catalog (28 Courses)</h2>
+
+  <h3>1. Matriculation & Intermediate — National Board Classes</h3>
+  <div class="table-responsive"><table>
+    <tr><th>Grade / Program</th><th>3 Compulsory Subjects</th><th>Full Course Fee</th><th>Curriculum Details</th></tr>
+    <tr><td>Grade 9 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
+    <tr><td>Grade 10 (Matric)</td><td>PKR 2,100</td><td>PKR 6,000</td><td>English, Urdu, Mathematics, General Science, Physics, Chemistry, Biology, Computer, Islamiyat, Pakistan Studies</td></tr>
+    <tr><td>Grade 11 / 1st Year (FA / FSc / ICS / ICom)</td><td>PKR 2,400</td><td>PKR 7,500</td><td>English, Urdu, Mathematics, Physics, Chemistry, Biology, Computer, Islamiyat, PakistanMah Noor Irfan — 981 Marks (2026) 🏆</div>
   <div style="font-size: 14px; margin-top: 8px;">Learn Today, Earn Tomorrow | 20+ Years Academic Excellence | International Tuition — $35 / $25 Per Hour</div>
   <div style="margin-top: 14px; background: rgba(5, 11, 22, 0.82); padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.35);">
     <p style="font-size: 14px; margin: 0 0 8px 0; color: #ffd700;">🔊 Official Academy Audio Announcement — Voice Narration & Background Music</p>
