@@ -1,1 +1,381 @@
 
+<!-- 2. PAKISTANI STUDENT PORTAL -->
+  <div id="portalPakistan" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark" style="width:auto; margin:0;" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+      </div>
+      <h2>🇵🇰 Pakistani Student Portal — Admissions & Classroom Access</h2>
+      <p class="small">New students must read academy regulations and submit the Official Admission Form below to receive their Student ID.</p>
+
+      <div class="gold" style="margin-top:16px; border:2px solid #059669;">
+        <h3 style="margin-top:0; color:#047857;">📝 Official Student Admission Form (Step 1: Apply & Get ID)</h3>
+        
+        <label>1. Select Your Examination Board / System *</label>
+        <select id="sBoardSelect">
+          <option value="Punjab Board">Punjab Board (Gujranwala, Lahore, Rawalpindi, Faisalabad, etc.)</option>
+          <option value="Sindh Board">Sindh Board (Karachi, Hyderabad, Sukkur, etc.)</option>
+          <option value="KPK Board">KPK Board (Peshawar, Abbottabad, Mardan, etc.)</option>
+          <option value="Federal Board">Federal Board (FBISE Islamabad)</option>
+          <option value="AJK Board">AJK Board (Mirpur / Muzaffarabad)</option>
+          <option value="Balochistan Board">Balochistan Board (Quetta)</option>
+          <option value="Cambridge International">Cambridge International (O/A Levels)</option>
+        </select>
+
+        <label>2. Select Specific Class / Program *</label>
+        <select id="sClassSelect">
+          <option value="Nursery to Grade 4">National — Nursery to Grade 4 (PKR 5,000/mo)</option>
+          <option value="Grade 5 to Grade 8">National — Grade 5 to Grade 8 (PKR 6,000/mo)</option>
+          <option value="Grade 9 (Matric)">Grade 9 (Matric)</option>
+          <option value="Grade 10 (Matric)">Grade 10 (Matric)</option>
+          <option value="1st Year (Inter)">1st Year (Inter)</option>
+          <option value="2nd Year (Inter)">2nd Year (Inter)</option>
+          <option value="IELTS Training Program">IELTS Training Program</option>
+          <option value="CSS Competitive Exam">CSS Competitive Examination (PKR 45,000)</option>
+        </select>
+
+        <label>3. Student Full Name *</label><input id="sName" placeholder="Enter Full Name">
+        <label>4. Parent / Guardian Name *</label><input id="pName" placeholder="Enter Parent Name">
+        <label>5. Date of Birth *</label><input type="date" id="sDOB">
+        <label>6. Contact / WhatsApp *</label><input id="sPhone" placeholder="+92 3XX-XXXXXXX">
+        <label>7. Meezan Bank / EasyPaisa Details *</label><input id="sBankInfo" placeholder="Account Title & Number">
+        <label>8. Personal Portal Password *</label><input type="password" id="sPassword" placeholder="Set your password">
+
+        <label>📜 Academy Rules & Regulations:</label>
+        <div class="rules-box-scroll">
+          <strong>1. Fee Submission:</strong> Monthly fees must be deposited via Meezan Bank or EasyPaisa by the 10th of every month.<br>
+          <strong>2. Attendance:</strong> 90% attendance is mandatory in live online and campus classes.<br>
+          <strong>3. Digital Library:</strong> Board-isolated materials are for registered students only.
+        </div>
+        <div style="margin:10px 0;">
+          <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; color:#0a192f; font-size:14px;">
+            <input type="checkbox" id="agreePakRules" onchange="togglePakSubmitBtn()" style="width: 18px; height: 18px;">
+            I agree to all Academy Rules & Regulations.
+          </label>
+        </div>
+
+        <button type="button" id="submitPakAdmissionBtn" class="btn-dark" onclick="submitPakAdmission()" disabled style="opacity:0.5; cursor:not-allowed;">🔒 Check Rules Box Above to Submit Admission</button>
+        <p id="admMsg" class="small" style="font-weight:bold; color:#047857; margin-top:6px;"></p>
+      </div>
+
+      <div class="gold" style="margin-top: 24px; border: 2px solid #0a192f;">
+        <h3 style="margin-top:0; color:#0a192f;">🚪 Step 2: Registered Student Classroom Login</h3>
+        <label>Student Admission ID or Full Name</label><input id="studentClassroomKey" placeholder="Enter ID or Full Name">
+        <label>Personal Portal Password</label><input type="password" id="studentPasswordInput" placeholder="Enter Password">
+        <button type="button" class="btn-green" onclick="openStudentClassroom()">🔓 Login & Open Classroom</button>
+        <div id="studentClassroomView" class="classroom-box hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. INTERNATIONAL STUDENT PORTAL -->
+  <div id="portalInternational" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark" style="width:auto; margin:0;" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+      </div>
+      <h2>🌍 International Diaspora Portal (GBP £) — Admissions & Classroom</h2>
+
+      <div class="gold" style="margin-top:16px; border:2px solid #059669;">
+        <h3 style="margin-top:0; color:#047857;">📝 International Student Admission Form (Step 1)</h3>
+        <label>Select Program *</label>
+        <select id="intlClassSelect">
+          <option value="UK/USA Primary (£25/hr)">UK/USA Primary (£25/hr)</option>
+          <option value="Cambridge O-Level (£30/hr)">Cambridge O-Level (£30/hr)</option>
+          <option value="Cambridge A-Level (£30/hr)">Cambridge A-Level (£30/hr)</option>
+          <option value="Quran Studies (£40/mo)">Quran Studies (£40/mo)</option>
+        </select>
+        <label>Student Full Name *</label><input id="intlName" placeholder="Enter Full Name">
+        <label>Country of Residence *</label><input id="intlCountry" placeholder="United Kingdom, USA, Germany">
+        <label>Contact / Email *</label><input id="intlPhone" placeholder="+44 ...">
+        <label>Personal Password *</label><input type="password" id="intlSetPassword" placeholder="Set password">
+
+        <label>📜 International Regulations:</label>
+        <div class="rules-box-scroll">
+          <strong>1. Fees:</strong> Billed exclusively in Pound Sterling (£) via wire transfer.<br>
+          <strong>2. Scheduling:</strong> Greenwich Mean Time (GMT/BST) scheduling.
+        </div>
+        <div style="margin:10px 0;">
+          <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; color:#0a192f; font-size:14px;">
+            <input type="checkbox" id="agreeIntlRules" onchange="toggleIntlSubmitBtn()" style="width: 18px; height: 18px;">
+            I agree to International Regulations.
+          </label>
+        </div>
+        <button type="button" id="submitIntlAdmissionBtn" class="btn-dark" onclick="submitIntlAdmission()" disabled style="opacity:0.5; cursor:not-allowed;">🔒 Check Rules Box Above to Submit</button>
+        <p id="intlAdmMsg" class="small" style="font-weight:bold; color:#047857; margin-top:6px;"></p>
+      </div>
+
+      <div class="gold" style="margin-top: 24px; border: 2px solid #0a192f;">
+        <h3 style="margin-top:0; color:#0a192f;">🚪 Step 2: International Student Login</h3>
+        <label>International ID or Full Name</label><input id="intlClassroomKey" placeholder="Enter ID or Full Name">
+        <label>Password</label><input type="password" id="intlPasswordInput" placeholder="Enter Password">
+        <button type="button" class="btn-green" onclick="openIntlClassroom()">🔓 Login International Classroom</button>
+        <div id="intlClassroomView" class="classroom-box hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. TEACHERS & FACULTY PORTAL -->
+  <div id="portalHiring" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark" style="width:auto; margin:0;" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+      </div>
+      <h2>💼 Teachers & Faculty Portal — Application & Dashboard</h2>
+
+      <div class="gold" style="margin-top:16px; border:2px solid #059669;">
+        <h3 style="margin-top:0; color:#047857;">📝 Step 1: Teacher Recruitment Application Form</h3>
+        <label>Applicant Full Name *</label><input id="hrName" placeholder="Enter Full Name">
+        <label>CNIC Number *</label><input id="hrCNIC" placeholder="34201-XXXXXXX-X">
+        <label>Phone / WhatsApp *</label><input id="hrPhone" placeholder="+92 3XX-XXXXXXX">
+        <label>Meezan Bank / EasyPaisa *</label><input id="hrBankInfo" placeholder="Account Title & Number">
+        <label>Subjects & Classes *</label><input id="hrSubjects" placeholder="Physics, IELTS, Mathematics">
+        <label>Personal Password *</label><input type="password" id="hrPassword" placeholder="Set password">
+
+        <label>📜 Faculty Rules:</label>
+        <div class="rules-box-scroll">
+          <strong>1. Conduct:</strong> Absolute punctuality and curriculum alignment.<br>
+          <strong>2. Salary:</strong> Disbursed via Meezan Bank or EasyPaisa.
+        </div>
+        <div style="margin:10px 0;">
+          <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; color:#0a192f; font-size:14px;">
+            <input type="checkbox" id="agreeFacultyRules" onchange="toggleFacultySubmitBtn()" style="width: 18px; height: 18px;">
+            I agree to Faculty Rules.
+          </label>
+        </div>
+        <button type="button" id="submitFacultyBtn" class="btn-dark" onclick="submitTeacherApplication()" disabled style="opacity:0.5; cursor:not-allowed;">🔒 Check Rules Box Above to Submit Application</button>
+        <p id="hrMsg" class="small" style="font-weight:bold; color:#047857; margin-top:6px;"></p>
+      </div>
+
+      <div class="gold" style="margin-top: 24px; border: 2px solid #0a192f;">
+        <h3 style="margin-top:0; color:#0a192f;">🚪 Step 2: Teacher Portal Login</h3>
+        <label>Teacher ID or Full Name</label><input id="teacherLoginKey" placeholder="Enter Teacher ID or Full Name">
+        <label>Password</label><input type="password" id="teacherLoginPass" placeholder="Enter Password">
+        <button type="button" class="btn-green" onclick="loginTeacherDashboard()">🔓 Login Teacher Dashboard</button>
+        <div id="teacherDashboardView" class="classroom-box hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ADMIN & ACCOUNTS PORTAL -->
+  <div id="portalAdmin" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark" style="width:auto; margin:0;" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+      </div>
+      <h2>🛡️ Admin & Accounts Executive Portal — Restricted Access</h2>
+      <input type="password" id="adminCode" placeholder="Enter Authorized Access Code">
+      <button type="button" class="btn-dark" onclick="loginAdmin()">Unlock Administration Dashboard</button>
+      
+      <div id="adminPanel" class="hidden" style="margin-top:16px;">
+        <p class="small" style="font-weight:bold; color:#047857;">Admin Dashboard Unlocked Successfully!</p>
+        <div class="gold" style="margin-top:14px; border:2px solid #059669;">
+          <h3 style="margin-top:0; color:#047857;">📢 Dynamic Breaking News Ticker Manager</h3>
+          <label>Enter New Breaking News Ticker Text</label>
+          <textarea id="adminBreakingNewsInput" rows="3" placeholder="Type breaking news here..."></textarea>
+          <button type="button" class="btn-green" onclick="saveAdminBreakingNews()">💾 Update Live Breaking News Ticker</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer-bar class="small">© 2026 Sir Haroon Javaid Hashmi Academy and College — All Rights Reserved</footer-bar>
+
+<script>
+// Toggle Submit Button Checkboxes
+function togglePakSubmitBtn() {
+  var chk = el('agreePakRules');
+  var btn = el('submitPakAdmissionBtn');
+  if (!chk || !btn) return;
+  if (chk.checked) {
+    btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
+    btn.innerText = '🚀 Submit Admission & Generate Student ID';
+  } else {
+    btn.disabled = true; btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed';
+    btn.innerText = '🔒 Check Rules Box Above to Submit Admission';
+  }
+}
+
+function toggleIntlSubmitBtn() {
+  var chk = el('agreeIntlRules');
+  var btn = el('submitIntlAdmissionBtn');
+  if (!chk || !btn) return;
+  if (chk.checked) {
+    btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
+    btn.innerText = '🚀 Submit International Admission & Generate ID';
+  } else {
+    btn.disabled = true; btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed';
+    btn.innerText = '🔒 Check Rules Box Above to Submit Admission';
+  }
+}
+
+function toggleFacultySubmitBtn() {
+  var chk = el('agreeFacultyRules');
+  var btn = el('submitFacultyBtn');
+  if (!chk || !btn) return;
+  if (chk.checked) {
+    btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
+    btn.innerText = '🚀 Submit Application & Generate Teacher ID';
+  } else {
+    btn.disabled = true; btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed';
+    btn.innerText = '🔒 Check Rules Box Above to Submit Application';
+  }
+}
+
+// Data storage arrays
+var admissionsData = window.safeStorage.get('shjh_admissions_v12', []);
+var staffData = window.safeStorage.get('shjh_staff_v12', []);
+
+function submitPakAdmission() {
+  var name = safeVal('sName', '').trim();
+  var parent = safeVal('pName', '').trim();
+  var phone = safeVal('sPhone', '').trim();
+  var pass = safeVal('sPassword', '').trim();
+  var cls = safeVal('sClassSelect', '');
+  if (!name || !parent || !phone || !pass) { alert('Please fill in all mandatory fields and password.'); return; }
+
+  var id = 'PAK-' + Math.floor(10000 + Math.random() * 90000);
+  admissionsData.unshift({ id: id, name: name, parent: parent, phone: phone, password: pass, cls: cls, status: 'Active' });
+  window.safeStorage.set('shjh_admissions_v12', admissionsData);
+  safeSet('admMsg', '✅ Admission Successful! Your Student ID is: ' + id);
+  alert('Admission Successful! Your Student ID is: ' + id);
+}
+
+function submitIntlAdmission() {
+  var name = safeVal('intlName', '').trim();
+  var phone = safeVal('intlPhone', '').trim();
+  var pass = safeVal('intlSetPassword', '').trim();
+  var cls = safeVal('intlClassSelect', '');
+  if (!name || !phone || !pass) { alert('Please fill in all mandatory fields and password.'); return; }
+
+  var id = 'INT-' + Math.floor(10000 + Math.random() * 90000);
+  admissionsData.unshift({ id: id, name: name, phone: phone, password: pass, cls: cls, status: 'Active' });
+  window.safeStorage.set('shjh_admissions_v12', admissionsData);
+  safeSet('intlAdmMsg', '✅ International Admission Successful! Your ID is: ' + id);
+  alert('International Admission Successful! Your ID is: ' + id);
+}
+
+function submitTeacherApplication() {
+  var name = safeVal('hrName', '').trim();
+  var phone = safeVal('hrPhone', '').trim();
+  var pass = safeVal('hrPassword', '').trim();
+  var subjects = safeVal('hrSubjects', '');
+  if (!name || !phone || !pass) { alert('Please fill in all mandatory fields and password.'); return; }
+
+  var id = 'HR-' + Math.floor(10000 + Math.random() * 90000);
+  staffData.unshift({ id: id, name: name, phone: phone, password: pass, subjects: subjects, status: 'Active' });
+  window.safeStorage.set('shjh_staff_v12', staffData);
+  safeSet('hrMsg', '✅ Application Successful! Your Teacher ID is: ' + id);
+  alert('Application Successful! Your Teacher ID is: ' + id);
+}
+
+function openStudentClassroom() {
+  var key = safeVal('studentClassroomKey', '').trim().toLowerCase();
+  var pass = safeVal('studentPasswordInput', '').trim();
+  var view = el('studentClassroomView');
+  if (!key) { alert('Enter Student ID or Name.'); return; }
+
+  var found = null;
+  for (var i = 0; i < admissionsData.length; i++) {
+    if (admissionsData[i].id.toLowerCase() === key || admissionsData[i].name.toLowerCase() === key) {
+      found = admissionsData[i]; break;
+    }
+  }
+
+  if (!found) {
+    view.innerHTML = '<div style="color:red; font-weight:bold;">⛔ Record not found! Please submit admission form first.</div>';
+    view.classList.remove('hidden');
+    return;
+  }
+  if (found.password && found.password !== pass) {
+    alert('Incorrect password!'); return;
+  }
+
+  view.innerHTML = '<h4>🏛️ Pakistani Classroom for ' + window.escapeHTML(found.name) + ' (' + window.escapeHTML(found.id) + ')</h4><p class="small">Class: ' + window.escapeHTML(found.cls) + ' | Status: ' + window.escapeHTML(found.status) + '</p>';
+  view.classList.remove('hidden');
+}
+
+function openIntlClassroom() {
+  var key = safeVal('intlClassroomKey', '').trim().toLowerCase();
+  var pass = safeVal('intlPasswordInput', '').trim();
+  var view = el('intlClassroomView');
+  if (!key) { alert('Enter International ID or Name.'); return; }
+
+  var found = null;
+  for (var i = 0; i < admissionsData.length; i++) {
+    if (admissionsData[i].id.toLowerCase() === key || admissionsData[i].name.toLowerCase() === key) {
+      found = admissionsData[i]; break;
+    }
+  }
+
+  if (!found) {
+    view.innerHTML = '<div style="color:red; font-weight:bold;">⛔ Record not found! Please submit international form first.</div>';
+    view.classList.remove('hidden');
+    return;
+  }
+  if (found.password && found.password !== pass) {
+    alert('Incorrect password!'); return;
+  }
+
+  view.innerHTML = '<h4>🌍 International Classroom for ' + window.escapeHTML(found.name) + ' (' + window.escapeHTML(found.id) + ')</h4>';
+  view.classList.remove('hidden');
+}
+
+function loginTeacherDashboard() {
+  var key = safeVal('teacherLoginKey', '').trim().toLowerCase();
+  var pass = safeVal('teacherLoginPass', '').trim();
+  var view = el('teacherDashboardView');
+  if (!key) { alert('Enter Teacher ID or Name.'); return; }
+
+  var found = null;
+  for (var i = 0; i < staffData.length; i++) {
+    if (staffData[i].id.toLowerCase() === key || staffData[i].name.toLowerCase() === key) {
+      found = staffData[i]; break;
+    }
+  }
+
+  if (!found) {
+    view.innerHTML = '<div style="color:red; font-weight:bold;">⛔ Record not found! Please submit faculty form first.</div>';
+    view.classList.remove('hidden');
+    return;
+  }
+  if (found.password && found.password !== pass) {
+    alert('Incorrect password!'); return;
+  }
+
+  view.innerHTML = '<h4>👨‍🏫 Teacher Dashboard for ' + window.escapeHTML(found.name) + ' (' + window.escapeHTML(found.id) + ')</h4><p class="small">Subjects: ' + window.escapeHTML(found.subjects) + '</p>';
+  view.classList.remove('hidden');
+}
+
+function loginAdmin() {
+  if (safeVal('adminCode', '') === 'Haroon2026@LEA') {
+    el('adminPanel').classList.remove('hidden');
+    alert('Admin Portal Unlocked successfully!');
+  } else {
+    alert('Invalid Access Code.');
+  }
+}
+
+function saveAdminBreakingNews() {
+  var txt = safeVal('adminBreakingNewsInput', '').trim();
+  if (!txt) { alert('Enter text.'); return; }
+  window.safeStorage.set('shjh_news_v12', txt);
+  var marquee = el('dynamicBreakingNewsMarquee');
+  if (marquee) marquee.textContent = txt;
+  alert('Breaking News updated successfully!');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateClocks();
+  var savedNews = window.safeStorage.get('shjh_news_v12', '');
+  if (savedNews) {
+    var marquee = el('dynamicBreakingNewsMarquee');
+    if (marquee) marquee.textContent = savedNews;
+    var area = el('adminBreakingNewsInput');
+    if (area) area.value = savedNews;
+  }
+});
+</script>
+</body>
+            </html>
