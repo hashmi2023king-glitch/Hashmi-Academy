@@ -1,4 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sir Haroon Javaid Hashmi Academy and College — Master Portal</title>
+<script>
+// Core robust functions defined immediately in global scope
+window.safeStorage = {
+  get: function(key, fallback) {
+    try {
+      var val = window.localStorage.getItem(key);
+      return val !== null ? JSON.parse(val) : fallback;
+    } catch (e) { return fallback; }
+  },
+  set: function(key, val) {
+    try { window.localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+  }
+};
 
+window.handleDirectorImgError = function(img) {
+  if (!img) return;
+  img.onerror = null;
+  var svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='#0a192f'/><stop offset='100%' stop-color='#050505'/></linearGradient></defs><rect width='200' height='200' fill='url(#g)'/><circle cx='100' cy='100' r='92' fill='none' stroke='#ffd700' stroke-width='5'/><circle cx='100' cy='72' r='28' fill='#ffd700'/><path d='M52 162 C52 125, 148 125, 148 162' fill='#ffd700'/><text x='100' y='186' font-family='Segoe UI, Arial' font-size='13' font-weight='bold' fill='#ffd700' text-anchor='middle'>SIR HAROON HASHMI</text></svg>";
+  img.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+};
+
+function el(id) { return document.getElementById(id); }
+function safeVal(id, def) { var e = el(id); return e ? e.value : def; }
+function safeSet(id, txt) { var e = el(id); if (e) e.textContent = txt; }
+
+// Live Clocks
+function updateClocks() {
+  var now = new Date();
+  var fmt = function(tz) {
+    try { return now.toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
+    catch (e) { return now.toLocaleTimeString('en-US'); }
+  };
+  safeSet('clockPK', 'Pakistan (PKT): ' + fmt('Asia/Karachi'));
+  safeSet('clockUK', 'UK (London): ' + fmt('Europe/London'));
+  safeSet('clockUS', 'USA (New York): ' + fmt('America/New_York'));
+  safeSet('clockEU', 'Europe (Berlin): ' + fmt('Europe/Berlin'));
+}
+setInterval(updateClocks, 1000);
+
+// Portal Switching Engine
+function switchPortal(portalId) {
+  var sections = document.querySelectorAll('.portal-section');
+  for (var i = 0; i < sections.length; i++) {
+    sections[i].classList.remove('active-portal');
+  }
+  var navs = document.querySelectorAll('nav a');
+  for (var j = 0; j < navs.length; j++) {
+    navs[j].classList.remove('active-nav');
+  }
+
+  var targetSec = el('portal' + portalId.charAt(0).toUpperCase() + portalId.slice(1));
+  var targetNav = el('nav' + portalId.charAt(0).toUpperCase() + portalId.slice(1));
+
+  if (targetSec) targetSec.classList.add('active-portal');
+  if (targetNav) targetNav.classList.add('active-nav');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Audio Engine 3x Prominent
+function playDirectorAudioIntro() {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    var text = "Assalam-o-Alaikum. My name is Haroon Javaid Hashmi. I am the Founder and Director of Academy and College. For over 26 years, I have been working in education, leadership, and operations. I started my journey as a Teacher and Event Coordinator, then Campus Manager at KIPS Academy Kharian Cantt, leading our branch to Number 1 position nationwide with the Best National Campus Manager Award. Later, I founded Learn and Earn Academy and College. By the grace of Allah, our students achieved 100% success rate in Board Examinations, including Mah Noor Irfan with 981 marks in Computer Science, Ayesha Siddiqa with 958 marks in Biology, and Syed Atta Shah with 808 marks. I also achieved Global Rank Number 1 on the Alison Leaderboard with 66,560 XP across 38 professional certifications. Welcome to our official portal.";
+    var utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 0.93;
+    window.speechSynthesis.speak(utter);
+    alert('Playing Official Director Audio Introduction...');
+  } else {
+    alert('Speech synthesis not supported in this browser.');
+  }
+}
+
+function playAppMarketingAudio() {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    var text = "Welcome to the official digital campus of Sir Haroon Javaid Hashmi Academy and College. This secure web application features four fully segregated portals: First, the Pakistani Student Portal with admission forms, board-isolated digital libraries, and PKR fee management. Second, the International Diaspora Portal with UK, USA, and Europe curricula and fee calculations in British Pounds. Third, the Teachers and Faculty Portal featuring recruitment application forms, teacher login, and an 80 percent revenue-sharing model. Fourth, the Admin and Accounts Executive Portal for director-level control, fee locks, and dynamic breaking news management.";
+    var utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 0.95;
+    window.speechSynthesis.speak(utter);
+    alert('Playing App Marketing Audio Ad...');
+  } else {
+    alert('Speech synthesis not supported in this browser.');
+  }
+}
+</script>
+<style>
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #050505; min-height: 100vh; line-height: 1.55; background-color: #ffffff; }
+header { background: linear-gradient(135deg, #050505 0%, #0a192f 50%, #050505 100%); border-bottom: 4px solid #d4af37; text-align: center; padding: 22px 16px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
+header h1 { margin: 10px auto 6px auto; font-size: clamp(20px, 3.2vw, 30px); color: #ffd700; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85); }
+header p { margin: 4px auto; font-weight: 600; color: #ffffff; font-size: clamp(13px, 1.8vw, 15px); }
+.security-ribbon { display: inline-block; background: rgba(5, 150, 105, 0.25); border: 1px solid #10b981; color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; margin-top: 6px; }
+.clock-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 8px; max-width: 960px; margin: 14px auto 0 auto; }
+.clock-pill { background: #050505; border: 1.5px solid #d4af37; color: #ffd700; padding: 6px 10px; border-radius: 16px; font-size: 12px; font-weight: 700; }
+nav { position: sticky; top: 0; width: 100%; background: #0a192f; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 10px 12px; z-index: 1000; border-bottom: 3px solid #d4af37; }
+nav a { color: #ffffff; text-decoration: none; background: #050505; border: 1.5px solid #d4af37; padding: 8px 13px; border-radius: 20px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+nav a:hover, nav a.active-nav { background: #059669; color: #ffffff; border-color: #ffd700; }
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 16px 20px; }
+.card { width: 100%; background: #ffffff; color: #050505; border: 2px solid #d4af37; border-top: 5px solid #0a192f; border-radius: 16px; padding: 22px 24px; margin: 18px 0; box-shadow: 0 8px 24px rgba(10, 25, 47, 0.12); }
+.top-action-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.how-to-btn { background: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #b8860b 100%) !important; color: #050505 !important; border: 2px solid #050505 !important; padding: 8px 14px !important; border-radius: 20px !important; font-size: 13px !important; font-weight: 800 !important; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+h2 { color: #0a192f; border-bottom: 3px solid #d4af37; padding-bottom: 10px; margin-top: 0; font-size: clamp(18px, 2.4vw, 23px); }
+h3 { color: #0a192f; margin-top: 18px; }
+input, select, textarea { width: 100%; padding: 11px 13px; margin: 6px 0 12px 0; border: 2px solid #0a192f; border-radius: 8px; font-size: 15px; background: #ffffff; color: #050505; }
+label { font-weight: 700; font-size: 14px; color: #0a192f; display: block; margin-top: 8px; }
+button, .btn-green { background: linear-gradient(135deg, #047857 0%, #10b981 50%, #059669 100%); color: #ffffff; border: 2px solid #050505; padding: 12px 16px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 15px; margin-top: 8px; }
+.btn-gold { background: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #b8860b 100%) !important; color: #050505 !important; }
+.btn-dark { background: #0a192f !important; color: #ffd700 !important; border-color: #d4af37 !important; }
+.gold { background: #fffbeb; border: 2px solid #d4af37; padding: 15px 17px; border-radius: 12px; color: #050505; }
+.badge { display: inline-block; background: #050505; color: #ffd700; border: 2px solid #d4af37; padding: 5px 13px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 8px; }
+.hidden { display: none !important; }
+.small { font-size: 13px; color: #334155; }
+.director-photo { width: 125px; height: 125px; border-radius: 50%; border: 4px solid #ffd700; object-fit: cover; background: #0a192f; display: block; margin: 0 auto 10px auto; }
+.portal-4-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 16px; }
+.portal-choice-card { background: #ffffff; border: 3px solid #d4af37; border-top: 6px solid #0a192f; border-radius: 16px; padding: 20px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
+.portal-section { display: none; }
+.portal-section.active-portal { display: block; }
+.classroom-box { background: #f8fafc; border: 3px solid #0a192f; border-top: 6px solid #059669; border-radius: 14px; padding: 18px; margin-top: 14px; }
+footer-bar { display: block; background: #0a192f; color: #ffd700; text-align: center; padding: 14px; border-top: 3px solid #d4af37; margin-top: 24px; }
+.rules-box-scroll { background: #f8fafc; border: 2px solid #d4af37; padding: 12px; border-radius: 8px; max-height: 140px; overflow-y: auto; font-size: 12.5px; color: #334155; margin-bottom: 10px; }
+
+/* Massive 3x Prominent Audio Cards */
+.audio-massive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin: 20px 0; }
+.audio-massive-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 3px solid #d4af37; border-top: 6px solid #0a192f; padding: 26px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(184, 134, 11, 0.2); }
+.audio-massive-box.green-theme { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 3px solid #059669; border-top: 6px solid #047857; }
+.audio-massive-box h3 { font-size: 22px; margin-top: 0; margin-bottom: 10px; color: #0a192f; }
+.audio-massive-box p { font-size: 15px; color: #1e293b; line-height: 1.6; margin-bottom: 18px; }
+.audio-massive-btn { width: 100%; padding: 18px 24px; font-size: 19px !important; font-weight: 800 !important; border-radius: 12px !important; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE</div>
+  <img src="sir-haroon.jpg" alt="Director Portrait" class="director-photo" onerror="handleDirectorImgError(this)">
+  <h1>SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE</h1>
+  <p>Founder & Director: Sir Haroon Javaid Hashmi | Senior IELTS & English Language Trainer | 26+ Years Experience</p>
+  <p>Dhandala / Dinga, District Gujrat, Pakistan | +92 334 1140082 | mibraheem23king@gmail.com</p>
+  <div class="security-ribbon">🔒 Official Master Secure Web Application 2026–27 | Massive Audio Center & Dynamic Breaking News</div>
+  <div class="clock-bar">
+    <div class="clock-pill" id="clockPK">Pakistan (PKT): --:--</div>
+    <div class="clock-pill" id="clockUK">United Kingdom (UK): --:--</div>
+    <div class="clock-pill" id="clockUS">United States (EST): --:--</div>
+    <div class="clock-pill" id="clockEU">Europe (CET): --:--</div>
+  </div>
+</header>
+
+<!-- NAVIGATION BAR -->
+<nav>
+  <a href="javascript:void(0)" onclick="switchPortal('gateway')" id="navGateway" class="active-nav">🌟 4-Portal Gateway</a>
+  <a href="javascript:void(0)" onclick="switchPortal('pakistan')" id="navPakistan">🇵🇰 Pakistani Portal</a>
+  <a href="javascript:void(0)" onclick="switchPortal('international')" id="navInternational">🌍 International Portal</a>
+  <a href="javascript:void(0)" onclick="switchPortal('hiring')" id="navHiring">💼 Teachers Portal</a>
+  <a href="javascript:void(0)" onclick="switchPortal('admin')" id="navAdmin">🛡️ Admin & Accounts Portal</a>
+</nav>
+
+<div class="wrap">
+  <!-- 1. GATEWAY PORTAL -->
+  <div id="portalGateway" class="portal-section active-portal">
+    
+    <!-- DIRECTOR'S WHITE PHOTOGRAPH FRAME INTRO SECTION -->
+    <div class="card" style="text-align:center; border: 3px solid #d4af37; border-top: 8px solid #0a192f; background: #ffffff;">
+      <img src="sir-haroon2.jpg" alt="Director Portrait" class="director-photo" style="width: 150px; height: 150px;" onerror="handleDirectorImgError(this)">
+      <h2 style="border:none; margin: 10px 0 4px 0; font-size: 26px; color:#0a192f;">Sir Haroon Javaid Hashmi — Founder & Director</h2>
+      <p style="font-weight:700; color:#059669; font-size:15px; margin-bottom:4px;">26+ Years Education & Leadership Legacy | Global Alison Rank #1 Leader</p>
+    </div>
+
+    <!-- FLOATING TEXT TICKER STRIP (EXACTLY BELOW DIRECTOR'S FRAME) -->
+    <div style="background:#b8860b; color:#050505; font-weight:bold; padding:12px 16px; overflow:hidden; white-space:nowrap; border: 2.5px solid #050505; border-radius: 10px; margin: 18px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <div style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+        <marquee scrollamount="5" id="dynamicBreakingNewsMarquee" style="flex:1; font-family:'Segoe UI', Arial, sans-serif; font-weight:bold; font-size:15px; color:#050505;">
+          🚨 NEW ADMISSIONS ARE NOW OPEN! Sir Haroon Javaid Hashmi Academy & College | 
+          🏆 Top Board Achievements (2026): Mah Noor Irfan (Computer Science) - 981 Marks | Aisha Siddiqa (Biology) - 958 Marks | Syed Atta Shah (2025) - 808 Marks | 
+          Global Alison Leaderboard Rank #1 (66,560 XP, 38 Certifications) | All Portals Active!
+        </marquee>
+      </div>
+    </div>
+
+    <!-- MASSIVE 3X PROMINENT AUDIO SITUATION MESSAGES CENTER -->
+    <div class="audio-massive-grid">
+      <div class="audio-massive-box">
+        <h3>🎙️ Director's Official Audio Introduction</h3>
+        <p>Listen to Founder & Director Sir Haroon Javaid Hashmi's 26-year legacy, KIPS #1 Branch achievement, and top board rankers.</p>
+        <button type="button" class="btn-dark audio-massive-btn" onclick="playDirectorAudioIntro()">▶ Play Director Audio Intro</button>
+      </div>
+      <div class="audio-massive-box green-theme">
+        <h3>🎧 Marketing Ad: What is Available in This App</h3>
+        <p>Explore all features, multi-board national/international portals, and the 80% teacher revenue model in this audio ad.</p>
+        <button type="button" class="btn-green audio-massive-btn" onclick="playAppMarketingAudio()">▶ Play App Marketing Audio Ad</button>
+      </div>
+    </div>
+
+    <!-- 4-PORTAL GATEWAY GRID -->
+    <div class="portal-4-grid">
+      <div class="portal-choice-card" onclick="switchPortal('pakistan')">
+        <div>
+          <h3 style="color:#0a192f; margin-top:0;">🇵🇰 Pakistani Student Portal</h3>
+          <p class="small">Official Student Admission Form First with Mandatory Rules Acceptance, followed by Student ID Classroom Login (PKR).</p>
+        </div>
+        <button type="button" class="btn-dark">Open Pakistani Portal</button>
+      </div>
+      <div class="portal-choice-card" onclick="switchPortal('international')">
+        <div>
+          <h3 style="color:#0a192f; margin-top:0;">🌍 International Student Portal</h3>
+          <p class="small">International Admission Form First with Mandatory Rules Acceptance & Tuition Fee Calculator in GBP (£).</p>
+        </div>
+        <button type="button" class="btn-dark">Open International Portal</button>
+      </div>
+      <div class="portal-choice-card" onclick="switchPortal('hiring')">
+        <div>
+          <h3 style="color:#0a192f; margin-top:0;">💼 Teachers & Faculty Portal</h3>
+          <p class="small">Faculty Recruitment Application Form First with Mandatory Rules Acceptance & Teacher Dashboard Login.</p>
+        </div>
+        <button type="button" class="btn-dark">Open Teachers Portal</button>
+      </div>
+      <div class="portal-choice-card" onclick="switchPortal('admin')">
+        <div>
+          <h3 style="color:#0a192f; margin-top:0;">🛡️ Admin & Accounts Portal</h3>
+          <p class="small">Executive Control for Director Sir Haroon Javaid Hashmi: Dynamic Breaking News Editor, Quiz Vault & Approvals.</p>
+        </div>
+        <button type="button" class="btn-dark">Open Admin Portal</button>
+      </div>
+    </div>
+  </div>
 <!-- 2. PAKISTANI STUDENT PORTAL -->
   <div id="portalPakistan" class="portal-section">
     <div class="card">
