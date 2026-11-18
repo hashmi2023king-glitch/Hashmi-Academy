@@ -684,3 +684,128 @@
       </div>
     </div>
   </div>
+<!-- =========================================================
+       6. PARENT APP PORTAL (Section 28)
+       ========================================================= -->
+  <div id="portalParentApp" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark btn-sm" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+        <span class="badge">DEDICATED PARENT MONITORING APP</span>
+      </div>
+      <h2>👨‍👩‍👧 Parent Portal — Live Class View, Daily Attendance & Weekly Progress</h2>
+      <div class="grid-2">
+        <div>
+          <label>Enter Child's Student ID or Parent CNIC</label>
+          <input id="parentLookupKey" placeholder="e.g., PAK-10001 or 34201-XXXXXXX-X">
+        </div>
+        <div style="display:flex; align-items:flex-end; gap:8px;">
+          <button type="button" class="btn-green" onclick="loadParentReport()">🔍 View Child's Live Report</button>
+          <button type="button" class="btn-gold" onclick="demoParentReport()">👁️ Demo Parent View</button>
+        </div>
+      </div>
+      <div id="parentReportOutput" class="hidden" style="margin-top:16px;"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       7. SUPER ADMIN CONTROL ROOM (Sections 7 to 29)
+       ========================================================= -->
+  <div id="portalAdmin" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark btn-sm" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+        <span class="badge">SUPER ADMIN CONTROL ROOM — 100% AUTO-LINKED</span>
+      </div>
+      <h2>🛡️ Super Admin Control Room — Founder & Director Sir Haroon Javaid Hashmi</h2>
+
+      <!-- Admin Unlock Bar -->
+      <div id="adminLoginBar" class="gold">
+        <label>Enter Director Access Code (Use <code>Haroon2026@LEA</code> or <code>7860</code>)</label>
+        <div class="grid-2">
+          <input type="password" id="adminPassInput" placeholder="Enter Director Passcode..." onkeydown="if(event.key==='Enter') unlockAdmin()">
+          <button type="button" class="btn-dark" onclick="unlockAdmin()">🔓 Unlock Super Admin Control Room</button>
+        </div>
+      </div>
+
+      <!-- Full Admin Control Room -->
+      <div id="adminControlRoom" class="hidden">
+        <!-- Live KPI Stats Bar (Section 7) -->
+        <div class="stat-grid" id="adminKpiGrid"></div>
+
+        <!-- Section 23: 4 Core Admin Buttons + Full Control Tabs -->
+        <div class="sub-tabs">
+          <button type="button" class="sub-tab-btn active-sub" onclick="switchSubTab('admTab','admAccounts',this)">💰 1. ACCOUNTS (60/40 & Concessions)</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('admTab','admSms',this)">📲 2. SMS & MESSAGES (1-Click + AI Draft)</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('admTab','admHr',this)">👔 3. HR & MASTER REGISTERS</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('admTab','admLibrary',this)">📚 4. LIBRARY & TIMETABLE / SYLLABUS</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('admTab','admAttLeaveFine',this)">⚖️ 5. ATTENDANCE, LEAVE, FINE & RESULTS</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('admTab','admBtnFeeCtrl',this)">🎛️ 6. BUTTON/FEE EDITOR & BACKUPS</button>
+        </div>
+
+        <!-- TAB 1: ACCOUNTS (60/40 SPLIT, FEE CONCESSIONS, REPORTS) - Sections 14, 22, 23A, 29D -->
+        <div id="admAccounts" class="admTab">
+          <div class="grid-2">
+            <!-- Private Fee Concession System (Section 29D) -->
+            <div class="gold">
+              <h3 style="margin-top:0;">🤝 Private Fee Concession System (Student Dignity Protected)</h3>
+              <p class="small">Private to Admin only. Automatically reduces student fee, recalculates 60% Teacher / 40% Admin split, and logs reason in Accounts.</p>
+              <div class="grid-2">
+                <div>
+                  <label>Select Student ID *</label>
+                  <input id="concStuId" placeholder="e.g., PAK-10001">
+                </div>
+                <div>
+                  <label>Concession Category *</label>
+                  <select id="concCategory">
+                    <option value="Orphan Child">Orphan Child</option>
+                    <option value="Poor / Deserving Child">Poor / Deserving Child</option>
+                    <option value="Hafiz-e-Quran">Hafiz-e-Quran</option>
+                    <option value="Board Topper">Board Topper</option>
+                    <option value="Teacher Child">Teacher Child</option>
+                    <option value="2 Siblings Together">2 Siblings Together</option>
+                  </select>
+                </div>
+              </div>
+              <label>Mandatory Reason (Private Admin Record) *</label>
+              <input id="concReason" placeholder="e.g., Father passed away / Labourer family">
+              <div class="grid-2">
+                <div>
+                  <label>Concession Type & Amount *</label>
+                  <select id="concType">
+                    <option value="50%">50% Concession</option>
+                    <option value="100%">100% Full Free Scholarship</option>
+                    <option value="FLAT">Fixed Amount Less (PKR / GBP)</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Fixed Amount (If Flat) & Duration *</label>
+                  <input id="concAmountDur" placeholder="e.g., 2000 | 1 Year">
+                </div>
+              </div>
+              <button type="button" class="btn-green" onclick="applyFeeConcession()">✅ Approve Concession & Auto-Update Accounts + 60/40 Split</button>
+              <div id="concessionLedgerList" class="small" style="margin-top:10px;"></div>
+            </div>
+
+            <!-- Manual Cash/Expense Entry & Export (Section 14 & 23A) -->
+            <div class="green-box">
+              <h3 style="margin-top:0;">📒 Automated 60/40 Accountant Ledger & Manual Correction</h3>
+              <div class="grid-2">
+                <select id="accEntryType">
+                  <option value="Fee Received (PKR)">Fee Received (PKR)</option>
+                  <option value="Fee Received (GBP)">Fee Received (GBP)</option>
+                  <option value="Extra Expense">Extra Expense</option>
+                  <option value="Correction Adjustment">Correction Adjustment</option>
+                </select>
+                <input type="number" id="accEntryAmt" placeholder="Amount">
+              </div>
+              <input id="accEntryNote" placeholder="Description / Student or Teacher ID">
+              <button type="button" class="btn-dark" onclick="addAccountEntry()">➕ Record Ledger Entry</button>
+              <div style="margin-top:10px;">
+                <button type="button" class="btn-gold btn-sm" onclick="exportCSVReport('Accounts')">📥 One-Click Excel/CSV Report</button>
+                <button type="button" class="btn-dark btn-sm" onclick="window.print()">🖨️ Print / Save PDF Report</button>
+              </div>
+              <div id="accountsLedgerTable" class="table-wrap"></div>
+            </div>
+          </div>
+        </div>
