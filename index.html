@@ -335,4 +335,150 @@ button, .btn-green {
     </div>
 
     <!-- AUTO SAVE TO LIBRARY ON CLASS END + UNANSWERED QUESTION TO QUIZ -->
-  
+    <!-- SECTION 7–20, 23 & 29: SUPER ADMIN CONTROL ROOM -->
+  <div id="view-adminSuper" class="card hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div>
+        <span class="badge">SUPER ADMIN CONTROL ROOM — SIR HAROON JAVAID HASHMI</span>
+        <h2 style="border:none; margin:0;">🛡️ Executive Super Admin &amp; Master ERP Control Room</h2>
+      </div>
+      <button type="button" onclick="switchMainView('gateway')" class="btn-dark" style="width:auto;">⬅ Main Gateway</button>
+    </div>
+
+    <!-- SUPER ADMIN LOCK / UNLOCK -->
+    <div id="superAdminLoginBox" class="gold" style="margin-top:12px;">
+      <label>Enter Super Admin Master Code (Passcode: <b>Haroon2026@LEA</b>)</label>
+      <div class="btn-row">
+        <input type="password" id="superAdminCode" placeholder="Enter Super Admin Passcode...">
+        <button type="button" onclick="unlockSuperAdmin()" class="btn-dark">🔓 Unlock Control Room</button>
+      </div>
+    </div>
+
+    <div id="superAdminWorkspace" class="hidden" style="margin-top:14px;">
+      <!-- LIVE SUPER ADMIN KPI DASHBOARD -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(145px,1fr)); gap:10px; margin-bottom:14px;">
+        <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+          <div class="small" style="color:#fff;">Total Students</div><b style="font-size:20px;" id="kpiStudents">148</b>
+        </div>
+        <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+          <div class="small" style="color:#fff;">Total Teachers</div><b style="font-size:20px;" id="kpiTeachers">24</b>
+        </div>
+        <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+          <div class="small" style="color:#fff;">PKR Collected</div><b style="font-size:18px; color:#6ee7b7;" id="kpiPkrFee">PKR 485,000</b>
+        </div>
+        <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+          <div class="small" style="color:#fff;">GBP £ Collected</div><b style="font-size:18px; color:#6ee7b7;" id="kpiGbpFee">£ 4,200</b>
+        </div>
+        <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+          <div class="small" style="color:#fff;">Pending Fee</div><b style="font-size:18px; color:#fca5a5;" id="kpiPending">PKR 32,000</b>
+        </div>
+        <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+          <div class="small" style="color:#fff;">Classes Today</div><b style="font-size:20px;">36 Live</b>
+        </div>
+      </div>
+
+      <!-- SECTION 23: ADMIN 4 MAIN BUTTONS (ACCOUNTS + SMS + HR + LIBRARY) + POINT 29 + REGISTERS -->
+      <div class="btn-row" style="margin-bottom:14px;">
+        <button type="button" class="btn-green" onclick="openAdminModule('modAccounts')">💰 1. ACCOUNTS (60/40 &amp; Invoices)</button>
+        <button type="button" class="btn-dark" onclick="openAdminModule('modSMS')">📲 2. SMS &amp; ONE-CLICK ALERTS</button>
+        <button type="button" class="btn-gold" onclick="openAdminModule('modHR')">👔 3. HR &amp; MASTER REGISTERS</button>
+        <button type="button" class="btn-dark" onclick="openAdminModule('modLibrary')">📚 4. LIBRARY &amp; APPROVALS</button>
+        <button type="button" class="btn-green" onclick="openAdminModule('modAttendance')">📅 5. CALENDAR ATTENDANCE &amp; FINES</button>
+        <button type="button" class="btn-gold" onclick="openAdminModule('modPoint29')">⚙️ 6. BUTTON CONTROL &amp; FEE CONCESSION</button>
+      </div>
+
+      <!-- MODULE 1: ACCOUNTS PORTAL (60/40 AUTO SPLIT, SEPARATE PKR/GBP, REPORTS, BACKUP) -->
+      <div id="modAccounts" class="admin-mod gold">
+        <h3 style="margin-top:0;">💰 Section 14, 22 &amp; 23A: Automated Accounts Software (60% Teacher / 40% Admin)</h3>
+        <div class="btn-row">
+          <div>
+            <label>Student Name</label><input id="accStName" value="Mah Noor Irfan">
+          </div>
+          <div>
+            <label>Assigned Teacher</label><input id="accTcName" value="Sir Haroon Javaid Hashmi">
+          </div>
+          <div>
+            <label>Currency</label>
+            <select id="accCurr"><option value="PKR ">PKR (Pakistan)</option><option value="£">£ GBP (International)</option></select>
+          </div>
+          <div>
+            <label>Gross Fee Amount (100%)</label><input type="number" id="accGrossFee" value="10000">
+          </div>
+        </div>
+        <button type="button" onclick="recordAuto6040Fee()" class="btn-green">⚡ Record Fee &amp; Auto-Calculate 60% Teacher / 40% Admin Split</button>
+
+        <div id="accLedgerTable" class="table-responsive" style="margin-top:12px;"></div>
+
+        <div class="btn-row">
+          <button type="button" onclick="exportFullSystemJSON()" class="btn-dark">💾 Section 19: Download Full Cloud Backup (.JSON)</button>
+          <button type="button" onclick="el('restoreJsonFile').click()" class="btn-gold">♻️ One-Click Restore Deleted Data</button>
+          <button type="button" onclick="window.print()" class="btn-green">🖨️ Export Accounts Report (PDF)</button>
+        </div>
+        <input type="file" id="restoreJsonFile" accept=".json" class="hidden" onchange="restoreFullSystemJSON(event)">
+      </div>
+
+      <!-- MODULE 2: SMS & ONE-CLICK MESSAGE SYSTEM (SECTIONS 8, 12, 13, 23B) -->
+      <div id="modSMS" class="admin-mod gold hidden">
+        <h3 style="margin-top:0;">📲 Section 8, 12, 13 &amp; 23B: One-Click SMS, WhatsApp &amp; LMS Notification Center</h3>
+        <label>Select Automated Template</label>
+        <select id="smsTemplateSel" onchange="loadAdminSmsTemplate()">
+          <option value="fee3">Fee Reminder — 3 Days Before Due Date</option>
+          <option value="feeDue">Fee Reminder — On Due Date</option>
+          <option value="feeFine">Overdue Fee Reminder — With Late Fine</option>
+          <option value="feePaid">Fee Paid — Official Receipt + Thank You</option>
+          <option value="tcPay">Teacher End-of-Month 60% Salary Statement</option>
+          <option value="ttChange">Timetable &amp; Syllabus Breakup Dispatch (Student + Teacher)</option>
+          <option value="customAI">Auto-Generate New Custom SMS (Requires Admin Approval)</option>
+        </select>
+        <label>Recipient Phone / WhatsApp (Leave blank for Broadcast)</label>
+        <input id="smsRecipientPhone" placeholder="+92 3XX-XXXXXXX or +44...">
+        <textarea id="smsMessageBody" rows="3"></textarea>
+        <div class="btn-row">
+          <button type="button" onclick="approveAndSendSMS('WhatsApp')" class="btn-green">✅ Approve &amp; Send via WhatsApp</button>
+          <button type="button" onclick="approveAndSendSMS('LMS + SMS')" class="btn-dark">📢 Approve &amp; Push to LMS + SMS</button>
+        </div>
+        <div id="smsLogBox" class="notice hidden" style="margin-top:10px;"></div>
+      </div>
+
+      <!-- MODULE 3: HR & MASTER REGISTERS (SECTIONS 15, 23C, 23E) -->
+      <div id="modHR" class="admin-mod gold hidden">
+        <h3 style="margin-top:0;">👔 Section 15 &amp; 23C: HR Recruitment, Teacher Verification &amp; Master Registers</h3>
+        <div class="btn-row">
+          <input id="hrNewTcName" placeholder="Teacher Full Name">
+          <input id="hrNewTcCnic" placeholder="CNIC (34201-XXXXXXX-X)">
+          <input id="hrNewTcSubj" placeholder="Subject & Board (e.g., Physics — Gujranwala Board)">
+          <input id="hrNewTcBank" placeholder="Meezan Bank / EasyPaisa Account">
+        </div>
+        <button type="button" onclick="hrApproveAndCreateTeacher()" class="btn-green">✅ Verify Degree/CNIC &amp; Auto-Create Teacher Account (Opens Account in Accounts + Posts to Notice Board)</button>
+
+        <h4>📋 Master Teacher Register (60% Share Linked)</h4>
+        <div id="masterTeacherRegTable" class="table-responsive"></div>
+
+        <h4>📋 Master Student Register</h4>
+        <div id="masterStudentRegTable" class="table-responsive"></div>
+      </div>
+
+      <!-- MODULE 4: LIBRARY, TIMETABLE, SYLLABUS & LEAVE/RESULT APPROVALS (SECTIONS 9, 10, 17, 18, 23D) -->
+      <div id="modLibrary" class="admin-mod gold hidden">
+        <h3 style="margin-top:0;">📚 Section 9, 10, 17, 18 &amp; 23D: Auto-Linked Approvals, Timetable &amp; Library</h3>
+
+        <h4>1) Pending Leave Requests (Auto-Updates Attendance, Timetable &amp; Pay/Fine on Approval)</h4>
+        <div id="adminLeaveQueue"></div>
+
+        <h4>2) Pending Result Approvals (Auto-Publishes Result Card &amp; Topper List on Approval)</h4>
+        <div id="adminResultQueue"></div>
+
+        <h4>3) Publish Board-Wise Timetable &amp; Syllabus Breakup (Goes to Teacher + Student Simultaneously)</h4>
+        <div class="btn-row">
+          <input id="ttBoardInput" value="BISE Gujranwala — Class 9th">
+          <input id="ttScheduleInput" value="Mon–Fri | 4:30 PM PKT (11:30 AM UK) | Unit 1–2 Weekly Breakup">
+        </div>
+        <button type="button" onclick="publishTimetableAndSyllabus()" class="btn-dark">📅 Publish Timetable &amp; Syllabus Breakup to Both LMS Portals</button>
+        <div id="ttPublishNotice" class="notice hidden" style="margin-top:8px;"></div>
+      </div>
+
+      <!-- MODULE 5: CALENDAR ATTENDANCE REGISTER & FINE SYSTEM (SECTIONS 11 & 16) -->
+      <div id="modAttendance" class="admin-mod gold hidden">
+        <h3 style="margin-top:0;">📅 Section 11 &amp; 16: Calendar Attendance Register (P / A / L / LE) &amp; Auto-Fine</h3>
+        <div class="btn-row">
+          
