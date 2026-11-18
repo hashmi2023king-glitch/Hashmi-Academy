@@ -496,4 +496,191 @@
       </div>
     </div>
   </div>
-  
+  <!-- =========================================================
+       5. TEACHER LMS ACCOUNT + AUTO PLANNING / QUIZ (Sections 6, 21, 22)
+       ========================================================= -->
+  <div id="portalTeacherLms" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark btn-sm" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+        <span class="badge">TEACHER REVENUE SHARE: 60% | AUTO-PLANNER & AUTO-QUIZ</span>
+      </div>
+      <h2>💼 Teacher LMS Account — Recruitment, Teaching Block & 60% Earnings</h2>
+
+      <!-- Teacher Login OR Recruitment Toggle -->
+      <div class="grid-2" id="teacherAuthGrid">
+        <div class="gold">
+          <h3 style="margin-top:0;">🔐 Existing Faculty Login</h3>
+          <label>Teacher ID or Full Name</label>
+          <input id="tchLoginId" placeholder="e.g., HR-10001">
+          <label>Password</label>
+          <input type="password" id="tchLoginPass" placeholder="Enter password (default 1234)">
+          <button type="button" class="btn-green" onclick="loginTeacherLMS()">🔓 Login Teacher LMS</button>
+          <button type="button" class="btn-gold" onclick="demoTeacherLMS()">👁️ Director Test Demo (Teacher LMS)</button>
+        </div>
+        <div class="green-box">
+          <h3 style="margin-top:0;">📝 New Faculty Application (60% Revenue Share)</h3>
+          <div class="grid-2">
+            <input id="hrAppName" placeholder="Full Name *">
+            <input id="hrAppCnic" placeholder="CNIC Number *">
+          </div>
+          <div class="grid-2">
+            <input id="hrAppPhone" placeholder="WhatsApp Number *">
+            <input id="hrAppQual" placeholder="Degree & Experience (e.g., M.Phil Physics) *">
+          </div>
+          <div class="grid-2">
+            <input id="hrAppSub" placeholder="Subjects (e.g., Physics, IELTS, Quran) *">
+            <select id="hrAppBoard">
+              <option value="Gujranwala Board">Gujranwala Board</option>
+              <option value="Lahore Board">Lahore Board</option>
+              <option value="Federal Board FBISE Islamabad">Federal Board FBISE Islamabad</option>
+              <option value="Karachi Board">Karachi Board</option>
+              <option value="Peshawar Board">Peshawar Board</option>
+              <option value="Cambridge International (O/A-Level)">Cambridge International (O/A-Level)</option>
+              <option value="UK / USA / EU KG-8">UK / USA / EU KG-8</option>
+              <option value="Quran Academy / Languages">Quran Academy / Languages</option>
+            </select>
+          </div>
+          <div class="grid-2">
+            <input id="hrAppBank" placeholder="Meezan Bank / EasyPaisa Account *">
+            <input type="password" id="hrAppPass" placeholder="Create Faculty Password *">
+          </div>
+          <label>Attach CNIC, Degree & CV *</label>
+          <input type="file" id="hrAppDocs" accept="image/*,.pdf,.doc,.docx">
+          <button type="button" class="btn-dark" onclick="submitFacultyApp()">🚀 Submit Faculty Application</button>
+          <div id="hrAppMsg" class="small" style="font-weight:bold; color:#047857; margin-top:6px;"></div>
+        </div>
+      </div>
+
+      <!-- Active Teacher LMS Workspace -->
+      <div id="teacherLmsWorkspace" class="hidden" style="margin-top:16px;">
+        <div class="dark-box" id="tchProfileBanner" style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; margin-bottom:14px; font-weight:bold;"></div>
+
+        <div class="sub-tabs">
+          <button type="button" class="sub-tab-btn active-sub" onclick="switchSubTab('tchTab','tchPlannerQuiz',this)">🧠 Auto Lesson Planner & Auto-Quiz</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('tchTab','tchLiveUpload',this)">🎥 Live Class, Upload & End-Class Auto-Save</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('tchTab','tchStudentsAtt',this)">👨‍🎓 My Students, Homework & Attendance</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('tchTab','tchMarksEntry',this)">📊 Enter Marks / Submit Result</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('tchTab','tchEarningsLeave',this)">💰 My 60% Earnings, Fines & Leave</button>
+        </div>
+
+        <!-- Tab 1: Teacher Auto Planning + Auto Quiz + Unsolved Class Question (Section 21) -->
+        <div id="tchPlannerQuiz" class="tchTab">
+          <div class="gold">
+            <h3 style="margin-top:0;">🧠 Section 21: Auto Lesson Planner & Auto Quiz Generator</h3>
+            <div class="grid-3">
+              <div>
+                <label>Select Board (Separate Board Isolation)</label>
+                <select id="tchPlanBoard">
+                  <option value="Gujranwala Board">Gujranwala Board</option>
+                  <option value="Lahore Board">Lahore Board</option>
+                  <option value="Federal Board FBISE Islamabad">Federal Board FBISE Islamabad</option>
+                  <option value="Cambridge International (O/A-Level)">Cambridge International (O/A-Level)</option>
+                  <option value="UK / USA / EU KG-8">UK / USA / EU KG-8</option>
+                </select>
+              </div>
+              <div>
+                <label>Select Class & Subject</label>
+                <input id="tchPlanClassSub" value="Class 9th — Physics">
+              </div>
+              <div>
+                <label>Enter Chapter / Topic</label>
+                <input id="tchPlanTopic" value="Kinematics & Equations of Motion">
+              </div>
+            </div>
+            <div class="grid-2">
+              <button type="button" class="btn-dark" onclick="generateLessonPlan()">📋 Auto-Suggest Topic Lesson Plan</button>
+              <button type="button" class="btn-green" onclick="generateAutoQuiz()">⚡ Auto-Create Quiz (MCQs, Short & Long Qs)</button>
+            </div>
+            <div id="tchAutoPlanOutput" class="green-box hidden" style="margin-top:12px;"></div>
+            <div id="tchAutoQuizEditor" class="card hidden" style="margin-top:12px;">
+              <h4 style="margin-top:0;">✏️ Manual Quiz Editor (Edit, Add, Delete, Improve Answer & Publish to Students)</h4>
+              <div id="tchQuizQuestionsList"></div>
+              <div class="grid-3" style="margin-top:10px;">
+                <input id="newQuizQ" placeholder="New Question text...">
+                <input id="newQuizAns" placeholder="Correct Answer...">
+                <button type="button" class="btn-gold" onclick="addManualQuizQuestion()">➕ Add Question</button>
+              </div>
+              <button type="button" class="btn-green" onclick="publishQuizToStudents()">🚀 Publish Quiz to Student LMS</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Live Class, Upload Lectures & End-Class Auto Library Save (Section 21) -->
+        <div id="tchLiveUpload" class="tchTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">🎥 Start Live Class & Post Unsolved Student Challenge Question</h3>
+              <label>Live Class Meeting Link (Zoom / Meet / WebRTC)</label>
+              <input id="tchLiveLink" value="https://meet.google.com/shjh-live-class-01">
+              <label>Question Left Unsolved for Students (Auto-Sends to Student Quiz Program)</label>
+              <input id="tchUnsolvedQ" placeholder="e.g., Derive 2nd Equation of Motion graphically">
+              <label>System Reference Correct Answer (For Auto-Checking)</label>
+              <input id="tchUnsolvedAns" placeholder="e.g., S = vit + 1/2 at^2 using Area under velocity-time graph">
+              <button type="button" class="btn-green" onclick="endClassAutoSave()">✅ End Class & Auto-Save Video + Notes + Q&A to Digital Library</button>
+            </div>
+            <div class="green-box">
+              <h3 style="margin-top:0;">📤 Upload Video Lecture / PDF Notes to Board Library</h3>
+              <label>Target Board</label>
+              <input id="tchLibBoard" value="Gujranwala Board">
+              <label>Class & Subject</label>
+              <input id="tchLibClassSub" value="Class 9th — Physics">
+              <label>Lecture Title, Video URL & Notes Summary</label>
+              <textarea id="tchLibDetails" rows="3" placeholder="Topic video link & PDF notes..."></textarea>
+              <button type="button" class="btn-dark" onclick="teacherUploadLibrary()">💾 Upload to Board-Isolated Library</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: My Students, Homework Check & Attendance Marking -->
+        <div id="tchStudentsAtt" class="tchTab hidden">
+          <div class="gold">
+            <h3 style="margin-top:0;">👨‍🎓 My Board Students — Mark Daily Attendance (P / A / L / LE)</h3>
+            <div id="tchStudentsTableWrap" class="table-wrap"></div>
+          </div>
+          <div class="green-box">
+            <h3 style="margin-top:0;">📢 Send Announcement / Chat to My Students</h3>
+            <input id="tchAnnounceText" placeholder="Write notice for your students...">
+            <button type="button" class="btn-dark" onclick="teacherSendNotice()">📨 Send to Student LMS</button>
+          </div>
+        </div>
+
+        <!-- Tab 4: Enter Marks & Submit Result to Admin (Section 18) -->
+        <div id="tchMarksEntry" class="tchTab hidden">
+          <div class="gold">
+            <h3 style="margin-top:0;">📊 Enter Student Marks (Submits to Super Admin for Approval)</h3>
+            <div class="grid-3">
+              <div><label>Student ID</label><input id="resStuId" placeholder="e.g., PAK-10001"></div>
+              <div><label>Exam Type</label><select id="resExamType"><option value="Monthly Test">Monthly Test</option><option value="Final Exam">Final Exam</option></select></div>
+              <div><label>Subject</label><input id="resSubject" value="Physics"></div>
+            </div>
+            <div class="grid-3">
+              <div><label>Obtained Marks</label><input type="number" id="resObtained" value="94"></div>
+              <div><label>Total Marks</label><input type="number" id="resTotal" value="100"></div>
+              <div style="display:flex; align-items:flex-end;"><button type="button" class="btn-green" onclick="submitResultForApproval()">📤 Submit Result to Admin</button></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: My 60% Earnings, Fines & Leave Apply -->
+        <div id="tchEarningsLeave" class="tchTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">💰 My 60% Revenue Share & Payment History</h3>
+              <div id="tchEarningsSummary" class="small"></div>
+            </div>
+            <div class="green-box">
+              <h3 style="margin-top:0;">📅 Apply for Faculty Leave (Auto-Notifies Students & Admin)</h3>
+              <label>Reason *</label>
+              <input id="tchLeaveReason" placeholder="e.g., Official University Duty">
+              <div class="grid-2">
+                <div><label>From Date *</label><input type="date" id="tchLeaveFrom"></div>
+                <div><label>To Date *</label><input type="date" id="tchLeaveTo"></div>
+              </div>
+              <button type="button" class="btn-dark" onclick="submitLeaveRequest('Teacher')">📨 Submit Faculty Leave</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
