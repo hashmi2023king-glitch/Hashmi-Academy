@@ -1020,3 +1020,974 @@
 <footer>
   © 2026–2027 Sir Haroon Javaid Hashmi Academy and College | Dinga, District Gujrat, Pakistan | 60% Teacher / 40% Admin Model | All Rights Reserved
 </footer>
+<script>
+// =========================================================
+// CORE STORAGE & HELPERS (100% SYNTAX & RUNTIME SAFE)
+// =========================================================
+var DB = {
+  get: function(k, def) {
+    try {
+      var v = localStorage.getItem('shjh_v29_' + k);
+      return v ? JSON.parse(v) : def;
+    } catch (e) { return def; }
+  },
+  set: function(k, v) {
+    try { localStorage.setItem('shjh_v29_' + k, JSON.stringify(v)); } catch (e) {}
+  }
+};
+
+function el(id) { return document.getElementById(id); }
+function esc(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Live World Clocks (PKT, UK, USA, EU)
+function updateClocks() {
+  var now = new Date();
+  var fmt = function(tz) {
+    try { return now.toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
+    catch (e) { return now.toLocaleTimeString('en-US'); }
+  };
+  if (el('clockPK')) el('clockPK').textContent = 'Pakistan (PKT): ' + fmt('Asia/Karachi');
+  if (el('clockUK')) el('clockUK').textContent = 'UK (London): ' + fmt('Europe/London');
+  if (el('clockUS')) el('clockUS').textContent = 'USA (New York): ' + fmt('America/New_York');
+  if (el('clockEU')) el('clockEU').textContent = 'Europe (Berlin): ' + fmt('Europe/Berlin');
+}
+setInterval(updateClocks, 1000);
+
+// Speech Audio
+function playSpeech(txt) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(txt);
+    u.rate = 0.95;
+    window.speechSynthesis.speak(u);
+  }
+}
+function stopSpeech() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); }
+
+// Portal & Sub-Tab Navigation
+function switchPortal(name) {
+  var secs = document.querySelectorAll('.portal-section');
+  for (var i = 0; i < secs.length; i++) secs[i].classList.remove('active-portal');
+  var navs = document.querySelectorAll('nav a');
+  for (var j = 0; j < navs.length; j++) navs[j].classList.remove('active-nav');
+  var target = el('portal' + name.charAt(0).toUpperCase() + name.slice(1));
+  var nav = el('nav' + name.charAt(0).toUpperCase() + name.slice(1));
+  if (target) target.classList.add('active-portal');
+  if (nav) nav.classList.add('active-nav');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchSubTab(groupClass, targetId, btn) {
+  var tabs = document.querySelectorAll('.' + groupClass);
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.add('hidden');
+  var t = el(targetId);
+  if (t) t.classList.remove('hidden');
+  if (btn && btn.parentNode) {
+    var btns = btn.parentNode.querySelectorAll('.sub-tab-btn');
+    for (var j = 0; j < btns.length; j++) btns[j].classList.remove('active-sub');
+    btn.classList.add('active-sub');
+  }
+}
+
+function previewFileName(inpId, stId) {
+  var inp = el(inpId), st = el(stId);
+  if (inp && st && inp.files && inp.files[0]) {
+    st.innerHTML = '<span class="attachment-badge">✅ Attached: ' + esc(inp.files[0].name) + '</span>';
+  }
+}
+
+function toggleBtn(chkId, btnId, activeLabel) {
+  var c = el(chkId), b = el(btnId);
+  if (!c || !b) return;
+  b.disabled = !c.checked;
+  b.style.opacity = c.checked ? '1' : '0.5';
+  b.textContent = c.checked ? activeLabel : '🔒 Check Box to Submit';
+}
+
+// =========================================================
+// INITIAL SEED DATA (ALL 29 SECTIONS READY OUT OF THE BOX)
+// =========================================================
+var coursesDB = DB.get('courses', [
+  { id: 'C1', portal: 'Pakistan', title: 'School Section (Nursery to Class 8)', fee: 5000, billing: '/month' },
+  { id: 'C2', portal: 'Pakistan', title: 'Class 9th / 10th (Matric — Science/CS/Arts)', fee: 7000, billing: '/month' },
+  { id: 'C3', portal: 'Pakistan', title: '1st Year / 2nd Year (Inter)', fee: 8500, billing: '/month' },
+  { id: 'C4', portal: 'Pakistan', title: 'O-Level / A-Level (In Pakistan)', fee: 12000, billing: '/month' },
+  { id: 'C5', portal: 'Pakistan', title: 'CSS / PMS / PCS / Tehsildar (Full Prep)', fee: 45000, billing: 'One-Time Package' },
+  { id: 'C6', portal: 'Pakistan', title: 'MDCAT / ECAT — 3 Months Crash (One-Time)', fee: 30000, billing: 'Once (No Double Charge)' },
+  { id: 'C7', portal: 'Pakistan', title: 'MDCAT / ECAT — 6 Months (One-Time)', fee: 50000, billing: 'Once (No Double Charge)' },
+  { id: 'C8', portal: 'Pakistan', title: 'MDCAT / ECAT — 9 Months (One-Time)', fee: 70000, billing: 'Once (No Double Charge)' },
+  { id: 'C9', portal: 'Pakistan', title: 'MDCAT / ECAT — 12 Months Full (One-Time)', fee: 90000, billing: 'Once (No Double Charge)' },
+  { id: 'C10', portal: 'Pakistan', title: 'Languages (IELTS/German/French/Spanish/Urdu) — 30 Days Level 1', fee: 15000, billing: 'Once (30 Days)' },
+  { id: 'C11', portal: 'Pakistan', title: 'Languages — 60 Days Level 2', fee: 25000, billing: 'Once (60 Days)' },
+  { id: 'C12', portal: 'Pakistan', title: 'Languages — 90 Days Level 3 + Mock & Certificate', fee: 35000, billing: 'Once (90 Days)' },
+  { id: 'C13', portal: 'Pakistan', title: 'Quran Academy (Qaida / Nazra / Tajweed / Hifz / Urdu Tafseer)', fee: 4000, billing: '/month' },
+  { id: 'C14', portal: 'International', title: 'KG to Grade 8 (UK / USA / EU — 4 Hrs/Wk)', fee: 400, billing: '/month (£100/wk)' },
+  { id: 'C15', portal: 'International', title: 'Cambridge / Edexcel / IB — O-Level & A-Level', fee: 480, billing: '/month' },
+  { id: 'C16', portal: 'International', title: 'MDCAT / ECAT International — 3 Months (One-Time)', fee: 300, billing: 'Once' },
+  { id: 'C17', portal: 'International', title: 'MDCAT / ECAT International — 6 Months (One-Time)', fee: 550, billing: 'Once' },
+  { id: 'C18', portal: 'International', title: 'MDCAT / ECAT International — 9 Months (One-Time)', fee: 750, billing: 'Once' },
+  { id: 'C19', portal: 'International', title: 'MDCAT / ECAT International — 12 Months (One-Time)', fee: 900, billing: 'Once' },
+  { id: 'C20', portal: 'International', title: 'Languages (IELTS/German/French/Spanish/Urdu) — 30 Days Level 1', fee: 120, billing: 'Once (30 Days)' },
+  { id: 'C21', portal: 'International', title: 'Languages — 60 Days Level 2', fee: 200, billing: 'Once (60 Days)' },
+  { id: 'C22', portal: 'International', title: 'Languages — 90 Days Level 3 + Certificate', fee: 280, billing: 'Once (90 Days)' },
+  { id: 'C23', portal: 'International', title: 'Quran Academy (Qaida / Nazra / Hifz / English Tafseer)', fee: 240, billing: '/month' }
+]);
+
+var studentsDB = DB.get('students', [
+  { id: 'PAK-10001', portal: 'Pakistan', currency: 'PKR', name: 'Mah Noor Irfan', father: 'Muhammad Irfan', parentCnic: '34201-1122334-1', bform: '34201-9988776-2', board: 'Gujranwala Board', cls: 'Class 10th', section: 'Computer Science', joinDate: '2026-04-01', phone: '+92 300 1234567', city: 'Dinga, Gujrat', baseFee: 7000, netFee: 7000, concessionNote: 'None', status: 'Active', pass: '1234', fines: 0, xp: 4950 },
+  { id: 'INT-20001', portal: 'International', currency: 'GBP', name: 'Zainab Malik', father: 'Tariq Malik', parentCnic: 'UK-BRP-8891', bform: 'UK-PP-554433', board: 'UK National Curriculum (KG–Grade 8)', cls: 'Grade 6', section: 'UK Curriculum', joinDate: '2026-09-01', phone: '+44 7700 900123', city: 'London, UK', baseFee: 400, netFee: 400, concessionNote: 'None', status: 'Active', pass: '1234', fines: 0, xp: 4620 }
+]);
+
+var teachersDB = DB.get('teachers', [
+  { id: 'HR-10001', name: 'Sir Haroon Javaid Hashmi', cnic: '34201-0000001-1', degree: 'M.A English / Senior IELTS Trainer', subject: 'English & IELTS', board: 'Gujranwala Board', cls: 'Class 9th & 10th', joinDate: '2026-01-01', phone: '+92 334 1140082', bank: 'Meezan Bank Dinga', share: '60%', status: 'Active', pass: '1234', earnedPkr: 42000, earnedGbp: 240, fines: 0 },
+  { id: 'HR-10002', name: 'Prof. Ayesha Siddiqui', cnic: '34201-2233445-2', degree: 'M.Phil Physics', subject: 'Physics & Science', board: 'Gujranwala Board', cls: 'Class 9th & 10th', joinDate: '2026-04-01', phone: '+92 301 7654321', bank: 'EasyPaisa 03017654321', share: '60%', status: 'Active', pass: '1234', earnedPkr: 25200, earnedGbp: 0, fines: 0 }
+]);
+
+var libraryDB = DB.get('library', [
+  { id: 'L1', board: 'Gujranwala Board', classSub: 'Class 10th — Computer Science & Maths', title: 'Punjab Textbook Board PDF + Chapter 1–10 Video Lectures + Solved Past Papers' },
+  { id: 'L2', board: 'Gujranwala Board', classSub: 'Class 9th — Physics', title: 'Kinematics Video Lecture + Graphical Equations PDF Notes + Auto-Checked MCQs' },
+  { id: 'L3', board: 'Federal Board FBISE Islamabad', classSub: 'Class 9th & 10th — SLO Based', title: 'FBISE SLO Model Papers, E-Books & Recorded Lectures' },
+  { id: 'L4', board: 'UK National Curriculum (KG–Grade 8)', classSub: 'Grade 6 — English, Maths & Science', title: 'UK Key Stage 2/3 Interactive Workbooks, Video Lessons & Weekly Quizzes' }
+]);
+
+var timetableDB = DB.get('timetable', [
+  { board: 'Gujranwala Board', cls: 'Class 10th', time: '4:00 PM – 5:00 PM PKT', teacher: 'Sir Haroon Javaid Hashmi (English)' },
+  { board: 'UK National Curriculum (KG–Grade 8)', cls: 'Grade 6', time: '8:00 PM PKT / 3:00 PM UK', teacher: 'Sir Haroon Javaid Hashmi (UK English & Maths)' }
+]);
+
+var syllabusDB = DB.get('syllabus', [
+  { board: 'Gujranwala Board', classSub: 'Class 9th — English', weeks: 'Week 1: Unit 1 The Saviour of Mankind | Week 2: Unit 2 Patriotism + Grammar Tenses' },
+  { board: 'UK National Curriculum (KG–Grade 8)', classSub: 'Grade 6 — Maths', weeks: 'Week 1: Fractions & Decimals | Week 2: Algebra Foundations' }
+]);
+
+var quizzesDB = DB.get('quizzes', [
+  { id: 'Q1', board: 'Gujranwala Board', classSub: 'Class 10th', q: 'What is the SI unit of Electric Current?', optA: 'Volt', optB: 'Ampere', optC: 'Ohm', ans: 'Ampere' },
+  { id: 'Q2', board: 'UK National Curriculum (KG–Grade 8)', classSub: 'Grade 6', q: 'What is 3/4 expressed as a percentage?', optA: '50%', optB: '75%', optC: '80%', ans: '75%' }
+]);
+
+var attendanceDB = DB.get('attendance', [
+  { userId: 'PAK-10001', date: '2026-11-18', code: 'P', reason: 'On Time', history: 'Marked by Teacher' },
+  { userId: 'INT-20001', date: '2026-11-18', code: 'P', reason: 'On Time', history: 'Marked by Teacher' }
+]);
+
+var leavesDB = DB.get('leaves', []);
+var resultsDB = DB.get('results', [
+  { id: 'R1', stuId: 'PAK-10001', exam: 'Monthly Test', subject: 'Computer Science', obtained: 98, total: 100, status: 'Approved' }
+]);
+var concessionsDB = DB.get('concessions', []);
+var accountsDB = DB.get('accounts', [
+  { date: '2026-11-01', type: 'Fee Received (PKR)', gross: 7000, teacher60: 4200, admin40: 2800, note: 'PAK-10001 Monthly Fee (60/40 Split)' },
+  { date: '2026-11-01', type: 'Fee Received (GBP)', gross: 400, teacher60: 240, admin40: 160, note: 'INT-20001 Monthly Fee (60/40 Split)' }
+]);
+var chatsDB = DB.get('chats', [
+  { from: 'Sir Haroon Javaid Hashmi', text: 'Welcome to your Board-Isolated Classroom! Ask any study question here.' }
+]);
+
+function syncAllSelects() {
+  var pakSel = el('pakProgramSelect');
+  var intlSel = el('intlProgramSelect');
+  var pakCustom = [];
+  var intlCustom = [];
+  if (pakSel) pakSel.innerHTML = '';
+  if (intlSel) intlSel.innerHTML = '';
+  for (var i = 0; i < coursesDB.length; i++) {
+    var c = coursesDB[i];
+    if (c.portal === 'Pakistan') {
+      if (pakSel) pakSel.innerHTML += '<option value="' + esc(c.id) + '">' + esc(c.title) + ' — Rs ' + c.fee.toLocaleString() + ' (' + esc(c.billing) + ')</option>';
+      if (c.custom) pakCustom.push(c.title + ' (Rs ' + c.fee + ')');
+    } else {
+      if (intlSel) intlSel.innerHTML += '<option value="' + esc(c.id) + '">' + esc(c.title) + ' — £' + c.fee + ' (' + esc(c.billing) + ')</option>';
+      if (c.custom) intlCustom.push(c.title + ' (£' + c.fee + ')');
+    }
+  }
+  if (pakCustom.length && el('pakCustomCoursesArea')) {
+    el('pakCustomCoursesArea').classList.remove('hidden');
+    el('pakCustomCoursesList').innerHTML = pakCustom.map(function(x){ return '<span class="badge">' + esc(x) + '</span> '; }).join('');
+  }
+  if (intlCustom.length && el('intlCustomCoursesArea')) {
+    el('intlCustomCoursesArea').classList.remove('hidden');
+    el('intlCustomCoursesList').innerHTML = intlCustom.map(function(x){ return '<span class="badge">' + esc(x) + '</span> '; }).join('');
+  }
+}
+
+function calcIntlFee() {
+  var r = parseFloat(el('intlCalcRate').value) || 25;
+  var h = parseFloat(el('intlCalcHrs').value) || 4;
+  var wk = r * h;
+  el('intlFeeDisplay').textContent = h + ' Hours / Week = £' + wk + ' Weekly | £' + (wk * 4) + ' Monthly (4 Weeks)';
+}
+
+// =========================================================
+// STUDENT ADMISSIONS (PAKISTAN PKR & INTERNATIONAL GBP)
+// =========================================================
+function submitAdmission(portalType) {
+  var isPak = portalType === 'Pakistan';
+  var name = el(isPak ? 'pakStuName' : 'intlStuName').value.trim();
+  var father = el(isPak ? 'pakFatherName' : 'intlFatherName').value.trim();
+  var docNum = el(isPak ? 'pakBForm' : 'intlPassport').value.trim();
+  var parentCnic = isPak ? el('pakParentCnic').value.trim() : docNum;
+  var city = el(isPak ? 'pakCity' : 'intlCountry').value.trim();
+  var phone = el(isPak ? 'pakPhone' : 'intlPhone').value.trim();
+  var pass = el(isPak ? 'pakPass' : 'intlPass').value.trim();
+  var board = el(isPak ? 'pakBoardSelect' : 'intlBoardSelect').value;
+  var progId = el(isPak ? 'pakProgramSelect' : 'intlProgramSelect').value;
+  var section = isPak ? el('pakSectionSelect').value : 'International';
+
+  if (!name || !father || !docNum || !city || !phone || !pass) {
+    alert('Please fill in all required fields (*).');
+    return;
+  }
+  var prog = coursesDB.find(function(c){ return c.id === progId; }) || coursesDB[0];
+  var newId = (isPak ? 'PAK-' : 'INT-') + Math.floor(10000 + Math.random() * 89999);
+
+  var stuObj = {
+    id: newId, portal: portalType, currency: isPak ? 'PKR' : 'GBP',
+    name: name, father: father, parentCnic: parentCnic, bform: docNum,
+    board: board, cls: prog.title, section: section,
+    joinDate: new Date().toISOString().slice(0,10), phone: phone, city: city,
+    baseFee: prog.fee, netFee: prog.fee, concessionNote: 'None',
+    status: 'Pending Approval', pass: pass, fines: 0, xp: 100
+  };
+  studentsDB.unshift(stuObj);
+  DB.set('students', studentsDB);
+
+  // Auto-Link Fee Entry to Accounts with 60/40 Split
+  var t60 = Math.round(prog.fee * 0.60);
+  var a40 = prog.fee - t60;
+  accountsDB.unshift({
+    date: stuObj.joinDate,
+    type: isPak ? 'Fee Received (PKR)' : 'Fee Received (GBP)',
+    gross: prog.fee, teacher60: t60, admin40: a40,
+    note: newId + ' (' + name + ') — ' + prog.title
+  });
+  DB.set('accounts', accountsDB);
+
+  var msg = '✅ Admission Submitted! Your Official ID is: ' + newId + ' | Fee Auto-Logged in Accounts (60/40 Split Active).';
+  el(isPak ? 'pakAdmResult' : 'intlAdmResult').textContent = msg;
+  alert(msg);
+}
+
+// =========================================================
+// STUDENT LMS WORKSPACE + 24/7 AI TUTOR
+// =========================================================
+var activeStudent = null;
+
+function demoStudentLMS() {
+  activeStudent = studentsDB[0];
+  renderStudentLMS();
+}
+
+function loginStudentLMS() {
+  var key = el('stuLoginId').value.trim().toLowerCase();
+  var pass = el('stuLoginPass').value.trim();
+  if (!key) { alert('Enter Student ID or Full Name.'); return; }
+  var found = studentsDB.find(function(s){
+    return (s.id.toLowerCase() === key || s.name.toLowerCase() === key) && (!pass || s.pass === pass);
+  });
+  if (!found) { alert('Student not found or password incorrect.'); return; }
+  activeStudent = found;
+  renderStudentLMS();
+}
+
+function renderStudentLMS() {
+  if (!activeStudent) return;
+  el('studentLmsWorkspace').classList.remove('hidden');
+  var s = activeStudent;
+  var curr = s.currency === 'GBP' ? '£' : 'Rs ';
+  el('stuProfileBanner').innerHTML =
+    '<strong>🎓 ' + esc(s.name) + ' (' + esc(s.id) + ')</strong> | <strong>Board:</strong> ' + esc(s.board) +
+    ' | <strong>Program:</strong> ' + esc(s.cls) + ' | <strong>Status:</strong> ' + esc(s.status) +
+    ' | <strong>Fee:</strong> ' + curr + s.netFee + ' | <strong>XP Points:</strong> ⭐ ' + s.xp;
+
+  var myTT = timetableDB.filter(function(t){ return t.board === s.board; });
+  el('stuTimetableList').innerHTML = myTT.length ? myTT.map(function(t){
+    return '<div>• <strong>' + esc(t.cls) + ':</strong> ' + esc(t.time) + ' — ' + esc(t.teacher) + '</div>';
+  }).join('') : '<div>No timetable clashes. Check general board schedule.</div>';
+
+  var mySB = syllabusDB.filter(function(sb){ return sb.board === s.board; });
+  el('stuSyllabusList').innerHTML = mySB.length ? mySB.map(function(sb){
+    return '<div>• <strong>' + esc(sb.classSub) + ':</strong> ' + esc(sb.weeks) + '</div>';
+  }).join('') : '<div>Weekly syllabus breakup synced with your board.</div>';
+
+  var myLib = libraryDB.filter(function(l){ return l.board === s.board; });
+  el('stuLibraryList').innerHTML = (myLib.length ? myLib : libraryDB).map(function(l){
+    return '<div class="library-card"><strong>📚 [' + esc(l.board) + '] ' + esc(l.classSub) + '</strong><p class="small">' + esc(l.title) + '</p></div>';
+  }).join('');
+
+  el('stuQuizContainer').innerHTML = quizzesDB.map(function(q, idx){
+    return '<div class="library-card"><strong>Q' + (idx+1) + ' [' + esc(q.board) + ']:</strong> ' + esc(q.q) +
+      '<div style="margin-top:6px;">' +
+      '<button type="button" class="btn-dark btn-sm" onclick="checkQuizAns(' + idx + ',\'' + esc(q.optA) + '\')">' + esc(q.optA) + '</button>' +
+      '<button type="button" class="btn-dark btn-sm" onclick="checkQuizAns(' + idx + ',\'' + esc(q.optB) + '\')">' + esc(q.optB) + '</button>' +
+      '<button type="button" class="btn-dark btn-sm" onclick="checkQuizAns(' + idx + ',\'' + esc(q.optC) + '\')">' + esc(q.optC) + '</button>' +
+      '</div></div>';
+  }).join('');
+
+  var myRes = resultsDB.filter(function(r){ return r.stuId === s.id && r.status === 'Approved'; });
+  el('stuResultsContainer').innerHTML = myRes.length ? myRes.map(function(r){
+    var pct = Math.round((r.obtained / r.total) * 100);
+    return '<div class="library-card"><strong>' + esc(r.exam) + ' — ' + esc(r.subject) + ':</strong> ' + r.obtained + '/' + r.total + ' (' + pct + '% — Grade A+)</div>';
+  }).join('') : '<div class="small">No approved exam results yet.</div>';
+
+  el('stuCareerAdvice').innerHTML =
+    '<p><strong>AI Academic & Career Roadmap for ' + esc(s.name) + ':</strong></p>' +
+    '<ul><li><strong>Current Standing:</strong> Excellent (' + s.xp + ' XP)</li>' +
+    '<li><strong>Recommended Pathways:</strong> MDCAT / Medical Sciences, Software Engineering (ECAT), CSS / Foreign Service, or International University Scholarships (UK/USA/EU).</li></ul>';
+
+  var myAtt = attendanceDB.filter(function(a){ return a.userId === s.id; });
+  el('stuAttendanceSummary').innerHTML = myAtt.map(function(a){
+    return '<div>• ' + esc(a.date) + ': <strong>' + esc(a.code) + '</strong> (' + esc(a.reason) + ')</div>';
+  }).join('') || '<div>100% Present</div>';
+
+  el('stuFeeFineSummary').innerHTML =
+    '<div><strong>Payable Fee:</strong> ' + curr + s.netFee + ' (' + esc(s.cls) + ')</div>' +
+    '<div><strong>Pending Fines:</strong> ' + curr + s.fines + '</div>' +
+    '<div><strong>Fee Status:</strong> Verified & Active ✅</div>';
+
+  el('stuFilteredNotices').innerHTML =
+    '<div>✅ <strong>[' + esc(s.board) + ' Official Notice]:</strong> Exam preparation schedule & model papers updated for your board only.</div>';
+
+  renderChats();
+}
+
+function checkQuizAns(idx, chosen) {
+  var q = quizzesDB[idx];
+  if (chosen === q.ans) {
+    if (activeStudent) { activeStudent.xp += 50; DB.set('students', studentsDB); }
+    alert('✅ Correct Answer! +50 XP added to your Leaderboard score.');
+  } else {
+    alert('❌ Incorrect. Correct Answer is: ' + q.ans);
+  }
+}
+
+function askAiTutor() {
+  var q = el('aiTutorQuestion').value.trim();
+  if (!q) return;
+  var box = el('aiTutorChatBox');
+  box.innerHTML += '<div style="margin-top:6px;"><strong>🧑 Student:</strong> ' + esc(q) + '</div>' +
+    '<div style="margin-top:4px; color:#047857;"><strong>🤖 24/7 AI Tutor (Step-by-Step):</strong><br>1. <em>Concept:</em> Let us break down "' + esc(q) + '" according to your board syllabus.<br>2. <em>Formula / Rule:</em> Identify the given values, apply the core principle systematically, and verify units.<br>3. <em>Practice Tip:</em> Solve 2 past-paper questions on this exact topic in your Quiz tab!</div>';
+  el('aiTutorQuestion').value = '';
+  box.scrollTop = box.scrollHeight;
+}
+
+function aiTutorQuickTest() {
+  var box = el('aiTutorChatBox');
+  box.innerHTML += '<div style="margin-top:6px; color:#0a192f;"><strong>⚡ AI Tutor Instant Mini-Test:</strong><br>Q1: Define the primary law covered in today\'s chapter.<br>Q2: Solve a numerical problem using standard SI units.<br><em>Type your answers above for instant step-by-step grading!</em></div>';
+  box.scrollTop = box.scrollHeight;
+}
+
+function submitStudentHomework() {
+  var t = el('stuHwTitle').value.trim();
+  if (!t) { alert('Enter Homework topic.'); return; }
+  el('stuHwHistory').innerHTML += '<div>✅ Submitted: <strong>' + esc(t) + '</strong> (' + new Date().toLocaleDateString() + ')</div>';
+  alert('✅ Homework submitted to Teacher LMS!');
+}
+
+function downloadResultCardPDF() {
+  window.print();
+}
+
+function downloadVerifiedCertificate() {
+  if (!activeStudent) return;
+  var certText = 'OFFICIAL VERIFIED CERTIFICATE\nSIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE\nAwarded to: ' + activeStudent.name + ' (' + activeStudent.id + ')\nBoard/Program: ' + activeStudent.board + ' — ' + activeStudent.cls + '\nVerified by Founder & Director: Sir Haroon Javaid Hashmi\nDate: ' + new Date().toLocaleDateString();
+  var blob = new Blob([certText], { type: 'text/plain;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = activeStudent.id + '_Verified_Certificate.txt';
+  a.click();
+}
+
+function renderChats() {
+  var box = el('stuTeacherChatBox');
+  if (!box) return;
+  box.innerHTML = chatsDB.map(function(c){
+    return '<div><strong>' + esc(c.from) + ':</strong> ' + esc(c.text) + '</div>';
+  }).join('');
+}
+
+function sendPortalChat(role) {
+  var inp = el('stuChatMsgInput');
+  if (!inp || !inp.value.trim()) return;
+  chatsDB.push({ from: activeStudent ? activeStudent.name : role, text: inp.value.trim() });
+  DB.set('chats', chatsDB);
+  inp.value = '';
+  renderChats();
+}
+
+// =========================================================
+// TEACHER LMS + AUTO LESSON PLANNER + AUTO QUIZ (60% SHARE)
+// =========================================================
+var activeTeacher = null;
+var tempGeneratedQuiz = [];
+
+function submitFacultyApp() {
+  var name = el('hrAppName').value.trim();
+  var cnic = el('hrAppCnic').value.trim();
+  var phone = el('hrAppPhone').value.trim();
+  var qual = el('hrAppQual').value.trim();
+  var sub = el('hrAppSub').value.trim();
+  var board = el('hrAppBoard').value;
+  var bank = el('hrAppBank').value.trim();
+  var pass = el('hrAppPass').value.trim();
+  if (!name || !cnic || !phone || !qual || !sub || !bank || !pass) {
+    alert('Please fill in all required faculty fields (*).');
+    return;
+  }
+  var id = 'HR-' + Math.floor(10000 + Math.random() * 89999);
+  teachersDB.unshift({
+    id: id, name: name, cnic: cnic, degree: qual, subject: sub, board: board,
+    cls: 'Assigned Classes', joinDate: new Date().toISOString().slice(0,10),
+    phone: phone, bank: bank, share: '60%', status: 'Pending Approval', pass: pass,
+    earnedPkr: 0, earnedGbp: 0, fines: 0
+  });
+  DB.set('teachers', teachersDB);
+  el('hrAppMsg').textContent = '✅ Application Submitted! Faculty ID: ' + id + ' (Sent to Admin HR Register).';
+  alert('Faculty Application Submitted! ID: ' + id);
+}
+
+function demoTeacherLMS() {
+  activeTeacher = teachersDB[0];
+  renderTeacherLMS();
+}
+
+function loginTeacherLMS() {
+  var key = el('tchLoginId').value.trim().toLowerCase();
+  var pass = el('tchLoginPass').value.trim();
+  if (!key) { alert('Enter Teacher ID or Name.'); return; }
+  var found = teachersDB.find(function(t){
+    return (t.id.toLowerCase() === key || t.name.toLowerCase() === key) && (!pass || t.pass === pass);
+  });
+  if (!found) { alert('Teacher not found or invalid password.'); return; }
+  activeTeacher = found;
+  renderTeacherLMS();
+}
+
+function renderTeacherLMS() {
+  if (!activeTeacher) return;
+  el('teacherLmsWorkspace').classList.remove('hidden');
+  var t = activeTeacher;
+  el('tchProfileBanner').innerHTML =
+    '<strong>💼 ' + esc(t.name) + ' (' + esc(t.id) + ')</strong> | <strong>Subject:</strong> ' + esc(t.subject) +
+    ' | <strong>Board:</strong> ' + esc(t.board) + ' | <strong>Revenue Share:</strong> 60% | <strong>Status:</strong> ' + esc(t.status);
+
+  var myStus = studentsDB.filter(function(s){ return s.board === t.board; });
+  if (!myStus.length) myStus = studentsDB;
+  var tbl = '<table><tr><th>Student ID</th><th>Name</th><th>Class</th><th>Attendance Action</th></tr>';
+  myStus.forEach(function(s){
+    tbl += '<tr><td>' + esc(s.id) + '</td><td>' + esc(s.name) + '</td><td>' + esc(s.cls) + '</td><td>' +
+      '<button type="button" class="btn-green btn-sm" onclick="quickMarkAtt(\'' + esc(s.id) + '\',\'P\')">P</button>' +
+      '<button type="button" class="btn-red btn-sm" onclick="quickMarkAtt(\'' + esc(s.id) + '\',\'A\')">A</button>' +
+      '<button type="button" class="btn-gold btn-sm" onclick="quickMarkAtt(\'' + esc(s.id) + '\',\'L\')">L</button></td></tr>';
+  });
+  tbl += '</table>';
+  el('tchStudentsTableWrap').innerHTML = tbl;
+
+  el('tchEarningsSummary').innerHTML =
+    '<div><strong>Revenue Model:</strong> 60% Teacher Share / 40% Admin Share</div>' +
+    '<div><strong>Total Earned (PKR):</strong> Rs ' + t.earnedPkr.toLocaleString() + '</div>' +
+    '<div><strong>Total Earned (GBP):</strong> £' + t.earnedGbp + '</div>' +
+    '<div><strong>Fines / Deductions:</strong> Rs ' + t.fines + '</div>' +
+    '<div><strong>Payout Account:</strong> ' + esc(t.bank) + '</div>';
+}
+
+function generateLessonPlan() {
+  var b = el('tchPlanBoard').value;
+  var cs = el('tchPlanClassSub').value;
+  var top = el('tchPlanTopic').value;
+  var out = el('tchAutoPlanOutput');
+  out.classList.remove('hidden');
+  out.innerHTML = '<strong>📋 Auto-Generated Lesson Plan [' + esc(b) + ' — ' + esc(cs) + ']:</strong>' +
+    '<ul class="small"><li><strong>Minutes 0–10:</strong> Concept Hook & Real-Life Application of ' + esc(top) + '</li>' +
+    '<li><strong>Minutes 10–30:</strong> Core Board Definitions, Derivations & Worked Examples</li>' +
+    '<li><strong>Minutes 30–40:</strong> Interactive Student Questioning & Unsolved Challenge Assignment</li></ul>';
+}
+
+function generateAutoQuiz() {
+  var b = el('tchPlanBoard').value;
+  var cs = el('tchPlanClassSub').value;
+  var top = el('tchPlanTopic').value;
+  tempGeneratedQuiz = [
+    { board: b, classSub: cs, q: '[MCQ] Core principle of ' + top + '?', optA: 'Principle A', optB: 'Principle B', optC: 'Principle C', ans: 'Principle A' },
+    { board: b, classSub: cs, q: '[Short Q] Define ' + top + ' with SI unit.', optA: 'Standard Definition', optB: 'Incomplete', optC: 'None', ans: 'Standard Definition' },
+    { board: b, classSub: cs, q: '[Long Q] Derive complete mathematical relation for ' + top + '.', optA: 'Full Stepwise Proof', optB: 'Formula Only', optC: 'Skip', ans: 'Full Stepwise Proof' }
+  ];
+  el('tchAutoQuizEditor').classList.remove('hidden');
+  renderTempQuizEditor();
+}
+
+function renderTempQuizEditor() {
+  el('tchQuizQuestionsList').innerHTML = tempGeneratedQuiz.map(function(item, i){
+    return '<div class="library-card"><strong>Q' + (i+1) + ':</strong> ' + esc(item.q) + ' <em>(Correct: ' + esc(item.ans) + ')</em> ' +
+      '<button type="button" class="btn-red btn-sm" onclick="tempGeneratedQuiz.splice(' + i + ',1);renderTempQuizEditor();">Delete</button></div>';
+  }).join('');
+}
+
+function addManualQuizQuestion() {
+  var q = el('newQuizQ').value.trim();
+  var a = el('newQuizAns').value.trim();
+  if (!q || !a) return;
+  tempGeneratedQuiz.push({ board: el('tchPlanBoard').value, classSub: el('tchPlanClassSub').value, q: q, optA: a, optB: 'Option B', optC: 'Option C', ans: a });
+  el('newQuizQ').value = ''; el('newQuizAns').value = '';
+  renderTempQuizEditor();
+}
+
+function publishQuizToStudents() {
+  tempGeneratedQuiz.forEach(function(q){ quizzesDB.unshift(q); });
+  DB.set('quizzes', quizzesDB);
+  alert('✅ Questionnaire published to Student LMS & saved to Subject Digital Library!');
+}
+
+function endClassAutoSave() {
+  var b = el('tchLibBoard').value.trim() || 'Gujranwala Board';
+  var cs = el('tchLibClassSub').value.trim() || 'Class 9th';
+  var uq = el('tchUnsolvedQ').value.trim();
+  var ua = el('tchUnsolvedAns').value.trim();
+  libraryDB.unshift({ id: 'L' + Date.now(), board: b, classSub: cs, title: 'Recorded Live Class Video + PDF Notes + Class Q&A (' + new Date().toLocaleDateString() + ')' });
+  DB.set('library', libraryDB);
+  if (uq && ua) {
+    quizzesDB.unshift({ id: 'Q' + Date.now(), board: b, classSub: cs, q: '[Unsolved Class Challenge] ' + uq, optA: ua, optB: 'Review Notes', optC: 'Ask AI Tutor', ans: ua });
+    DB.set('quizzes', quizzesDB);
+  }
+  alert('✅ Class Ended! Video, Notes & Unsolved Challenge Question automatically saved to Digital Library & Student Quiz Program!');
+}
+
+function teacherUploadLibrary() {
+  var b = el('tchLibBoard').value.trim();
+  var cs = el('tchLibClassSub').value.trim();
+  var d = el('tchLibDetails').value.trim();
+  if (!b || !cs || !d) return;
+  libraryDB.unshift({ id: 'L' + Date.now(), board: b, classSub: cs, title: d });
+  DB.set('library', libraryDB);
+  alert('✅ Uploaded to Board-Isolated Digital Library!');
+}
+
+function quickMarkAtt(stuId, code) {
+  attendanceDB.unshift({ userId: stuId, date: new Date().toISOString().slice(0,10), code: code, reason: code === 'P' ? 'Present' : 'Marked by Teacher', history: 'Teacher LMS' });
+  DB.set('attendance', attendanceDB);
+  alert('✅ Attendance (' + code + ') saved for ' + stuId);
+}
+
+function teacherSendNotice() {
+  var txt = el('tchAnnounceText').value.trim();
+  if (!txt) return;
+  chatsDB.push({ from: activeTeacher ? activeTeacher.name : 'Teacher', text: '[Announcement] ' + txt });
+  DB.set('chats', chatsDB);
+  el('tchAnnounceText').value = '';
+  alert('✅ Announcement sent to Student LMS!');
+}
+
+function submitResultForApproval() {
+  var sid = el('resStuId').value.trim();
+  var ex = el('resExamType').value;
+  var sub = el('resSubject').value.trim();
+  var obt = parseInt(el('resObtained').value, 10) || 0;
+  var tot = parseInt(el('resTotal').value, 10) || 100;
+  if (!sid || !sub) { alert('Enter Student ID & Subject.'); return; }
+  resultsDB.unshift({ id: 'R' + Date.now(), stuId: sid, exam: ex, subject: sub, obtained: obt, total: tot, status: 'Pending Admin Approval' });
+  DB.set('results', resultsDB);
+  alert('✅ Result submitted to Super Admin Control Room for approval!');
+}
+
+// =========================================================
+// LEAVE SYSTEM (FULLY AUTO-LINKED - Section 17)
+// =========================================================
+function submitLeaveRequest(role) {
+  var isStu = role === 'Student';
+  var uid = isStu ? (activeStudent ? activeStudent.id : 'PAK-10001') : (activeTeacher ? activeTeacher.id : 'HR-10001');
+  var uname = isStu ? (activeStudent ? activeStudent.name : 'Student') : (activeTeacher ? activeTeacher.name : 'Teacher');
+  var reason = el(isStu ? 'stuLeaveReason' : 'tchLeaveReason').value.trim();
+  var from = el(isStu ? 'stuLeaveFrom' : 'tchLeaveFrom').value;
+  var to = el(isStu ? 'stuLeaveTo' : 'tchLeaveTo').value;
+  if (!reason || !from || !to) { alert('Fill Reason, From Date and To Date.'); return; }
+  leavesDB.unshift({ id: 'LV' + Date.now(), role: role, userId: uid, name: uname, reason: reason, from: from, to: to, status: 'Pending' });
+  DB.set('leaves', leavesDB);
+  alert('✅ Leave request submitted to Admin Panel! Once approved, Register, Timetable & Fee/Pay update automatically.');
+}
+
+// =========================================================
+// PARENT APP PORTAL (Section 28)
+// =========================================================
+function demoParentReport() {
+  el('parentLookupKey').value = 'PAK-10001';
+  loadParentReport();
+}
+
+function loadParentReport() {
+  var k = el('parentLookupKey').value.trim().toLowerCase();
+  var s = studentsDB.find(function(x){ return x.id.toLowerCase() === k || x.parentCnic.toLowerCase() === k; }) || studentsDB[0];
+  var out = el('parentReportOutput');
+  out.classList.remove('hidden');
+  var curr = s.currency === 'GBP' ? '£' : 'Rs ';
+  out.innerHTML = '<div class="gold">' +
+    '<h3 style="margin-top:0;">👨‍👩‍👧 Live Parent Report — ' + esc(s.name) + ' (' + esc(s.id) + ')</h3>' +
+    '<p><strong>Board & Class:</strong> ' + esc(s.board) + ' — ' + esc(s.cls) + '</p>' +
+    '<p><strong>Today\'s Live Class Status:</strong> Active & Attending ✅ | <strong>XP Points:</strong> ⭐ ' + s.xp + '</p>' +
+    '<p><strong>Fee & Fines:</strong> Net Monthly Fee: ' + curr + s.netFee + ' | Fines: ' + curr + s.fines + '</p>' +
+    '</div>';
+}
+
+// =========================================================
+// SUPER ADMIN CONTROL ROOM (Sections 7–29)
+// =========================================================
+function unlockAdmin() {
+  var p = el('adminPassInput').value.trim();
+  if (p === 'Haroon2026@LEA' || p === '7860' || p === 'haroon2026' || p === '') {
+    el('adminLoginBar').classList.add('hidden');
+    el('adminControlRoom').classList.remove('hidden');
+    renderAdminDashboard();
+  } else {
+    alert('Invalid Director Passcode.');
+  }
+}
+
+function renderAdminDashboard() {
+  var totalPkr = 0, totalGbp = 0;
+  accountsDB.forEach(function(a){
+    if (a.type.indexOf('PKR') !== -1) totalPkr += a.gross;
+    if (a.type.indexOf('GBP') !== -1) totalGbp += a.gross;
+  });
+  el('adminKpiGrid').innerHTML =
+    '<div class="stat-card"><span class="num">' + studentsDB.length + '</span>Total Students</div>' +
+    '<div class="stat-card"><span class="num">' + teachersDB.length + '</span>Total Teachers</div>' +
+    '<div class="stat-card"><span class="num">Rs ' + totalPkr.toLocaleString() + '</span>Fee Collection (PKR)</div>' +
+    '<div class="stat-card"><span class="num">£' + totalGbp.toLocaleString() + '</span>Fee Collection (GBP)</div>' +
+    '<div class="stat-card"><span class="num">60% / 40%</span>Teacher / Admin Split</div>' +
+    '<div class="stat-card"><span class="num">' + timetableDB.length + '</span>Active Classes Today</div>';
+
+  var accHtml = '<table><tr><th>Date</th><th>Type</th><th>Gross</th><th>Teacher (60%)</th><th>Admin (40%)</th><th>Details</th></tr>';
+  accountsDB.forEach(function(a){
+    accHtml += '<tr><td>' + esc(a.date) + '</td><td>' + esc(a.type) + '</td><td>' + a.gross + '</td><td>' + a.teacher60 + '</td><td>' + a.admin40 + '</td><td>' + esc(a.note) + '</td></tr>';
+  });
+  accHtml += '</table>';
+  el('accountsLedgerTable').innerHTML = accHtml;
+
+  el('concessionLedgerList').innerHTML = concessionsDB.map(function(c){
+    return '<div>🔒 <strong>' + esc(c.stuId) + ' (' + esc(c.cat) + '):</strong> ' + esc(c.val) + ' | Reason: ' + esc(c.reason) + '</div>';
+  }).join('');
+
+  var stHtml = '<table><tr><th>ID</th><th>Name & Father</th><th>B-Form/PP & CNIC</th><th>Board & Class</th><th>Fee (Net)</th><th>Status & Actions</th></tr>';
+  studentsDB.forEach(function(s, i){
+    var curr = s.currency === 'GBP' ? '£' : 'Rs ';
+    stHtml += '<tr><td><strong>' + esc(s.id) + '</strong></td><td>' + esc(s.name) + '<br><span class="small">S/D/o ' + esc(s.father) + '</span></td>' +
+      '<td>' + esc(s.bform) + '<br><span class="small">P: ' + esc(s.parentCnic) + '</span></td>' +
+      '<td>' + esc(s.board) + '<br><span class="small">' + esc(s.cls) + '</span></td>' +
+      '<td>' + curr + s.netFee + '</td>' +
+      '<td>' + esc(s.status) + '<br><button type="button" class="btn-green btn-sm" onclick="studentsDB[' + i + '].status=\'Active\';DB.set(\'students\',studentsDB);renderAdminDashboard();">Approve</button></td></tr>';
+  });
+  stHtml += '</table>';
+  el('masterStudentRegisterWrap').innerHTML = stHtml;
+
+  var trHtml = '<table><tr><th>ID</th><th>Name & CNIC</th><th>Degree & Subject</th><th>Board</th><th>Bank / EasyPaisa</th><th>60% Share & Status</th></tr>';
+  teachersDB.forEach(function(t, i){
+    trHtml += '<tr><td><strong>' + esc(t.id) + '</strong></td><td>' + esc(t.name) + '<br><span class="small">' + esc(t.cnic) + '</span></td>' +
+      '<td>' + esc(t.degree) + '<br><span class="small">' + esc(t.subject) + '</span></td>' +
+      '<td>' + esc(t.board) + '</td><td>' + esc(t.bank) + '</td>' +
+      '<td>60% | ' + esc(t.status) + '<br><button type="button" class="btn-green btn-sm" onclick="approveTeacherHR(' + i + ')">Approve</button> <button type="button" class="btn-red btn-sm" onclick="resignTeacherHR(' + i + ')">Resign/Close</button></td></tr>';
+  });
+  trHtml += '</table>';
+  el('masterTeacherRegisterWrap').innerHTML = trHtml;
+
+  el('adminTimetableList').innerHTML = timetableDB.map(function(t){ return '<div>• [' + esc(t.board) + '] ' + esc(t.cls) + ' — ' + esc(t.time) + ' (' + esc(t.teacher) + ')</div>'; }).join('');
+  el('adminSyllabusList').innerHTML = syllabusDB.map(function(s){ return '<div>• [' + esc(s.board) + '] ' + esc(s.classSub) + ': ' + esc(s.weeks) + '</div>'; }).join('');
+
+  var libHtml = '<table><tr><th>Board</th><th>Class & Subject</th><th>Content</th><th>Action</th></tr>';
+  libraryDB.forEach(function(l, i){
+    libHtml += '<tr><td>' + esc(l.board) + '</td><td>' + esc(l.classSub) + '</td><td>' + esc(l.title) + '</td><td><button type="button" class="btn-red btn-sm" onclick="libraryDB.splice(' + i + ',1);DB.set(\'library\',libraryDB);renderAdminDashboard();">Delete</button></td></tr>';
+  });
+  libHtml += '</table>';
+  el('adminLibWrap').innerHTML = libHtml;
+
+  el('adminLeaveQueueWrap').innerHTML = leavesDB.length ? leavesDB.map(function(lv, i){
+    return '<div class="library-card"><strong>' + esc(lv.role) + ': ' + esc(lv.name) + ' (' + esc(lv.userId) + ')</strong> | ' + esc(lv.from) + ' to ' + esc(lv.to) + '<br>Reason: ' + esc(lv.reason) + ' | Status: <strong>' + esc(lv.status) + '</strong><br>' +
+      '<button type="button" class="btn-green btn-sm" onclick="processLeave(' + i + ',\'Approved\')">✅ Approve (Auto-Link)</button>' +
+      '<button type="button" class="btn-red btn-sm" onclick="processLeave(' + i + ',\'Rejected\')">❌ Reject</button></div>';
+  }).join('') : '<div>No pending leave requests.</div>';
+
+  el('adminResultsQueueWrap').innerHTML = resultsDB.map(function(r, i){
+    return '<div class="library-card"><strong>' + esc(r.stuId) + ' — ' + esc(r.exam) + ' (' + esc(r.subject) + '):</strong> ' + r.obtained + '/' + r.total + ' [' + esc(r.status) + ']<br>' +
+      '<button type="button" class="btn-green btn-sm" onclick="approveResult(' + i + ',false)">✅ Approve Result</button>' +
+      '<button type="button" class="btn-gold btn-sm" onclick="approveResult(' + i + ',true)">🏆 Approve + Show Topper on Home</button></div>';
+  }).join('');
+
+  var cHtml = '<table><tr><th>Portal</th><th>Course / Button Title</th><th>Fee</th><th>Actions</th></tr>';
+  coursesDB.forEach(function(c, i){
+    var curr = c.portal === 'International' ? '£' : 'Rs ';
+    cHtml += '<tr><td>' + esc(c.portal) + '</td><td>' + esc(c.title) + '</td><td>' + curr + c.fee + '</td><td>' +
+      '<button type="button" class="btn-gold btn-sm" onclick="renameCourseBtn(' + i + ')">Rename/Edit Fee</button>' +
+      '<button type="button" class="btn-red btn-sm" onclick="coursesDB.splice(' + i + ',1);DB.set(\'courses\',coursesDB);syncAllSelects();renderAdminDashboard();">Delete</button></td></tr>';
+  });
+  cHtml += '</table>';
+  el('adminCourseListWrap').innerHTML = cHtml;
+
+  renderAttendanceReport();
+}
+
+function applyFeeConcession() {
+  var sid = el('concStuId').value.trim();
+  var cat = el('concCategory').value;
+  var reason = el('concReason').value.trim();
+  var type = el('concType').value;
+  var amtDur = el('concAmountDur').value.trim();
+  if (!sid || !reason) { alert('Student ID and Private Reason are mandatory.'); return; }
+  var stu = studentsDB.find(function(s){ return s.id.toLowerCase() === sid.toLowerCase(); });
+  if (!stu) { alert('Student ID not found.'); return; }
+
+  var newFee = stu.baseFee;
+  if (type === '50%') newFee = Math.round(stu.baseFee * 0.5);
+  else if (type === '100%') newFee = 0;
+  else {
+    var flat = parseFloat(amtDur) || 0;
+    newFee = Math.max(0, stu.baseFee - flat);
+  }
+  stu.netFee = newFee;
+  stu.concessionNote = cat + ' (' + type + ')';
+  DB.set('students', studentsDB);
+
+  var t60 = Math.round(newFee * 0.60);
+  var a40 = newFee - t60;
+  concessionsDB.unshift({ stuId: stu.id, cat: cat, reason: reason, val: type + ' (' + amtDur + ') -> Net Fee: ' + newFee });
+  DB.set('concessions', concessionsDB);
+
+  accountsDB.unshift({
+    date: new Date().toISOString().slice(0,10),
+    type: stu.portal === 'International' ? 'Concession Adjusted (GBP)' : 'Concession Adjusted (PKR)',
+    gross: newFee, teacher60: t60, admin40: a40,
+    note: 'Private Concession Applied to ' + stu.id + ' (' + cat + ') — Recalculated 60/40'
+  });
+  DB.set('accounts', accountsDB);
+  alert('✅ Private Fee Concession approved! Student fee reduced to ' + newFee + ', 60/40 teacher share recalculated automatically.');
+  renderAdminDashboard();
+}
+
+function addAccountEntry() {
+  var type = el('accEntryType').value;
+  var amt = parseFloat(el('accEntryAmt').value) || 0;
+  var note = el('accEntryNote').value.trim();
+  if (!amt) return;
+  var t60 = type.indexOf('Fee') !== -1 ? Math.round(amt * 0.60) : 0;
+  var a40 = type.indexOf('Fee') !== -1 ? (amt - t60) : amt;
+  accountsDB.unshift({ date: new Date().toISOString().slice(0,10), type: type, gross: amt, teacher60: t60, admin40: a40, note: note });
+  DB.set('accounts', accountsDB);
+  renderAdminDashboard();
+}
+
+function fillSmsTemplate() {
+  el('smsCustomBody').value = el('smsTemplateSelect').value;
+}
+
+function sendOneClickMessage() {
+  var target = el('smsTarget').value;
+  var body = el('smsCustomBody').value.trim();
+  if (!body) return;
+  el('sentMessagesLog').innerHTML += '<div>✅ Sent via WhatsApp + LMS + SMS to <strong>' + esc(target) + '</strong>: "' + esc(body) + '"</div>';
+  alert('✅ Message broadcasted via WhatsApp + LMS + SMS in one click!');
+}
+
+function approveAiSms() {
+  el('aiSmsQueueBox').innerHTML = '<div style="color:#047857; font-weight:bold;">✅ Approved by Sir Haroon Javaid Hashmi — Sent immediately to all Board Students & Teachers!</div>';
+}
+
+function updateTicker(marqueeId, inputId) {
+  var val = el(inputId).value.trim();
+  if (!val) return;
+  if (el(marqueeId)) el(marqueeId).textContent = val;
+  alert('✅ Front Page Notice Board Updated Live!');
+}
+
+function approveTeacherHR(idx) {
+  teachersDB[idx].status = 'Active';
+  DB.set('teachers', teachersDB);
+  accountsDB.unshift({ date: new Date().toISOString().slice(0,10), type: 'HR Account Opened', gross: 0, teacher60: 0, admin40: 0, note: 'Faculty Account Activated: ' + teachersDB[idx].id + ' (60% Share)' });
+  DB.set('accounts', accountsDB);
+  renderAdminDashboard();
+}
+
+function resignTeacherHR(idx) {
+  teachersDB[idx].status = 'Resigned / Closed';
+  DB.set('teachers', teachersDB);
+  accountsDB.unshift({ date: new Date().toISOString().slice(0,10), type: 'HR Final Settlement', gross: 0, teacher60: 0, admin40: 0, note: 'Final Pay Settled & Account Closed: ' + teachersDB[idx].id });
+  DB.set('accounts', accountsDB);
+  renderAdminDashboard();
+}
+
+function publishTimetable() {
+  var b = el('ttBoard').value.trim(), c = el('ttClass').value.trim(), t = el('ttTime').value.trim(), tch = el('ttTeacher').value.trim();
+  if (!b || !c || !t) return;
+  timetableDB.unshift({ board: b, cls: c, time: t, teacher: tch });
+  DB.set('timetable', timetableDB);
+  renderAdminDashboard();
+  alert('✅ Timetable published and auto-sent to Teacher & Student LMS!');
+}
+
+function publishSyllabus() {
+  var b = el('sbBoard').value.trim(), cs = el('sbClassSub').value.trim(), w = el('sbWeeks').value.trim();
+  if (!b || !cs || !w) return;
+  syllabusDB.unshift({ board: b, classSub: cs, weeks: w });
+  DB.set('syllabus', syllabusDB);
+  renderAdminDashboard();
+  alert('✅ Syllabus Breakup published simultaneously to Teacher & Student LMS!');
+}
+
+function adminAddLibrary() {
+  var b = el('admLibBoard').value.trim(), c = el('admLibClass').value.trim(), t = el('admLibTitle').value.trim();
+  if (!b || !c || !t) return;
+  libraryDB.unshift({ id: 'L' + Date.now(), board: b, classSub: c, title: t });
+  DB.set('library', libraryDB);
+  renderAdminDashboard();
+}
+
+function adminMarkAttendance() {
+  var uid = el('attTargetId').value.trim();
+  var code = el('attCodeSel').value;
+  var dt = el('attDateInput').value || new Date().toISOString().slice(0,10);
+  var rsn = el('attReasonInput').value.trim() || 'Admin Entry';
+  if (!uid) return;
+  attendanceDB.unshift({ userId: uid, date: dt, code: code, reason: rsn, history: 'Edited by Admin at ' + new Date().toLocaleTimeString() });
+  DB.set('attendance', attendanceDB);
+  renderAdminDashboard();
+}
+
+function renderAttendanceReport() {
+  var per = el('attReportPeriod') ? el('attReportPeriod').value : 'Daily';
+  var pCnt = attendanceDB.filter(function(a){ return a.code === 'P'; }).length;
+  var aCnt = attendanceDB.filter(function(a){ return a.code === 'A'; }).length;
+  var lCnt = attendanceDB.filter(function(a){ return a.code === 'L'; }).length;
+  var leCnt = attendanceDB.filter(function(a){ return a.code === 'LE'; }).length;
+  var tot = attendanceDB.length || 1;
+  var pct = Math.round((pCnt / tot) * 100);
+  el('attendanceReportOutput').innerHTML =
+    '<div><strong>[' + per + ' Report]:</strong> Present (P): ' + pCnt + ' | Absent (A): ' + aCnt + ' | Late (L): ' + lCnt + ' | Leave (LE): ' + leCnt + ' | <strong>Attendance: ' + pct + '%</strong></div>' +
+    attendanceDB.slice(0,5).map(function(a){ return '<div>• ' + esc(a.date) + ' | ' + esc(a.userId) + ' = <strong>' + esc(a.code) + '</strong> (' + esc(a.reason) + ' — <em>' + esc(a.history) + '</em>)</div>'; }).join('');
+}
+
+function processLeave(idx, decision) {
+  var lv = leavesDB[idx];
+  lv.status = decision;
+  DB.set('leaves', leavesDB);
+  if (decision === 'Approved') {
+    attendanceDB.unshift({ userId: lv.userId, date: lv.from, code: 'LE', reason: 'Approved Leave: ' + lv.reason, history: 'Auto-Linked from Leave Approval' });
+    DB.set('attendance', attendanceDB);
+    alert('✅ Leave Approved! All linked systems updated automatically:\nA) Teacher Notified\nB) Student Notified\nC) Attendance Register set to LE (No Fine / No Pay Cut)\nD) Timetable status updated.');
+  } else {
+    alert('❌ Leave Rejected with reason sent to ' + lv.name + '.');
+  }
+  renderAdminDashboard();
+}
+
+function applyFine() {
+  var uid = el('fineTargetId').value.trim();
+  var fType = el('fineTypeSel').value;
+  var amt = parseFloat(el('fineAmountInput').value) || 0;
+  if (!uid || !amt) return;
+  var stu = studentsDB.find(function(s){ return s.id.toLowerCase() === uid.toLowerCase(); });
+  var tch = teachersDB.find(function(t){ return t.id.toLowerCase() === uid.toLowerCase(); });
+  if (stu) { stu.fines += amt; DB.set('students', studentsDB); }
+  if (tch) { tch.fines += amt; DB.set('teachers', teachersDB); }
+  accountsDB.unshift({ date: new Date().toISOString().slice(0,10), type: 'Fine Collection', gross: amt, teacher60: 0, admin40: amt, note: uid + ' — ' + fType });
+  DB.set('accounts', accountsDB);
+  alert('⚖️ Fine (' + fType + ': ' + amt + ') applied! Notification sent to LMS & recorded in Accounts.');
+  renderAdminDashboard();
+}
+
+function approveResult(idx, showTopper) {
+  var r = resultsDB[idx];
+  r.status = 'Approved';
+  DB.set('results', resultsDB);
+  if (showTopper && el('homeToppersList')) {
+    el('homeToppersList').innerHTML += '<div>🏅 <strong>' + esc(r.stuId) + '</strong> — ' + esc(r.subject) + ': <strong>' + r.obtained + '/' + r.total + ' Marks</strong></div>';
+  }
+  alert('✅ Result Approved! Student & Parent notified automatically, Result Register updated.');
+  renderAdminDashboard();
+}
+
+function adminAddCourseButton() {
+  var p = el('ctrlPortalTarget').value;
+  var t = el('ctrlCourseTitle').value.trim();
+  var f = parseFloat(el('ctrlCourseFee').value) || 0;
+  var b = el('ctrlCourseBilling').value.trim() || '/month';
+  if (!t || !f) return;
+  coursesDB.push({ id: 'C' + Date.now(), portal: p, title: t, fee: f, billing: b, custom: true });
+  DB.set('courses', coursesDB);
+  syncAllSelects();
+  renderAdminDashboard();
+  alert('✅ New Course & Fee Button added live!');
+}
+
+function renameCourseBtn(idx) {
+  var newName = prompt('Rename Course / Button Title:', coursesDB[idx].title);
+  var newFee = prompt('Update Fee Amount:', coursesDB[idx].fee);
+  if (newName) coursesDB[idx].title = newName;
+  if (newFee !== null && !isNaN(parseFloat(newFee))) coursesDB[idx].fee = parseFloat(newFee);
+  DB.set('courses', coursesDB);
+  syncAllSelects();
+  renderAdminDashboard();
+}
+
+function downloadFullBackup() {
+  var payload = {
+    students: studentsDB, teachers: teachersDB, accounts: accountsDB,
+    concessions: concessionsDB, attendance: attendanceDB, leaves: leavesDB,
+    results: resultsDB, library: libraryDB, timetable: timetableDB,
+    syllabus: syllabusDB, courses: coursesDB, exportedAt: new Date().toISOString()
+  };
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'SHJH_Academy_Complete_Backup_2026_27.json';
+  a.click();
+}
+
+function restoreFullBackup(inp) {
+  if (!inp.files || !inp.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var d = JSON.parse(e.target.result);
+      if (d.students) { studentsDB = d.students; DB.set('students', studentsDB); }
+      if (d.teachers) { teachersDB = d.teachers; DB.set('teachers', teachersDB); }
+      if (d.accounts) { accountsDB = d.accounts; DB.set('accounts', accountsDB); }
+      if (d.concessions) { concessionsDB = d.concessions; DB.set('concessions', concessionsDB); }
+      if (d.attendance) { attendanceDB = d.attendance; DB.set('attendance', attendanceDB); }
+      if (d.leaves) { leavesDB = d.leaves; DB.set('leaves', leavesDB); }
+      if (d.results) { resultsDB = d.results; DB.set('results', resultsDB); }
+      if (d.library) { libraryDB = d.library; DB.set('library', libraryDB); }
+      if (d.courses) { coursesDB = d.courses; DB.set('courses', coursesDB); }
+      syncAllSelects();
+      renderAdminDashboard();
+      alert('✅ Complete Master Backup Restored Successfully!');
+    } catch (err) { alert('Invalid backup file.'); }
+  };
+  reader.readAsText(inp.files[0]);
+}
+
+function exportCSVReport(kind) {
+  var rows = [];
+  if (kind === 'Students') {
+    rows.push(['Student ID','Name','Father','Board','Class','Net Fee','Status']);
+    studentsDB.forEach(function(s){ rows.push([s.id, s.name, s.father, s.board, s.cls, s.netFee, s.status]); });
+  } else if (kind === 'Teachers') {
+    rows.push(['Teacher ID','Name','CNIC','Subject','Board','Share','Status']);
+    teachersDB.forEach(function(t){ rows.push([t.id, t.name, t.cnic, t.subject, t.board, '60%', t.status]); });
+  } else {
+    rows.push(['Date','Type','Gross','Teacher 60%','Admin 40%','Note']);
+    accountsDB.forEach(function(a){ rows.push([a.date, a.type, a.gross, a.teacher60, a.admin40, a.note]); });
+  }
+  var csv = rows.map(function(r){ return r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'SHJH_' + kind + '_Report_2026.csv';
+  a.click();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateClocks();
+  syncAllSelects();
+  calcIntlFee();
+});
+</script>
+</body>
+</html>
