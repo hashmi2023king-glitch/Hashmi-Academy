@@ -1,1 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIR HAROON JAVAID HASHMI ACADEMY & COLLEGE — Complete ERP & LMS (v2)</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --navy: #0b2545;
+    --navy-light: #134074;
+    --gold: #c99700;
+    --gold-light: #fdf6e3;
+    --green: #15803d;
+    --green-hover: #166534;
+    --black: #111827;
+    --gray-bg: #f8fafc;
+    --border: #cbd5e1;
+    --danger: #b91c1c;
+    --warning: #d97706;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  body { background-color: var(--bg); color: var(--black); line-height: 1.5; }
 
+  /* Top Utility Bar */
+  .top-bar {
+    background: var(--black);
+    color: #fff;
+    padding: 8px 20px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .world-clocks span {
+    background: var(--navy);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+    border: 1px solid var(--gold);
+    font-weight: 600;
+  }
+
+  /* Header */
+  header {
+    background: var(--bg);
+    border-bottom: 3px solid var(--navy);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .brand-left { display: flex; align-items: center; gap: 16px; }
+  .director-avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    border: 3px solid var(--gold); object-fit: cover;
+    background: var(--navy); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 22px; text-align: center;
+  }
+  .brand-title h1 { color: var(--navy); font-size: 24px; letter-spacing: 0.5px; }
+  .brand-title p { color: var(--black); font-size: 13px; font-weight: 600; }
+  .brand-title .gold-tag { color: var(--gold); font-weight: 700; }
+
+  /* Main Top Navigation Catalog */
+  nav.main-nav {
+    background: var(--navy);
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+  nav.main-nav button {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 9px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13.5px;
+    transition: 0.2s;
+  }
+  nav.main-nav button:hover, nav.main-nav button.active {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+  nav.main-nav button.btn-admin-nav {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+
+  /* TV Breaking News + Hiring Notice Board */
+  .tv-notice-wrapper {
+    background: var(--bg);
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  }
+  .tv-ticker-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    min-height: 44px;
+    overflow: hidden;
+  }
+  .tv-label {
+    background: var(--danger);
+    color: #fff;
+    font-weight: 800;
+    font-size: 12.5px;
+    padding: 11px 16px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 235px;
+  }
+  .tv-label.hiring-lbl { background: var(--green); }
+  .live-dot {
+    width: 9px; height: 9px; background: #fff; border-radius: 50%;
+    animation: pulseDot 1s infinite;
+  }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+  .tv-ticker-content {
+    flex: 1;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+  }
+  .tv-ticker-content.hiring-bg { background: var(--gold-light); color: var(--black); }
+  .ticker-fade { animation: slideFade 0.45s ease-in-out; }
+  @keyframes slideFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Layout & Sections */
+  .container { max-width: 1340px; margin: 22px auto; padding: 0 18px; }
+  .page-section { display: none; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+  .page-section.active { display: block; }
+
+  .sec-header {
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .sec-header h2 { color: var(--navy); font-size: 22px; }
+
+  /* Cards & Grids */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--navy);
+    border-radius: 6px;
+    padding: 18px;
+  }
+  .card.gold-top { border-top-color: var(--gold); background: var(--gold-light); }
+  .card.green-top { border-top-color: var(--green); }
+  .card h3 { color: var(--navy); margin-bottom: 10px; font-size: 17px; }
+
+  /* Buttons */
+  .btn {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13.5px;
+    transition: 0.2s;
+    display: inline-block;
+  }
+  .btn:hover { background: var(--green-hover); }
+  .btn-navy { background: var(--navy); }
+  .btn-navy:hover { background: var(--navy-light); }
+  .btn-gold { background: var(--gold); color: var(--black); }
+  .btn-danger { background: var(--danger); }
+  .btn-warning { background: var(--warning); color: #fff; }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
+
+  /* Forms */
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 12px; }
+  label { display: block; font-size: 12.5px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  input, select, textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 13.5px;
+    background: #fff;
+    color: var(--black);
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--navy); }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin-top: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--navy); color: #fff; padding: 10px; text-align: left; white-space: nowrap; }
+  td { padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:nth-child(even) { background: var(--gray-bg); }
+
+  /* Badges */
+  .badge { padding: 3px 8px; border-radius: 12px; font-size: 11.5px; font-weight: 700; display: inline-block; }
+  .b-green { background: #dcfce7; color: #166534; }
+  .b-red { background: #fee2e2; color: #991b1b; }
+  .b-gold { background: #fef3c7; color: #92400e; }
+  .b-navy { background: #dbeafe; color: #1e40af; }
+
+  /* Sub-tabs */
+  .sub-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+  .sub-tab-btn {
+    background: var(--gray-bg);
+    color: var(--navy);
+    border: 1px solid var(--border);
+    padding: 7px 13px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .sub-tab-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .sub-panel { display: none; }
+  .sub-panel.active { display: block; }
+
+  /* Admin Grid */
+  .admin-4-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0; }
+  .admin-4-card {
+    background: var(--navy);
+    color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    border-bottom: 4px solid var(--gold);
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s;
+  }
+  .admin-4-card:hover { transform: translateY(-2px); background: var(--navy-light); }
+  .admin-4-card h4 { color: var(--gold); font-size: 16px; margin-bottom: 4px; }
+  .admin-4-card p { font-size: 12px; color: #e2e8f0; }
+
+  /* Stat Cards */
+  .stat-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--gold);
+    padding: 14px;
+    border-radius: 6px;
+  }
+  .stat-card .label { font-size: 12px; color: #475569; font-weight: 700; text-transform: uppercase; }
+  .stat-card .val { font-size: 20px; font-weight: 800; color: var(--navy); margin-top: 4px; }
+
+  footer {
+    background: var(--black);
+    color: #fff;
+    text-align: center;
+    padding: 18px;
+    margin-top: 36px;
+    border-top: 4px solid var(--gold);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP WORLD CLOCKS & CONTACT BAR -->
+<div class="top-bar">
+  <div>
+    <strong>Founder:</strong> Sir Haroon Javaid Hashmi | <strong>Phone / WhatsApp / EasyPaisa:</strong> +92 334 1140082 | <strong>Location:</strong> Dinga, District Gujrat, Pakistan
+  </div>
+  <div class="world-clocks" id="world-clocks">
+    <span>PKT: --:--</span>
+    <span>UK: --:--</span>
+    <span>USA (EST): --:--</span>
+    <span>EU (CET): --:--</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="brand-left">
+    <div class="director-avatar">SH</div>
+    <div class="brand-title">
+      <h1>SIR HAROON JAVAID HASHMI ACADEMY & COLLEGE</h1>
+      <p><span class="gold-tag">Global Rank #1 Educator (TEFL/C1 Certified)</span> • Dual-Portal Automated ERP & LMS (60/40 Sustainable Revenue Model)</p>
+      <p style="font-size:12px; color:#475569;">Official Portal: https://hashmi2023king-glitch.github.io/Hashmi-Academy/ | Meezan Bank (Dinga) & EasyPaisa Verified</p>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-navy" onclick="showMainPage('pak-portal')">🇵🇰 Pakistani Portal (PKR)</button>
+    <button class="btn btn-gold" onclick="showMainPage('int-portal')">🌍 International Portal (GBP £)</button>
+  </div>
+</header>
+
+<!-- TOP LEVEL NAVIGATION CATALOG -->
+<nav class="main-nav">
+  <button class="active" onclick="showMainPage('home-page', this)">🏠 Home & Notice Board</button>
+  <button onclick="showMainPage('pak-portal', this)">🇵🇰 Pakistani Portal (PKR)</button>
+  <button onclick="showMainPage('int-portal', this)">🌍 International Portal (GBP £)</button>
+  <button onclick="showMainPage('quran-portal', this)">📖 Quran Portal (PKR & GBP £)</button>
+  <button onclick="showMainPage('student-lms', this)">🎓 Student LMS (Filtered News)</button>
+  <button onclick="showMainPage('teacher-lms', this)">👨‍🏫 Teacher LMS + Apply Job</button>
+  <button onclick="showMainPage('session-calendar', this)">📅 Session & MDCAT/ECAT</button>
+  <button onclick="showMainPage('languages-portal', this)">🗣️ Languages (5 Languages)</button>
+  <button onclick="showMainPage('world-features-portal', this)">🌟 World Features</button>
+  <button onclick="showMainPage('erp-90-portal', this)">⚡ 90-Point Enterprise ERP</button>
+  <button onclick="showMainPage('erp-202-portal', this)">⚡ Master 202-Point AI ERP</button>
+  <button class="btn-admin-nav" onclick="showMainPage('admin-panel', this)">🔐 Super Admin ERP</button>
+</nav>
+
+<!-- TV BREAKING NEWS + HIRING NOTICE BOARD -->
+<div class="tv-notice-wrapper">
+  <div class="tv-ticker-row">
+    <div class="tv-label"><span class="live-dot"></span> BREAKING EDU NEWS (24H)</div>
+    <div class="tv-ticker-content">
+      <div id="tv-news-display" class="ticker-fade">Loading verified 24-hour board educational updates...</div>
+      <div style="white-space:nowrap;">
+        <span class="badge b-navy" id="tv-news-board-tag">ALL BOARDS</span>
+        <button class="btn btn-navy btn-sm" onclick="nextBreakingNews()">Next ▶</button>
+      </div>
+    </div>
+  </div>
+  <div class="tv-ticker-row">
+    <div class="tv-label hiring-lbl"><span class="live-dot"></span> WE ARE HIRING (FACULTY)</div>
+    <div class="tv-ticker-content hiring-bg">
+      <div id="tv-hiring-display" class="ticker-fade">Loading active faculty vacancies...</div>
+      <div style="white-space:nowrap;">
+        <button class="btn btn-sm" onclick="showMainPage('teacher-lms'); switchSubTab('teacher-lms', 'tch-apply-leave', document.querySelectorAll('#teacher-lms .sub-tab-btn')[4]);">Apply Now</button>
+        <button class="btn btn-gold btn-sm" onclick="nextHiringNews()">Next ▶</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HOME & OVERVIEW PAGE -->
+  <div id="home-page" class="page-section active">
+    <div class="sec-header">
+      <h2>Welcome to Sir Haroon Javaid Hashmi Academy & College</h2>
+      <span class="badge b-gold">Phase 1 Launch: District Gujrat (Dinga, Gujrat, Kharian, Lalamusa, Sarai Alamgir, Jalalpur Jattan)</span>
+    </div>
+    <div class="grid-3">
+      <div class="card gold-top">
+        <h3>🇵🇰 1A. Pakistani Portal (PKR)</h3>
+        <p style="font-size:13px;">Board-segregated LMS for Punjab, Federal, AJK, KPK, Sindh & Balochistan Boards, O/A Levels, CSS/PMS & Languages.</p>
+        <button class="btn" style="margin-top:10px;" onclick="showMainPage('pak-portal')">Open Pakistani Portal (PKR)</button>
+      </div>
+      <div class="card">
+        <h3>🌍 1B. International Portal (GBP £)</h3>
+        <p style="font-size:13px;">UK / USA / Europe Curriculum (KG–Grade 8, Cambridge/Edexcel/IB O & A Levels, IELTS/German/French/Spanish) priced strictly in GBP £.</p>
+        <button class="btn btn-navy" style="margin-top:10px;" onclick="showMainPage('int-portal')">Open International Portal (£)</button>
+      </div>
+      <div class="card green-top">
+        <h3>📖 25B. Global Quran Portal (PKR & £)</h3>
+        <p style="font-size:13px;">Qaida, Nazra with Tajweed, Hifz-e-Quran, Tajweed + Qirat, Tarjuma + Tafseer (Urdu/English medium).</p>
+        <button class="btn btn-gold" style="margin-top:10px;" onclick="showMainPage('quran-portal')">Open Quran Portal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAKISTANI PORTAL (PKR) -->
+  <div id="pak-portal" class="page-section">
+    <div class="sec-header">
+      <h2>🇵🇰 Pakistani Student & Academic Portal (PKR)</h2>
+      <span class="badge b-navy">Meezan Bank & EasyPaisa Verified</span>
+    </div>
+    <div class="sub-tabs" id="pak-subtabs">
+      <button class="sub-tab-btn active" onclick="switchSubTab('pak-portal', 'pak-tab-reg', this)">📝 Student Registration</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('pak-portal', 'pak-tab-boards', this)">🏛️ Board & Class Selection</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('pak-portal', 'pak-tab-fee', this)">💳 Fee Structure & Calculator</button>
+    </div>
+    
+    <div id="pak-tab-reg" class="sub-panel active">
+      <h3>Register New Pakistani Student (PKR)</h3>
+      <div class="form-grid">
+        <div><label>Student Full Name</label><input type="text" id="pak-reg-name" placeholder="e.g. Ali Raza"></div>
+        <div><label>Father's Name</label><input type="text" id="pak-reg-father" placeholder="e.g. Ahmad Raza"></div>
+        <div><label>Board Type</label>
+          <select id="pak-reg-board-type" onchange="populatePakBoardsInReg()">
+            <option value="punjab">Punjab Boards</option>
+            <option value="federal">Federal / AJK</option>
+            <option value="kpk">KPK Boards</option>
+            <option value="balochistan">Balochistan Board</option>
+            <option value="sindh">Sindh Boards</option>
+          </select>
+        </div>
+        <div><label>Specific Board</label><select id="pak-reg-board-name"></select></div>
+        <div><label>Class / Level</label>
+          <select id="pak-reg-class">
+            <option>Nursery / Prep</option>
+            <option>Class 1 to 5</option>
+            <option>Class 6 to 8</option>
+            <option>Class 9th (Matric)</option>
+            <option>Class 10th (Matric)</option>
+            <option>1st Year (Inter Part-I)</option>
+            <option>2nd Year (Inter Part-II)</option>
+            <option>Cambridge O Level</option>
+            <option>Cambridge A Level</option>
+            <option>CSS / PMS Preparation</option>
+          </select>
+        </div>
+        <div><label>Monthly Fee (PKR)</label><input type="number" id="pak-reg-fee" value="4500"></div>
+      </div>
+      <button class="btn" onclick="registerPakStudent()">Complete PKR Registration & Assign Teacher</button>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ID</th><th>Student Name</th><th>Board</th><th>Class</th><th>Fee (PKR)</th><th>Status</th></tr></thead>
+          <tbody id="pak-students-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="pak-tab-boards" class="sub-panel">
+      <h3>Explore Regional Boards & Curricula</h3>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Punjab Boards</h3>
+          <p style="font-size:13px;">Lahore, Gujranwala, Rawalpindi, Faisalabad, Multan, Sargodha, Bahawalpur, Sahiwal, D.G. Khan.</p>
+        </div>
+        <div class="card">
+          <h3>Federal & AJK</h3>
+          <p style="font-size:13px;">FBISE Islamabad & AJK Board Mirpur.</p>
+        </div>
+        <div class="card">
+          <h3>Competitive Exams</h3>
+          <p style="font-size:13px;">CSS, PMS, Tehsildar, MDCAT, ECAT.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="pak-tab-fee" class="sub-panel">
+      <h3>Fee Structure & 60/40 Split Calculator (PKR)</h3>
+      <div class="form-grid">
+        <div><label>Enter Monthly Fee (PKR)</label><input type="number" id="calc-pak-fee" value="5000" oninput="calcPakSplit()"></div>
+      </div>
+      <div class="grid-3" style="margin-top:14px;">
+        <div class="stat-card"><div class="label">Teacher Share (60%)</div><div class="val" id="calc-res-tch">PKR 3,000</div></div>
+        <div class="stat-card"><div class="label">System Cost (20%)</div><div class="val" id="calc-res-sys">PKR 1,000</div></div>
+        <div class="stat-card"><div class="label">Admin Income (20%)</div><div class="val" id="calc-res-adm">PKR 1,000</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERNATIONAL PORTAL (GBP £) -->
+  <div id="int-portal" class="page-section">
+    <div class="sec-header">
+      <h2>🌍 International Student & Academic Portal (GBP £)</h2>
+      <span class="badge b-gold">UK, USA, Europe & Expat Curriculum</span>
+    </div>
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="switchSubTab('int-portal', 'int-tab-reg', this)">📝 International Registration</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('int-portal', 'int-tab-curric', this)">🌐 Curricula & Pricing (£)</button>
+    </div>
+
+    <div id="int-tab-reg" class="sub-panel active">
+      <h3>Register International Student (GBP £)</h3>
+      <div class="form-grid">
+        <div><label>Student Name</label><input type="text" id="int-name" placeholder="e.g. Hamza Khan"></div>
+        <div><label>Country / Timezone</label><input type="text" id="int-country" placeholder="e.g. United Kingdom (GMT)"></div>
+        <div><label>Curriculum</label>
+          <select id="int-curriculum">
+            <option>UK National Curriculum (Key Stages 1-4)</option>
+            <option>Cambridge / Edexcel International GCSE</option>
+            <option>Cambridge International A Levels</option>
+            <option>US K-12 Common Core</option>
+            <option>IB Diploma Programme</option>
+          </select>
+        </div>
+        <div><label>Monthly Fee (£)</label><input type="number" id="int-fee" value="120"></div>
+      </div>
+      <button class="btn btn-gold" onclick="registerIntStudent()">Register International Student (£)</button>
+    </div>
+
+    <div id="int-tab-curric" class="sub-panel">
+      <h3>International Fee & Pricing Schedule (£)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Level</th><th>Curriculum</th><th>Monthly Fee (£)</th><th>Teacher Share (£) (60%)</th></tr></thead>
+          <tbody>
+            <tr><td>Primary (KG - Gr 5)</td><td>UK / US Core</td><td>£80</td><td>£48</td></tr>
+            <tr><td>Secondary (Gr 6 - 9)</td><td>Cambridge Lower Secondary</td><td>£120</td><td>£72</td></tr>
+            <tr><td>O Levels / IGCSE</td><td>Cambridge / Edexcel</td><td>£160</td><td>£96</td></tr>
+            <tr><td>A Levels</td><td>Advanced Level</td><td>£220</td><td>£132</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- QURAN PORTAL -->
+  <div id="quran-portal" class="page-section">
+    <div class="sec-header">
+      <h2>📖 Global Quran Portal (PKR & GBP £)</h2>
+      <span class="badge b-green">Certified Qaris & Female Huffaz Available</span>
+    </div>
+    <div class="grid-3" id="quran-courses-grid"></div>
+  </div>
+
+  <!-- STUDENT LMS -->
+  <div id="student-lms" class="page-section">
+    <div class="sec-header">
+      <h2>🎓 Student LMS & Filtered News Board</h2>
+      <span class="badge b-navy">Board-Specific Assignments & Live Classes</span>
+    </div>
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="switchSubTab('student-lms', 'std-tab-news', this)">📰 Filtered Board News</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('student-lms', 'std-tab-live', this)">🎥 Live Classroom & Auto-Mic</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('student-lms', 'std-tab-quiz', this)">🧠 CBT Exam & AI Tutor</button>
+    </div>
+
+    <div id="std-tab-news" class="sub-panel active">
+      <h3>Filtered Board Educational News</h3>
+      <div class="form-grid">
+        <div><label>Select Your Board</label>
+          <select id="student-filter-board" onchange="renderFilteredNews()">
+            <option value="All">All Boards</option>
+            <option value="Gujranwala Board">Gujranwala Board</option>
+            <option value="Federal Board FBISE Islamabad">Federal Board FBISE Islamabad</option>
+            <option value="Lahore Board">Lahore Board</option>
+          </select>
+        </div>
+      </div>
+      <div id="filtered-news-container" style="margin-top:14px;"></div>
+    </div>
+
+    <div id="std-tab-live" class="sub-panel">
+      <h3>Live Classroom Session (Slow Net Adaptive Mode)</h3>
+      <div class="card" style="background:var(--navy); color:#fff;">
+        <h3>🔴 Live Session: Physics Grade 9th (Gujranwala Board)</h3>
+        <p style="font-size:13px; color:#cbd5e1;">Instructor: Prof. Ahmad Ali | Quality: Adaptive Bitrate (Slow Net Active)</p>
+        <div style="margin:14px 0; background:#000; height:220px; border-radius:6px; display:flex; align-items:center; justify-content:center; position:relative;">
+          <div style="text-align:center;">
+            <p style="font-size:18px; color:var(--gold);">[LIVE VIDEO STREAM ACTIVE]</p>
+            <p style="font-size:12px; color:#aaa;">Auto-mic Hand-Raise protocol enabled.</p>
+          </div>
+        </div>
+        <button class="btn btn-gold" onclick="alert('Hand raised! Teacher notified to unmute your mic.')">Raise Hand ✋</button>
+      </div>
+    </div>
+
+    <div id="std-tab-quiz" class="sub-panel">
+      <h3>CBT Exam & AI Tutor Practice</h3>
+      <div class="card">
+        <h3>Daily Challenge Question</h3>
+        <p id="gamify-q" style="font-weight:600; margin-bottom:10px;">What is the powerhouse of the cell?</p>
+        <input type="text" id="gamify-ans" placeholder="Enter your answer..." style="max-width:300px; margin-bottom:10px;">
+        <br>
+        <button class="btn" onclick="submitDailyChallenge()">Submit Answer</button>
+        <p id="gamify-result" style="margin-top:10px; font-weight:700;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEACHER LMS -->
+  <div id="teacher-lms" class="page-section">
+    <div class="sec-header">
+      <h2>👨‍🏫 Teacher LMS & Faculty Portal</h2>
+      <span class="badge b-green">60% Revenue Share & Automated Payslips</span>
+    </div>
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="switchSubTab('teacher-lms', 'tch-tab-roster', this)">📋 Faculty Roster</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('teacher-lms', 'tch-tab-payroll', this)">💰 Payroll & Payslips</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('teacher-lms', 'tch-apply-leave', this)">📝 Apply / Join Faculty</button>
+    </div>
+
+    <div id="tch-tab-roster" class="sub-panel active">
+      <h3>Active Teaching Faculty</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Teacher ID</th><th>Name</th><th>Degree</th><th>Subject</th><th>Board / Curriculum</th><th>Share</th><th>Status</th></tr></thead>
+          <tbody id="teacher-roster-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tch-tab-payroll" class="sub-panel">
+      <h3>Teacher Earnings & Payslips (60% Split + 15% Annual Increment)</h3>
+      <div class="form-grid">
+        <div><label>Select Teacher</label>
+          <select id="payroll-tch-select">
+            <option value="HR-101">Prof. Ahmad Ali (Physics - PKR 2,700 earned)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="generatePayslip()">Generate Itemized PDF Payslip</button>
+      <div id="payslip-output" style="margin-top:16px;"></div>
+    </div>
+
+    <div id="tch-apply-leave" class="sub-panel">
+      <h3>Faculty Application & Hiring Form</h3>
+      <div class="form-grid">
+        <div><label>Full Name</label><input type="text" id="job-name" placeholder="e.g. Dr. Salman Khan"></div>
+        <div><label>CNIC / Passport</label><input type="text" id="job-cnic" placeholder="34201-0000000-1"></div>
+        <div><label>Degree / Qualification</label><input type="text" id="job-deg" placeholder="Ph.D / M.Phil"></div>
+        <div><label>Subject Specialization</label><input type="text" id="job-subj" placeholder="Mathematics / Physics"></div>
+        <div><label>Upload CV (PDF)</label><input type="file" id="job-cv"></div>
+        <div><label>Experience Letter</label><input type="file" id="job-exp"></div>
+      </div>
+      <button class="btn" onclick="submitJobApplication()">Submit Faculty Application</button>
+    </div>
+  </div>
+
+  <!-- SESSION & MDCAT/ECAT -->
+  <div id="session-calendar" class="page-section">
+    <div class="sec-header">
+      <h2>📅 Session Timetables & MDCAT/ECAT Entrance Prep</h2>
+      <span class="badge b-gold">District Gujrat & Online Global Batches</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>MDCAT & ECAT Crash Course Schedule</h3>
+        <p style="font-size:13px; margin-bottom:10px;">Rigorous practice tests, past paper analysis, and time-management workshops.</p>
+        <button class="btn btn-navy" onclick="alert('MDCAT/ECAT registration package downloaded!')">Download Schedule PDF</button>
+      </div>
+      <div class="card green-top">
+        <h3>District Gujrat Phase 1 Timetable</h3>
+        <p style="font-size:13px; margin-bottom:10px;">Physical & online hybrid classes covering Dinga, Gujrat, Kharian, Lalamusa, Sarai Alamgir, and Jalalpur Jattan.</p>
+        <button class="btn" onclick="alert('Timetable synced successfully!')">View Timetable</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANGUAGES PORTAL -->
+  <div id="languages-portal" class="page-section">
+    <div class="sec-header">
+      <h2>🗣️ Global Language Preparation Portal</h2>
+      <span class="badge b-navy">IELTS, Urdu, Spanish, German & French</span>
+    </div>
+    <div class="grid-3">
+      <div class="card gold-top">
+        <h3>🇬🇧 IELTS Academic & General</h3>
+        <p style="font-size:13px;">Band 8+ coaching by certified C1/TEFL instructor Sir Haroon Javaid Hashmi.</p>
+      </div>
+      <div class="card">
+        <h3>🇩🇪 German Language (A1 to C2)</h3>
+        <p style="font-size:13px;">Structured preparation for Goethe-Zertifikat and vocational training in Germany.</p>
+      </div>
+      <div class="card green-top">
+        <h3>🇪🇸 Spanish, French & Urdu</h3>
+        <p style="font-size:13px;">Comprehensive conversational and written grammar mastery modules.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORLD FEATURES -->
+  <div id="world-features-portal" class="page-section">
+    <div class="sec-header">
+      <h2>🌟 Advanced World-Class Features</h2>
+      <span class="badge b-gold">202-Point AI Ecosystem</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🤖 AI Predictive Coach</h3>
+        <p style="font-size:13px; margin-bottom:10px;">Analyzes student quiz velocity, homework consistency, and exam readiness.</p>
+        <button class="btn" onclick="runAICoachingSimulation()">Run AI Predictive Analysis</button>
+        <div id="ai-coaching-output" style="margin-top:12px; display:none; background:var(--gray-bg); padding:10px; border-radius:6px; font-size:13px;"></div>
+      </div>
+      <div class="card green-top">
+        <h3>🔒 Dual Cloud Backup & Recovery</h3>
+        <p style="font-size:13px; margin-bottom:10px;">Automated daily midnight backup with 1-click 5-minute restoration.</p>
+        <button class="btn btn-navy" onclick="alert('Backup snapshot saved to Google Drive securely!')">Execute Backup Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 90-POINT ENTERPRISE ERP -->
+  <div id="erp-90-portal" class="page-section">
+    <div class="sec-header">
+      <h2>⚡ 90-Point Enterprise ERP Suite</h2>
+      <span class="badge b-navy">Fee Collection, Payroll & Attendance Audit</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Module ID</th><th>Operational Domain</th><th>Status</th><th>Verification</th></tr></thead>
+        <tbody>
+          <tr><td>ERP-01</td><td>Meezan Bank & EasyPaisa Fee Receipts</td><td><span class="badge b-green">Active</span></td><td>Verified</td></tr>
+          <tr><td>ERP-02</td><td>60/40 Automated Revenue Split</td><td><span class="badge b-green">Active</span></td><td>Verified</td></tr>
+          <tr><td>ERP-03</td><td>Teacher Payroll & 15% Annual Increment</td><td><span class="badge b-green">Active</span></td><td>Verified</td></tr>
+          <tr><td>ERP-04</td><td>Parent Absentee SMS Alert System</td><td><span class="badge b-green">Active</span></td><td>Verified</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 202-POINT MASTER AI ERP -->
+  <div id="erp-202-portal" class="page-section">
+    <div class="sec-header">
+      <h2>⚡ Master 202-Point AI Enterprise ERP</h2>
+      <span class="badge b-gold">Complete System Audit & Telemetry</span>
+    </div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="label">Total System Points</div><div class="val">202 / 202</div></div>
+      <div class="stat-card"><div class="label">Active Portals</div><div class="val">12 Portals</div></div>
+      <div class="stat-card"><div class="label">Security Level</div><div class="val">3-Lock OTP</div></div>
+      <div class="stat-card"><div class="label">Revenue Engine</div><div class="val">60/40 Split</div></div>
+    </div>
+  </div>
+
+  <!-- SUPER ADMIN ERP -->
+  <div id="admin-panel" class="page-section">
+    <div class="sec-header">
+      <h2>🔐 Super Admin ERP & Master Control Panel</h2>
+      <span class="badge b-red">Restricted Access: Director Sir Haroon Javaid Hashmi</span>
+    </div>
+    <div class="admin-4-grid">
+      <div class="admin-4-card" onclick="alert('Opening Account Ledger...')">
+        <h4>Accounts & Ledger</h4>
+        <p>PKR & GBP £ transaction logs</p>
+      </div>
+      <div class="admin-4-card" onclick="alert('Opening HR & Payroll Management...')">
+        <h4>HR & Payroll</h4>
+        <p>60% Teacher share payouts</p>
+      </div>
+      <div class="admin-4-card" onclick="alert('Opening Student Database...')">
+        <h4>Student Register</h4>
+        <p>Active enrollments & boards</p>
+      </div>
+      <div class="admin-4-card" onclick="alert('Opening Expansion Controls...')">
+        <h4>District Gujrat Phase 1</h4>
+        <p>Multi-phase geographic rollout</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>SIR HAROON JAVAID HASHMI ACADEMY & COLLEGE</strong> — Dinga, District Gujrat, Pakistan | Phone/EasyPaisa: +92 334 1140082</p>
+  <p style="font-size:12px; color:#cbd5e1; margin-top:4px;">Automated Dual-Portal ERP & LMS • 60% Teacher / 40% Admin Sustainable Revenue Architecture</p>
+</footer>
+
+<script>
+// Centralized Master Database & State Logic for all 202 Points
+const BOARDS_DATA = {
+  punjab: ["Lahore Board", "Gujranwala Board", "Faisalabad Board", "Multan Board", "Rawalpindi Board", "Bahawalpur Board", "Sargodha Board", "D.G Khan Board", "Sahiwal Board"],
+  federal: ["Federal Board FBISE Islamabad", "AJK Board Mirpur"],
+  kpk: ["Peshawar Board", "Mardan Board", "Swat Board", "Abbottabad Board", "Bannu Board", "Kohat Board", "Malakand Board", "D.I Khan Board"],
+  balochistan: ["Quetta Board"],
+  sindh: ["Karachi Board", "Hyderabad Board", "Sukkur Board", "Larkana Board", "Mirpurkhas Board"]
+};
+
+let db = {
+  breakingNews: [
+    { id: 101, board: "Gujranwala Board", cls: "Class 9th (Matric)", type: "Date Sheet", text: "BISE Gujranwala Class 9th Annual Exam Date Sheet Issued.", source: "Official BISE Gujranwala", timestamp: Date.now() },
+    { id: 102, board: "Federal Board FBISE Islamabad", cls: "1st Year (Inter Part-I)", type: "Paper Pattern Change", text: "FBISE releases updated SLO-based Paper Pattern.", source: "Official FBISE", timestamp: Date.now() },
+    { id: 103, board: "Lahore Board", cls: "Class 10th (Matric)", type: "Result Announcement", text: "BISE Lahore announces Matric Annual Examination Results.", source: "Official BISE Lahore", timestamp: Date.now() }
+  ],
+  hiringVacancies: [
+    { id: 201, category: "KG to Grade 8", title: "We Need Teacher — KG English & Phonics (Online)", active: true },
+    { id: 202, category: "Matric", title: "We Need Teacher — Class 9th Science (Gujranwala Board)", active: true },
+    { id: 203, category: "Intermediate", title: "We Need Teacher — 1st/2nd Year Physics (Federal Board)", active: true }
+  ],
+  students: [
+    { id: "PAK-10001", portal: "PKR", name: "Zainab Fatima", father: "Muhammad Tariq", board: "Gujranwala Board", cls: "Class 9th (Matric)", sec: "Science", fee: 4500, paid: true, status: "Active", teacherId: "HR-101" }
+  ],
+  teachers: [
+    { id: "HR-101", name: "Prof. Ahmad Ali", cnic: "34201-7788990-1", degree: "M.Phil Physics", subject: "Physics", board: "Gujranwala Board", share: 60, status: "Active", earnedPKR: 2700, earnedGBP: 240, paidPKR: 2000, bank: "Meezan Bank" }
+  ],
+  accounts: [
+    { id: 1, date: "2026-11-18", desc: "Fee: Zainab Fatima (PAK-10001)", curr: "PKR", total: 4500, tch: 2700, adm: 1800 }
+  ],
+  library: [
+    { id: 1, title: "Class 9th Physics Textbook (Gujranwala Board)", type: "PDF E-Book", size: "14 MB" },
+    { id: 2, title: "Cambridge IGCSE Mathematics Revision Guide", type: "PDF E-Book", size: "22 MB" }
+  ]
+};
+
+// Clocks Update
+function updateClocks() {
+  const now = new Date();
+  const fmt = (tz) => new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(now);
+  const clockEl = document.getElementById('world-clocks');
+  if (clockEl) {
+    clockEl.innerHTML = `
+      <span>PKT: ${fmt('Asia/Karachi')}</span>
+      <span>UK: ${fmt('Europe/London')}</span>
+      <span>USA: ${fmt('America/New_York')}</span>
+      <span>EU: ${fmt('Europe/Berlin')}</span>
+    `;
+  }
+}
+setInterval(updateClocks, 1000);
+updateClocks();
+
+// Navigation Controller
+function showMainPage(pageId, btnEl) {
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(pageId);
+  if (target) target.classList.add('active');
+  if (btnEl) {
+    document.querySelectorAll('nav.main-nav button').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+  }
+}
+
+function switchSubTab(parentId, panelId, btnEl) {
+  const parent = document.getElementById(parentId);
+  if (!parent) return;
+  parent.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+  parent.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+  if (btnEl) btnEl.classList.add('active');
+}
+
+// Breaking News & Hiring Tickers
+let newsIdx = 0;
+let hiringIdx = 0;
+
+function renderTickers() {
+  const newsEl = document.getElementById('tv-news-display');
+  const boardTag = document.getElementById('tv-news-board-tag');
+  if (newsEl && db.breakingNews.length > 0) {
+    newsIdx = newsIdx % db.breakingNews.length;
+    const item = db.breakingNews[newsIdx];
+    newsEl.innerHTML = `<span class="badge b-red">${item.type}</span> <strong>[${item.board}]:</strong> ${item.text}`;
+    if (boardTag) boardTag.innerText = item.board;
+  }
+
+  const hiringEl = document.getElementById('tv-hiring-display');
+  if (hiringEl && db.hiringVacancies.length > 0) {
+    hiringIdx = hiringIdx % db.hiringVacancies.length;
+    const hItem = db.hiringVacancies[hiringIdx];
+    hiringEl.innerHTML = `<span class="badge b-green">${hItem.category}</span> <strong>${hItem.title}</strong> — Apply via Teacher Portal`;
+  }
+}
+setInterval(renderTickers, 4500);
+renderTickers();
+
+function nextBreakingNews() {
+  newsIdx = (newsIdx + 1) % db.breakingNews.length;
+  renderTickers();
+}
+function nextHiringNews() {
+  hiringIdx = (hiringIdx + 1) % db.hiringVacancies.length;
+  renderTickers();
+}
+
+// Pakistani Portal Functions
+function populatePakBoardsInReg() {
+  const type = document.getElementById('pak-reg-board-type').value;
+  const select = document.getElementById('pak-reg-board-name');
+  if (!select) return;
+  select.innerHTML = "";
+  const boards = BOARDS_DATA[type] || [];
+  boards.forEach(b => {
+    const opt = document.createElement('option');
+    opt.value = b;
+    opt.innerText = b;
+    select.appendChild(opt);
+  });
+}
+
+function registerPakStudent() {
+  const name = document.getElementById('pak-reg-name').value.trim();
+  const father = document.getElementById('pak-reg-father').value.trim();
+  const board = document.getElementById('pak-reg-board-name').value;
+  const cls = document.getElementById('pak-reg-class').value;
+  const fee = parseInt(document.getElementById('pak-reg-fee').value) || 4500;
+
+  if (!name || !father) {
+    alert("Please enter student name and father's name.");
+    return;
+  }
+
+  const id = "PAK-" + Math.floor(10000 + Math.random() * 90000);
+  db.students.push({ id, portal: "PKR", name, father, board, cls, fee, paid: true, status: "Active", teacherId: "HR-101" });
+  
+  // Add to accounts with 60/40 split
+  const tchShare = fee * 0.6;
+  const admShare = fee * 0.4;
+  db.accounts.push({ id: db.accounts.length + 1, date: new Date().toISOString().split('T')[0], desc: `Fee: ${name} (${id})`, curr: "PKR", total: fee, tch: tchShare, adm: admShare });
+
+  alert(`Student registered successfully! ID: ${id}. Meezan Bank / EasyPaisa receipt generated.`);
+  renderPakStudentsTable();
+}
+
+function renderPakStudentsTable() {
+  const tbody = document.getElementById('pak-students-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  db.students.filter(s => s.portal === "PKR").forEach(s => {
+    tbody.innerHTML += `
+      <tr>
+        <td><strong>${s.id}</strong></td>
+        <td>${s.name} (${s.father})</td>
+        <td>${s.board}</td>
+        <td>${s.cls}</td>
+        <td>PKR ${s.fee.toLocaleString()}</td>
+        <td><span class="badge b-green">${s.status}</span></td>
+      </tr>
+    `;
+  });
+}
+
+function calcPakSplit() {
+  const fee = parseFloat(document.getElementById('calc-pak-fee').value) || 0;
+  document.getElementById('calc-res-tch').innerText = `PKR ${(fee * 0.6).toLocaleString()}`;
+  document.getElementById('calc-res-sys').innerText = `PKR ${(fee * 0.2).toLocaleString()}`;
+  document.getElementById('calc-res-adm').innerText = `PKR ${(fee * 0.2).toLocaleString()}`;
+}
+
+// International Portal Functions
+function registerIntStudent() {
+  const name = document.getElementById('int-name').value.trim();
+  const country = document.getElementById('int-country').value.trim();
+  const curriculum = document.getElementById('int-curriculum').value;
+  const fee = parseFloat(document.getElementById('int-fee').value) || 120;
+
+  if (!name || !country) {
+    alert("Please fill in student name and country.");
+    return;
+  }
+
+  const id = "INT-" + Math.floor(1000 + Math.random() * 9000);
+  db.students.push({ id, portal: "GBP", name, father: country, board: curriculum, cls: "International", fee, paid: true, status: "Active", teacherId: "HR-101" });
+
+  const tchShare = fee * 0.6;
+  const admShare = fee * 0.4;
+  db.accounts.push({ id: db.accounts.length + 1, date: new Date().toISOString().split('T')[0], desc: `Fee: ${name} (${id})`, curr: "GBP", total: fee, tch: tchShare, adm: admShare });
+
+  alert(`International student registered successfully! ID: ${id} (£${fee}/mo).`);
+}
+
+// Quran Portal Render
+function updateQuranCourses() {
+  const grid = document.getElementById('quran-courses-grid');
+  if (!grid) return;
+  const courses = [
+    { title: "Noorani Qaida with Tajweed", desc: "Perfect articulation of Arabic letters for beginners.", feePKR: "PKR 2,500/mo", feeGBP: "£35/mo" },
+    { title: "Nazra Quran with Tajweed", desc: "Fluent Quran reading with precise rule observance.", feePKR: "PKR 3,000/mo", feeGBP: "£45/mo" },
+    { title: "Hifz-e-Quran (Memorization)", desc: "Structured daily memorization with expert Qari supervision.", feePKR: "PKR 4,500/mo", feeGBP: "£65/mo" },
+    { title: "Tarjuma & Tafseer-ul-Quran", desc: "Word-by-word translation and deep contextual commentary.", feePKR: "PKR 4,000/mo", feeGBP: "£60/mo" }
+  ];
+  grid.innerHTML = "";
+  courses.forEach(c => {
+    grid.innerHTML += `
+      <div class="card green-top">
+        <h3>📖 ${c.title}</h3>
+        <p style="font-size:13px; margin-bottom:10px;">${c.desc}</p>
+        <p style="font-weight:700; color:var(--navy);">Fee: ${c.feePKR} | ${c.feeGBP}</p>
+        <button class="btn btn-gold" style="margin-top:10px;" onclick="alert('Enrolled in ${c.title}!')">Enroll Now</button>
+      </div>
+    `;
+  });
+}
+
+// Filtered News for Student LMS
+function renderFilteredNews() {
+  const filter = document.getElementById('student-filter-board').value;
+  const container = document.getElementById('filtered-news-container');
+  if (!container) return;
+
+  const filtered = filter === "All" ? db.breakingNews : db.breakingNews.filter(n => n.board === filter);
+  container.innerHTML = "";
+  if (filtered.length === 0) {
+    container.innerHTML = `<p style="color:#666; font-style:italic;">No active news updates for ${filter}.</p>`;
+    return;
+  }
+  filtered.forEach(n => {
+    container.innerHTML += `
+      <div class="card" style="margin-bottom:10px; border-top-color:var(--navy);">
+        <span class="badge b-red">${n.type}</span> <strong>[${n.board}]</strong>
+        <p style="margin-top:6px; font-weight:600;">${n.text}</p>
+        <p style="font-size:11.5px; color:#666; margin-top:4px;">Source: ${n.source}</p>
+      </div>
+    `;
+  });
+}
+
+// Teacher Roster & Payroll
+function renderTeacherRoster() {
+  const tbody = document.getElementById('teacher-roster-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  db.teachers.forEach(t => {
+    tbody.innerHTML += `
+      <tr>
+        <td><strong>${t.id}</strong></td>
+        <td>${t.name}</td>
+        <td>${t.degree}</td>
+        <td>${t.subject}</td>
+        <td>${t.board}</td>
+        <td>${t.share}%</td>
+        <td><span class="badge b-green">${t.status}</span></td>
+      </tr>
+    `;
+  });
+}
+
+function generatePayslip() {
+  const tchId = document.getElementById('payroll-tch-select').value;
+  const tch = db.teachers.find(t => t.id === tchId);
+  const out = document.getElementById('payslip-output');
+  if (!tch || !out) return;
+
+  out.style.display = "block";
+  out.innerHTML = `
+    <div class="card" style="border-top-color:var(--gold); background:var(--gold-light);">
+      <h3>📄 Itemized Payslip: ${tch.name} (${tch.id})</h3>
+      <p style="font-size:13px;"><strong>Qualification:</strong> ${tch.degree} | <strong>Subject:</strong> ${tch.subject}</p>
+      <hr style="margin:8px 0; border:0; border-top:1px solid var(--border);">
+      <p style="font-size:13px;">• Revenue Share (60%): <strong>PKR ${tch.earnedPKR.toLocaleString()} | £${tch.earnedGBP}</strong></p>
+      <p style="font-size:13px;">• Annual Increment (15%): Applied</p>
+      <p style="font-size:13px;">• Paid Disbursal via ${tch.bank}: <strong>PKR ${tch.paidPKR.toLocaleString()}</strong></p>
+      <button class="btn btn-sm" style="margin-top:10px;" onclick="alert('Payslip downloaded as official PDF!')">Download PDF Payslip</button>
+    </div>
+  `;
+}
+
+function submitJobApplication() {
+  const name = document.getElementById('job-name').value.trim();
+  const cnic = document.getElementById('job-cnic').value.trim();
+  const deg = document.getElementById('job-deg').value.trim();
+  const subj = document.getElementById('job-subj').value.trim();
+
+  if (!name || !cnic || !deg || !subj) {
+    alert("Please fill in all required faculty application fields.");
+    return;
+  }
+  alert(`Faculty application submitted successfully for ${name} (${subj}). HR will review CV and credentials within 24 hours.`);
+}
+
+// AI Predictive Coaching Simulation
+function runAICoachingSimulation() {
+  const el = document.getElementById('ai-coaching-output');
+  el.style.display = 'block';
+  el.innerHTML = `
+    <strong>🤖 AI Predictive Coach Report:</strong><br>
+    • <strong>Score Prediction:</strong> Student Zainab Fatima (PAK-10001) is projected to achieve <strong>94% (A+)</strong> in Gujranwala Board exams.<br>
+    • <strong>Emotional Check:</strong> Engagement velocity is optimal. Motivational boost dispatched: <em>"You're on track for top honors!"</em><br>
+    • <strong>Revision Loop:</strong> 2 students flagged for Chapter 3 Kinematics revision; auto-assigned targeted practice set.
+  `;
+}
+
+function submitDailyChallenge() {
+  const ans = document.getElementById('gamify-ans').value.trim().toLowerCase();
+  const res = document.getElementById('gamify-result');
+  if (ans.includes('mitochondria')) {
+    res.style.color = "var(--green)";
+    res.innerText = "🎉 Correct Answer! You won a Free Class Voucher + 50 Gamification XP Points!";
+  } else {
+    res.style.color = "var(--danger)";
+    res.innerText = "❌ Incorrect. Try again tomorrow for the daily challenge!";
+  }
+}
+
+// Initialize on Load
+populatePakBoardsInReg();
+updateQuranCourses();
+renderFilteredNews();
+renderPakStudentsTable();
+renderTeacherRoster();
+</script>
+
+</body>
+</html>
