@@ -1157,6 +1157,36 @@ var teachersDB = DB.get('teachers', [
 ]);
 
 var libraryDB = DB.get('library', [
+ var libraryDB = DB.get('library', [
+  // 1. PUNJAB BOARDS
+  { id: 'L_PB_10_MATH', board: 'Gujranwala Board / Punjab Boards', classSub: 'Class 10th — Mathematics & Computer Science', title: 'Chapter 1 to 15 Topic-Wise Video Lectures, Past Papers & Textbook Backup PDF' },
+  { id: 'L_PB_9_PHY', board: 'Gujranwala Board / Punjab Boards', classSub: 'Class 9th — Physics & Chemistry', title: 'Kinematics, Dynamics & Chemical Bonding Video Lectures + Notes' },
+  { id: 'L_PB_INTER', board: 'Punjab Boards', classSub: '1st Year & 2nd Year Inter — Pre-Medical / Engineering', title: 'Complete Intermediate Physics, Chemistry, Biology & Maths Video Library' },
+  
+  // 2. FEDERAL & AJK BOARDS
+  { id: 'L_FBISE', board: 'Federal Board FBISE Islamabad', classSub: 'Class 9th, 10th & Inter — SLO Based', title: 'FBISE SLO Model Papers, E-Books, Solved Assignments & Recorded Lectures' },
+  { id: 'L_AJK', board: 'AJK Board Mirpur', classSub: 'Matric & Inter All Groups', title: 'AJK Textbook Board Syllabi, Notes & Chapter-wise Video Support' },
+  
+  // 3. KPK BOARDS
+  { id: 'L_KPK', board: 'Peshawar Board / KPK Boards', classSub: 'Class 9th to 12th All Subjects', title: 'KPK Textbook Board Digital Library, Past Papers & Audio Lectures' },
+  
+  // 4. SINDH & BALOCHISTAN BOARDS
+  { id: 'L_SINDH', board: 'Sindh Board (Karachi, Hyderabad, Sukkur)', classSub: 'Matric & Inter Science & Arts', title: 'Sindh Textbook Board Complete E-Books & Chapter Notes' },
+  { id: 'L_BALOCH', board: 'Balochistan Board Quetta', classSub: 'Class 9th to 12th', title: 'Quetta Board Textbooks, Syllabus Breakups & Video Guides' },
+  
+  // 5. CAMBRIDGE & INTERNATIONAL O/A LEVELS
+  { id: 'L_CAMB', board: 'Cambridge International (O/A-Level)', classSub: 'O-Level & A-Level (Maths, Physics, Chem, Bio, Economics, English)', title: 'Cambridge Examiner Reports, Past Papers (2015-2026), Syllabus Breakdowns & Master Lectures' },
+  { id: 'L_UK_KG8', board: 'UK National Curriculum (KG–Grade 8)', classSub: 'KG to Grade 8 (UK / USA / EU Curriculum)', title: 'UK Key Stage 1, 2, 3 Interactive Workbooks, Phonics, Mathematics & Science Video Lessons' },
+  
+  // 6. COMPETITIVE EXAMS (CSS / PMS / MDCAT / ECAT)
+  { id: 'L_CSS', board: 'Competitive Exams (CSS / PMS / Tehsildar)', classSub: 'CSS / PMS — Essay, Précis, General Knowledge, Pakistan Studies', title: 'CSS Compulsory & Optional Subject Notes, Past Examiners Guidelines & Interview Prep' },
+  { id: 'L_MDCAT', board: 'MDCAT / ECAT Entry Tests', classSub: 'MDCAT / ECAT (3, 6, 9, 12 Months Packages)', title: 'High-Yield Physics, Chemistry, Biology & Maths MCQs Bank, Mock Tests & Formula Sheets' },
+  
+  // 7. LANGUAGES & QURAN ACADEMY
+  { id: 'L_LANG', board: 'Languages Academy', classSub: 'IELTS (Academic/General), German, French, Spanish, Urdu', title: 'Listening, Reading, Writing & Speaking Master Modules, Mock Tests & Vocabulary Bank' },
+  { id: 'L_QURAN', board: 'Quran Academy (Pakistan & International)', classSub: 'Qaida, Nazra, Hifz, Tajweed, Tafseer (Urdu/English)', title: 'Audio Recitation Guides, Tajweed Rules, Hifz Manzil Tracker & Tarjuma Tafseer Notes' }
+]);
+DB.set('library', libraryDB);
   { id: 'L1', board: 'Gujranwala Board', classSub: 'Class 10th — Computer Science & Maths', title: 'Punjab Textbook Board PDF + Chapter 1–10 Video Lectures + Solved Past Papers' },
   { id: 'L2', board: 'Gujranwala Board', classSub: 'Class 9th — Physics', title: 'Kinematics Video Lecture + Graphical Equations PDF Notes + Auto-Checked MCQs' },
   { id: 'L3', board: 'Federal Board FBISE Islamabad', classSub: 'Class 9th & 10th — SLO Based', title: 'FBISE SLO Model Papers, E-Books & Recorded Lectures' },
