@@ -910,3 +910,113 @@
             <div id="adminLibWrap" class="table-wrap"></div>
           </div>
         </div>
+<!-- TAB 5: ATTENDANCE CALENDAR, AUTO-LINKED LEAVE, FINES & RESULTS (Sections 11, 16, 17, 18) -->
+        <div id="admAttLeaveFine" class="admTab hidden">
+          <div class="grid-2">
+            <!-- Attendance Calendar & Reports (Section 16) -->
+            <div class="gold">
+              <h3 style="margin-top:0;">📅 Calendar Attendance Register & Multi-Period Reports</h3>
+              <div class="grid-3">
+                <input id="attTargetId" placeholder="Student/Teacher ID">
+                <select id="attCodeSel">
+                  <option value="P">P = Present</option>
+                  <option value="A">A = Absent (Auto-Fine / Pay Cut)</option>
+                  <option value="L">L = Late (Auto-Fine / Pay Cut)</option>
+                  <option value="LE">LE = Approved Leave</option>
+                </select>
+                <input type="date" id="attDateInput">
+              </div>
+              <input id="attReasonInput" placeholder="Late / Absent Reason (Saved with Edit History)">
+              <button type="button" class="btn-dark" onclick="adminMarkAttendance()">✅ Save Attendance & Edit Audit Log</button>
+              <div style="margin-top:8px;">
+                <select id="attReportPeriod" onchange="renderAttendanceReport()">
+                  <option value="Daily">Daily View</option>
+                  <option value="Monthly">Month-Wise Check</option>
+                  <option value="Quarterly">Quarterly Check (Q1–Q4)</option>
+                  <option value="3Months">3-Months Check</option>
+                  <option value="6Months">6-Months Check</option>
+                  <option value="Yearly">Full Yearly Check</option>
+                </select>
+              </div>
+              <div id="attendanceReportOutput" class="small" style="margin-top:6px;"></div>
+            </div>
+
+            <!-- Leave Approval Queue (Section 17) -->
+            <div class="green-box">
+              <h3 style="margin-top:0;">📨 Leave Approval Queue (1-Click Auto-Updates Register, Timetable & Accounts)</h3>
+              <div id="adminLeaveQueueWrap" class="small"></div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <!-- Fine / Jurmana System (Section 11) -->
+            <div class="gold">
+              <h3 style="margin-top:0;">⚖️ Fine / Jurmana System (Auto-Notifies LMS & Accounts)</h3>
+              <div class="grid-2">
+                <input id="fineTargetId" placeholder="Student or Teacher ID">
+                <select id="fineTypeSel">
+                  <option value="Late Coming Fine">Student: Late Coming Fine</option>
+                  <option value="Absent Fine">Student: Absent Fine</option>
+                  <option value="Homework Not Done Fine">Student: Homework Not Done Fine</option>
+                  <option value="Late Fee Fine">Student: Late Fee Fine</option>
+                  <option value="Discipline Fine">Student: Discipline Fine</option>
+                  <option value="Late Class Fine">Teacher: Late Class Fine</option>
+                  <option value="Missed Class Fine">Teacher: Missed Class Fine</option>
+                  <option value="Late Result Fine">Teacher: Late Result Fine</option>
+                  <option value="Late Syllabus Fine">Teacher: Late Syllabus Fine</option>
+                </select>
+              </div>
+              <input type="number" id="fineAmountInput" placeholder="Fine Amount (PKR or GBP)">
+              <button type="button" class="btn-red" onclick="applyFine()">⚖️ Apply Fine & Auto-Update Accounts</button>
+            </div>
+
+            <!-- Result Approval & Topper Publisher (Section 18) -->
+            <div class="green-box">
+              <h3 style="margin-top:0;">🏆 Result Approval & Home Page Topper Publisher</h3>
+              <div id="adminResultsQueueWrap" class="small"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: DYNAMIC BUTTON/FEE EDITOR & MASTER BACKUP/RESTORE (Sections 19 & 29) -->
+        <div id="admBtnFeeCtrl" class="admTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">🎛️ Section 29: Add / Delete / Rename Courses & Edit Fees</h3>
+              <div class="grid-2">
+                <select id="ctrlPortalTarget">
+                  <option value="Pakistan">Pakistani Portal (PKR)</option>
+                  <option value="International">International Portal (GBP £)</option>
+                </select>
+                <input id="ctrlCourseTitle" placeholder="Course / Button Name (e.g., Class 9th Punjab Board)">
+              </div>
+              <div class="grid-2">
+                <input type="number" id="ctrlCourseFee" placeholder="Fee Amount (e.g., 7000 or 400)">
+                <input id="ctrlCourseBilling" placeholder="Billing (e.g., /mo or One-Time Package)">
+              </div>
+              <button type="button" class="btn-green" onclick="adminAddCourseButton()">➕ Add New Course & Fee Button</button>
+              <div id="adminCourseListWrap" class="table-wrap"></div>
+            </div>
+
+            <div class="green-box">
+              <h3 style="margin-top:0;">💾 Section 19: Complete Institutional Backup & One-Click Restore</h3>
+              <p class="small">Includes Student Backup, Teacher Backup, Section/Board Isolated Backups, Attendance, Concessions & Accounts.</p>
+              <button type="button" class="btn-dark" onclick="downloadFullBackup()">📥 Download Complete Master Backup (.json)</button>
+              <button type="button" class="btn-gold" onclick="exportCSVReport('Students')">📊 Export Student Register (Excel CSV)</button>
+              <button type="button" class="btn-gold" onclick="exportCSVReport('Teachers')">📊 Export Teacher HR Register (Excel CSV)</button>
+              <div style="margin-top:10px;">
+                <label>Restore From Backup File (.json)</label>
+                <input type="file" id="restoreJsonInput" accept=".json" onchange="restoreFullBackup(this)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026–2027 Sir Haroon Javaid Hashmi Academy and College | Dinga, District Gujrat, Pakistan | 60% Teacher / 40% Admin Model | All Rights Reserved
+</footer>
