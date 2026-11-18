@@ -335,3 +335,165 @@
     </div>
   </div>
                                                                                                                                                                    </div>
+                                                                                                                                                                   <!-- =========================================================
+       4. STUDENT LMS ACCOUNT + 24/7 AI TUTOR (Sections 5, 21, 28)
+       ========================================================= -->
+  <div id="portalStudentLms" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark btn-sm" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+        <span class="badge">STUDENT LMS — BOARD ISOLATED & AI TUTOR ACTIVE</span>
+      </div>
+      <h2>🎓 Student LMS Account — Board-Isolated Library, Timetable & 24/7 AI Tutor</h2>
+
+      <!-- Student Login Bar -->
+      <div class="grid-2" id="studentAuthGrid">
+        <div class="gold">
+          <h3 style="margin-top:0;">🔐 Registered Student Login</h3>
+          <label>Student ID or Full Name</label>
+          <input id="stuLoginId" placeholder="e.g., PAK-10001 or Mah Noor Irfan">
+          <label>Personal Password</label>
+          <input type="password" id="stuLoginPass" placeholder="Enter password (default 1234 for demo)">
+          <button type="button" class="btn-green" onclick="loginStudentLMS()">🔓 Login Student LMS</button>
+          <button type="button" class="btn-gold" onclick="demoStudentLMS()">👁️ Director Test Demo (Student LMS)</button>
+        </div>
+        <div class="green-box">
+          <h3 style="margin-top:0;">🏆 Top Board Achievers (2026 Honor Roll)</h3>
+          <div id="homeToppersList" class="small">
+            <div>🏅 <strong>Mah Noor Irfan</strong> — Computer Science: <strong>981 Marks (Gujranwala Board)</strong></div>
+            <div>🏅 <strong>Aisha Siddiqa</strong> — Biology: <strong>958 Marks</strong></div>
+            <div>🏅 <strong>Syed Atta Shah (2025)</strong> — 808 Marks</div>
+            <div>🌟 <strong>Sir Haroon Javaid Hashmi</strong> — Global Alison Rank #1 Leader (66,560 XP, 38 Certifications)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Student LMS Workspace -->
+      <div id="studentLmsWorkspace" class="hidden" style="margin-top:16px;">
+        <div class="dark-box" id="stuProfileBanner" style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; margin-bottom:14px; font-weight:bold;"></div>
+
+        <div class="sub-tabs">
+          <button type="button" class="sub-tab-btn active-sub" onclick="switchSubTab('stuTab','stuCourses',this)">📚 My Board Library & Timetable</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('stuTab','stuAiTutor',this)">🤖 24/7 Personal AI Tutor</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('stuTab','stuQuizzes',this)">📝 Quizzes, Homework & Live Qs</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('stuTab','stuResults',this)">📊 Results, Career & PDF Card</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('stuTab','stuAttLeave',this)">📅 Attendance, Leave & Fee/Fines</button>
+          <button type="button" class="sub-tab-btn" onclick="switchSubTab('stuTab','stuNoticesChat',this)">📢 Board Notices & Teacher Chat</button>
+        </div>
+
+        <!-- Tab 1: Courses, Board-Isolated Library, Timetable, Syllabus Breakup -->
+        <div id="stuCourses" class="stuTab">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">🗓️ My Live Class Timetable (Filtered to My Board & Class)</h3>
+              <div id="stuTimetableList" class="small"></div>
+            </div>
+            <div class="green-box">
+              <h3 style="margin-top:0;">📋 Weekly Syllabus Breakup (My Board & Class)</h3>
+              <div id="stuSyllabusList" class="small"></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0;">📖 Board-Isolated Digital Library & Topic-Wise Video Lectures</h3>
+            <p class="small">Strict Isolation Rule: Only books, notes, PDFs, and recorded/live lectures matching your exact Board + Class appear below.</p>
+            <div id="stuLibraryList"></div>
+          </div>
+        </div>
+
+        <!-- Tab 2: 24/7 Personal AI Tutor (Section 28) -->
+        <div id="stuAiTutor" class="stuTab hidden">
+          <div class="green-box">
+            <h3 style="margin-top:0;">🤖 24/7 Personal AI Tutor — Ask Any Question, Get Step-by-Step Explanation or Practice Test</h3>
+            <div class="chat-box" id="aiTutorChatBox">
+              <div><strong>🤖 AI Tutor:</strong> Assalam-o-Alaikum! I am your 24/7 Personal AI Tutor. Ask me any question from your board syllabus (Maths, Physics, English, IELTS, CSS, Quran) or click "Generate Instant Practice Test" below!</div>
+            </div>
+            <div class="grid-2">
+              <input id="aiTutorQuestion" placeholder="Type your question here (e.g., Explain Quadratic Formula step by step)...">
+              <div style="display:flex; gap:6px;">
+                <button type="button" class="btn-green" onclick="askAiTutor()">💬 Ask AI Tutor</button>
+                <button type="button" class="btn-gold" onclick="aiTutorQuickTest()">⚡ AI Practice Test</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Quizzes, Homework & Live Class Questions (Section 5 & 21) -->
+        <div id="stuQuizzes" class="stuTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">📝 Online MCQs & Auto-Checked Quizzes (Including Unsolved Class Questions)</h3>
+              <div id="stuQuizContainer"></div>
+            </div>
+            <div class="green-box">
+              <h3 style="margin-top:0;">📤 Assignments / Homework Submission</h3>
+              <label>Select Assignment / Topic</label>
+              <input id="stuHwTitle" placeholder="e.g., Chapter 1 Exercise 1.1">
+              <label>Upload Homework File (PDF / Image)</label>
+              <input type="file" id="stuHwFile" accept="image/*,.pdf">
+              <button type="button" class="btn-dark" onclick="submitStudentHomework()">📤 Submit Homework to Teacher</button>
+              <div id="stuHwHistory" class="small" style="margin-top:10px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Results, Career Guidance, Certificate & Result Card PDF (Sections 5, 18, 28) -->
+        <div id="stuResults" class="stuTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">📊 Official Approved Results & Progress Report</h3>
+              <div id="stuResultsContainer"></div>
+              <button type="button" class="btn-dark" onclick="downloadResultCardPDF()">📄 Download Official Result Card / Transcript</button>
+              <button type="button" class="btn-gold" onclick="downloadVerifiedCertificate()">🎓 Download Verified Course Completion Certificate</button>
+            </div>
+            <div class="green-box">
+              <h3 style="margin-top:0;">🧭 AI Career Guidance & University Scholarship Advisor</h3>
+              <div id="stuCareerAdvice" class="small"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: Attendance, Leave Apply, Fee Status & Fines (Sections 5, 11, 17, 29D) -->
+        <div id="stuAttLeave" class="stuTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">📅 My Attendance Record & Leave Application</h3>
+              <div id="stuAttendanceSummary" class="small"></div>
+              <hr style="border:1px solid #d4af37; margin:12px 0;">
+              <strong>Apply for Leave (Auto-Linked to Admin & Register):</strong>
+              <label>Leave Reason *</label>
+              <input id="stuLeaveReason" placeholder="e.g., Medical / Family Emergency">
+              <div class="grid-2">
+                <div><label>From Date *</label><input type="date" id="stuLeaveFrom"></div>
+                <div><label>To Date *</label><input type="date" id="stuLeaveTo"></div>
+              </div>
+              <button type="button" class="btn-green" onclick="submitLeaveRequest('Student')">📨 Submit Leave Request</button>
+            </div>
+            <div class="green-box">
+              <h3 style="margin-top:0;">💳 My Fee Status, Fines & Receipt Upload</h3>
+              <div id="stuFeeFineSummary" class="small"></div>
+              <label>Upload New Monthly Fee Slip</label>
+              <input type="file" id="stuNewSlip" accept="image/*,.pdf">
+              <button type="button" class="btn-dark" onclick="alert('✅ Fee Slip uploaded and sent to Accounts & Admin for instant verification!')">📤 Upload Fee Receipt</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 6: Board-Filtered Notices & Teacher Chat (Sections 5 & 25C) -->
+        <div id="stuNoticesChat" class="stuTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">📢 Level-2 Filtered Notice Board (Only My Board & Class)</h3>
+              <div id="stuFilteredNotices" class="small"></div>
+            </div>
+            <div class="green-box">
+              <h3 style="margin-top:0;">💬 Direct Message / Chat With My Teacher</h3>
+              <div class="chat-box" id="stuTeacherChatBox"></div>
+              <input id="stuChatMsgInput" placeholder="Write message to your teacher...">
+              <button type="button" class="btn-green" onclick="sendPortalChat('Student')">📨 Send Message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
