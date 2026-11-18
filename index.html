@@ -809,3 +809,104 @@
             </div>
           </div>
         </div>
+<!-- TAB 2: SMS & ONE-CLICK MESSAGES + AI SMS APPROVAL (Sections 8, 12, 13, 23B) -->
+        <div id="admSms" class="admTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">📲 One-Click Admin Broadcast (WhatsApp + LMS + SMS)</h3>
+              <div class="grid-2">
+                <div>
+                  <label>Target Audience</label>
+                  <select id="smsTarget">
+                    <option value="All Students & Parents">All Students & Parents</option>
+                    <option value="All Teachers">All Teachers</option>
+                    <option value="Gujranwala Board Students">Gujranwala Board Students</option>
+                    <option value="International Students (GBP)">International Students (GBP)</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Pre-Made Template</label>
+                  <select id="smsTemplateSelect" onchange="fillSmsTemplate()">
+                    <option value="">-- Choose Pre-Made Message --</option>
+                    <option value="⏰ Fee Reminder (3 Days Before): Dear Parent, monthly fee is due in 3 days. Please submit via Meezan Bank / EasyPaisa.">Fee Reminder (3 Days Before)</option>
+                    <option value="⚠️ Overdue Fee + Fine Notice: Fee due date has passed. Late fee fine has been applied to your account.">After Fee Date + Fine</option>
+                    <option value="✅ Fee Receipt & Thank You: JazakAllah! Your fee has been received and verified in Academy Accounts.">Fee Paid Receipt + Thank You</option>
+                    <option value="💰 End of Month Teacher Pay (60% Share): Dear Teacher, your monthly 60% revenue share has been calculated in your LMS.">Teacher Monthly 60% Pay</option>
+                    <option value="📝 Test Tomorrow & Syllabus Breakup Update: Please check your board-isolated LMS for tomorrow's test & syllabus.">Test Tomorrow / Syllabus</option>
+                  </select>
+                </div>
+              </div>
+              <textarea id="smsCustomBody" rows="3" placeholder="Message text..."></textarea>
+              <button type="button" class="btn-green" onclick="sendOneClickMessage()">🚀 Send Instantly via WhatsApp + LMS + SMS</button>
+              <div id="sentMessagesLog" class="small" style="margin-top:10px;"></div>
+            </div>
+
+            <div class="green-box">
+              <h3 style="margin-top:0;">🤖 AI Auto-Generated SMS Approval Queue (Section 23B)</h3>
+              <p class="small">When a required SMS is not in pre-made templates, the system drafts it and requests Director approval:</p>
+              <div id="aiSmsQueueBox" class="gold">
+                <strong>System Draft Request:</strong>
+                <p class="small">"Sir, I have created this SMS for upcoming 2027 Board Exam Date Sheet & Holiday Notice. Please approve so I can send immediately to all board students."</p>
+                <button type="button" class="btn-green btn-sm" onclick="approveAiSms()">✅ Approve & Send Immediately</button>
+              </div>
+              <h4 style="margin-bottom:4px;">📢 Update Front Page Breaking News & Hiring Ticker</h4>
+              <input id="adminNewsEdit" placeholder="New Breaking News text...">
+              <button type="button" class="btn-dark btn-sm" onclick="updateTicker('breakingNewsMarquee','adminNewsEdit')">Update Breaking News</button>
+              <input id="adminHiringEdit" placeholder="New Hiring / Marketing notice...">
+              <button type="button" class="btn-gold btn-sm" onclick="updateTicker('marketingHiringMarquee','adminHiringEdit')">Update Hiring/Marketing Board</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: HR & MASTER REGISTERS (Sections 15 & 23C) -->
+        <div id="admHr" class="admTab hidden">
+          <div class="gold">
+            <h3 style="margin-top:0;">👨‍🎓 Master Student Register (Column-Wise)</h3>
+            <div id="masterStudentRegisterWrap" class="table-wrap"></div>
+          </div>
+          <div class="green-box">
+            <h3 style="margin-top:0;">👔 Master Teacher & HR Register (Auto-Linked to Accounts 60/40)</h3>
+            <div id="masterTeacherRegisterWrap" class="table-wrap"></div>
+          </div>
+        </div>
+
+        <!-- TAB 4: LIBRARY, TIMETABLE & SYLLABUS BREAKUP (Sections 9, 10, 23D) -->
+        <div id="admLibrary" class="admTab hidden">
+          <div class="grid-2">
+            <div class="gold">
+              <h3 style="margin-top:0;">🗓️ Board-Wise Timetable Creator (Auto-Sends to Teacher & Student)</h3>
+              <div class="grid-2">
+                <input id="ttBoard" placeholder="Board (e.g., Gujranwala Board / UK KG-8)">
+                <input id="ttClass" placeholder="Class (e.g., Class 9th / Grade 5)">
+              </div>
+              <div class="grid-2">
+                <input id="ttTime" placeholder="Time (PKT + UK Time e.g., 5:00 PM PKT / 12:00 PM UK)">
+                <input id="ttTeacher" placeholder="Teacher Name / ID">
+              </div>
+              <button type="button" class="btn-dark" onclick="publishTimetable()">➕ Publish Timetable (Auto-Syncs LMS)</button>
+              <div id="adminTimetableList" class="small" style="margin-top:8px;"></div>
+            </div>
+
+            <div class="green-box">
+              <h3 style="margin-top:0;">📋 Board-Wise Syllabus Breakup (Auto-Sends to Teacher & Student)</h3>
+              <div class="grid-2">
+                <input id="sbBoard" placeholder="Board (e.g., Gujranwala Board)">
+                <input id="sbClassSub" placeholder="Class & Subject (e.g., Class 9th English)">
+              </div>
+              <input id="sbWeeks" placeholder="e.g., Week 1: Unit 1 | Week 2: Unit 2">
+              <button type="button" class="btn-green" onclick="publishSyllabus()">➕ Publish Syllabus Breakup</button>
+              <div id="adminSyllabusList" class="small" style="margin-top:8px;"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-top:0;">📚 Global Board-Isolated Library Manager (Approve / Delete / Add)</h3>
+            <div class="grid-3">
+              <input id="admLibBoard" placeholder="Board (e.g., Gujranwala Board)">
+              <input id="admLibClass" placeholder="Class & Subject">
+              <input id="admLibTitle" placeholder="Book / Video / Notes Link">
+            </div>
+            <button type="button" class="btn-gold btn-sm" onclick="adminAddLibrary()">➕ Add Library Item</button>
+            <div id="adminLibWrap" class="table-wrap"></div>
+          </div>
+        </div>
