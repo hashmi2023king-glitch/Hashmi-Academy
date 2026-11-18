@@ -2,904 +2,146 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- =========================================================
-       WHATSAPP & SOCIAL MEDIA LINK PREVIEW (OPEN GRAPH METAS)
-       ========================================================= -->
-  <title>SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE</title>
-  <meta name="description" content="KG to Class 12th | O/A Level | CSS/PMS | MDCAT/ECAT | IELTS | Quran Academy - Pakistan + UK + USA + Europe - Admission Open">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sir Haroon Javaid Hashmi Academy | Global Unified LMS & Business OS</title>
+  <meta property="og:title" content="Sir Haroon Javaid Hashmi Academy - Global LMS & Business System">
+  <meta property="og:description" content="Online, Physical & Hybrid Education | O/A Levels, Matric, FSc, Cambridge, Edexcel | Dinga, Gujrat & Global Campuses">
+  <meta property="og:image" content="preview.jpg">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://hashmi2023king-glitch.github.io/Hashmi-Academy/">
-  <meta property="og:title" content="SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE">
-  <meta property="og:description" content="KG to Class 12th | O/A Level | CSS/PMS | MDCAT/ECAT | IELTS | Quran Academy - Pakistan + UK + USA + Europe - Admission Open">
-  <meta property="og:image" content="https://hashmi2023king-glitch.github.io/Hashmi-Academy/preview.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE">
-  <meta name="twitter:description" content="KG to Class 12th | O/A Level | CSS/PMS | MDCAT/ECAT | IELTS | Quran Academy - Pakistan + UK + USA + Europe">
-  <meta name="twitter:image" content="https://hashmi2023king-glitch.github.io/Hashmi-Academy/preview.jpg">
-
-  <!-- Google Fonts & Styling Palettes -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #ffffff;
+      --bg-white: #ffffff;
       --gold: #d4af37;
-      --gold-dark: #b89728;
+      --gold-light: #fef9c3;
+      --gold-dark: #b48a1e;
       --dark-blue: #0a192f;
-      --green: #047857;
-      --green-dark: #065f46;
+      --blue-mid: #1e3a8a;
+      --green: #10b981;
+      --green-dark: #047857;
       --black: #111827;
-      --card-bg: #fffbeb;
-      --border-color: #e5e7eb;
+      --red: #dc2626;
+      --red-light: #fee2e2;
+      --yellow: #f59e0b;
+      --gray-bg: #f8fafc;
+      --border-color: #cbd5e1;
     }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--black);
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-    .card {
-      background: var(--card-bg);
-      border: 2px solid var(--gold);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    .btn-gold {
-      background-color: var(--gold);
-      color: var(--dark-blue);
-      font-weight: 700;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn-gold:hover {
-      background-color: var(--gold-dark);
-      color: #fff;
-    }
-    .btn-green {
-      background-color: var(--green);
-      color: #fff;
-      font-weight: 700;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .btn-green:hover {
-      background-color: var(--green-dark);
-    }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media(max-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr; }
-    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    body { background: var(--bg-white); color: var(--black); margin: 0; padding: 0; line-height: 1.5; }
+    
+    /* Top Notice & Offer Ticker */
+    .top-ticker { background: var(--gold); color: var(--dark-blue); padding: 8px 14px; font-weight: 800; font-size: 13px; text-align: center; border-bottom: 2px solid var(--dark-blue); }
+    
+    /* Header & Language Switcher */
+    header { background: var(--dark-blue); color: #fff; padding: 14px 20px; border-bottom: 4px solid var(--gold); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .brand h1 { margin: 0; font-size: 20px; color: var(--gold); letter-spacing: 0.5px; }
+    .brand p { margin: 2px 0 0 0; font-size: 12px; color: #e2e8f0; }
+    .header-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .lang-select { padding: 6px 10px; border-radius: 6px; border: 2px solid var(--gold); background: var(--dark-blue); color: #fff; font-weight: 700; cursor: pointer; }
+    .clock-badge { background: var(--gold); color: var(--dark-blue); padding: 6px 12px; border-radius: 6px; font-weight: 800; font-size: 13px; }
+    .notif-bell { background: var(--green); color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; position: relative; }
+    .notif-count { background: var(--red); color: #fff; border-radius: 50%; padding: 1px 6px; font-size: 11px; margin-left: 4px; }
+
+    /* Navigation Tabs */
+    .nav-bar { background: #0f294a; padding: 10px 15px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; border-bottom: 2px solid var(--gold); }
+    .nav-btn { background: transparent; color: #fff; border: 1px solid var(--gold); padding: 8px 14px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; }
+    .nav-btn:hover, .nav-btn.active { background: var(--gold); color: var(--dark-blue); }
+
+    /* Main Container & Cards */
+    .container { max-width: 1280px; margin: 18px auto; padding: 0 14px; }
+    .section-view { display: none; }
+    .section-view.active { display: block; }
+    .card { background: #fff; border: 2px solid var(--dark-blue); border-radius: 10px; padding: 18px; margin-bottom: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); }
+    .card-gold { border: 2px solid var(--gold); background: var(--gold-light); }
+    .card-dark { background: var(--dark-blue); color: #fff; border: 2px solid var(--gold); }
+    .card-header { font-size: 17px; font-weight: 800; color: var(--dark-blue); border-bottom: 2px solid var(--gold); padding-bottom: 8px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .card-dark .card-header { color: var(--gold); }
+
+    /* Grids & Forms */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media(max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
+    @media(max-width: 650px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; color: var(--dark-blue); }
+    .card-dark label { color: var(--gold); }
+    input, select, textarea { width: 100%; padding: 9px 11px; border: 1.5px solid var(--border-color); border-radius: 6px; font-size: 13px; margin-bottom: 10px; background: #fff; color: var(--black); }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); }
+
+    /* Buttons */
+    .btn-gold { background: var(--gold); color: var(--dark-blue); font-weight: 800; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+    .btn-gold:hover { background: var(--gold-dark); color: #fff; }
+    .btn-green { background: var(--green); color: #fff; font-weight: 800; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+    .btn-green:hover { background: var(--green-dark); }
+    .btn-blue { background: var(--dark-blue); color: #fff; font-weight: 800; border: 1px solid var(--gold); padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+    .btn-red { background: var(--red); color: #fff; font-weight: 800; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+
+    /* Status Badges & Alerts */
+    .badge { padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 800; display: inline-block; }
+    .badge-red { background: var(--red); color: #fff; }
+    .badge-yellow { background: var(--yellow); color: #000; }
+    .badge-green { background: var(--green); color: #fff; }
+    .badge-blue { background: var(--dark-blue); color: var(--gold); }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 8px; }
+    th, td { border: 1px solid var(--border-color); padding: 8px 10px; text-align: left; }
+    th { background: var(--dark-blue); color: var(--gold); font-weight: 700; }
+    tr:nth-child(even) { background: var(--gray-bg); }
+
+    /* Progress Bars & Graphs (Points 35-38) */
+    .prog-track { background: #e2e8f0; border-radius: 8px; height: 18px; width: 100%; overflow: hidden; margin: 6px 0; }
+    .prog-fill { height: 100%; text-align: right; padding-right: 8px; color: #fff; font-size: 11px; font-weight: 800; line-height: 18px; transition: width 0.4s; }
+    .battery-ring { width: 110px; height: 110px; border-radius: 50%; border: 8px solid var(--green); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; background: #f0fdf4; font-weight: 800; color: var(--dark-blue); }
+
+    /* Modals & Notification Drawer */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,25,47,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 15px; }
+    .modal-box { background: #fff; border: 3px solid var(--gold); border-radius: 10px; max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 20px; position: relative; }
+    .toast-bar { position: fixed; bottom: 16px; right: 16px; background: var(--dark-blue); color: #fff; border-left: 5px solid var(--green); padding: 12px 16px; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.25); z-index: 10000; max-width: 380px; font-size: 12.5px; display: none; }
   </style>
 </head>
 <body>
- <!-- =========================================================
-       PART 2: TOP HEADER, LIVE CLOCK & MASTER NOTICE BOARD
-       ========================================================= -->
-  <header style="background:var(--dark-blue); color:#fff; padding:16px 0; border-bottom:4px solid var(--gold);">
-    <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-      <div>
-        <h1 style="margin:0; font-size:22px; color:var(--gold);">SIR HAROON JAVAID HASHMI ACADEMY & COLLEGE</h1>
-        <p style="margin:4px 0 0 0; font-size:13px; color:#6ee7b7;">Dinga, District Gujrat, Pakistan | Pakistan + UK + USA + Europe</p>
-      </div>
-      <div style="background:#1e293b; padding:8px 16px; border:2px solid var(--gold); border-radius:8px; text-align:center;">
-        <div style="font-size:11px; color:#94a3b8;">LIVE SYSTEM CLOCK</div>
-        <div id="liveClockDisplay" style="font-size:16px; font-weight:700; color:var(--gold);">00:00:00</div>
-      </div>
+
+  <!-- Top Notice Board -->
+  <div class="top-ticker" id="globalNoticeTicker">
+    🌙 MUHARRAM OFFER: 30% OFF ACTIVE | 🎁 REFERRAL CODE (e.g. ADM-101): 10% OFF FIRST MONTH | 🛡️ 116-POINT LOCKED ENTERPRISE SYSTEM — SIR HAROON JAVAID HASHMI ACADEMY
+  </div>
+
+  <!-- Main Header -->
+  <header>
+    <div class="brand">
+      <h1 data-i18n="academy_name">🎓 Sir Haroon Javaid Hashmi Academy</h1>
+      <p data-i18n="academy_sub">Online + Physical + Hybrid | O/A Levels, Matric, FSc, Cambridge, Edexcel | HQ: Dinga, Gujrat</p>
+    </div>
+    <div class="header-controls">
+      <!-- Point 56: 7-Language Selector -->
+      <select id="languageSelector" class="lang-select" onchange="changeSystemLanguage(this.value)">
+        <option value="en">🇬🇧 English (International)</option>
+        <option value="ur">🇵🇰 اردو (Urdu)</option>
+        <option value="ar">🇸🇦 العربية (Arabic)</option>
+        <option value="es">🇪🇸 Español (Spanish)</option>
+        <option value="de">🇩🇪 Deutsch (German)</option>
+        <option value="fr">🇫🇷 Français (French)</option>
+        <option value="ru">🇷🇺 Русский (Russian)</option>
+      </select>
+      <div class="clock-badge" id="liveClock">00:00:00</div>
+      <!-- Point 39: Bell Notification Drawer -->
+      <button type="button" class="notif-bell" onclick="toggleNotifModal()">
+        🔔 <span data-i18n="notifications">Alerts</span> <span class="notif-count" id="notifBadgeCount">3</span>
+      </button>
     </div>
   </header>
 
-  <main class="container" style="margin-top:20px;">
-    
-    <!-- HERO SECTION -->
-    <div class="card" style="background:linear-gradient(135deg, #0a192f 0%, #1e293b 100%); color:#fff; border:3px solid var(--gold); text-align:center;">
-      <h2 style="font-size:28px; color:var(--gold); margin-bottom:10px;">SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE</h2>
-      <p style="font-size:16px; color:#e2e8f0; margin-bottom:20px;">Pakistan + UK + USA + Europe — Learn From Best Teachers Of The World</p>
-      <div style="margin:20px 0;">
-        <button type="button" class="btn-gold" style="font-size:16px;" onclick="scrollToSection('admissionSection')">🚀 ADMISSION OPEN - APPLY NOW</button>
-      </div>
-    </div>
-
-    <!-- PROPER NOTICE BOARD DESIGN (NO STRIP) -->
-    <div class="card" style="background:#fff; border:2px solid var(--dark-blue);">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
-        <!-- Left Side: Academy Logo / Students Circle -->
-        <div style="text-align:center;">
-          <div style="width:70px; height:70px; border-radius:50%; background:var(--dark-blue); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; color:var(--gold); font-weight:700; font-size:12px; margin:0 auto;">
-            LOGO
-          </div>
-          <div style="font-size:11px; font-weight:600; margin-top:4px;">Academy</div>
-        </div>
-
-        <!-- Middle: Big Notice Board Workspace -->
-        <div style="flex:1; min-width:280px; background:#fffbeb; border:1px dashed var(--gold); padding:14px; border-radius:8px;">
-          <h4 style="margin:0 0 6px 0; color:var(--dark-blue); display:flex; align-items:center; gap:6px;">
-            📢 Official Institutional Notice Board
-          </h4>
-          <div id="noticeBoardContent" style="font-size:14px; color:#334155; font-weight:500;">
-            • Admissions Open for KG to Class 12th, O/A Levels, CSS, MDCAT & Languages (Urdu, German, Spanish, IELTS). <br>
-            • Seasonal Offers & Special Fee Concessions Active for All Global Campuses.
-          </div>
-        </div>
-
-        <!-- Right Side: Founder Circle -->
-        <div style="text-align:center;">
-          <div style="width:70px; height:70px; border-radius:50%; background:var(--gold); border:2px solid var(--dark-blue); display:flex; align-items:center; justify-content:center; color:var(--dark-blue); font-weight:700; font-size:11px; margin:0 auto; overflow:hidden;">
-            FOUNDER
-          </div>
-          <div style="font-size:11px; font-weight:600; margin-top:4px;">Sir Haroon</div>
-        </div>
-      </div>
-    </div>
-    <!-- =========================================================
-       PART 3: 6 CLICKABLE MASTER CATEGORY CARDS & PORTALS
-       ========================================================= -->
-    <div id="admissionSection" class="card" style="background:#fff; border:2px solid var(--dark-blue);">
-      <h3 style="color:var(--dark-blue); text-align:center; margin-top:0; margin-bottom:16px;">🎓 Select Your Academic Category & Program</h3>
-      
-      <div class="grid-2" style="grid-template-columns: repeat(3, 1fr);">
-        <!-- 1. School -->
-        <div style="background:#fffbeb; border:2px solid var(--gold); border-radius:10px; padding:16px; text-align:center; cursor:pointer;" onclick="selectCategory('School KG-8')">
-          <div style="font-size:24px; margin-bottom:6px;">🎒</div>
-          <h4 style="margin:0 0 6px 0; color:var(--dark-blue);">School (Nursery to Class 8)</h4>
-          <p class="small" style="margin:0; font-size:12px; color:#475569;">UK Key Stages, Punjab & Federal Syllabi, Interactive Workbooks.</p>
-        </div>
-
-        <!-- 2. Matric / Inter -->
-        <div style="background:#fffbeb; border:2px solid var(--gold); border-radius:10px; padding:16px; text-align:center; cursor:pointer;" onclick="selectCategory('Matric Inter')">
-          <div style="font-size:24px; margin-bottom:6px;">📚</div>
-          <h4 style="margin:0 0 6px 0; color:var(--dark-blue);">Matric / Inter (Class 9th–12th)</h4>
-          <p class="small" style="margin:0; font-size:12px; color:#475569;">All Punjab Boards, FBISE, AJK, Sindh & KPK Science/Arts Groups.</p>
-        </div>
-
-        <!-- 3. O/A Levels -->
-        <div style="background:#fffbeb; border:2px solid var(--gold); border-radius:10px; padding:16px; text-align:center; cursor:pointer;" onclick="selectCategory('O A Level')">
-          <div style="font-size:24px; margin-bottom:6px;">🌍</div>
-          <h4 style="margin:0 0 6px 0; color:var(--dark-blue);">O Level / A Level</h4>
-          <p class="small" style="margin:0; font-size:12px; color:#475569;">Cambridge International Syllabi, Past Papers & Expert Lectures.</p>
-        </div>
-
-        <!-- 4. CSS / PMS -->
-        <div style="background:#fffbeb; border:2px solid var(--gold); border-radius:10px; padding:16px; text-align:center; cursor:pointer;" onclick="selectCategory('CSS PMS')">
-          <div style="font-size:24px; margin-bottom:6px;">⚖️</div>
-          <h4 style="margin:0 0 6px 0; color:var(--dark-blue);">CSS / PMS / PPSC</h4>
-          <p class="small" style="margin:0; font-size:12px; color:#475569;">Competitive Examination Training, Essay, Précis & Interview Prep.</p>
-        </div>
-
-        <!-- 5. MDCAT / ECAT -->
-        <div style="background:#fffbeb; border:2px solid var(--gold); border-radius:10px; padding:16px; text-align:center; cursor:pointer;" onclick="selectCategory('MDCAT ECAT')">
-          <div style="font-size:24px; margin-bottom:6px;">🔬</div>
-          <h4 style="margin:0 0 6px 0; color:var(--dark-blue);">MDCAT / ECAT Entry Tests</h4>
-          <p class="small" style="margin:0; font-size:12px; color:#475569;">High-Yield Physics, Chemistry, Biology & Maths MCQs & Mock Tests.</p>
-        </div>
-
-        <!-- 6. Languages & Quran -->
-        <div style="background:#fffbeb; border:2px solid var(--gold); border-radius:10px; padding:16px; text-align:center; cursor:pointer;" onclick="selectCategory('Languages Quran')">
-          <div style="font-size:24px; margin-bottom:6px;">📖</div>
-          <h4 style="margin:0 0 6px 0; color:var(--dark-blue);">Languages & Quran Academy</h4>
-          <p class="small" style="margin:0; font-size:12px; color:#475569;">IELTS, German, French, Spanish, Urdu & Quran Tajweed/Tafseer.</p>
-        </div>
-      </div>
-    </div>
-    <!-- =========================================================
-       PART 4: DUAL PORTALS (PAKISTANI PKR & INTERNATIONAL GBP £)
-       ========================================================= -->
-    <div class="card" style="background:#0a192f; color:#fff; border:3px solid var(--gold);">
-      <h3 style="color:var(--gold); text-align:center; margin-top:0;">🌐 Global & National Admission Portals</h3>
-      <div style="display:flex; justify-content:center; gap:12px; margin-bottom:20px;">
-        <button type="button" class="btn-green" onclick="switchPortal('Pakistan')">🇵🇰 Pakistani Student Portal (PKR)</button>
-        <button type="button" class="btn-gold" onclick="switchPortal('International')">🌍 International Student Portal (GBP £)</button>
-      </div>
-
-      <!-- Pakistani Admission Form View -->
-      <div id="pakPortalView" style="background:#fff; color:var(--black); padding:20px; border-radius:10px;">
-        <h4 style="color:var(--dark-blue); margin-top:0;">📝 Pakistani Student Admission Form (Fee in PKR)</h4>
-        <div class="grid-2">
-          <div>
-            <label style="font-size:12px; font-weight:600;">Full Student Name:</label>
-            <input type="text" id="pakStuName" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" placeholder="Enter Student Name">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">Father's Name:</label>
-            <input type="text" id="pakFatherName" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" placeholder="Enter Father's Name">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">B-Form / CNIC Number:</label>
-            <input type="text" id="pakBForm" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" placeholder="35202-XXXXXXX-X">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">Parent WhatsApp Phone:</label>
-            <input type="text" id="pakPhone" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" placeholder="+92 3XX XXXXXXX">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">City / Region (e.g. Dinga, Gujrat):</label>
-            <input type="text" id="pakCity" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" value="Dinga, District Gujrat">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">Select Board / Curriculum:</label>
-            <select id="pakBoardSelect" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;">
-              <option>Gujranwala Board / Punjab Boards</option>
-              <option>Federal Board FBISE Islamabad</option>
-              <option>AJK Board Mirpur</option>
-              <option>Peshawar Board / KPK Boards</option>
-              <option>Sindh Board</option>
-              <option>Cambridge O/A Levels</option>
-            </select>
-          </div>
-        </div>
-        <div style="margin-top:16px;">
-          <label style="font-size:12px; font-weight:600;">Select Course & Program Package:</label>
-          <select id="pakProgramSelect" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;">
-            <option value="School KG-8">School Nursery to Grade 8 (PKR 5,000/month)</option>
-            <option value="Matric Inter">Matric / Inter Science Group (PKR 7,500/month)</option>
-            <option value="MDCAT ECAT">MDCAT / ECAT Mastery Package (PKR 30,000 Full)</option>
-            <option value="CSS PMS">CSS / PMS Competitive Training (PKR 25,000 Full)</option>
-            <option value="Languages Quran">IELTS / Languages & Quran Academy (PKR 6,000/month)</option>
-          </select>
-        </div>
-        <div style="margin-top:16px; background:#fffbeb; padding:12px; border-radius:6px; border:1px solid var(--gold);">
-          <label style="font-size:13px; font-weight:600; color:var(--dark-blue);">Help & Concession Inquiry (Do you need any assistance?):</label>
-          <input type="text" id="pakHelpNote" style="width:100%; padding:8px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" placeholder="Optional: Mention if applying for Hafiz, Sibling, or Financial Aid">
-        </div>
-        <div style="text-align:center; margin-top:20px;">
-          <button type="button" class="btn-gold" onclick="submitAdmission('Pakistan')">✅ Submit Pakistani Admission Application</button>
-        </div>
-        <div id="pakAdmResult" style="margin-top:10px; text-align:center; font-weight:600; color:var(--green);"></div>
-      </div>
-
-      <!-- International Admission Form View (Hidden by Default) -->
-      <div id="intPortalView" style="background:#fff; color:var(--black); padding:20px; border-radius:10px; display:none;">
-        <h4 style="color:var(--dark-blue); margin-top:0;">🌍 International Student Admission Form (Fee in GBP £)</h4>
-        <div class="grid-2">
-          <div>
-            <label style="font-size:12px; font-weight:600;">Full Student Name:</label>
-            <input type="text" id="intStuName" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" placeholder="Enter Student Name">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">Parent WhatsApp / Email:</label>
-            <input type="text" id="intPhone" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" placeholder="+44 XXXXX XXXXX">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">Country / Location (UK, USA, Europe):</label>
-            <input type="text" id="intCountry" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" value="United Kingdom (UK)">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600;">Curriculum / Board:</label>
-            <select id="intBoardSelect" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;">
-              <option>UK National Curriculum (KG to Grade 8)</option>
-              <option>Cambridge International O/A Levels</option>
-              <option>Quran Tajweed & Tafseer (Global)</option>
-            </select>
-          </div>
-        </div>
-        <div style="margin-top:16px;">
-          <label style="font-size:12px; font-weight:600;">Select International Course Package:</label>
-          <select id="intProgramSelect" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ccc; border-radius:6px;" onchange="calcIntlFee()">
-            <option value="UK KG-8">UK Key Stage 1-3 / Math & Science (£50 / month)</option>
-            <option value="Cambridge O/A">Cambridge O/A Level Master Package (£80 / month)</option>
-            <option value="Quran Global">Quran Academy Global Tajweed (£40 / month)</option>
-            <option value="IELTS Global">IELTS Masterclass (£210 Full)</option>
-          </select>
-        </div>
-        <div style="margin-top:16px; background:#f8fafc; padding:12px; border-radius:6px; border:1px solid #cbd5e1;">
-          <div style="font-size:14px; font-weight:700; color:var(--dark-blue);">Calculated Tuition Fee: <span id="intFeeDisplay" style="color:var(--green);">£50 / month</span></div>
-          <p class="small" style="margin:4px 0 0 0; color:#64748b;">International Payments accepted via Wise, Payoneer, or Direct Bank Transfer in GBP £.</p>
-        </div>
-        <div style="text-align:center; margin-top:20px;">
-          <button type="button" class="btn-gold" onclick="submitAdmission('International')">✅ Submit International Admission Application</button>
-        </div>
-        <div id="intAdmResult" style="margin-top:10px; text-align:center; font-weight:600; color:var(--green);"></div>
-      </div>
-    </div>
-    <!-- =========================================================
-       PART 5: STUDENT LMS WORKSPACE & 24/7 AI TUTOR
-       ========================================================= -->
-    <div class="card" style="background:#fff; border:2px solid var(--dark-blue); margin-top:20px;">
-      <h3 style="color:var(--dark-blue); text-align:center; margin-top:0;">🎓 Student Portal & 24/7 AI Tutor Workspace</h3>
-      <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">
-        <input type="text" id="stuLoginId" placeholder="Enter Student ID (e.g., PAK-10001)" style="padding:8px; width:260px; border:1px solid #ccc; border-radius:6px;">
-        <button type="button" class="btn-green" onclick="loginStudentLMS()">🔐 Login Student Portal</button>
-      </div>
-
-      <!-- Student Workspace (Hidden until login) -->
-      <div id="studentLmsWorkspace" style="display:none; border-top:2px solid var(--gold); padding-top:16px; margin-top:16px;">
-        <div id="stuProfileBanner" style="background:#fffbeb; padding:12px; border-radius:8px; border:1px solid var(--gold); margin-bottom:16px; font-size:14px; color:var(--dark-blue);"></div>
-        
-        <div class="grid-2">
-          <!-- Timetable & Syllabus -->
-          <div style="background:#f8fafc; padding:14px; border-radius:8px; border:1px solid #e2e8f0;">
-            <h4 style="color:var(--dark-blue); margin-top:0;">📅 Class Timetable & Syllabus</h4>
-            <div id="stuTimetableList" class="small" style="margin-bottom:10px;">No timetable assigned yet.</div>
-            <div id="stuSyllabusList" class="small">Syllabus details loading...</div>
-          </div>
-
-          <!-- 24/7 AI Tutor -->
-          <div style="background:#f0fdf4; padding:14px; border-radius:8px; border:1px solid #bbf7d0;">
-            <h4 style="color:var(--green-dark); margin-top:0;">🤖 24/7 AI Tutor (Ask Questions)</h4>
-            <input type="text" id="aiQuestionInput" placeholder="Ask any question about Physics, Math, CSS..." style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; margin-bottom:8px;">
-            <button type="button" class="btn-green" style="width:100%; padding:8px;" onclick="askAITutor()">Ask AI Tutor</button>
-            <div id="aiTutorResponse" style="margin-top:10px; font-size:13px; color:#166534; background:#fff; padding:8px; border-radius:6px; border:1px solid #dcfce7; min-height:40px;">AI Tutor is ready to answer your academic queries.</div>
-          </div>
-        </div>
-
-        <!-- Student Library & Quizzes -->
-        <div style="margin-top:16px;">
-          <h4 style="color:var(--dark-blue);">📚 Board-Isolated Digital Library & Video Lectures</h4>
-          <div id="stuLibraryList" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:8px;"></div>
-        </div>
-      </div>
-    </div>
-    <!-- =========================================================
-       PART 6: TEACHER LMS PORTAL & 15% PUBLIC INCREMENT POLICY
-       ========================================================= -->
-    <div class="card" style="background:#fff; border:2px solid var(--dark-blue); margin-top:20px;">
-      <h3 style="color:var(--dark-blue); text-align:center; margin-top:0;">👨‍🏫 Teacher Portal & Administration LMS</h3>
-      <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">
-        <input type="text" id="tchLoginId" placeholder="Enter Teacher ID (e.g., HR-10001)" style="padding:8px; width:260px; border:1px solid #ccc; border-radius:6px;">
-        <input type="password" id="tchLoginPass" placeholder="Password" style="padding:8px; width:140px; border:1px solid #ccc; border-radius:6px;">
-        <button type="button" class="btn-gold" onclick="loginTeacherLMS()">🔐 Login Teacher Portal</button>
-      </div>
-
-      <!-- Teacher Workspace (Hidden until login) -->
-      <div id="teacherLmsWorkspace" style="display:none; border-top:2px solid var(--gold); padding-top:16px; margin-top:16px;">
-        <div id="tchProfileBanner" style="background:#fffbeb; padding:12px; border-radius:8px; border:1px solid var(--gold); margin-bottom:16px; font-size:14px; color:var(--dark-blue);"></div>
-        
-        <!-- Public Increment Policy Display for Teachers -->
-        <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px; border-radius:8px; margin-bottom:16px;">
-          <h4 style="margin:0 0 4px 0; color:var(--green-dark);">📈 Public Pay & 15% Increment Policy</h4>
-          <p class="small" style="margin:0; color:#166534;">If you teach well and your results are good, your normal pay will continue, plus you will get a 15% increment with every pay, as long as you remain attached with our system. This policy is active for all global faculty members.</p>
-        </div>
-
-        <div class="grid-2">
-          <!-- Upload Notes / Lectures -->
-          <div style="background:#f8fafc; padding:14px; border-radius:8px; border:1px solid #e2e8f0;">
-            <h4 style="color:var(--dark-blue); margin-top:0;">📤 Upload Lecture & Board Notes</h4>
-            <input type="text" id="tchLibBoard" placeholder="Board / Category (e.g. Gujranwala / Cambridge)" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px;">
-            <input type="text" id="tchLibClassSub" placeholder="Class & Subject (e.g. Grade 10 Physics)" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px;">
-            <textarea id="tchLibDetails" placeholder="Paste Lecture Summary, Video Link & Notes Details here..." style="width:100%; height:70px; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px;"></textarea>
-            <button type="button" class="btn-green" style="width:100%;" onclick="teacherUploadLibrary()">Upload to Board-Isolated Library</button>
-          </div>
-
-          <!-- Faculty Application Form -->
-          <div style="background:#fffbeb; padding:14px; border-radius:8px; border:1px solid var(--gold);">
-            <h4 style="color:var(--dark-blue); margin-top:0;">📝 New Faculty Registration Form</h4>
-            <input type="text" id="hrAppName" placeholder="Full Name" style="width:100%; padding:6px; margin-bottom:6px; border:1px solid #ccc; border-radius:4px;">
-            <input type="text" id="hrAppCnic" placeholder="CNIC Number" style="width:100%; padding:6px; margin-bottom:6px; border:1px solid #ccc; border-radius:4px;">
-            <input type="text" id="hrAppPhone" placeholder="WhatsApp Phone" style="width:100%; padding:6px; margin-bottom:6px; border:1px solid #ccc; border-radius:4px;">
-            <input type="text" id="hrAppQual" placeholder="Qualification (M.Sc / PhD / IELTS)" style="width:100%; padding:6px; margin-bottom:6px; border:1px solid #ccc; border-radius:4px;">
-            <button type="button" class="btn-gold" style="width:100%; padding:8px;" onclick="submitFacultyApp()">Submit Job Application</button>
-            <div id="hrAppMsg" style="margin-top:6px; font-size:12px; font-weight:600; color:var(--green);"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- =========================================================
-       PART 7: DIRECTOR ADMIN DASHBOARD & FEE BEHAVIOUR SYSTEM
-       ========================================================= -->
-    <div class="card" style="background:#0a192f; color:#fff; border:3px solid var(--gold); margin-top:20px;">
-      <h3 style="color:var(--gold); text-align:center; margin-top:0;">👑 Director Executive Control Panel & Fee Behaviour</h3>
-      <div style="display:flex; justify-content:center; gap:10px; margin-bottom:16px;">
-        <input type="password" id="directorPassInput" placeholder="Enter Director Secret Code" style="padding:8px; width:240px; border-radius:6px; border:1px solid var(--gold);">
-        <button type="button" class="btn-gold" onclick="loginDirectorAdmin()">🔓 Unlock Director Dashboard</button>
-      </div>
-
-      <!-- Director Dashboard Workspace (Hidden until unlocked) -->
-      <div id="directorWorkspace" style="display:none; background:#fff; color:var(--black); padding:20px; border-radius:10px; margin-top:16px;">
-        
-        <!-- 1. Private Fee Behaviour Controls (Concession, Scholarship, Season Offers) -->
-        <h4 style="color:var(--dark-blue); border-bottom:2px solid var(--gold); padding-bottom:6px; margin-top:0;">💰 Fee Behaviour & Scholarship Governance (Confidential)</h4>
-        <div class="grid-2" style="grid-template-columns: repeat(3, 1fr); margin-bottom:20px;">
-          <!-- Concession Button -->
-          <div style="background:#fffbeb; border:1px solid var(--gold); padding:12px; border-radius:8px;">
-            <h5 style="margin:0 0 6px 0; color:var(--dark-blue);">🤝 Fee Concession Policy</h5>
-            <p class="small" style="font-size:11px; margin:0 0 8px 0;">Orphan: 100% Free | Very Poor: 75% Off | Poor: 50% Off | Hafiz-e-Quran: 25% Off | 2nd Sibling: 50% Off.</p>
-            <button type="button" class="btn-green" style="width:100%; padding:8px; font-size:12px;" onclick="openFeeModal('Concession')">Apply Concession</button>
-          </div>
-
-          <!-- Scholarship Button -->
-          <div style="background:#fffbeb; border:1px solid var(--gold); padding:12px; border-radius:8px;">
-            <h5 style="margin:0 0 6px 0; color:var(--dark-blue);">🏆 Merit & Topper Scholarship</h5>
-            <p class="small" style="font-size:11px; margin:0 0 8px 0;">Board 1st: 100% Free + Books | Board 2nd/3rd: 75% | Academy Topper: 50% | 90%+ Marks: 50% Off.</p>
-            <button type="button" class="btn-gold" style="width:100%; padding:8px; font-size:12px;" onclick="openFeeModal('Scholarship')">Grant Scholarship</button>
-          </div>
-
-          <!-- Season & Religious Incentives -->
-          <div style="background:#fffbeb; border:1px solid var(--gold); padding:12px; border-radius:8px;">
-            <h5 style="margin:0 0 6px 0; color:var(--dark-blue);">🌙 Global Incentives (World-Wide)</h5>
-            <p class="small" style="font-size:11px; margin:0 0 8px 0;">Muharram (1st 10 Days): 30% Off | Ramadan: 30% Off | Eid & Hajj: 25% Off | Early Bird: 20% Off.</p>
-            <button type="button" class="btn-green" style="width:100%; padding:8px; font-size:12px;" onclick="activateGlobalIncentive()">Activate World Incentive</button>
-          </div>
-        </div>
-
-        <!-- 2. Top Teacher Pay Policy & Payroll Calculator -->
-        <h4 style="color:var(--dark-blue); border-bottom:2px solid var(--gold); padding-bottom:6px;">💳 Top Teacher Pay Policy & Automated 60/40 Accounts</h4>
-        <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:16px;">
-          <p class="small" style="margin:0; font-size:12px; color:#334155;">
-            <strong>Pay Structure:</strong> Normal Teacher: 60% | Good Teacher (20+ Students): 65% + Bonus | Top Teacher (50+ Students / Toppers): 70% + Award | Star Teacher: 70% + Yearly Umrah/Tour Bonus. <br>
-            <strong>Disbursement Channels:</strong> Meezan Bank Transfer, EasyPaisa/JazzCash (Pakistan), Wise/Payoneer/Bank Transfer in GBP £ (International).
-          </p>
-        </div>
-
-        <div id="adminSummaryStats" class="grid-2" style="margin-bottom:16px;"></div>
-
-        <!-- 3. Student & Faculty Approval Tables -->
-        <div id="adminAdmissionsList" style="margin-top:14px;"></div>
-      </div>
-    </div>
-    <!-- =========================================================
-       PART 8: MASTER DATABASES, STORAGE & CORE INITIALIZATION
-       ========================================================= -->
-  <script>
-    // Safe LocalStorage Database Wrapper
-    const DB = {
-      get: function(key, defaultVal) {
-        try {
-          var item = localStorage.getItem('hashmi_' + key);
-          return item ? JSON.parse(item) : defaultVal;
-        } catch(e) {
-          return defaultVal;
-        }
-      },
-      set: function(key, val) {
-        try {
-          localStorage.setItem('hashmi_' + key, JSON.stringify(val));
-        } catch(e) {}
-      }
-    };
-
-    // Initialize Default Databases
-    var teachersDB = DB.get('teachers', [
-      { id: 'HR-10001', name: 'Sir Haroon Javaid Hashmi', cnic: '35202-0000000-1', phone: '+923341140082', qual: 'Director & Master Educator', cls: 'All Portals', joinCode: '2026', share: 70, earnedPkr: 0, earnedGbp: 0 }
-    ]);
-    DB.set('teachers', teachersDB);
-
-    var studentsDB = DB.get('students', [
-      { id: 'PAK-10001', portal: 'Pakistan', currency: 'PKR', name: 'Demo Student', father: 'Javaid Hashmi', parentCnic: '35202-1111111-1', board: 'Gujranwala Board', cls: 'Matric / Inter', joinDate: new Date().toISOString(), baseFee: 7500, netFee: 7500, status: 'Approved' }
-    ]);
-    DB.set('students', studentsDB);
-
-    // Complete Board-Isolated Digital Library Database
-    var libraryDB = DB.get('library', [
-      { id: 'L-101', board: 'Gujranwala Board', clsSub: 'Grade 10 Physics', details: 'Complete Chapter 10 Simple Harmonic Motion - Notes & Video Lecture Link by Sir Haroon.' },
-      { id: 'L-102', board: 'Cambridge O/A Levels', clsSub: 'O Level Mathematics', details: 'Trigonometry & Advanced Algebra Formulae Sheet with Past Paper Solutions.' },
-      { id: 'L-103', board: 'MDCAT / ECAT', clsSub: 'MDCAT Biology', details: 'High-Yield Nervous Coordination MCQs & Conceptual Quick Review.' }
-    ]);
-    DB.set('library', libraryDB);
-
-    var accountsDB = DB.get('accounts', []);
-    var quizzesDB = DB.get('quizzes', []);
-    var timetableDB = DB.get('timetable', []);
-    var syllabusDB = DB.get('syllabus', []);
-
-    var activeStudent = null;
-    var activeTeacher = null;
-
-    // Live Clock Functionality
-    function updateClocks() {
-      var now = new Date();
-      var timeString = now.toLocaleTimeString();
-      var clockEl = document.getElementById('liveClockDisplay');
-      if (clockEl) clockEl.textContent = timeString;
-    }
-    setInterval(updateClocks, 1000);
-    updateClocks();
-
-    function el(id) {
-      return document.getElementById(id);
-    }
-  </script>
-  <!-- =========================================================
-       PART 9: PORTAL SWITCHING & CURRENCY CONVERSION LOGIC
-       ========================================================= -->
-  <script>
-    // Switch between Pakistani PKR Portal and International GBP Portal
-    function switchPortal(portalType) {
-      var pakView = el('pakPortalView');
-      var intView = el('intPortalView');
-      if (!pakView || !intView) return;
-
-      if (portalType === 'Pakistan') {
-        pakView.style.display = 'block';
-        intView.style.display = 'none';
-      } else {
-        pakView.style.display = 'none';
-        intView.style.display = 'block';
-      }
-    }
-
-    // Calculate International Tuition Fee in GBP £
-    function calcIntlFee() {
-      var select = el('intProgramSelect');
-      var display = el('intFeeDisplay');
-      if (!select || !display) return;
-
-      var val = select.value;
-      var fee = 50;
-      if (val === 'Cambridge O/A') fee = 80;
-      else if (val === 'Quran Global') fee = 40;
-      else if (val === 'IELTS Global') fee = 210;
-
-      display.textContent = '£' + fee + (fee > 100 ? ' Full Course' : ' / month');
-    }
-
-    // Smooth scroll to sections
-    function scrollToSection(sectionId) {
-      var sec = el(sectionId);
-      if (sec) sec.scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
-  <!-- =========================================================
-       PART 10: ADMISSION SUBMISSION & AUTOMATED ACCOUNTS
-       ========================================================= -->
-  <script>
-    // Submit Student Admission Application (Pakistan or International)
-    function submitAdmission(portalType) {
-      var isPak = portalType === 'Pakistan';
-      var name = el(isPak ? 'pakStuName' : 'intStuName').value.trim();
-      var parent = isPak ? el('pakFatherName').value.trim() : 'International Parent';
-      var docNum = isPak ? el('pakBForm').value.trim() : 'INT-PASSPORT';
-      var phone = el(isPak ? 'pakPhone' : 'intPhone').value.trim();
-      var board = el(isPak ? 'pakBoardSelect' : 'intBoardSelect').value;
-      var progSelect = el(isPak ? 'pakProgramSelect' : 'intProgramSelect').value;
-
-      if (!name || !phone) {
-        alert('❌ Please fill in all required student admission fields.');
-        return;
-      }
-
-      var newId = (isPak ? 'PAK-' : 'INT-') + Math.floor(10000 + Math.random() * 90000);
-      var feeAmount = isPak ? 7500 : 50;
-      if (progSelect.includes('MDCAT') || progSelect.includes('CSS') || progSelect.includes('IELTS')) feeAmount = isPak ? 30000 : 210;
-
-      var stuObj = {
-        id: newId,
-        portal: isPak ? 'Pakistan' : 'International',
-        currency: isPak ? 'PKR' : 'GBP',
-        name: name,
-        father: parent,
-        parentCnic: docNum,
-        board: board,
-        cls: progSelect,
-        joinDate: new Date().toISOString(),
-        baseFee: feeAmount,
-        netFee: feeAmount,
-        status: 'Pending Approval'
-      };
-
-      studentsDB.unshift(stuObj);
-      DB.set('students', studentsDB);
-
-      // Auto-Link Fee Entry to Accounts
-      var t60 = Math.round(feeAmount * 0.60);
-      var a40 = feeAmount - t60;
-      accountsDB.unshift({
-        date: stuObj.joinDate,
-        type: isPak ? 'Fee Received (PKR)' : 'Fee Received (GBP £)',
-        gross: feeAmount,
-        teacher60: t60,
-        admin40: a40,
-        note: newId + ' (' + name + ') - Admission Fee'
-      });
-      DB.set('accounts', accountsDB);
-
-      var msg = '✅ Admission Submitted Successfully! Your ID is ' + newId + '. Pending Admin Approval.';
-      if (isPak) el('pakAdmResult').textContent = msg;
-      else el('intAdmResult').textContent = msg;
-      alert(msg);
-    }
-  </script>
-  <!-- =========================================================
-       PART 11: STUDENT LMS LOGIN & 24/7 AI TUTOR LOGIC
-       ========================================================= -->
-  <script>
-    // Login Student LMS Portal
-    function loginStudentLMS() {
-      var key = el('stuLoginId').value.trim().toLowerCase();
-      if (!key) {
-        alert('❌ Please enter your Student ID (e.g. PAK-10001).');
-        return;
-      }
-      var found = studentsDB.find(function(s) {
-        return s.id.toLowerCase() === key;
-      });
-      if (!found) {
-        alert('❌ Student ID not found in database.');
-        return;
-      }
-      activeStudent = found;
-      renderStudentLMS();
-    }
-
-    // Render Student Workspace Dashboard
-    function renderStudentLMS() {
-      if (!activeStudent) return;
-      el('studentLmsWorkspace').style.display = 'block';
-      var s = activeStudent;
-      var curr = s.currency === 'GBP' ? '£' : 'PKR ';
-
-      el('stuProfileBanner').innerHTML = '<strong>🎓 Student:</strong> ' + s.name + ' (' + s.id + ') | <strong>Board:</strong> ' + s.board + ' | <strong>Program:</strong> ' + s.cls + ' | <strong>Fee:</strong> ' + curr + s.netFee + ' | <strong>Status:</strong> ' + s.status;
-
-      // Filter Board-Isolated Library for Student
-      var myLib = libraryDB.filter(function(l) {
-        return l.board === s.board || l.board === 'All';
-      });
-
-      el('stuLibraryList').innerHTML = myLib.length ? myLib.map(function(l) {
-        return '<div style="background:#fffbeb; border:1px solid var(--gold); padding:10px; border-radius:6px;">' +
-               '<div style="font-weight:700; color:var(--dark-blue); font-size:13px;">' + l.clsSub + '</div>' +
-               '<div style="font-size:12px; color:#475569; margin-top:4px;">' + l.details + '</div>' +
-               '<button type="button" class="btn-green" style="margin-top:6px; padding:4px 10px; font-size:11px;" onclick="alert(\'Opening Lecture Materials...\')">📥 Download Notes</button>' +
-               '</div>';
-      }).join('') : '<div style="font-size:12px; color:#64748b;">No library notes uploaded for this board yet.</div>';
-    }
-
-    // 24/7 AI Tutor Functionality
-    function askAITutor() {
-      var q = el('aiQuestionInput').value.trim();
-      var resp = el('aiTutorResponse');
-      if (!q) {
-        alert('Please enter your question for the AI Tutor.');
-        return;
-      }
-      resp.textContent = '🤖 AI Tutor is analyzing your query ("' + q + '")...';
-      setTimeout(function() {
-        resp.innerHTML = '<strong>AI Tutor Answer:</strong> Excellent question! For ' + (activeStudent ? activeStudent.board : 'General Studies') + ', remember the core principles and concepts. Sir Haroon Javaid Hashmi Academy’s 24/7 AI tutor recommends reviewing relevant chapter summaries and practicing past paper MCQs.';
-      }, 800);
-    }
-  </script>
-  <!-- =========================================================
-       PART 12: TEACHER LMS LOGIN, LIBRARY UPLOAD & HR FORM
-       ========================================================= -->
-  <script>
-    // Login Teacher LMS Portal
-    function loginTeacherLMS() {
-      var key = el('tchLoginId').value.trim().toLowerCase();
-      var pass = el('tchLoginPass').value.trim();
-      if (!key) {
-        alert('❌ Please enter your Teacher ID (e.g. HR-10001).');
-        return;
-      }
-      var found = teachersDB.find(function(t) {
-        return t.id.toLowerCase() === key && (t.joinCode === pass || pass === '2026');
-      });
-      if (!found) {
-        alert('❌ Teacher ID or Password incorrect.');
-        return;
-      }
-      activeTeacher = found;
-      renderTeacherLMS();
-    }
-
-    // Render Teacher Workspace
-    function renderTeacherLMS() {
-      if (!activeTeacher) return;
-      el('teacherLmsWorkspace').style.display = 'block';
-      var t = activeTeacher;
-
-      el('tchProfileBanner').innerHTML = '<strong>👨‍🏫 Faculty Member:</strong> ' + t.name + ' (' + t.id + ') | <strong>Qualification:</strong> ' + t.qual + ' | <strong>Current Pay Share:</strong> ' + t.share + '% + 15% Performance Increment Eligible';
-    }
-
-    // Teacher Upload Board-Isolated Library Note
-    function teacherUploadLibrary() {
-      var board = el('tchLibBoard').value.trim();
-      var clsSub = el('tchLibClassSub').value.trim();
-      var details = el('tchLibDetails').value.trim();
-
-      if (!board || !clsSub || !details) {
-        alert('❌ Please fill in Board, Subject, and Lecture details.');
-        return;
-      }
-
-      libraryDB.unshift({
-        id: 'L-' + Math.floor(100 + Math.random() * 900),
-        board: board,
-        clsSub: clsSub,
-        details: details
-      });
-      DB.set('library', libraryDB);
-
-      el('tchLibBoard').value = '';
-      el('tchLibClassSub').value = '';
-      el('tchLibDetails').value = '';
-      alert('✅ Lecture & Notes uploaded successfully to Board-Isolated Digital Library!');
-    }
-
-    // Submit New Faculty Application
-    function submitFacultyApp() {
-      var name = el('hrAppName').value.trim();
-      var cnic = el('hrAppCnic').value.trim();
-      var phone = el('hrAppPhone').value.trim();
-      var qual = el('hrAppQual').value.trim();
-
-      if (!name || !cnic || !phone || !qual) {
-        alert('❌ Please fill in all required faculty registration fields.');
-        return;
-      }
-
-      var newTchId = 'HR-' + Math.floor(10000 + Math.random() * 90000);
-      teachersDB.unshift({
-        id: newTchId,
-        name: name,
-        cnic: cnic,
-        phone: phone,
-        qual: qual,
-        cls: 'Assigned Upon Approval',
-        joinCode: '2026',
-        share: 60,
-        earnedPkr: 0,
-        earnedGbp: 0
-      });
-      DB.set('teachers', teachersDB);
-
-      el('hrAppMsg').textContent = '✅ Application Submitted! Your Temporary Teacher ID is ' + newTchId + ' (Default Code: 2026).';
-      alert('✅ Faculty Application Submitted! ID: ' + newTchId);
-    }
-  </script>
-  <!-- =========================================================
-       PART 13: DIRECTOR ADMIN DASHBOARD & GOVERNANCE LOGIC
-       ========================================================= -->
-  <script>
-    // Unlock Director Executive Dashboard
-    function loginDirectorAdmin() {
-      var pass = el('directorPassInput').value.trim();
-      if (pass !== '2026' && pass !== 'haroon') {
-        alert('❌ Incorrect Director Executive Password.');
-        return;
-      }
-      el('directorWorkspace').style.display = 'block';
-      renderDirectorDashboard();
-      alert('🔓 Director Dashboard Unlocked Successfully!');
-    }
-
-    // Render Director Executive Statistics & Admissions
-    function renderDirectorDashboard() {
-      var totalStudents = studentsDB.length;
-      var totalTeachers = teachersDB.length;
-      var totalAccounts = accountsDB.reduce(function(sum, a) { return sum + a.gross; }, 0);
-
-      el('adminSummaryStats').innerHTML = 
-        '<div style="background:#fffbeb; padding:12px; border-radius:6px; border:1px solid var(--gold); text-align:center;">' +
-        '<div style="font-size:12px; color:#64748b;">Total Enrolled Students</div>' +
-        '<div style="font-size:20px; font-weight:700; color:var(--dark-blue);">' + totalStudents + '</div>' +
-        '</div>' +
-        '<div style="background:#fffbeb; padding:12px; border-radius:6px; border:1px solid var(--gold); text-align:center;">' +
-        '<div style="font-size:12px; color:#64748b;">Total Faculty Members</div>' +
-        '<div style="font-size:20px; font-weight:700; color:var(--dark-blue);">' + totalTeachers + '</div>' +
-        '</div>';
-
-      el('adminAdmissionsList').innerHTML = '<h4 style="color:var(--dark-blue);">📋 Recent Student Admissions & Status</h4>' +
-        studentsDB.map(function(s) {
-          return '<div style="background:#f8fafc; border:1px solid #cbd5e1; padding:10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">' +
-                 '<div><strong>' + s.name + '</strong> (' + s.id + ') | ' + s.portal + ' | ' + s.cls + ' | Fee: ' + s.netFee + '</div>' +
-                 '<div style="font-size:12px; color:var(--green); font-weight:600;">' + s.status + '</div>' +
-                 '</div>';
-        }).join('');
-    }
-
-    // Open Fee Concession or Scholarship Governance Modal
-    function openFeeModal(type) {
-      var promptMsg = type === 'Concession' ? 
-        'Enter Concession Type & Student ID (Orphan 100%, Poor 50%, Hafiz 25%, 2nd Sibling 50%):' :
-        'Enter Scholarship Details & Student ID (Board 1st 100%, 90%+ Marks 50%):';
-      var details = prompt(promptMsg);
-      if (details) {
-        alert('✅ ' + type + ' Policy successfully applied and saved in confidential admin records. Student dignity protected.');
-      }
-    }
-
-    // Activate Global World-Wide Incentives (Muharram 30% Off, Ramadan 30% Off, Eid 25% Off)
-    function activateGlobalIncentive() {
-      var choice = prompt('Select Global Incentive to Broadcast on Notice Board:\n1. Muharram-ul-Haram Incentive (30% Off)\n2. Ramadan Mubarak Incentive (30% Off)\n3. Eid / Hajj Incentive (25% Off)\n4. Early Bird Special (20% Off)');
-      if (choice) {
-        alert('✅ Global Incentive successfully activated! Automatically broadcasted on Notice Board, Student Portals, and WhatsApp groups across Pakistan, UK, USA, and Europe.');
-      }
-    }
-  </script>
-  <!-- =========================================================
-       PART 14: TIMETABLE, SYLLABUS & AUTOMATED QUIZ SYSTEM
-       ========================================================= -->
-  <script>
-    // Automated Timetable and Syllabus Initializer
-    var defaultTimetables = [
-      { board: 'Gujranwala Board', day: 'Monday', time: '04:00 PM - 05:30 PM', sub: 'Grade 10 Physics - Simple Harmonic Motion' },
-      { board: 'Cambridge O/A Levels', day: 'Tuesday', time: '05:30 PM - 07:00 PM', sub: 'O Level Mathematics - Trigonometry & Vectors' },
-      { board: 'MDCAT / ECAT', day: 'Wednesday', time: '06:00 PM - 08:00 PM', sub: 'MDCAT Biology - Nervous & Chemical Coordination' }
-    ];
-    timetableDB = DB.get('timetable', defaultTimetables);
-    DB.set('timetable', timetableDB);
-
-    var defaultSyllabi = [
-      { board: 'Gujranwala Board', desc: 'Matric Science Group Complete 4-Month Course Coverage & Weekly Mock Tests.' },
-      { board: 'Cambridge O/A Levels', desc: 'Cambridge International Syllabus Rigorous Past Paper Practice & Examiner Report Review.' }
-    ];
-    syllabusDB = DB.get('syllabus', defaultSyllabi);
-    DB.set('syllabus', syllabusDB);
-
-    // Render Timetable on Student LMS
-    function loadStudentTimetableAndSyllabus() {
-      if (!activeStudent) return;
-      var tList = timetableDB.filter(function(t) { return t.board === activeStudent.board || t.board === 'All'; });
-      var sList = syllabusDB.filter(function(s) { return s.board === activeStudent.board || s.board === 'All'; });
-
-      el('stuTimetableList').innerHTML = tList.length ? tList.map(function(t) {
-        return '<div>• ' + t.day + ' (' + t.time + '): <strong>' + t.sub + '</strong></div>';
-      }).join('') : '<div>No live timetable scheduled for today.</div>';
-
-      el('stuSyllabusList').innerHTML = sList.length ? sList.map(function(s) {
-        return '<div>📖 ' + s.desc + '</div>';
-      }).join('') : '<div>Syllabus outline in progress.</div>';
-    }
-  </script>
-  <!-- =========================================================
-       PART 15: CONTACT SECTION, FOOTER & FINAL CLOSURE
-       ========================================================= -->
-    <div class="card" style="background:#0a192f; color:#fff; border:3px solid var(--gold); text-align:center; margin-top:20px;">
-      <h3 style="color:var(--gold); margin-top:0;">📞 Direct Admission Desk & Global Campus Contact</h3>
-      <p style="font-size:14px; color:#e2e8f0; margin-bottom:16px;">
-        <strong>Headquarters:</strong> Dinga, District Gujrat, Punjab, Pakistan | <strong>Global Campuses:</strong> Pakistan • UK • USA • Europe
-      </p>
-      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
-        <a href="https://wa.me/923341140082?text=Assalam-o-Alaikum%20Sir%20Haroon!%20I%20want%20to%20apply%20for%20admission." target="_blank" style="text-decoration:none;">
-          <button type="button" class="btn-green" style="font-size:15px;">💬 WhatsApp Direct: +92 334 1140082</button>
-        </a>
-        <button type="button" class="btn-gold" style="font-size:15px;" onclick="scrollToSection('admissionSection')">📝 Open Admission Form</button>
-      </div>
-    </div>
-
-  </main>
-
-  <footer style="background:#060f1d; color:#94a3b8; text-align:center; padding:18px; border-top:2px solid var(--gold); font-size:13px;">
-    <div style="color:var(--gold); font-weight:700; margin-bottom:4px;">SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE</div>
-    <div>© 2026 All Rights Reserved | Unified Global Educational System — Pakistan, UK, USA & Europe</div>
-  </footer>
-
-  <script>
-    // Category Card Click Handler (Auto-Scrolls & Pre-Selects Program)
-    function selectCategory(catName) {
-      switchPortal('Pakistan');
-      var pakSel = el('pakProgramSelect');
-      if (pakSel) {
-        for (var i = 0; i < pakSel.options.length; i++) {
-          if (pakSel.options[i].value === catName) {
-            pakSel.selectedIndex = i;
-            break;
-          }
-        }
-      }
-      scrollToSection('pakPortalView');
-    }
-
-    // Hook Timetable & Syllabus Loader into Student Render
-    var originalRenderStudentLMS = renderStudentLMS;
-    renderStudentLMS = function() {
-      originalRenderStudentLMS();
-      if (typeof loadStudentTimetableAndSyllabus === 'function') {
-        loadStudentTimetableAndSyllabus();
-      }
-    };
-  </script>
-
-</body>
-</html>
+  <!-- 5-Portal & Public Navigation Bar (Point 19) -->
+  <nav class="nav-bar">
+    <button type="button" class="nav-btn active" onclick="switchTab('publicHome', this)" data-i18n="nav_home">🏠 Public Home & Offers</button>
+    <button type="button" class="nav-btn" onclick="switchTab('admissionReg', this)" data-i18n="nav_admission">📝 Student/Teacher Registration (Consent + OTP)</button>
+    <button type="button" class="nav-btn" onclick="switchTab('loginGateway', this)" data-i18n="nav_login">🔐 5-Role Login (3-Locks Security)</button>
+    <button type="button" class="nav-btn" onclick="switchTab('liveClassroom', this)" data-i18n="nav_classroom">🎥 Live Classroom (Mic/Hand-Raise)</button>
+    <button type="button" class="nav-btn" onclick="switchTab('complaintPortal', this)" data-i18n="nav_complaint">📩 Confidential Complaint Box</button>
+  </nav>
+
+  <!-- Toast Auto-Thank You Alert (Point 24) -->
+  <div id="autoThankYouToast" class="toast-bar"></div>
+  
