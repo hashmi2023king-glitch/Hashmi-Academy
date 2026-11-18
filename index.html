@@ -90,3 +90,248 @@
   <a href="javascript:void(0)" onclick="switchPortal('parentApp')" id="navParentApp">👨‍👩‍👧 Parent App</a>
   <a href="javascript:void(0)" onclick="switchPortal('admin')" id="navAdmin">🛡️ Super Admin Control Room</a>
   </nav>
+<div class="wrap">
+  <!-- 1. GATEWAY PORTAL -->
+  <div id="portalGateway" class="portal-section active-portal">
+    <div class="card" style="text-align:center; border: 3px solid #d4af37; border-top: 8px solid #0a192f; background: #ffffff;">
+      <img src="sir-haroon.jpg" alt="Director Portrait" class="director-photo" style="width: 165px; height: 165px;" onerror="this.onerror=null; this.style.display='none';">
+      <h2 style="border:none; margin: 10px 0 4px 0; font-size: 26px; color:#0a192f;">Sir Haroon Javaid Hashmi — Founder & Director</h2>
+      <p style="font-weight:700; color:#059669; font-size:15px; margin-bottom:4px;">26+ Years Education & Leadership Legacy | Global Alison Rank #1 Leader (66,560 XP, 38 Certifications)</p>
+      <p class="small">Phase 1 Launch Region: District Gujrat (Dinga City, Gujrat City, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar)</p>
+    </div>
+
+    <!-- Section 24 & 25A: TV Breaking News & Hiring Notice Board -->
+    <div style="background:#b8860b; color:#050505; font-weight:bold; padding:12px 16px; overflow:hidden; white-space:nowrap; border: 2.5px solid #050505; border-radius: 10px; margin: 18px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <marquee scrollamount="5" id="breakingNewsMarquee" style="font-family:'Segoe UI', Arial, sans-serif; font-weight:bold; font-size:15px; color:#050505;">
+        🚨 2027 BOARD EXAMS SCHEDULE ACTIVE! Punjab, Federal, KPK, Sindh & AJK Boards | 🏆 Top Board Rankers: Mah Noor Irfan (981 Marks) | Aisha Siddiqa (958 Marks) | 💼 We Are Hiring: Teachers for KG-12, O/A Levels, IELTS, CSS, PMS & Quran!
+      </marquee>
+    </div>
+
+    <div style="background:#0a192f; color:#ffd700; font-weight:bold; padding:12px 16px; overflow:hidden; white-space:nowrap; border: 2.5px solid #d4af37; border-radius: 10px; margin: 18px 0;">
+      <marquee scrollamount="4" id="marketingHiringMarquee" style="font-family:'Segoe UI', Arial, sans-serif; font-weight:bold; font-size:14px; color:#ffd700;">
+        📢 MARKETING & HIRING BOARD: 60/40 Revenue Share Model Active | Global Alison #1 Ranker Leadership | Multi-Board Isolated Portals | 24/7 AI Tutor & Parent App Live!
+      </marquee>
+    </div>
+
+    <!-- Audio Center -->
+    <div class="grid-2" style="margin:20px 0;">
+      <div class="gold" style="text-align:center;">
+        <h3>🎙️ Director's Official Audio Introduction</h3>
+        <button type="button" class="btn-dark" onclick="playSpeech('Welcome to Sir Haroon Javaid Hashmi Academy and College. 26 years of educational excellence.')">▶ Play Director Audio Intro</button>
+      </div>
+      <div class="green-box" style="text-align:center;">
+        <h3>🎧 App Marketing & Features Audio Ad</h3>
+        <button type="button" class="btn-green" onclick="playSpeech('Explore our Pakistani portal in PKR, International portal in GBP, 60/40 teacher revenue share, and Super Admin Control Room.')">▶ Play Marketing Audio Ad</button>
+      </div>
+    </div>
+    <div style="text-align:center; margin-bottom:18px;">
+      <button type="button" class="btn-red" style="width:auto; padding:8px 20px;" onclick="stopSpeech()">⏹ Stop Audio</button>
+    </div>
+
+    <!-- Portal Gateway Cards Grid -->
+    <div class="grid-2">
+      <div class="gold" style="text-align:center; cursor:pointer;" onclick="switchPortal('pakistan')">
+        <h3 style="color:#0a192f;">🇵🇰 Pakistani Student Portal (PKR)</h3>
+        <p class="small">School, Matric, Inter, O/A-Levels, CSS/PMS, MDCAT/ECAT, Languages & Quran Academy.</p>
+        <button type="button" class="btn-dark">Open Pakistani Portal</button>
+      </div>
+      <div class="green-box" style="text-align:center; cursor:pointer;" onclick="switchPortal('international')">
+        <h3 style="color:#0a192f;">🌍 International Diaspora Portal (GBP £)</h3>
+        <p class="small">UK/USA/EU KG-8, Cambridge O/A-Levels, Quran & Fee Calculator (£25–£35/hr).</p>
+        <button type="button" class="btn-dark">Open International Portal</button>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:16px;">
+      <div class="green-box" style="text-align:center; cursor:pointer;" onclick="switchPortal('studentLms')">
+        <h3 style="color:#0a192f;">🎓 Student LMS & 24/7 AI Tutor</h3>
+        <p class="small">Board-Isolated Library, Video Lectures, Quizzes, Attendance, Result Card PDF & Parent View.</p>
+        <button type="button" class="btn-dark">Open Student LMS</button>
+      </div>
+      <div class="gold" style="text-align:center; cursor:pointer;" onclick="switchPortal('teacherLms')">
+        <h3 style="color:#0a192f;">💼 Teacher LMS & Auto-Lesson Planner</h3>
+        <p class="small">60% Revenue Share, Auto-Quiz Generator, End-Class Library Saving & Student Attendance.</p>
+        <button type="button" class="btn-dark">Open Teacher LMS</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       2. PAKISTANI STUDENT PORTAL (Sections 2, 4, 15, 27)
+       ========================================================= -->
+  <div id="portalPakistan" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark btn-sm" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+        <span class="badge">CURRENCY: PAKISTANI RUPEES (PKR)</span>
+      </div>
+      <h2>🇵🇰 Pakistani Student Portal — Admissions, Board-Isolated Library & Courses</h2>
+      <p class="small">Select your examination board and program to access dedicated LMS and digital libraries.</p>
+
+      <div class="gold" style="border:2px solid #059669;">
+        <h3 style="margin-top:0; color:#047857;">📝 Official Pakistani Student Admission Form</h3>
+        <div class="grid-2">
+          <div>
+            <label>1. Select Board / Educational System *</label>
+            <select id="pakBoardSelect">
+              <optgroup label="Punjab Boards">
+                <option value="Gujranwala Board">Gujranwala Board (BISE GRW)</option>
+                <option value="Lahore Board">Lahore Board</option>
+                <option value="Rawalpindi Board">Rawalpindi Board</option>
+                <option value="Faisalabad Board">Faisalabad Board</option>
+                <option value="Multan Board">Multan Board</option>
+                <option value="Bahawalpur Board">Bahawalpur Board</option>
+                <option value="Sargodha Board">Sargodha Board</option>
+                <option value="D.G Khan Board">D.G Khan Board</option>
+                <option value="Sahiwal Board">Sahiwal Board</option>
+              </optgroup>
+              <optgroup label="Federal & AJK">
+                <option value="Federal Board FBISE Islamabad">Federal Board FBISE Islamabad</option>
+                <option value="AJK Board Mirpur">AJK Board Mirpur</option>
+              </optgroup>
+              <optgroup label="KPK Boards">
+                <option value="Peshawar Board">Peshawar Board</option>
+                <option value="Abbottabad Board">Abbottabad Board</option>
+                <option value="Mardan Board">Mardan Board</option>
+              </optgroup>
+              <optgroup label="Balochistan & Sindh">
+                <option value="Quetta Board">Quetta Board</option>
+                <option value="Karachi Board">Karachi Board</option>
+                <option value="Hyderabad Board">Hyderabad Board</option>
+              </optgroup>
+              <optgroup label="International / Special">
+                <option value="Cambridge International (O/A-Level in Pakistan)">Cambridge International (O/A-Level in Pakistan)</option>
+                <option value="Quran Academy / Languages">Quran Academy / Languages</option>
+              </optgroup>
+            </select>
+          </div>
+          <div>
+            <label>2. Select Program / Course (PKR) *</label>
+            <select id="pakProgramSelect"></select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div><label>3. Student Full Name *</label><input id="pakStuName" placeholder="Enter Full Name"></div>
+          <div><label>4. Father / Guardian Name *</label><input id="pakFatherName" placeholder="Enter Father Name"></div>
+        </div>
+
+        <div class="grid-2">
+          <div><label>5. Student B-Form Number *</label><input id="pakBForm" placeholder="34201-XXXXXXX-X"></div>
+          <div><label>6. Parent CNIC Number *</label><input id="pakParentCnic" placeholder="34201-XXXXXXX-X"></div>
+        </div>
+
+        <div class="grid-2">
+          <div><label>7. City / District (Phase 1: Gujrat) *</label><input id="pakCity" placeholder="e.g., Dinga, Gujrat, Kharian"></div>
+          <div><label>8. WhatsApp Number *</label><input id="pakPhone" placeholder="+92 3XX-XXXXXXX"></div>
+        </div>
+
+        <div class="grid-2">
+          <div><label>9. Section / Group *</label><select id="pakSectionSelect"><option value="Science Group">Science Group</option><option value="Computer Science">Computer Science</option><option value="Arts / Humanities">Arts / Humanities</option><option value="General Group">General Group</option></select></div>
+          <div><label>10. Personal Portal Password *</label><input type="password" id="pakPass" placeholder="Create password"></div>
+        </div>
+
+        <div style="background:#ffffff; border:2px solid #059669; border-radius:10px; padding:14px; margin:12px 0;">
+          <h4 style="margin:0 0 8px 0; color:#047857;">📎 Mandatory Attachments & Fee Slip</h4>
+          <div class="grid-3">
+            <div><label>B-Form Copy *</label><input type="file" id="pakBFile" accept="image/*,.pdf" onchange="previewFileName('pakBFile','pakBStat')"><div id="pakBStat" class="small"></div></div>
+            <div><label>Parent CNIC Copy *</label><input type="file" id="pakCFile" accept="image/*,.pdf" onchange="previewFileName('pakCFile','pakCStat')"><div id="pakCStat" class="small"></div></div>
+            <div><label>Meezan / EasyPaisa Slip *</label><input type="file" id="pakSFile" accept="image/*,.pdf" onchange="previewFileName('pakSFile','pakSStat')"><div id="pakSStat" class="small"></div></div>
+          </div>
+        </div>
+
+        <div style="margin:10px 0;">
+          <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:14px;">
+            <input type="checkbox" id="pakAgree" onchange="toggleBtn('pakAgree','pakSubmitBtn','🚀 Submit Pakistani Admission')">
+            I confirm all attached documents are authentic and agree to Academy Rules.
+          </label>
+        </div>
+        <button type="button" id="pakSubmitBtn" class="btn-dark" onclick="submitAdmission('Pakistan')" disabled style="opacity:0.5; cursor:not-allowed;">🔒 Check Box to Submit</button>
+        <div id="pakAdmResult" class="small" style="font-weight:bold; color:#047857; margin-top:8px;"></div>
+      </div>
+      <div id="pakCustomCoursesArea" class="green-box hidden" style="margin-top:14px;">
+        <strong>Admin Added Custom Courses:</strong>
+        <div id="pakCustomCoursesList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       3. INTERNATIONAL STUDENT PORTAL (Sections 3, 25B, 26)
+       ========================================================= -->
+  <div id="portalInternational" class="portal-section">
+    <div class="card">
+      <div class="top-action-bar">
+        <button type="button" class="btn-dark btn-sm" onclick="switchPortal('gateway')">⬅️ Back to Gateway</button>
+        <span class="badge">CURRENCY: BRITISH POUNDS (£)</span>
+      </div>
+      <h2>🌍 International Diaspora Portal (GBP £) — UK/USA/EU KG-8 & O/A-Levels</h2>
+      <p class="small">Exclusively priced in GBP (£) for overseas students in UK, USA, Europe, Canada and Gulf.</p>
+
+      <!-- GBP Fee Calculator -->
+      <div class="gold" style="border:2px solid #b8860b; margin-bottom:16px;">
+        <h3 style="margin-top:0; color:#0a192f;">💷 International Tuition Fee Calculator</h3>
+        <div class="grid-2">
+          <div><label>Hourly Rate (£)</label><input type="number" id="intlCalcRate" value="25" onkeyup="calcIntlFee()" onchange="calcIntlFee()"></div>
+          <div><label>Hours Per Week</label><input type="number" id="intlCalcHrs" value="4" onkeyup="calcIntlFee()" onchange="calcIntlFee()"></div>
+        </div>
+        <div id="intlFeeDisplay" style="font-weight:bold; font-size:15px; color:#047857; margin-top:6px;">4 Hours / Week = £100 Weekly | £400 Monthly</div>
+      </div>
+
+      <div class="green-box" style="border:2px solid #059669;">
+        <h3 style="margin-top:0; color:#047857;">📝 International Student Admission Form & Passport Verification</h3>
+        <div class="grid-2">
+          <div>
+            <label>1. Select Curriculum / Program *</label>
+            <select id="intlBoardSelect">
+              <option value="UK National Curriculum (KG–Grade 8)">UK National Curriculum (KG–Grade 8)</option>
+              <option value="USA / European School Curriculum">USA / European School Curriculum</option>
+              <option value="Cambridge / Edexcel O-Level & A-Level">Cambridge / Edexcel O-Level & A-Level</option>
+              <option value="Quran Academy (Nazra, Hifz, Tajweed, Tafseer)">Quran Academy (Nazra, Hifz, Tajweed, Tafseer)</option>
+              <option value="Languages (IELTS, German, French, Spanish, Urdu)">Languages (IELTS, German, French, Spanish, Urdu)</option>
+            </select>
+          </div>
+          <div>
+            <label>2. Select Fee Package *</label>
+            <select id="intlProgramSelect"></select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div><label>3. Student Full Name *</label><input id="intlStuName" placeholder="Enter Full Name"></div>
+          <div><label>4. Parent / Guardian Name *</label><input id="intlFatherName" placeholder="Enter Parent Name"></div>
+        </div>
+
+        <div class="grid-2">
+          <div><label>5. Passport / National ID / BRP Number *</label><input id="intlPassport" placeholder="UK Passport / ID Number"></div>
+          <div><label>6. Country of Residence *</label><input id="intlCountry" placeholder="e.g., United Kingdom, USA, Germany"></div>
+        </div>
+
+        <div class="grid-2">
+          <div><label>7. WhatsApp / International Phone *</label><input id="intlPhone" placeholder="+44 7XXX XXXXXX"></div>
+          <div><label>8. Personal Password *</label><input type="password" id="intlPass" placeholder="Create password"></div>
+        </div>
+
+        <div style="background:#ffffff; border:2px solid #059669; border-radius:10px; padding:14px; margin:12px 0;">
+          <h4 style="margin:0 0 8px 0; color:#047857;">📎 Mandatory Passport & Proof of Address Attachments</h4>
+          <div class="grid-2">
+            <div><label>Passport / ID Copy *</label><input type="file" id="intlPFile" accept="image/*,.pdf" onchange="previewFileName('intlPFile','intlPStat')"><div id="intlPStat" class="small"></div></div>
+            <div><label>Parent Proof of Address *</label><input type="file" id="intlAFile" accept="image/*,.pdf" onchange="previewFileName('intlAFile','intlAStat')"><div id="intlAStat" class="small"></div></div>
+          </div>
+        </div>
+
+        <div style="margin:10px 0;">
+          <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:14px;">
+            <input type="checkbox" id="intlAgree" onchange="toggleBtn('intlAgree','intlSubmitBtn','🚀 Submit International Admission')">
+            I confirm all attached verification documents are authentic and agree to regulations.
+          </label>
+        </div>
+        <button type="button" id="intlSubmitBtn" class="btn-dark" onclick="submitAdmission('International')" disabled style="opacity:0.5; cursor:not-allowed;">🔒 Check Box to Submit</button>
+        <div id="intlAdmResult" class="small" style="font-weight:bold; color:#047857; margin-top:8px;"></div>
+      </div>
+      <div id="intlCustomCoursesArea" class="green-box hidden" style="margin-top:14px;">
+        <strong>Admin Added International Courses:</strong>
+        <div id="intlCustomCoursesList"></div>
+      </div>
+    </div>
+  </div>
+                                                                                                                                                                   </div>
