@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a192f">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Sir Haroon Javaid Hashmi Academy and College — Official Digital Campus</title>
+<script>
+// SAFE STORAGE & XSS PROTECTION ENGINE
+window.safeMem = {};
+window.safeDB = {
+  get: function(k, def) {
+    try {
+      var v = localStorage.getItem(k);
+      return v !== null ? JSON.parse(v) : (window.safeMem[k] !== undefined ? window.safeMem[k] : def);
+    } catch (e) {
+      return window.safeMem[k] !== undefined ? window.safeMem[k] : def;
+    }
+  },
+  set: function(k, val) {
+    window.safeMem[k] = val;
+    try { localStorage.setItem(k, JSON.stringify(val)); } catch (e) {}
+  }
+};
 
+window.esc = function(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+};
+
+function el(id) { return document.getElementById(id); }
+function val(id, d) { var e = el(id); return e ? e.value : d; }
+function setTxt(id, t) { var e = el(id); if (e) e.textContent = t; }
+</script>
+<style>
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; scroll-behavior: smooth; touch-action: manipulation; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #050505;
+  min-height: 100vh;
+  line-height: 1.55;
+  background: linear-gradient(160deg, #050505 0%, #0a192f 55%, #050505 100%);
+  background-attachment: fixed;
+}
+header {
+  background: linear-gradient(135deg, #050505 0%, #0a192f 50%, #050505 100%);
+  border-bottom: 4px solid #d4af37;
+  text-align: center;
+  padding: 20px 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.65);
+}
+header h1 { margin: 8px auto 4px auto; font-size: clamp(20px, 3.2vw, 30px); color: #ffd700; }
+header p { margin: 3px auto; font-weight: 600; color: #ffffff; font-size: clamp(12.5px, 1.8vw, 14.5px); }
+.clock-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; max-width: 960px; margin: 12px auto 0 auto; }
+.clock-pill { background: #050505; border: 1.5px solid #d4af37; color: #ffd700; padding: 6px 10px; border-radius: 16px; font-size: 12px; font-weight: 700; }
+nav {
+  position: sticky; top: 0; width: 100%; background: #0a192f; display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 6px; padding: 10px; z-index: 1000; border-bottom: 3px solid #d4af37;
+}
+nav a {
+  color: #ffffff; text-decoration: none; background: #050505; border: 1.5px solid #d4af37;
+  padding: 7px 12px; border-radius: 20px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+}
+nav a:hover, nav a.active-nav { background: #059669; border-color: #ffd700; }
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 14px 18px; }
+.card {
+  width: 100%; background: #ffffff; color: #050505; border: 2px solid #d4af37;
+  border-top: 5px solid #0a192f; border-radius: 16px; padding: 20px 22px; margin: 16px 0;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+}
+h2 { color: #0a192f; border-bottom: 3px solid #d4af37; padding-bottom: 8px; margin-top: 0; font-size: clamp(18px, 2.4vw, 22px); }
+h3 { color: #0a192f; margin-top: 16px; }
+.badge { display: inline-block; background: #050505; color: #ffd700; border: 2px solid #d4af37; padding: 5px 12px; border-radius: 20px; font-size: 11.5px; font-weight: bold; }
+.hidden { display: none !important; }
+.small { font-size: 13px; color: #334155; }
+.gold { background: #fffbeb; border: 2px solid #d4af37; padding: 14px 16px; border-radius: 12px; color: #050505; }
+.notice { background: #f0fdf4; padding: 14px 16px; border-radius: 10px; border: 2px solid #059669; color: #050505; }
+.table-responsive { width: 100%; overflow-x: auto; margin: 12px 0; border-radius: 10px; border: 2px solid #0a192f; }
+table { width: 100%; min-width: 540px; border-collapse: collapse; background: #ffffff; }
+th, td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: left; font-size: 13.5px; }
+th { background: #0a192f; color: #ffd700; }
+tr:nth-child(even) td { background: #f8fafc; }
+input, select, textarea {
+  width: 100%; padding: 10px 12px; margin: 5px 0 12px 0; border: 2px solid #0a192f;
+  border-radius: 8px; font-size: 14.5px; background: #ffffff; color: #050505;
+}
+label { font-weight: 700; font-size: 13.5px; color: #0a192f; display: block; margin-top: 6px; }
+button, .btn-green {
+  background: linear-gradient(135deg, #047857 0%, #10b981 50%, #059669 100%);
+  color: #ffffff; border: 2px solid #050505; padding: 11px 16px; border-radius: 10px;
+  font-weight: bold; cursor: pointer; width: 100%; font-size: 14.5px; margin-top: 8px;
+}
+.btn-gold { background: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #b8860b 100%) !important; color: #050505 !important; }
+.btn-dark { background: #0a192f !important; color: #ffd700 !important; border-color: #d4af37 !important; }
+.btn-danger { background: #dc2626 !important; color: #ffffff !important; }
+.btn-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 10px; }
+
+/* TV BREAKING NEWS + HIRING TICKER */
+.ticker-box { background: #050505; border: 2px solid #ffd700; border-radius: 12px; padding: 10px 14px; margin: 12px 0; color: #ffffff; }
+.ticker-label { background: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 5px; }
+.ticker-label-hire { background: #059669; }
+.marquee-line { overflow: hidden; white-space: nowrap; font-size: 14px; font-weight: bold; color: #ffd700; }
+.marquee-inner { display: inline-block; animation: slideNews 28s linear infinite; }
+@keyframes slideNews { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+/* 2 MAIN PORTALS GRID */
+.portal-2-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; margin-top: 14px; }
+.portal-card {
+  background: #ffffff; border: 3px solid #d4af37; border-top: 6px solid #0a192f;
+  border-radius: 16px; padding: 22px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.chip-btn {
+  display: inline-block; background: #0a192f; color: #ffd700; border: 1.5px solid #d4af37;
+  padding: 6px 12px; border-radius: 18px; font-size: 12.5px; font-weight: 700; margin: 4px; cursor: pointer;
+}
+.chip-btn:hover, .chip-btn.active-chip { background: #059669; color: #ffffff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE — GLOBAL DIGITAL CAMPUS</div>
+  <h1>SIR HAROON JAVAID HASHMI ACADEMY AND COLLEGE</h1>
+  <p>Founder &amp; Director: Sir Haroon Javaid Hashmi | Location: Dinga, District Gujrat, Pakistan</p>
+  <p>Vision: Teachers From Whole World + Pakistan Teach Students From Whole World For Best Results | +92 334 1140082</p>
+  <div class="clock-bar">
+    <div class="clock-pill" id="clockPK">Pakistan (PKT): --:--</div>
+    <div class="clock-pill" id="clockUK">UK (London): --:--</div>
+    <div class="clock-pill" id="clockUS">USA (New York): --:--</div>
+    <div class="clock-pill" id="clockEU">Europe (CET): --:--</div>
+  </div>
+</header>
+
+<nav>
+  <a onclick="switchMainView('gateway')">🏠 Main 2-Portal Gateway</a>
+  <a onclick="switchMainView('pakistani')">🇵🇰 Pakistani Portal (PKR)</a>
+  <a onclick="switchMainView('international')">🌍 International Portal (£ GBP)</a>
+  <a onclick="switchMainView('studentLMS')">🎓 Student LMS</a>
+  <a onclick="switchMainView('teacherLMS')">👨‍🏫 Teacher LMS (60/40)</a>
+  <a onclick="switchMainView('adminSuper')">🛡️ Super Admin Control Room</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- SECTION 24 & 25: AUTO NOTICE BOARD (BREAKING NEWS + WE ARE HIRING) -->
+  <div class="ticker-box">
+    <div><span class="ticker-label">🔴 LIVE EDUCATIONAL BREAKING NEWS (24-HR AUTO BOARD)</span></div>
+    <div class="marquee-line">
+      <div class="marquee-inner" id="breakingNewsTicker">
+        📢 Punjab Boards (BISE Gujranwala, Lahore, Rawalpindi, Faisalabad, Multan) Class 10th Exam Date: 16 March 2027 | Class 9th Exam: April 2027 | Inter Exam: May 2027 ★ Federal Board FBISE Islamabad New Session &amp; Model Papers Released ★ Cambridge O/A Level May–June 2027 Registration Open ★ CSS Written Exam: 27 Jan 2027 | MDCAT &amp; ECAT One-Time Full Packages Active!
+      </div>
+    </div>
+    <div style="margin-top:8px;"><span class="ticker-label ticker-label-hire">💼 WE ARE HIRING — GLOBAL &amp; PAKISTAN FACULTY</span></div>
+    <div class="marquee-line">
+      <div class="marquee-inner" id="hiringNewsTicker" style="color:#6ee7b7; animation-duration: 24s;">
+        🌟 Urgent Hiring: KG English Teacher | Class 9th Science (Gujranwala &amp; Lahore Board) | A-Level Physics &amp; Math | IELTS Band 8 Trainer | CSS English Precis Specialist | Online Quran Nazra &amp; Tajweed Qari for UK/USA/Europe Students — Apply in HR / Teacher Portal!
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: MAIN PORTALS - 2 PORTALS GATEWAY -->
+  <div id="view-gateway" class="card">
+    <h2 style="text-align:center; border:none;">Select Your Academic Wing — 2 Main Portals</h2>
+    <p style="text-align:center; color:#0a192f; font-weight:600;">Choose Pakistani Portal (Fee in PKR &amp; All 25+ Pakistan Boards) or International Portal (Fee in GBP £ for UK / USA / Europe).</p>
+
+    <div class="portal-2-grid">
+      <div class="portal-card">
+        <div style="font-size:44px;">🇵🇰</div>
+        <h3 style="font-size:22px; margin:8px 0;">A) PAKISTANI PORTAL — FEE IN PKR</h3>
+        <p class="small">
+          • School Section (Nursery to Class 8 — Punjab Textbook Board)<br>
+          • Matric &amp; Inter (9th, 10th, 1st Year, 2nd Year — All 25+ Boards)<br>
+          • Cambridge O Level / A Level<br>
+          • Competitive Exams (CSS, PMS, PCS, Tehsildar, PPSC, MDCAT, ECAT)<br>
