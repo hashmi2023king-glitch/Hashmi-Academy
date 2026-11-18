@@ -174,3 +174,165 @@ button, .btn-green {
           • Matric &amp; Inter (9th, 10th, 1st Year, 2nd Year — All 25+ Boards)<br>
           • Cambridge O Level / A Level<br>
           • Competitive Exams (CSS, PMS, PCS, Tehsildar, PPSC, MDCAT, ECAT)<br>
+  <!-- SECTION 5: STUDENT LMS ACCOUNT -->
+  <div id="view-studentLMS" class="card hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div>
+        <span class="badge" id="stProfileBadge">ID: PAK-12345 | BISE GUJRANWALA | CLASS 9TH</span>
+        <h2 style="border:none; margin:0;">🎓 Student LMS Account — Interactive Study &amp; Exam Portal</h2>
+      </div>
+      <button type="button" onclick="switchMainView('gateway')" class="btn-dark" style="width:auto;">⬅ Main Gateway</button>
+    </div>
+
+    <!-- LEVEL 2 FILTERED LMS NOTICE BOARD (ONLY HIS BOARD + HIS CLASS NEWS) -->
+    <div class="gold" style="margin:12px 0;">
+      <b>📌 Filtered LMS Notice Board (<span id="stFilteredBoardTitle">BISE Gujranwala — Class 9th</span> Only):</b>
+      <div id="stFilteredNewsBox" class="small" style="margin-top:6px;">
+        • [Official] Class 9th BISE Gujranwala English Unit 1 &amp; Physics Chapter 1 Weekly Test scheduled for Friday.<br>
+        • [Paper Pattern] Updated Pairing Scheme &amp; SLO-based MCQs uploaded in Digital Library.
+      </div>
+    </div>
+
+    <!-- GAMIFICATION & STATS BAR -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:10px; margin:12px 0;">
+      <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+        <div class="small" style="color:#fff;">Attendance</div><b style="font-size:20px;">94% (P)</b>
+      </div>
+      <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+        <div class="small" style="color:#fff;">Gamification Points</div><b style="font-size:20px;" id="stPoints">1,250 ★</b>
+      </div>
+      <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+        <div class="small" style="color:#fff;">Fee Status</div><b style="font-size:18px; color:#6ee7b7;" id="stFeeBadge">PAID ✅</b>
+      </div>
+      <div style="background:#0a192f; color:#ffd700; padding:12px; border-radius:10px; text-align:center; border:2px solid #d4af37;">
+        <div class="small" style="color:#fff;">World Rank</div><b style="font-size:20px;">Top 10 🏆</b>
+      </div>
+    </div>
+
+    <!-- STUDENT LMS TABS -->
+    <div>
+      <span class="chip-btn active-chip" onclick="showStTab('stLectures', this)">🎥 Video Lectures &amp; Live Class</span>
+      <span class="chip-btn" onclick="showStTab('stLibrary', this)">📚 Board Digital Library</span>
+      <span class="chip-btn" onclick="showStTab('stQuiz', this)">📝 Auto Quiz (Instant Result)</span>
+      <span class="chip-btn" onclick="showStTab('stAI', this)">🤖 24/7 AI Tutor &amp; Career</span>
+      <span class="chip-btn" onclick="showStTab('stResultCert', this)">📄 Result Card &amp; Certificate</span>
+      <span class="chip-btn" onclick="showStTab('stLeaveChat', this)">✉️ Leave Apply &amp; Teacher Chat</span>
+    </div>
+
+    <div id="stLectures" class="st-pane" style="margin-top:12px;">
+      <h3>🎥 Topic-Wise Recorded Lectures &amp; Live Zoom/Meet Class Link</h3>
+      <div class="notice">
+        <b>🔴 Live Class Link Today (PKT 4:30 PM | UK 11:30 AM):</b> English &amp; Science Live Session by Sir Haroon Javaid Hashmi —
+        <a href="https://google.com" target="_blank" style="font-weight:bold; color:#047857;">Join Live Classroom →</a>
+      </div>
+      <div id="stAutoLibraryVideos" style="margin-top:10px;"></div>
+    </div>
+
+    <div id="stLibrary" class="st-pane hidden" style="margin-top:12px;">
+      <h3>📚 Board-Wise Digital Library (Books, Notes, Past Papers &amp; Solved Class Questions)</h3>
+      <div id="stLibraryList"></div>
+    </div>
+
+    <div id="stQuiz" class="st-pane hidden" style="margin-top:12px;">
+      <h3>📝 Online Auto-Checking Quiz &amp; Homework Questions</h3>
+      <div id="stQuizBox" class="gold"></div>
+    </div>
+
+    <div id="stAI" class="st-pane hidden" style="margin-top:12px;">
+      <h3>🤖 24/7 Personal AI Tutor &amp; Career Guidance Advisor</h3>
+      <label>Ask Any Subject Question (Step-by-Step Explanation)</label>
+      <input id="aiTutorQuestion" placeholder="e.g., Explain Newton's Second Law or IELTS Writing Task 2 structure...">
+      <button type="button" onclick="askAITutor()" class="btn-green">Ask AI Teacher Now</button>
+      <div id="aiTutorAnswer" class="notice hidden" style="margin-top:10px;"></div>
+
+      <div class="gold" style="margin-top:14px;">
+        <b>🎯 Smart Career Guidance (Based on Your Marks):</b> With your <b>91% Average</b> in Science &amp; English, recommended pathways are <b>MDCAT (Medical), ECAT (Software/AI Engineering), or CSS Civil Services</b>.
+      </div>
+    </div>
+
+    <div id="stResultCert" class="st-pane hidden" style="margin-top:12px;">
+      <h3>📄 Official Result Card &amp; Course Completion Certificate (PDF Ready)</h3>
+      <div id="printableResultCard" class="gold">
+        <h3 style="margin-top:0; text-align:center;">SIR HAROON JAVAID HASHMI ACADEMY &amp; COLLEGE</h3>
+        <p style="text-align:center;" class="small">Official Verified Transcript &amp; Progress Report — 2026–2027 Session</p>
+        <table>
+          <tr><th>Subject</th><th>Total Marks</th><th>Obtained</th><th>Grade</th></tr>
+          <tr><td>English (Compulsory)</td><td>100</td><td>94</td><td>A+</td></tr>
+          <tr><td>Mathematics / Science</td><td>100</td><td>92</td><td>A+</td></tr>
+          <tr><td>Physics / Computer</td><td>100</td><td>89</td><td>A+</td></tr>
+          <tr><th>Grand Total &amp; Position</th><th>300</th><th>275 (91.6%)</th><th>1st Position 🏆</th></tr>
+        </table>
+      </div>
+      <div class="btn-row">
+        <button type="button" onclick="window.print()" class="btn-dark">🖨️ Download Result Card (PDF)</button>
+        <button type="button" onclick="downloadVerifiedCertificate()" class="btn-gold">🏅 Download Verified Completion Certificate</button>
+      </div>
+      <div id="certPreviewBox" class="notice hidden" style="margin-top:10px;"></div>
+    </div>
+
+    <div id="stLeaveChat" class="st-pane hidden" style="margin-top:12px;">
+      <h3>🗓️ Apply for Leave (Auto-Linked to Admin &amp; Attendance Register)</h3>
+      <label>Leave Reason *</label><input id="stLeaveReason" placeholder="e.g., Medical / Family Emergency">
+      <div class="btn-row">
+        <div><label>From Date</label><input type="date" id="stLeaveFrom"></div>
+        <div><label>To Date</label><input type="date" id="stLeaveTo"></div>
+      </div>
+      <button type="button" onclick="submitLeaveRequest('Student')" class="btn-green">Submit Leave Application</button>
+      <div id="stLeaveStatus" class="notice hidden" style="margin-top:8px;"></div>
+
+      <h3>💬 Direct Chat / Message with Teacher</h3>
+      <textarea id="stTeacherMsg" rows="2" placeholder="Write message to your subject teacher..."></textarea>
+      <button type="button" onclick="sendLMSChat('Student -> Teacher')" class="btn-dark">Send Message to Teacher</button>
+      <div id="lmsChatFeed" class="small" style="margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 6, 21 & 22: TEACHER LMS ACCOUNT (60/40 REVENUE + AUTO QUIZ + AUTO LIBRARY) -->
+  <div id="view-teacherLMS" class="card hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div>
+        <span class="badge">ID: HR-12345 | VERIFIED FACULTY ✓ | 60% REVENUE SHARE</span>
+        <h2 style="border:none; margin:0;">👨‍🏫 Teacher LMS Office — Auto-Planning, Auto-Quiz &amp; 60/40 Earnings</h2>
+      </div>
+      <button type="button" onclick="switchMainView('gateway')" class="btn-dark" style="width:auto;">⬅ Main Gateway</button>
+    </div>
+
+    <div>
+      <span class="chip-btn active-chip" onclick="showTcTab('tcAutoPlan', this)">🧠 Auto-Planning &amp; Auto-Quiz</span>
+      <span class="chip-btn" onclick="showTcTab('tcEndClass', this)">💾 End Class &amp; Auto-Save Library</span>
+      <span class="chip-btn" onclick="showTcTab('tcEarnings', this)">💰 My Earnings (60/40 Share)</span>
+      <span class="chip-btn" onclick="showTcTab('tcAttMarks', this)">📋 Attendance, Marks &amp; Leave</span>
+    </div>
+
+    <!-- SECTION 21: TEACHER AUTO PLANNING + AUTO QUIZ -->
+    <div id="tcAutoPlan" class="tc-pane" style="margin-top:12px;">
+      <h3>🧠 Section 21: Auto Topic Planning &amp; Auto Quiz Generator</h3>
+      <div class="btn-row">
+        <div>
+          <label>Board</label>
+          <select id="tcBoard"><option>BISE Gujranwala</option><option>BISE Lahore</option><option>Federal Board FBISE</option><option>Cambridge O/A Level</option></select>
+        </div>
+        <div>
+          <label>Class &amp; Subject</label>
+          <input id="tcSubjTopic" value="Class 9th — English Unit 1 (The Saviour of Mankind)">
+        </div>
+      </div>
+      <button type="button" onclick="generateAutoTopicAndQuiz()" class="btn-green">⚡ Auto-Generate Lesson Plan + MCQs, Short &amp; Long Quiz</button>
+
+      <div id="tcGeneratedPlanBox" class="hidden" style="margin-top:12px;">
+        <div class="notice" id="tcLessonPlanText"></div>
+        <h4>✏️ Manual Teacher Editor (Edit, Add, or Delete Questions Before Sending to Students)</h4>
+        <div id="tcEditableQuizList"></div>
+        <div class="btn-row">
+          <input id="newManualQ" placeholder="Add new custom question...">
+          <input id="newManualAns" placeholder="Correct answer...">
+        </div>
+        <div class="btn-row">
+          <button type="button" onclick="addManualQuizQuestion()" class="btn-dark">➕ Add Question</button>
+          <button type="button" onclick="publishQuizToStudents()" class="btn-gold">🚀 Send Quiz to Student LMS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUTO SAVE TO LIBRARY ON CLASS END + UNANSWERED QUESTION TO QUIZ -->
+  
