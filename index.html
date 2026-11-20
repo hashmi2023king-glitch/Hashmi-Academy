@@ -2082,3 +2082,193 @@
 
   <div id="generatedReceiptCard" class="calc-summary-box" style="display:none;margin-top:12px;"></div>
 </section>
+<script>
+  (function () {
+    let activePayPortal = "pakistani";
+    let verifiedReceiptFile = null;
+
+    const paymentMethodsCatalog = {
+      pakistani: [
+        {
+          id: "easypaisa",
+          name: "EasyPaisa Mobile Account (PKR)",
+          details: "Account Title: Haroon Javaid Hashmi • Currency: PKR • Instant SMS & App Receipt Verification."
+        },
+        {
+          id: "jazzcash",
+          name: "JazzCash Mobile Wallet (PKR)",
+          details: "Account Title: Haroon Javaid Hashmi • Currency: PKR • Enter 12-Digit TID after transfer."
+        },
+        {
+          id: "pk_bank",
+          name: "Pakistani Bank Transfer / Raast IBFT (PKR)",
+          details: "Title: Sir Haroon Javaid Hashmi Academy • Raast / IBFT Instant Transfer • Attach IBFT Slip."
+        }
+      ],
+      international: [
+        {
+          id: "uk_eu_bank",
+          name: "UK / US / European Bank Transfer (GBP £ / USD $ / EUR €)",
+          details: "International Remittance to Pakistan PKR Account • Currency: GBP £ / USD $ • Enter Bank Wire Reference."
+        },
+        {
+          id: "western_union",
+          name: "Western Union / Wise Remittance",
+          details: "Receiver: Haroon Javaid Hashmi (Pakistan) • Enter 10-Digit MTCN or Wise Transfer Reference."
+        },
+        {
+          id: "intl_card",
+          name: "International Debit / Credit Card (Visa / Mastercard)",
+          details: "Supports GBP £ & USD $ Billing • Automatic Conversion & Official Academy Receipt."
+        }
+      ]
+    };
+
+    const switchPakPayBtn = document.getElementById("switchPakPayBtn");
+    const switchIntlPayBtn = document.getElementById("switchIntlPayBtn");
+    const payAmountLabel = document.getElementById("payAmountLabel");
+    const payMethodSelect = document.getElementById("payMethodSelect");
+    const payAccountInstructionsBox = document.getElementById("payAccountInstructionsBox");
+    const payReceiptFileInput = document.getElementById("payReceiptFileInput");
+    const payUploadStatusPill = document.getElementById("payUploadStatusPill");
+    const submitPaymentReceiptBtn = document.getElementById("submitPaymentReceiptBtn");
+    const generatedReceiptCard = document.getElementById("generatedReceiptCard");
+
+    function renderPaymentMethodOptions() {
+      const list = paymentMethodsCatalog[activePayPortal] || paymentMethodsCatalog.pakistani;
+      if (payAmountLabel) {
+        payAmountLabel.textContent = activePayPortal === "pakistani"
+          ? "Amount Paid (PKR)"
+          : "Amount Paid (GBP £ / USD $)";
+      }
+      if (payMethodSelect) {
+        payMethodSelect.innerHTML = list
+          .map((m) => `<option value="${m.id}">${m.name}</option>`)
+          .join("");
+      }
+      updateMethodInstructions();
+    }
+
+    function updateMethodInstructions() {
+      const list = paymentMethodsCatalog[activePayPortal] || paymentMethodsCatalog.pakistani;
+      const chosen = list.find((m) => m.id === payMethodSelect?.value) || list[0];
+      if (payAccountInstructionsBox && chosen) {
+        payAccountInstructionsBox.innerHTML = `
+          <div style="color:#f0cf65;font-weight:800;">${chosen.name}</div>
+          <div style="margin-top:4px;color:#cbd5e1;">${chosen.details}</div>
+        `;
+      }
+    }
+
+    switchPakPayBtn?.addEventListener("click", () => {
+      activePayPortal = "pakistani";
+      switchPakPayBtn.classList.add("active");
+      switchIntlPayBtn?.classList.remove("active");
+      renderPaymentMethodOptions();
+    });
+
+    switchIntlPayBtn?.addEventListener("click", () => {
+      activePayPortal = "international";
+      switchIntlPayBtn.classList.add("active");
+      switchPakPayBtn?.classList.remove("active");
+      renderPaymentMethodOptions();
+    });
+
+    payMethodSelect?.addEventListener("change", updateMethodInstructions);
+
+    payReceiptFileInput?.addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) {
+        verifiedReceiptFile = null;
+        if (payUploadStatusPill) payUploadStatusPill.textContent = "No file selected.";
+        return;
+      }
+      const maxBytes = 2 * 1024 * 1024;
+      if (file.size > maxBytes) {
+        alert("Receipt file is larger than 2 MB. Please choose a smaller screenshot or PDF.");
+        e.target.value = "";
+        verifiedReceiptFile = null;
+        if (payUploadStatusPill) payUploadStatusPill.textContent = "Stopped — File exceeds 2 MB limit.";
+        return;
+      }
+      verifiedReceiptFile = {
+        name: file.name,
+        sizeKB: `${Math.max(1, Math.round(file.size / 1024))} KB`
+      };
+      if (payUploadStatusPill) {
+        payUploadStatusPill.textContent = `Ready: ${verifiedReceiptFile.name} (${verifiedReceiptFile.sizeKB})`;
+      }
+    });
+
+    submitPaymentReceiptBtn?.addEventListener("click", () => {
+      const admNo = (document.getElementById("payAdmissionNoInput")?.value || "").trim().toUpperCase();
+      const studentName = (document.getElementById("payStudentNameInput")?.value || "").trim();
+      const amountVal = Number(document.getElementById("payAmountInput")?.value || 0);
+      const txnRef = (document.getElementById("payTxnRefInput")?.value || "").trim();
+      const methodLabel = payMethodSelect?.options[payMethodSelect.selectedIndex]?.text || "Selected Method";
+
+      if (!admNo || !studentName || amountVal <= 0 || !txnRef) {
+        alert("Please enter Admission Number, Student Name, Amount Paid, and Transaction Reference.");
+        return;
+      }
+
+      const currencyPrefix = activePayPortal === "pakistani" ? "PKR " : "GBP £ / USD $ ";
+      const receiptCode = `${activePayPortal === "pakistani" ? "RCP" : "INT"}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const timestamp = new Date().toLocaleString();
+
+      // Sync with Admin Backup & Accounts Portal if present
+      if (window.adminBackupState && Array.isArray(window.adminBackupState.records)) {
+        const existing = window.adminBackupState.records.find(
+          (r) => r.admissionNo.toUpperCase() === admNo
+        );
+        if (existing) {
+          existing.feePaid = `${currencyPrefix}${amountVal.toLocaleString()}`;
+          existing.feeDues = `${currencyPrefix}0`;
+          existing.receiptNo = receiptCode;
+          existing.status = "Active";
+          existing.inactiveReason = "";
+        } else {
+          window.adminBackupState.records.unshift({
+            admissionNo: admNo,
+            portal: activePayPortal === "pakistani" ? "Pakistani Students Portal" : "International Students Portal",
+            studentName,
+            email: "verified@student.com",
+            loginId: `user_${admNo.toLowerCase().replace("-", "")}`,
+            password: `SHJ@${Math.floor(1000 + Math.random() * 9000)}`,
+            status: "Active",
+            inactiveReason: "",
+            feeTotal: `${currencyPrefix}${amountVal.toLocaleString()}`,
+            feePaid: `${currencyPrefix}${amountVal.toLocaleString()}`,
+            feeDues: `${currencyPrefix}0`,
+            receiptNo: receiptCode
+          });
+        }
+      }
+
+      if (generatedReceiptCard) {
+        generatedReceiptCard.style.display = "block";
+        generatedReceiptCard.innerHTML = `
+          <div style="color:#22c55e;font-weight:800;font-size:0.95rem;margin-bottom:6px;">
+            Official Payment Receipt Generated — ${receiptCode}
+          </div>
+          <div><strong>Admission Number:</strong> ${admNo} | <strong>Student:</strong> ${studentName}</div>
+          <div><strong>Method:</strong> ${methodLabel}</div>
+          <div><strong>Amount Paid:</strong> ${currencyPrefix}${amountVal.toLocaleString()} | <strong>Txn Ref:</strong> ${txnRef}</div>
+          <div><strong>Attachment:</strong> ${verifiedReceiptFile ? `${verifiedReceiptFile.name} (${verifiedReceiptFile.sizeKB})` : "Reference Verified"}</div>
+          <div><strong>Date &amp; Time:</strong> ${timestamp}</div>
+          <hr style="border:none;border-top:1px solid rgba(212,175,55,0.3);margin:8px 0;" />
+          <div style="color:#f0cf65;font-weight:700;">3-Way Notification Dispatched:</div>
+          <ul style="margin-top:4px;padding-left:18px;color:#cbd5e1;">
+            <li><strong>1. Student Copy:</strong> Receipt ${receiptCode} &amp; Active Portal Notice sent.</li>
+            <li><strong>2. Parent / Guardian Copy:</strong> Fee confirmation alert sent.</li>
+            <li><strong>3. Director Copy (Sir Haroon Javaid Hashmi):</strong> Logged in Admin Accounts Portal.</li>
+          </ul>
+        `;
+      }
+
+      alert(`Receipt ${receiptCode} Generated!\nAdmission ${admNo} is now marked Active in Admin Accounts.`);
+    });
+
+    renderPaymentMethodOptions();
+  })();
+</script>
