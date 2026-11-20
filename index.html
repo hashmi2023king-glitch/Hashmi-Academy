@@ -2044,3 +2044,41 @@
     refreshIntlSummary();
   })();
 </script>
+<section id="portalPaymentWorkflowSection" class="detail-box" style="margin-top:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+    <strong style="color:#f0cf65;font-size:1rem;">Fee Payment &amp; Official Receipt Verification</strong>
+    <span class="badge-pill" id="payModeBadge">PKR &amp; GBP/USD Supported</span>
+  </div>
+
+  <div class="type-pill-row" style="margin-bottom:10px;">
+    <button type="button" class="type-pill-btn active" id="switchPakPayBtn">1. Pakistani Portal Payment (PKR)</button>
+    <button type="button" class="type-pill-btn" id="switchIntlPayBtn">2. International Portal Payment (GBP £ / USD $)</button>
+  </div>
+
+  <label class="field-label" for="payAdmissionNoInput">Admission Number (e.g. SHJ-104 or INT-202)</label>
+  <input id="payAdmissionNoInput" class="field-input" type="text" placeholder="Enter your Admission Number..." />
+
+  <label class="field-label" for="payStudentNameInput">Student Full Name</label>
+  <input id="payStudentNameInput" class="field-input" type="text" placeholder="Enter student name..." />
+
+  <label class="field-label" for="payAmountInput" id="payAmountLabel">Amount Paid (PKR)</label>
+  <input id="payAmountInput" class="field-input" type="number" min="1" placeholder="e.g. 5000" />
+
+  <label class="field-label" for="payMethodSelect">Select Payment Method</label>
+  <select id="payMethodSelect" class="field-input"></select>
+
+  <div id="payAccountInstructionsBox" class="calc-summary-box" style="margin-bottom:10px;"></div>
+
+  <label class="field-label" for="payTxnRefInput">Transaction ID / Reference Number</label>
+  <input id="payTxnRefInput" class="field-input" type="text" placeholder="Enter Transaction ID / MTCN / Bank Ref..." />
+
+  <label class="field-label" for="payReceiptFileInput">Upload Payment Receipt Screenshot (Max 2 MB)</label>
+  <input id="payReceiptFileInput" class="field-input" type="file" accept="image/*,.pdf" />
+  <p id="payUploadStatusPill" class="upload-status-pill" style="margin-bottom:8px;">Receipt Upload: Optional or Less than 2 MB</p>
+
+  <button type="button" id="submitPaymentReceiptBtn" class="gold-submit-btn">
+    Submit Payment &amp; Generate Official Receipt
+  </button>
+
+  <div id="generatedReceiptCard" class="calc-summary-box" style="display:none;margin-top:12px;"></div>
+</section>
