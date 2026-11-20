@@ -1645,3 +1645,142 @@
   </script>
 </body>
 </html>
+<script>
+  (function () {
+    const STORAGE_KEY = "SHJ_ACADEMY_STATE_V1";
+    const appFrame = document.querySelector(".app-frame");
+    const panelBodyEl = document.getElementById("panelBody");
+    const panelTitleEl = document.getElementById("panelTitle");
+    const panelEl = document.getElementById("dynamicPanel");
+    const updatesCountEl = document.getElementById("updatesCount");
+    if (!appFrame || !panelBodyEl || !panelTitleEl || !panelEl) return;
+
+    const tickerStyle = document.createElement("style");
+    tickerStyle.textContent = `
+      .ticker-strip {
+        overflow: hidden;
+        white-space: nowrap;
+        border: 1px solid rgba(212, 175, 55, 0.45);
+        border-radius: 8px;
+        background: #07142b;
+        padding: 6px 0;
+        margin-bottom: 10px;
+        font-size: 0.8rem;
+      }
+      .ticker-track {
+        display: inline-block;
+        padding-left: 100%;
+        animation: shjMarquee 24s linear infinite;
+        color: #d4af37;
+        font-weight: 600;
+      }
+      .ticker-strip.promo .ticker-track {
+        color: #ffffff;
+        animation-duration: 30s;
+      }
+      @keyframes shjMarquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+      }
+    `;
+    document.head.appendChild(tickerStyle);
+
+    const noticeTicker = document.createElement("div");
+    noticeTicker.className = "ticker-strip";
+    noticeTicker.innerHTML = `<div class="ticker-track">📢 NOTICE: Sir Haroon Javaid Hashmi Academy &amp; College • Phase 1 District Gujrat Active • DOAB Open Access Books Integrated • Teacher &amp; Director LMS Ready</div>`;
+
+    const promoTicker = document.createElement("div");
+    promoTicker.className = "ticker-strip promo";
+    promoTicker.innerHTML = `<div class="ticker-track">🎓 COURSES &amp; PORTALS: Nursery–Grade 12 • Boards &amp; O/A Levels • CSS, PMS, Tehsildar, MDCAT, ECAT • IELTS, Urdu, Spanish &amp; German • International GBP (£) &amp; Local PKR Tracks</div>`;
+
+    const heroEl = document.getElementById("homeHero");
+    if (heroEl && !document.querySelector(".ticker-strip")) {
+      heroEl.insertAdjacentElement("afterend", noticeTicker);
+      noticeTicker.insertAdjacentElement("afterend", promoTicker);
+    }
+
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : { receipts: [], broadcastLog: [] };
+      } catch (e) {
+        return { receipts: [], broadcastLog: [] };
+      }
+    }
+
+    function saveState(state) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    const appState = loadSavedState();
+
+    document.addEventListener("click", (event) => {
+      if (event.target && event.target.id === "verifyFeeReceiptBtn") {
+        setTimeout(() => {
+          const out = document.getElementById("feeReceiptOutput");
+          if (out && out.textContent.trim()) {
+            appState.receipts.unshift({
+              entry: out.textContent.trim(),
+              time: new Date().toLocaleTimeString()
+            });
+            appState.receipts = appState.receipts.slice(0, 20);
+            saveState(appState);
+          }
+        }, 10);
+      }
+
+      if (event.target && event.target.id === "sendBroadcastBtn") {
+        setTimeout(() => {
+          const msg = (document.getElementById("broadcastMsgInput")?.value || "").trim();
+          if (msg) {
+            appState.broadcastLog.unshift({
+              msg: msg,
+              time: new Date().toLocaleTimeString()
+            });
+            appState.broadcastLog = appState.broadcastLog.slice(0, 20);
+            saveState(appState);
+            noticeTicker.querySelector(".ticker-track").textContent =
+              `📢 LATEST BROADCAST (${new Date().toLocaleTimeString()}): ${msg} • Sir Haroon Javaid Hashmi Academy & College`;
+          }
+        }, 10);
+      }
+
+      if (event.target && event.target.closest('[data-target="contact"]')) {
+        setTimeout(() => {
+          if (!panelEl.classList.contains("open")) return;
+          const auditBox = document.createElement("div");
+          auditBox.className = "sub-box";
+          auditBox.innerHTML = `
+            <div style="margin-bottom:6px;"><strong>Saved Local Audit Summary:</strong></div>
+            <div style="font-size:0.82rem;margin-bottom:8px;">
+              Receipts Logged: <strong>${appState.receipts.length}</strong> | Broadcasts Sent: <strong>${appState.broadcastLog.length}</strong>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button type="button" id="printViewBtn" class="nav-pill">Print / Save PDF View</button>
+              <button type="button" id="clearAuditBtn" class="close-btn">Clear Saved Log</button>
+            </div>
+          `;
+          panelBodyEl.appendChild(auditBox);
+
+          document.getElementById("printViewBtn")?.addEventListener("click", () => {
+            window.print();
+          });
+
+          document.getElementById("clearAuditBtn")?.addEventListener("click", () => {
+            appState.receipts = [];
+            appState.broadcastLog = [];
+            saveState(appState);
+            auditBox.querySelector("div:nth-child(2)").innerHTML =
+              "Receipts Logged: <strong>0</strong> | Broadcasts Sent: <strong>0</strong>";
+          });
+        }, 15);
+      }
+    });
+
+    if (updatesCountEl && typeof updatesCountEl.textContent === "string") {
+      updatesCountEl.textContent = updatesCountEl.textContent || "3";
+    }
+  })();
+</script>
