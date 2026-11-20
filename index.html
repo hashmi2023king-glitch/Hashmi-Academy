@@ -384,3 +384,189 @@
   </script>
 </body>
 </html>
+<script>
+  (function () {
+    const panelBodyEl = document.getElementById("panelBody");
+    const panelTitleEl = document.getElementById("panelTitle");
+    const panelEl = document.getElementById("dynamicPanel");
+    if (!panelBodyEl || !panelTitleEl || !panelEl) return;
+
+    const libraryCatalog = [
+      { title: "Directory of Open Access Books (DOAB) — Peer-Reviewed Monographs", track: "Open Access / Research", level: "Higher Ed & Reference" },
+      { title: "Foundational English, Urdu & Mathematics (Nursery – Grade 5)", track: "School Boards & Cambridge", level: "Primary" },
+      { title: "Secondary Sciences, Pakistan Studies & Islamiat (Grades 6 – 10)", track: "School Boards & O Levels", level: "Secondary" },
+      { title: "Intermediate & A Level Core Sciences, Humanities & Commerce", track: "FSc / ICS / FA / A Levels", level: "Higher Secondary" },
+      { title: "CSS, PMS & Tehsildar — Syllabus & Current Affairs Compendium", track: "Competitive Exams", level: "Civil Services" },
+      { title: "MDCAT & ECAT — Concept Drills & Past Paper Banks", track: "Entry Tests", level: "Pre-Medical / Engineering" },
+      { title: "IELTS Academic & General + Urdu, Spanish & German Guides", track: "Languages", level: "All Levels" }
+    ];
+
+    const registerPages = {
+      "83": [
+        { roll: "01", name: "Ayesha Tariq", status: "Present" },
+        { roll: "02", name: "Bilal Mahmood", status: "Present" },
+        { roll: "03", name: "Hamza Siddiqui", status: "Absent" }
+      ],
+      "84": [
+        { roll: "04", name: "Zainab Farooq", status: "Present" },
+        { roll: "05", name: "Usman Ghani", status: "Present" },
+        { roll: "06", name: "Maryam Khalid", status: "Leave" }
+      ],
+      "85": [
+        { roll: "07", name: "Ali Raza", status: "Present" },
+        { roll: "08", name: "Hira Naveed", status: "Present" }
+      ],
+      "86": [
+        { roll: "09", name: "Saad Ahmed", status: "Absent" },
+        { roll: "10", name: "Fatima Noor", status: "Present" }
+      ],
+      "87": [
+        { roll: "11", name: "Daniyal Mirza", status: "Present" },
+        { roll: "12", name: "Sanaullah Khan", status: "Present" }
+      ],
+      "88": [
+        { roll: "13", name: "Mahnoor Aslam", status: "Present" },
+        { roll: "14", name: "Taha Javed", status: "Absent" }
+      ],
+      "89": [
+        { roll: "15", name: "Khadija Shah", status: "Present" },
+        { roll: "16", name: "Zohaib Malik", status: "Present" }
+      ]
+    };
+
+    function renderPortalsView() {
+      panelTitleEl.textContent = "Academic Portals";
+      panelBodyEl.innerHTML = `
+        <div style="display:grid;gap:8px;">
+          <button type="button" class="action-btn portal-sub-btn" data-portal="pk">🇵🇰 Pakistani Students Portal (Nursery–Grade 12, Boards, CSS/PMS, MDCAT/ECAT)</button>
+          <button type="button" class="action-btn portal-sub-btn" data-portal="intl">🌍 International Students Portal (GBP £ Fee & Global Tracks)</button>
+          <button type="button" class="action-btn portal-sub-btn" data-portal="teacher">👨‍🏫 Teacher LMS Portal (Classes, Attendance & Syllabus)</button>
+          <button type="button" class="action-btn portal-sub-btn" data-portal="admin">🛡️ Director Admin LMS (Accounts, HR, Payroll & Expansion)</button>
+        </div>
+        <div id="portalDetailBox" style="margin-top:12px;padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
+          Select any portal above to inspect its active modules.
+        </div>
+      `;
+
+      const details = {
+        pk: "<strong>Pakistani Students Portal:</strong> Covers Nursery to Grade 12 across Pakistani boards, CSS, PMS, Tehsildar, MDCAT, ECAT, and language tracks (IELTS, Urdu, Spanish, German).",
+        intl: "<strong>International Students Portal:</strong> Segregated global student track structured with Pound Sterling (£) fee display and international curriculum schedules.",
+        teacher: "<strong>Teacher LMS Portal:</strong> Manages daily class schedules, student attendance marking, lesson plans, and syllabus tracking.",
+        admin: "<strong>Director Admin LMS:</strong> Central control for admissions, fee verification, payroll, HR, faculty hiring, and District Gujrat to global phase toggles."
+      };
+
+      panelBodyEl.querySelectorAll(".portal-sub-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const box = document.getElementById("portalDetailBox");
+          if (box) box.innerHTML = details[btn.dataset.portal] || "";
+        });
+      });
+    }
+
+    function renderLibraryView() {
+      panelTitleEl.textContent = "Library — All Boards & Systems";
+      panelBodyEl.innerHTML = `
+        <input id="libSearchInput" type="text" placeholder="Filter books or subjects..." style="width:100%;padding:9px 11px;border-radius:8px;border:1px solid #d4af37;background:#07142b;color:#fff;margin-bottom:10px;" />
+        <ul id="libResultList" class="panel-list"></ul>
+      `;
+
+      const input = document.getElementById("libSearchInput");
+      const list = document.getElementById("libResultList");
+
+      function drawList(query) {
+        const q = (query || "").trim().toLowerCase();
+        const matches = libraryCatalog.filter(
+          (item) =>
+            item.title.toLowerCase().includes(q) ||
+            item.track.toLowerCase().includes(q) ||
+            item.level.toLowerCase().includes(q)
+        );
+        list.innerHTML = matches.length
+          ? matches.map((m) => `<li><strong>${m.title}</strong> — <em>${m.track}</em> (${m.level})</li>`).join("")
+          : "<li>No matching books found.</li>";
+      }
+
+      drawList("");
+      input.addEventListener("input", (e) => drawList(e.target.value));
+    }
+
+    function renderRegisterView() {
+      panelTitleEl.textContent = "Daily Register — Pages 83–89";
+      const pageKeys = Object.keys(registerPages);
+      panelBodyEl.innerHTML = `
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+          ${pageKeys
+            .map(
+              (p, idx) =>
+                `<button type="button" class="nav-pill reg-page-btn ${idx === 0 ? "active" : ""}" data-page="${p}">Page ${p}</button>`
+            )
+            .join("")}
+        </div>
+        <div id="registerTableWrap"></div>
+      `;
+
+      const wrap = document.getElementById("registerTableWrap");
+      const statuses = ["Present", "Absent", "Leave"];
+
+      function drawPage(pageNum) {
+        const rows = registerPages[pageNum] || [];
+        wrap.innerHTML = `
+          <table style="width:100%;border-collapse:collapse;font-size:0.86rem;">
+            <thead>
+              <tr style="border-bottom:1px solid #d4af37;text-align:left;">
+                <th style="padding:6px;">Roll</th>
+                <th style="padding:6px;">Name</th>
+                <th style="padding:6px;">Status (Tap to Cycle)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows
+                .map(
+                  (r, i) => `
+                <tr style="border-bottom:1px solid rgba(212,175,55,0.25);">
+                  <td style="padding:6px;">${r.roll}</td>
+                  <td style="padding:6px;">${r.name}</td>
+                  <td style="padding:6px;">
+                    <button type="button" class="close-btn reg-status-btn" data-idx="${i}">${r.status}</button>
+                  </td>
+                </tr>`
+                )
+                .join("")}
+            </tbody>
+          </table>
+        `;
+
+        wrap.querySelectorAll(".reg-status-btn").forEach((sBtn) => {
+          sBtn.addEventListener("click", () => {
+            const idx = Number(sBtn.dataset.idx);
+            const current = rows[idx].status;
+            const next = statuses[(statuses.indexOf(current) + 1) % statuses.length];
+            rows[idx].status = next;
+            sBtn.textContent = next;
+          });
+        });
+      }
+
+      drawPage("83");
+      panelBodyEl.querySelectorAll(".reg-page-btn").forEach((pBtn) => {
+        pBtn.addEventListener("click", () => {
+          panelBodyEl.querySelectorAll(".reg-page-btn").forEach((b) => b.classList.remove("active"));
+          pBtn.classList.add("active");
+          drawPage(pBtn.dataset.page);
+        });
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-target]");
+      if (!trigger) return;
+      const target = trigger.dataset.target;
+      setTimeout(() => {
+        if (!panelEl.classList.contains("open")) return;
+        if (target === "portals") renderPortalsView();
+        else if (target === "library") renderLibraryView();
+        else if (target === "register") renderRegisterView();
+      }, 0);
+    });
+  })();
+</script>
