@@ -1,996 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sir Haroon Javaid Hashmi — Global Academy &amp; College</title>
-  <style>
-    :root {
-      --bg-navy: #061329;
-      --bg-card: #0b1e3f;
-      --gold: #d4af37;
-      --gold-bright: #f0cf65;
-      --gold-border: rgba(212, 175, 55, 0.55);
-      --green-btn: #154a2d;
-      --green-hover: #1d643d;
-      --white: #ffffff;
-      --muted: #cbd5e1;
-      --blue-link: #60a5fa;
-      --active-green: #22c55e;
-      --warn-amber: #f59e0b;
-      --danger-red: #f87171;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      padding: 12px;
-    }
-
-    .book-stage {
-      max-width: 700px;
-      margin: 0 auto;
-      perspective: 1800px;
-    }
-
-    .page-card {
-      position: relative;
-      border: 2px solid var(--gold);
-      border-radius: 16px;
-      background:
-        radial-gradient(circle at top, rgba(212, 175, 55, 0.18), transparent 55%),
-        linear-gradient(180deg, #091b3a 0%, #050e20 100%);
-      padding: 16px 18px 20px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-      transform-origin: left center;
-      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
-    }
-
-    .page-card.flipping {
-      transform: rotateY(-75deg);
-      opacity: 0.25;
-    }
-
-    .hidden-view {
-      display: none;
-    }
-
-    .top-meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-      border-bottom: 1px solid var(--gold-border);
-    }
-
-    .lms-badge {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--gold);
-      background: var(--bg-card);
-      border: 1px solid var(--gold-border);
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
-
-    .live-clock {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--gold-bright);
-      font-variant-numeric: tabular-nums;
-      background: var(--bg-card);
-      border: 1px solid var(--gold-border);
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-
-    .welcome-photo-wrap {
-      border: 2px solid var(--gold);
-      border-radius: 14px;
-      overflow: hidden;
-      background-color: #050f24;
-      margin-bottom: 12px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
-    }
-
-    .welcome-photo-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
-
-    .photo-fallback-notice {
-      display: none;
-      padding: 14px;
-      text-align: center;
-      font-size: 0.86rem;
-      color: var(--gold-bright);
-      line-height: 1.5;
-    }
-
-    .quote-section {
-      background: rgba(11, 30, 63, 0.92);
-      border-left: 3px solid var(--gold);
-      border-right: 3px solid var(--gold);
-      border-radius: 10px;
-      padding: 11px 14px;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    .quote-text {
-      font-size: 0.98rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--gold-bright);
-      margin-bottom: 5px;
-    }
-
-    .director-attribution {
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--white);
-    }
-
-    .language-bar-box {
-      background-color: var(--bg-card);
-      border: 1.5px solid var(--gold);
-      border-radius: 11px;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-    }
-
-    .language-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .language-label {
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: var(--gold-bright);
-      white-space: nowrap;
-    }
-
-    .language-empty-box {
-      flex: 1 1 auto;
-      min-width: 0;
-      background-color: var(--bg-navy);
-      border: 1.5px solid var(--gold);
-      border-radius: 8px;
-      padding: 8px 10px;
-      color: var(--white);
-      font-size: 0.88rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .language-empty-box.empty-placeholder {
-      color: #94a3b8;
-      font-weight: 500;
-    }
-
-    .language-scroll-drawer {
-      display: none;
-      margin-top: 8px;
-      border: 1px solid var(--gold-border);
-      border-radius: 8px;
-      background-color: #050e20;
-      padding: 8px;
-    }
-
-    .language-scroll-drawer.open {
-      display: block;
-    }
-
-    .lang-search-input {
-      width: 100%;
-      padding: 7px 10px;
-      margin-bottom: 6px;
-      border-radius: 6px;
-      border: 1px solid var(--gold-border);
-      background-color: var(--bg-navy);
-      color: var(--white);
-      font-size: 0.84rem;
-    }
-
-    .language-scroll-list {
-      max-height: 165px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold) var(--bg-navy);
-      display: grid;
-      gap: 4px;
-      padding-right: 4px;
-    }
-
-    .language-scroll-list::-webkit-scrollbar {
-      width: 7px;
-    }
-
-    .language-scroll-list::-webkit-scrollbar-track {
-      background: var(--bg-navy);
-      border-radius: 4px;
-    }
-
-    .language-scroll-list::-webkit-scrollbar-thumb {
-      background-color: var(--gold);
-      border-radius: 4px;
-    }
-
-    .lang-option-btn {
-      width: 100%;
-      text-align: left;
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--white);
-      padding: 6px 9px;
-      border-radius: 6px;
-      font-size: 0.84rem;
-      cursor: pointer;
-    }
-
-    .lang-option-btn:hover,
-    .lang-option-btn.selected {
-      background-color: var(--green-btn);
-      border-color: var(--gold);
-    }
-
-    .flip-side-bar {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .flip-page-btn {
-      background: linear-gradient(135deg, #d4af37 0%, #b38b1d 100%);
-      color: #061329;
-      border: 1px solid var(--gold-bright);
-      border-radius: 999px;
-      padding: 9px 16px;
-      font-size: 0.86rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .page-heading {
-      font-size: 1.12rem;
-      font-weight: 800;
-      color: var(--gold-bright);
-    }
-
-    .nav-back-btn {
-      background-color: var(--green-btn);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .portal-card {
-      background-color: var(--bg-card);
-      border: 1.5px solid var(--gold-border);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 11px;
-    }
-
-    .portal-card-btn {
-      width: 100%;
-      background-color: var(--green-btn);
-      color: var(--white);
-      border: 1.5px solid var(--gold);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 0.95rem;
-      font-weight: 800;
-      cursor: pointer;
-      text-align: center;
-      transition: background-color 0.15s ease;
-    }
-
-    .portal-card-btn:hover {
-      background-color: var(--green-hover);
-    }
-
-    .portal-sub-options {
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed var(--gold-border);
-    }
-
-    .portal-sub-options.open {
-      display: grid;
-    }
-
-    .sub-choice-btn {
-      background-color: var(--bg-navy);
-      color: var(--gold-bright);
-      border: 1.5px solid var(--gold);
-      border-radius: 9px;
-      padding: 10px 10px;
-      font-size: 0.88rem;
-      font-weight: 800;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .sub-choice-btn:hover {
-      background-color: var(--green-btn);
-      color: var(--white);
-    }
-
-    .fourth-status-strip {
-      background-color: var(--bg-card);
-      border: 1.5px solid var(--gold);
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 4px;
-    }
-
-    .status-bar-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .status-label-btn {
-      background-color: var(--gold);
-      color: #061329;
-      border: none;
-      border-radius: 8px;
-      padding: 9px 12px;
-      font-size: 0.84rem;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .admission-bar-input {
-      flex: 1 1 200px;
-      min-width: 0;
-      padding: 9px 11px;
-      border-radius: 8px;
-      border: 1.5px solid var(--gold);
-      background-color: var(--bg-navy);
-      color: var(--white);
-      font-size: 0.88rem;
-    }
-
-    .admission-bar-input::placeholder {
-      color: #94a3b8;
-    }
-
-    .status-result-card {
-      display: none;
-      margin-top: 10px;
-      padding: 11px;
-      border-radius: 10px;
-      background-color: var(--bg-navy);
-      font-size: 0.86rem;
-      line-height: 1.55;
-    }
-
-    .status-result-card.show {
-      display: block;
-    }
-
-    .status-result-card.is-active {
-      border: 1.5px solid var(--active-green);
-    }
-
-    .status-result-card.is-inactive {
-      border: 1.5px solid var(--danger-red);
-    }
-
-    .detail-box {
-      background-color: var(--bg-card);
-      border: 1px solid var(--gold-border);
-      border-radius: 11px;
-      padding: 12px;
-      margin-bottom: 12px;
-      font-size: 0.86rem;
-      line-height: 1.55;
-    }
-
-    .detail-box ul {
-      margin-top: 6px;
-      padding-left: 18px;
-    }
-
-    .detail-box li {
-      margin-bottom: 5px;
-    }
-
-    .system-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .system-select-btn {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      border: 1.5px solid var(--gold);
-      border-radius: 9px;
-      padding: 9px 11px;
-      font-size: 0.84rem;
-      font-weight: 800;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .system-select-btn.active {
-      background-color: var(--green-btn);
-      color: var(--gold-bright);
-      border-color: var(--gold-bright);
-    }
-
-    .tag-done {
-      display: inline-block;
-      margin-top: 4px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #22c55e;
-    }
-
-    .tag-pending {
-      display: inline-block;
-      margin-top: 4px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #f59e0b;
-    }
-
-    .subj-catalog-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      background-color: var(--bg-navy);
-      border: 1px solid var(--gold-border);
-      border-radius: 8px;
-      padding: 7px 10px;
-      margin-bottom: 6px;
-      font-size: 0.82rem;
-    }
-
-    .badge-compulsory {
-      background-color: rgba(34, 197, 94, 0.18);
-      color: #4ade80;
-      border: 1px solid #22c55e;
-      border-radius: 999px;
-      padding: 2px 8px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .badge-optional {
-      background-color: rgba(240, 207, 101, 0.16);
-      color: #f0cf65;
-      border: 1px solid #d4af37;
-      border-radius: 999px;
-      padding: 2px 8px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .stream-btn-row {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin: 8px 0;
-    }
-
-    .stream-pill-btn {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 7px 12px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .stream-pill-btn.active {
-      background-color: var(--green-btn);
-      color: var(--gold-bright);
-      border-color: var(--gold-bright);
-    }
-
-    .opt-subject-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-      gap: 6px;
-      margin: 8px 0;
-    }
-
-    .opt-check-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background-color: var(--bg-navy);
-      border: 1px solid var(--gold-border);
-      border-radius: 7px;
-      padding: 6px 8px;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    .course-main-stack {
-      display: grid;
-      gap: 9px;
-      margin-bottom: 12px;
-    }
-
-    .course-opt-btn {
-      width: 100%;
-      background-color: var(--green-btn);
-      color: var(--white);
-      border: 1.5px solid var(--gold);
-      border-radius: 10px;
-      padding: 11px 14px;
-      font-size: 0.9rem;
-      font-weight: 800;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .course-opt-btn:hover,
-    .course-opt-btn.active {
-      background-color: var(--green-hover);
-      border-color: var(--gold-bright);
-    }
-
-    .type-pill-row {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin: 8px 0;
-    }
-
-    .type-pill-btn {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 7px 12px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .type-pill-btn.active {
-      background-color: var(--gold);
-      color: #061329;
-    }
-
-    .field-label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--gold-bright);
-      margin-top: 8px;
-      margin-bottom: 4px;
-    }
-
-    .field-input {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--gold);
-      background-color: var(--bg-navy);
-      color: var(--white);
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-    }
-
-    .small-gold-btn {
-      background-color: var(--gold);
-      color: #061329;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .small-gold-btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .calc-summary-box {
-      margin-top: 10px;
-      background-color: #050e20;
-      border: 1.5px solid var(--gold);
-      border-radius: 10px;
-      padding: 11px;
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
-
-    .upload-status-pill {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 5px 10px;
-      border-radius: 7px;
-      background-color: var(--bg-navy);
-      border: 1px solid var(--gold-border);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--gold-bright);
-    }
-
-    .science-modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(2, 8, 20, 0.78);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-    }
-
-    .science-modal-backdrop.open {
-      display: flex;
-    }
-
-    .science-modal-box {
-      width: 100%;
-      max-width: 380px;
-      background: var(--bg-card);
-      border: 2px solid var(--gold);
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-    }
-
-    .science-choice-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .admin-tabs {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .admin-tab-btn {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 7px 10px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .admin-tab-btn.active {
-      background-color: var(--gold);
-      color: #061329;
-    }
-
-    .backup-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.8rem;
-      margin-top: 8px;
-    }
-
-    .backup-table th,
-    .backup-table td {
-      padding: 6px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-      text-align: left;
-    }
-  </style>
-</head>
-<body>
-  <div class="book-stage">
-    <section id="welcomePage" class="page-card" aria-label="Page 1 Welcome Page">
-      <div class="top-meta-row">
-        <span class="lms-badge" data-i18n="page1Badge">Page 1 • Welcome Page</span>
-        <span id="liveClock" class="live-clock">--:--:--</span>
-      </div>
-
-      <div class="welcome-photo-wrap">
-        <img
-          id="welcomePhotoImg"
-          class="welcome-photo-img"
-          src="IMG-20261120-WA2906_2.jpg"
-          alt="Sir Haroon Javaid Hashmi Academy & College — Welcome"
-        />
-        <div id="photoFallbackNotice" class="photo-fallback-notice">
-          Place <strong>IMG-20261120-WA2906_2.jpg</strong> in the same folder as <strong>index.html</strong> to display the Welcome Page photo.
-        </div>
-      </div>
-
-      <div class="quote-section">
-        <p class="quote-text">“A man can be destroyed but not defeated”</p>
-        <p class="director-attribution">Director Haroon Javaid Hashmi</p>
-      </div>
-
-      <div class="language-bar-box">
-        <div class="language-row">
-          <span class="language-label" data-i18n="languageLabel">Language:</span>
-          <button
-            type="button"
-            id="languageEmptyBox"
-            class="language-empty-box empty-placeholder"
-            aria-expanded="false"
-          >
-            <span id="selectedLanguageText">Select Language (Worldwide)</span>
-            <span>▼</span>
-          </button>
-        </div>
-
-        <div id="languageScrollDrawer" class="language-scroll-drawer">
-          <input
-            type="text"
-            id="languageSearchInput"
-            class="lang-search-input"
-            placeholder="Search any language in the world..."
-          />
-          <div id="languageScrollList" class="language-scroll-list" role="listbox"></div>
-        </div>
-      </div>
-
-      <div class="flip-side-bar">
-        <button type="button" id="flipToPortalsBtn" class="flip-page-btn" data-i18n="flipPageBtn">
-          Flip Page ➡️
-        </button>
-      </div>
-    </section>
-
-    <section id="portalPage" class="page-card hidden-view" aria-label="Page 2 Portal Page">
-      <div class="top-meta-row">
-        <h2 class="page-heading" data-i18n="portalPageHeading">Portal Page</h2>
-        <button type="button" class="nav-back-btn" data-go-page="welcome-page" data-i18n="backWelcomeBtn">
-          ⬅️ Welcome Page
-        </button>
-      </div>
-
-      <div class="portal-card">
-        <button type="button" id="pakPortalToggleBtn" class="portal-card-btn" data-i18n="pakPortalBtn">
-          1. Pakistani Students Portal
-        </button>
-        <div id="pakSubOptions" class="portal-sub-options">
-          <button type="button" class="sub-choice-btn" data-open-page3="pakistani" data-entry-type="Classes" data-i18n="classesOpt">
-            1. Classes
-          </button>
-          <button type="button" class="sub-choice-btn" data-open-page3="pakistani" data-entry-type="Courses" data-i18n="coursesOpt">
-            2. Courses
-          </button>
-        </div>
-      </div>
-
-      <div class="portal-card">
-        <button type="button" id="intlPortalToggleBtn" class="portal-card-btn" data-i18n="intlPortalBtn">
-          2. International Students Portal
-        </button>
-        <div id="intlSubOptions" class="portal-sub-options">
-          <button type="button" class="sub-choice-btn" data-open-page3="international" data-entry-type="Classes" data-i18n="classesOpt">
-            1. Classes
-          </button>
-          <button type="button" class="sub-choice-btn" data-open-page3="international" data-entry-type="Courses" data-i18n="coursesOpt">
-            2. Courses
-          </button>
-        </div>
-      </div>
-
-      <div class="portal-card">
-        <button type="button" class="portal-card-btn" data-go-page="admin-portal" data-i18n="adminPortalBtn">
-          3. Admin Portal
-        </button>
-      </div>
-
-      <div class="fourth-status-strip">
-        <div class="status-bar-row">
-          <button type="button" id="checkStatusTriggerBtn" class="status-label-btn" data-i18n="checkAdmStatusLabel">
-            Check Admission Status
-          </button>
-          <input
-            id="admissionNumberBar"
-            class="admission-bar-input"
-            type="text"
-            placeholder="Write Admission Number & Press Enter (e.g. SHJ-101 or SHJ-104)"
-            aria-label="Admission Number"
-          />
-        </div>
-        <div id="admissionStatusResultCard" class="status-result-card"></div>
-      </div>
-    </section>
-
-    <section id="subViewPage" class="page-card hidden-view" aria-live="polite">
-      <div class="top-meta-row">
-        <h2 id="subViewTitle" class="page-heading">Page 3</h2>
-        <button type="button" class="nav-back-btn" data-go-page="portal-page" data-i18n="backPortalPageBtn">
-          ⬅️ Portal Page
-        </button>
-      </div>
-      <div id="subViewBody"></div>
-    </section>
-  </div>
-
-  <div id="scienceBranchModal" class="science-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="sciModalTitle">
-    <div class="science-modal-box">
-      <h3 id="sciModalTitle" style="color:#f0cf65;font-size:1rem;font-weight:800;">Science Stream Selection</h3>
-      <p style="color:#cbd5e1;font-size:0.86rem;margin-top:6px;">
-        Choose one branch to continue in Science:
-      </p>
-      <div class="science-choice-grid">
-        <button type="button" id="pickComputerScienceBtn" class="portal-card-btn">Computer Science</button>
-        <button type="button" id="pickBiologyBtn" class="portal-card-btn">Biology</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      const BACKUP_STORAGE_KEY = "SHJ_ADMIN_STRONG_BACKUP_FINAL_V4";
-      const MAX_SIZE = 2 * 1024 * 1024;
-
-      const clockEl = document.getElementById("liveClock");
-      const welcomePhotoImg = document.getElementById("welcomePhotoImg");
-      const photoFallbackNotice = document.getElementById("photoFallbackNotice");
-
-      const welcomePage = document.getElementById("welcomePage");
-      const portalPage = document.getElementById("portalPage");
-      const subViewPage = document.getElementById("subViewPage");
-      const subViewTitle = document.getElementById("subViewTitle");
-      const subViewBody = document.getElementById("subViewBody");
-
-      const languageEmptyBox = document.getElementById("languageEmptyBox");
-      const selectedLanguageText = document.getElementById("selectedLanguageText");
-      const languageScrollDrawer = document.getElementById("languageScrollDrawer");
-      const languageSearchInput = document.getElementById("languageSearchInput");
-      const languageScrollList = document.getElementById("languageScrollList");
-
-      const flipToPortalsBtn = document.getElementById("flipToPortalsBtn");
-      const pakPortalToggleBtn = document.getElementById("pakPortalToggleBtn");
-      const pakSubOptions = document.getElementById("pakSubOptions");
-      const intlPortalToggleBtn = document.getElementById("intlPortalToggleBtn");
-      const intlSubOptions = document.getElementById("intlSubOptions");
-
-      const checkStatusTriggerBtn = document.getElementById("checkStatusTriggerBtn");
-      const admissionNumberBar = document.getElementById("admissionNumberBar");
-      const admissionStatusResultCard = document.getElementById("admissionStatusResultCard");
-
-      const scienceModal = document.getElementById("scienceBranchModal");
-      const pickComputerScienceBtn = document.getElementById("pickComputerScienceBtn");
-      const pickBiologyBtn = document.getElementById("pickBiologyBtn");
-
-      let onScienceBranchSelected = null;
-
-      const SafeUploadManager = {
-        isUploaded: false,
-        pendingFileData: null,
-
-        checkFile(file) {
-          if (!file) {
-            alert("Please select a file first.");
-            return false;
-          }
-          if (file.size > MAX_SIZE) {
-            alert("File is too large. Please select a file less than 2 MB.");
-            return false;
-          }
-          return true;
-        },
-
-        showStatus(statusEl, state, customText) {
-          if (!statusEl) return;
-          if (customText) {
-            statusEl.innerText = customText;
-          } else if (state === "uploading") {
-            statusEl.innerText = "Uploading... Please wait";
-          } else if (state === "uploaded") {
-            statusEl.innerText = "Uploaded - Now you can press Save";
-          } else if (state === "failed") {
-            statusEl.innerText = "Upload Failed - Try again on strong Internet";
-          } else {
-            statusEl.innerText = "Waiting...";
-          }
-        },
-
-        async sendToServer(file) {
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              resolve({
-                name: file.name,
-                sizeBytes: file.size,
-                sizeKB: `${Math.max(1, Math.round(file.size / 1024))} KB`,
-                type: file.type || "application/octet-stream",
-                uploadedAt: new Date().toLocaleString()
-              });
-            }, 650);
-          });
-        },
-
-        async uploadWithRetry(file, options = {}) {
-          const tries = options.tries || 3;
-          const commitBtn = options.commitBtn || null;
-          const statusEl = options.statusEl || null;
-
-          this.isUploaded = false;
-          this.pendingFileData = null;
-if (commitBtn) commitBtn.disabled = true;
-
-          if (!this.checkFile(file)) {
-            this.showStatus(statusEl, "failed", "Upload Stopped - File must be less than 2 MB.");
-            return false;
-          }
-
-          for (let attempt = 1; attempt <= tries; attempt++) {
-            try {
-              this.showStatus(
-                statusEl,
-                "uploading",
-                attempt === 1
-                  ? "Uploading... Please wait"
-                  : `Uploading... Retry ${attempt} of ${tries}`
-              );
-              const payload = await this.sendToServer(file);
-              this.pendingFileData = payload;
-              this.isUploaded = true;
-              if (commitBtn) commitBtn.disabled = false;
-              this.showStatus(statusEl, "uploaded", "Uploaded - Now you can press Save");
-              alert("Uploaded Successfully");
-              return true;
-            } catch (error) {
-              console.log("Try " + attempt + " Failed: " + error);
-              if (attempt === tries) {
-                this.isUploaded = false;
-                this.pendingFileData = null;
-                if (commitBtn) commitBtn.disabled = true;
-                this.showStatus(statusEl, "failed", "Upload Failed - Check internet and try again");
-                alert("Internet is weak. Please check WiFi / 4G and try again.");
-                return false;
-              }
-            }
-          }
-          return false;
-        }
-      };
-
-      window.SafeUploadManager = SafeUploadManager;
-
-      welcomePhotoImg?.addEventListener("error", () => {
+welcomePhotoImg?.addEventListener("error", () => {
         if (welcomePhotoImg.dataset.triedAlt !== "1") {
           welcomePhotoImg.dataset.triedAlt = "1";
           welcomePhotoImg.src = "IMG-20261120-WA2906.jpg";
@@ -1016,843 +24,128 @@ if (commitBtn) commitBtn.disabled = true;
         }
       });
 
-      const systemClassSubjectCatalog = {
-        government: {
-          "Class 3": {
-            tag: "Primary Level — Classes 3 to 5",
-            rule: "At Primary Stage, all subjects are Compulsory. General Knowledge in Class 3 splits into General Science and Social Studies in Classes 4 and 5.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Islamiat or Ethics / Religious Education for Non-Muslims", category: "Compulsory" },
-              { name: "General Knowledge", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" }
-            ]
-          },
-          "Class 4": {
-            tag: "Primary Level — Classes 3 to 5",
-            rule: "At Primary Stage, all subjects are Compulsory. General Knowledge splits into General Science and Social Studies.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat or Ethics", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" }
-            ]
-          },
-          "Class 5": {
-            tag: "Primary Level — Classes 3 to 5",
-            rule: "At Primary Stage, all subjects are Compulsory. General Knowledge splits into General Science and Social Studies.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat or Ethics", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" }
-            ]
-          },
-          "Class 6": {
-            tag: "Middle Level — Classes 6 to 8",
-            rule: "Social Studies separates into History and Geography. Computer Education becomes mandatory. Student chooses 1 to 2 Optional Subjects.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Computer Education", category: "Compulsory" },
-              { name: "Islamiat or Ethics", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "Arabic", category: "Optional" },
-              { name: "Persian", category: "Optional" },
-              { name: "Punjabi", category: "Optional" },
-              { name: "Art and Drawing", category: "Optional" },
-              { name: "Home Economics", category: "Optional" },
-              { name: "Agriculture", category: "Optional" },
-              { name: "Physical Education", category: "Optional" }
-            ]
-          },
-          "Class 7": {
-            tag: "Middle Level — Classes 6 to 8",
-            rule: "Social Studies separates into History and Geography. Computer Education becomes mandatory. Student chooses 1 to 2 Optional Subjects.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Computer Education", category: "Compulsory" },
-              { name: "Islamiat or Ethics", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "Arabic", category: "Optional" },
-              { name: "Persian", category: "Optional" },
-              { name: "Punjabi", category: "Optional" },
-              { name: "Art and Drawing", category: "Optional" },
-              { name: "Home Economics", category: "Optional" },
-              { name: "Agriculture", category: "Optional" },
-              { name: "Physical Education", category: "Optional" }
-            ]
-          },
-          "Class 8": {
-            tag: "Middle Level — Classes 6 to 8",
-            rule: "Social Studies separates into History and Geography. Computer Education becomes mandatory. Student chooses 1 to 2 Optional Subjects.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Computer Education", category: "Compulsory" },
-              { name: "Islamiat or Ethics", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "Arabic", category: "Optional" },
-              { name: "Persian", category: "Optional" },
-              { name: "Punjabi", category: "Optional" },
-              { name: "Art and Drawing", category: "Optional" },
-              { name: "Home Economics", category: "Optional" },
-              { name: "Agriculture", category: "Optional" },
-              { name: "Physical Education", category: "Optional" }
-            ]
-          },
-          "Class 9": {
-            tag: "Secondary / Matric Level — Class 9",
-            rule: "Student selects a specialized academic stream examined by BISE (Science Group, Humanities / Arts Group, Commerce Group, or Matric-Tech Stream).",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Islamiat or Ethics", category: "Compulsory" },
-              { name: "Pakistan Studies", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "Mathematics (Science Group)", category: "Optional" },
-              { name: "Physics (Science Group)", category: "Optional" },
-              { name: "Chemistry (Science Group)", category: "Optional" },
-              { name: "Biology (Science Choice)", category: "Optional" },
-              { name: "Computer Science and ICT (Science Choice)", category: "Optional" },
-              { name: "General Mathematics (Humanities / Commerce)", category: "Optional" },
-              { name: "General Science (Humanities / Commerce)", category: "Optional" },
-              { name: "Civics (Humanities / Arts)", category: "Optional" },
-              { name: "Education (Humanities / Arts)", category: "Optional" },
-              { name: "Economics (Humanities / Arts)", category: "Optional" },
-              { name: "Home Economics (Humanities / Arts)", category: "Optional" },
-              { name: "Islamic Studies Elective (Humanities / Arts)", category: "Optional" },
-              { name: "Health and Physical Education (Humanities / Arts)", category: "Optional" },
-              { name: "Punjabi / Arabic / Persian (Humanities / Arts)", category: "Optional" },
-              { name: "Commerce Electives (Commerce Group)", category: "Optional" },
-              { name: "Technical & Vocational Trades — IT, Agriculture, Health Sciences (Matric-Tech)", category: "Optional" }
-            ]
-          },
-          "Class 10": {
-            tag: "Secondary / Matric Level — Class 10",
-            rule: "Student selects a specialized academic stream examined by BISE (Science Group, Humanities / Arts Group, Commerce Group, or Matric-Tech Stream).",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Islamiat or Ethics", category: "Compulsory" },
-              { name: "Pakistan Studies", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "Mathematics (Science Group)", category: "Optional" },
-              { name: "Physics (Science Group)", category: "Optional" },
-              { name: "Chemistry (Science Group)", category: "Optional" },
-              { name: "Biology (Science Choice)", category: "Optional" },
-              { name: "Computer Science and ICT (Science Choice)", category: "Optional" },
-              { name: "General Mathematics (Humanities / Commerce)", category: "Optional" },
-              { name: "General Science (Humanities / Commerce)", category: "Optional" },
-              { name: "Civics (Humanities / Arts)", category: "Optional" },
-              { name: "Education (Humanities / Arts)", category: "Optional" },
-              { name: "Economics (Humanities / Arts)", category: "Optional" },
-              { name: "Home Economics (Humanities / Arts)", category: "Optional" },
-              { name: "Islamic Studies Elective (Humanities / Arts)", category: "Optional" },
-              { name: "Health and Physical Education (Humanities / Arts)", category: "Optional" },
-              { name: "Punjabi / Arabic / Persian (Humanities / Arts)", category: "Optional" },
-              { name: "Commerce Electives (Commerce Group)", category: "Optional" },
-              { name: "Technical & Vocational Trades — IT, Agriculture, Health Sciences (Matric-Tech)", category: "Optional" }
-            ]
-          },
-          "Class 11": {
-            tag: "Higher Secondary / Intermediate — First Year",
-            rule: "Islamiat is typically studied in Class 11, while Tarjuma-tul-Quran is taught across both years. Student chooses Any 3 Electives in F.A.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Islamiat (Class 11)", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "Physics (F.Sc. Pre-Medical / Pre-Engineering / ICS)", category: "Optional" },
-              { name: "Chemistry (F.Sc. Pre-Medical / Pre-Engineering)", category: "Optional" },
-              { name: "Biology (F.Sc. Pre-Medical)", category: "Optional" },
-              { name: "Mathematics (F.Sc. Pre-Engineering / ICS)", category: "Optional" },
-              { name: "Computer Science (ICS)", category: "Optional" },
-              { name: "Statistics (ICS)", category: "Optional" },
-              { name: "Economics (ICS / I.Com / F.A.)", category: "Optional" },
-              { name: "Principles of Accounting (I.Com)", category: "Optional" },
-              { name: "Business Math / Statistics (I.Com)", category: "Optional" },
-              { name: "Commerce / Banking / Commercial Geography (I.Com)", category: "Optional" },
-              { name: "Civics (F.A. Humanities)", category: "Optional" },
-              { name: "Education (F.A. Humanities)", category: "Optional" },
-              { name: "Psychology (F.A. Humanities)", category: "Optional" },
-              { name: "Sociology (F.A. Humanities)", category: "Optional" },
-              { name: "History (F.A. Humanities)", category: "Optional" },
-              { name: "Fine Arts (F.A. Humanities)", category: "Optional" },
-              { name: "Languages (F.A. Humanities)", category: "Optional" }
-            ]
-          },
-          "Class 12": {
-            tag: "Higher Secondary / Intermediate — Second Year",
-            rule: "Pakistan Studies is typically studied in Class 12, while Tarjuma-tul-Quran is taught across both years. Student chooses Any 3 Electives in F.A.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Pakistan Studies (Class 12)", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "Physics (F.Sc. Pre-Medical / Pre-Engineering / ICS)", category: "Optional" },
-              { name: "Chemistry (F.Sc. Pre-Medical / Pre-Engineering)", category: "Optional" },
-              { name: "Biology (F.Sc. Pre-Medical)", category: "Optional" },
-              { name: "Mathematics (F.Sc. Pre-Engineering / ICS)", category: "Optional" },
-              { name: "Computer Science (ICS)", category: "Optional" },
-              { name: "Statistics (ICS)", category: "Optional" },
-              { name: "Economics (ICS / I.Com / F.A.)", category: "Optional" },
-              { name: "Principles of Accounting (I.Com)", category: "Optional" },
-              { name: "Business Math / Statistics (I.Com)", category: "Optional" },
-              { name: "Commerce / Banking / Commercial Geography (I.Com)", category: "Optional" },
-              { name: "Civics (F.A. Humanities)", category: "Optional" },
-              { name: "Education (F.A. Humanities)", category: "Optional" },
-              { name: "Psychology (F.A. Humanities)", category: "Optional" },
-              { name: "Sociology (F.A. Humanities)", category: "Optional" },
-              { name: "History (F.A. Humanities)", category: "Optional" },
-              { name: "Fine Arts (F.A. Humanities)", category: "Optional" },
-              { name: "Languages (F.A. Humanities)", category: "Optional" }
-            ]
+      const orderedClasses = [
+        "Class 3", "Class 4", "Class 5",
+        "Class 6", "Class 7", "Class 8",
+        "Class 9", "Class 10", "Class 11", "Class 12"
+      ];
+
+      function buildStageSubjects(sysId, classKey) {
+        const num = parseInt(classKey.replace("Class ", ""), 10) || 9;
+        if (num <= 5) {
+          const base = [
+            { name: "English", category: "Compulsory" },
+            { name: "Urdu", category: "Compulsory" },
+            { name: "Mathematics", category: "Compulsory" },
+            { name: "Islamiat or Ethics", category: "Compulsory" },
+            { name: num === 3 ? "General Knowledge" : "General Science", category: "Compulsory" },
+            { name: "Nazra Quran", category: "Compulsory" }
+          ];
+          if (num >= 4) base.splice(5, 0, { name: "Social Studies", category: "Compulsory" });
+          if (sysId === "american" || sysId === "beacon") {
+            base.push({ name: "ICT / Computer", category: "Optional" }, { name: "Art & Drawing", category: "Optional" });
+          } else if (sysId === "root") {
+            base.push({ name: "Roots-Intel ICT", category: "Optional" }, { name: "Foreign Language (Chinese/German)", category: "Optional" });
+          } else if (sysId === "general") {
+            return base.map((s) => ({ ...s, category: "Optional" }));
           }
-        },
-        american: {
-          "Class 3": {
-            tag: "American Lyceum — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for American Lyceum System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Knowledge / Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" },
-              { name: "Computer / ICT", category: "Optional" },
-              { name: "Art", category: "Optional" }
-            ]
-          },
-          "Class 4": {
-            tag: "American Lyceum — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for American Lyceum System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Knowledge / Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" },
-              { name: "Computer / ICT", category: "Optional" },
-              { name: "Art", category: "Optional" }
-            ]
-          },
-          "Class 5": {
-            tag: "American Lyceum — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for American Lyceum System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Knowledge / Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" },
-              { name: "Computer / ICT", category: "Optional" },
-              { name: "Art", category: "Optional" }
-            ]
-          },
-          "Class 6": {
-            tag: "American Lyceum — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for American Lyceum System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Art", category: "Optional" },
-              { name: "Global Perspectives", category: "Optional" }
-            ]
-          },
-          "Class 7": {
-            tag: "American Lyceum — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for American Lyceum System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Art", category: "Optional" },
-              { name: "Global Perspectives", category: "Optional" }
-            ]
-          },
-          "Class 8": {
-            tag: "American Lyceum — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for American Lyceum System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Art", category: "Optional" },
-              { name: "Global Perspectives", category: "Optional" }
-            ]
-          },
-          "Class 9": {
-            tag: "American Lyceum — Secondary (Classes 9 to 10 / O Level)",
-            rule: "Primarily Cambridge O Levels / IGCSE — 5 Compulsory plus 3 to 5 Electives. Select campuses offer Matric.",
-            subjects: [
-              { name: "English (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Urdu (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Mathematics (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Islamiat (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Pakistan Studies (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Physics (Elective)", category: "Optional" },
-              { name: "Chemistry (Elective)", category: "Optional" },
-              { name: "Biology (Elective)", category: "Optional" },
-              { name: "Computer Science / ICT (Elective)", category: "Optional" },
-              { name: "Economics / Business / Accounting (Elective)", category: "Optional" },
-              { name: "BISE Matric Track (Select Campuses)", category: "Optional" }
-            ]
-          },
-          "Class 10": {
-            tag: "American Lyceum — Secondary (Classes 9 to 10 / O Level)",
-            rule: "Primarily Cambridge O Levels / IGCSE — 5 Compulsory plus 3 to 5 Electives. Select campuses offer Matric.",
-            subjects: [
-              { name: "English (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Urdu (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Mathematics (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Islamiat (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Pakistan Studies (O Level / Matric Compulsory)", category: "Compulsory" },
-              { name: "Physics (Elective)", category: "Optional" },
-              { name: "Chemistry (Elective)", category: "Optional" },
-              { name: "Biology (Elective)", category: "Optional" },
-              { name: "Computer Science / ICT (Elective)", category: "Optional" },
-              { name: "Economics / Business / Accounting (Elective)", category: "Optional" },
-              { name: "BISE Matric Track (Select Campuses)", category: "Optional" }
-            ]
-          },
-          "Class 11": {
-            tag: "American Lyceum — Higher Secondary (Classes 11 to 12 / A Level)",
-            rule: "F.Sc. / ICS / I.Com / F.A. Intermediate and Cambridge A Levels on select campuses.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Islamiat / Pakistan Studies", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "F.Sc. Pre-Medical / Pre-Engineering Subjects", category: "Optional" },
-              { name: "ICS Computer Science Subjects", category: "Optional" },
-              { name: "I.Com Commerce Subjects", category: "Optional" },
-              { name: "F.A. Humanities Subjects", category: "Optional" },
-              { name: "Cambridge A Levels Specialized Subjects (Select Campuses)", category: "Optional" }
-            ]
-          },
-          "Class 12": {
-            tag: "American Lyceum — Higher Secondary (Classes 11 to 12 / A Level)",
-            rule: "F.Sc. / ICS / I.Com / F.A. Intermediate and Cambridge A Levels on select campuses.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Islamiat / Pakistan Studies", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "F.Sc. Pre-Medical / Pre-Engineering Subjects", category: "Optional" },
-              { name: "ICS Computer Science Subjects", category: "Optional" },
-              { name: "I.Com Commerce Subjects", category: "Optional" },
-              { name: "F.A. Humanities Subjects", category: "Optional" },
-              { name: "Cambridge A Levels Specialized Subjects (Select Campuses)", category: "Optional" }
-            ]
-          }
-        },
-        beacon: {
-          "Class 3": {
-            tag: "Beaconhouse — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for Beaconhouse School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" },
-              { name: "ICT", category: "Optional" },
-              { name: "Art and Design", category: "Optional" },
-              { name: "Music / P.E.", category: "Optional" }
-            ]
-          },
-          "Class 4": {
-            tag: "Beaconhouse — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for Beaconhouse School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" },
-              { name: "ICT", category: "Optional" },
-              { name: "Art and Design", category: "Optional" },
-              { name: "Music / P.E.", category: "Optional" }
-            ]
-          },
-          "Class 5": {
-            tag: "Beaconhouse — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for Beaconhouse School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Nazra Quran", category: "Compulsory" },
-              { name: "ICT", category: "Optional" },
-              { name: "Art and Design", category: "Optional" },
-              { name: "Music / P.E.", category: "Optional" }
-            ]
-          },
-          "Class 6": {
-            tag: "Beaconhouse — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for Beaconhouse School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Foreign Language", category: "Optional" },
-              { name: "Global Citizenship", category: "Optional" }
-            ]
-          },
-          "Class 7": {
-            tag: "Beaconhouse — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for Beaconhouse School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Foreign Language", category: "Optional" },
-              { name: "Global Citizenship", category: "Optional" }
-            ]
-          },
-          "Class 8": {
-            tag: "Beaconhouse — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for Beaconhouse School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Foreign Language", category: "Optional" },
-              { name: "Global Citizenship", category: "Optional" }
-            ]
-          },
-          "Class 9": {
-            tag: "Beaconhouse — Secondary (Classes 9 to 10 / O Level)",
-            rule: "Primarily Cambridge O Levels / IGCSE — 5 Compulsory plus 3+ Electives. Select campuses offer Matric.",
-            subjects: [
-              { name: "English (5 Compulsory)", category: "Compulsory" },
-              { name: "Urdu (5 Compulsory)", category: "Compulsory" },
-              { name: "Mathematics (5 Compulsory)", category: "Compulsory" },
-              { name: "Islamiat (5 Compulsory)", category: "Compulsory" },
-              { name: "Pakistan Studies (5 Compulsory)", category: "Compulsory" },
-              { name: "Physics (O Level Elective)", category: "Optional" },
-              { name: "Chemistry (O Level Elective)", category: "Optional" },
-              { name: "Biology (O Level Elective)", category: "Optional" },
-              { name: "Computer Science / ICT (O Level Elective)", category: "Optional" },
-              { name: "Accounting / Economics / Business Studies (O Level Elective)", category: "Optional" },
-              { name: "BISE Matric Option (Select Campuses)", category: "Optional" }
-            ]
-          },
-          "Class 10": {
-            tag: "Beaconhouse — Secondary (Classes 9 to 10 / O Level)",
-            rule: "Primarily Cambridge O Levels / IGCSE — 5 Compulsory plus 3+ Electives. Select campuses offer Matric.",
-            subjects: [
-              { name: "English (5 Compulsory)", category: "Compulsory" },
-              { name: "Urdu (5 Compulsory)", category: "Compulsory" },
-              { name: "Mathematics (5 Compulsory)", category: "Compulsory" },
-              { name: "Islamiat (5 Compulsory)", category: "Compulsory" },
-              { name: "Pakistan Studies (5 Compulsory)", category: "Compulsory" },
-              { name: "Physics (O Level Elective)", category: "Optional" },
-              { name: "Chemistry (O Level Elective)", category: "Optional" },
-              { name: "Biology (O Level Elective)", category: "Optional" },
-              { name: "Computer Science / ICT (O Level Elective)", category: "Optional" },
-              { name: "Accounting / Economics / Business Studies (O Level Elective)", category: "Optional" },
-              { name: "BISE Matric Option (Select Campuses)", category: "Optional" }
-            ]
-          },
-          "Class 11": {
-            tag: "Beaconhouse — Higher Secondary (Classes 11 to 12 / A Level)",
-            rule: "Cambridge A Levels — 3 to 4 Specialized Subjects. Select campuses offer BISE Intermediate.",
-            subjects: [
-              { name: "Cambridge A Level — Physics", category: "Optional" },
-              { name: "Cambridge A Level — Chemistry", category: "Optional" },
-              { name: "Cambridge A Level — Biology", category: "Optional" },
-              { name: "Cambridge A Level — Mathematics", category: "Optional" },
-              { name: "Cambridge A Level — Computer Science", category: "Optional" },
-              { name: "Cambridge A Level — Economics / Accounting / Business", category: "Optional" },
-              { name: "Cambridge A Level — Psychology / Sociology / Law", category: "Optional" },
-              { name: "BISE Intermediate Option (Select Campuses)", category: "Optional" }
-            ]
-          },
-          "Class 12": {
-            tag: "Beaconhouse — Higher Secondary (Classes 11 to 12 / A Level)",
-            rule: "Cambridge A Levels — 3 to 4 Specialized Subjects. Select campuses offer BISE Intermediate.",
-            subjects: [
-              { name: "Cambridge A Level — Physics", category: "Optional" },
-              { name: "Cambridge A Level — Chemistry", category: "Optional" },
-              { name: "Cambridge A Level — Biology", category: "Optional" },
-              { name: "Cambridge A Level — Mathematics", category: "Optional" },
-              { name: "Cambridge A Level — Computer Science", category: "Optional" },
-              { name: "Cambridge A Level — Economics / Accounting / Business", category: "Optional" },
-              { name: "Cambridge A Level — Psychology / Sociology / Law", category: "Optional" },
-              { name: "BISE Intermediate Option (Select Campuses)", category: "Optional" }
-            ]
-          }
-        },
-        root: {
-          "Class 3": {
-            tag: "Roots School System — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for Roots School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Roots-Intel ICT", category: "Optional" },
-              { name: "Art / Music", category: "Optional" },
-              { name: "Foreign Language — Chinese / German", category: "Optional" }
-            ]
-          },
-          "Class 4": {
-            tag: "Roots School System — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for Roots School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Roots-Intel ICT", category: "Optional" },
-              { name: "Art / Music", category: "Optional" },
-              { name: "Foreign Language — Chinese / German", category: "Optional" }
-            ]
-          },
-          "Class 5": {
-            tag: "Roots School System — Primary (Classes 3 to 5)",
-            rule: "Primary Level subjects for Roots School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "Science", category: "Compulsory" },
-              { name: "Social Studies", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Roots-Intel ICT", category: "Optional" },
-              { name: "Art / Music", category: "Optional" },
-              { name: "Foreign Language — Chinese / German", category: "Optional" }
-            ]
-          },
-          "Class 6": {
-            tag: "Roots School System — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for Roots School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Art", category: "Optional" },
-              { name: "Global Perspectives", category: "Optional" }
-            ]
-          },
-          "Class 7": {
-            tag: "Roots School System — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for Roots School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Art", category: "Optional" },
-              { name: "Global Perspectives", category: "Optional" }
-            ]
-          },
-          "Class 8": {
-            tag: "Roots School System — Middle (Classes 6 to 8)",
-            rule: "Middle Level subjects for Roots School System.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Mathematics", category: "Compulsory" },
-              { name: "General Science", category: "Compulsory" },
-              { name: "History", category: "Compulsory" },
-              { name: "Geography", category: "Compulsory" },
-              { name: "Islamiat", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "ICT / Robotics", category: "Optional" },
-              { name: "Art", category: "Optional" },
-              { name: "Global Perspectives", category: "Optional" }
-            ]
-          },
-          "Class 9": {
-            tag: "Roots School System — Secondary (Classes 9 to 10 / O Level)",
-            rule: "Dual Track offering BISE Matric (Science / Arts) and Cambridge O Levels (5 Compulsory plus 3 Electives).",
-            subjects: [
-              { name: "English (Compulsory)", category: "Compulsory" },
-              { name: "Urdu (Compulsory)", category: "Compulsory" },
-              { name: "Mathematics (Compulsory)", category: "Compulsory" },
-              { name: "Islamiat (Compulsory)", category: "Compulsory" },
-              { name: "Pakistan Studies (Compulsory)", category: "Compulsory" },
-              { name: "BISE Matric — Science / Arts Electives", category: "Optional" },
-              { name: "Cambridge O Levels — 3 Specialized Electives", category: "Optional" }
-            ]
-          },
-          "Class 10": {
-            tag: "Roots School System — Secondary (Classes 9 to 10 / O Level)",
-            rule: "Dual Track offering BISE Matric (Science / Arts) and Cambridge O Levels (5 Compulsory plus 3 Electives).",
-            subjects: [
-              { name: "English (Compulsory)", category: "Compulsory" },
-              { name: "Urdu (Compulsory)", category: "Compulsory" },
-              { name: "Mathematics (Compulsory)", category: "Compulsory" },
-              { name: "Islamiat (Compulsory)", category: "Compulsory" },
-              { name: "Pakistan Studies (Compulsory)", category: "Compulsory" },
-              { name: "BISE Matric — Science / Arts Electives", category: "Optional" },
-              { name: "Cambridge O Levels — 3 Specialized Electives", category: "Optional" }
-            ]
-          },
-          "Class 11": {
-            tag: "Roots School System — Higher Secondary (Classes 11 to 12 / A Level)",
-            rule: "F.Sc. / ICS / I.Com / F.A. Intermediate and Cambridge A Levels on select campuses.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Islamiat / Pakistan Studies", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "F.Sc. / ICS / I.Com / F.A. Intermediate Electives", category: "Optional" },
-              { name: "Cambridge A Levels Specialized Subjects (Select Campuses)", category: "Optional" }
-            ]
-          },
-          "Class 12": {
-            tag: "Roots School System — Higher Secondary (Classes 11 to 12 / A Level)",
-            rule: "F.Sc. / ICS / I.Com / F.A. Intermediate and Cambridge A Levels on select campuses.",
-            subjects: [
-              { name: "English", category: "Compulsory" },
-              { name: "Urdu", category: "Compulsory" },
-              { name: "Islamiat / Pakistan Studies", category: "Compulsory" },
-              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
-              { name: "F.Sc. / ICS / I.Com / F.A. Intermediate Electives", category: "Optional" },
-              { name: "Cambridge A Levels Specialized Subjects (Select Campuses)", category: "Optional" }
-            ]
-          }
-        },
-        general: {
-          "Class 3": {
-            tag: "General School System — Primary (Classes 3 to 5) — Open Options",
-            rule: "Mix Syllabus & Open Options: Student can choose from all Primary Subjects listed across systems. No fixed syllabus binding.",
-            subjects: [
-              { name: "English", category: "Optional" },
-              { name: "Urdu", category: "Optional" },
-              { name: "Mathematics", category: "Optional" },
-              { name: "General Knowledge / General Science", category: "Optional" },
-              { name: "Social Studies", category: "Optional" },
-              { name: "Islamiat or Ethics", category: "Optional" },
-              { name: "Nazra Quran", category: "Optional" },
-              { name: "Computer / ICT / Roots-Intel ICT", category: "Optional" },
-              { name: "Art & Design / Music / P.E.", category: "Optional" },
-              { name: "Foreign Language (Chinese / German)", category: "Optional" }
-            ]
-          },
-          "Class 4": {
-            tag: "General School System — Primary (Classes 3 to 5) — Open Options",
-            rule: "Mix Syllabus & Open Options: Student can choose from all Primary Subjects listed across systems. No fixed syllabus binding.",
-            subjects: [
-              { name: "English", category: "Optional" },
-              { name: "Urdu", category: "Optional" },
-              { name: "Mathematics", category: "Optional" },
-              { name: "General Science", category: "Optional" },
-              { name: "Social Studies", category: "Optional" },
-              { name: "Islamiat or Ethics", category: "Optional" },
-              { name: "Nazra Quran", category: "Optional" },
-              { name: "Computer / ICT", category: "Optional" },
-              { name: "Art & Design / Music / P.E.", category: "Optional" }
-            ]
-          },
-          "Class 5": {
-            tag: "General School System — Primary (Classes 3 to 5) — Open Options",
-            rule: "Mix Syllabus & Open Options: Student can choose from all Primary Subjects listed across systems. No fixed syllabus binding.",
-            subjects: [
-              { name: "English", category: "Optional" },
-              { name: "Urdu", category: "Optional" },
-              { name: "Mathematics", category: "Optional" },
-              { name: "General Science", category: "Optional" },
-              { name: "Social Studies", category: "Optional" },
-              { name: "Islamiat or Ethics", category: "Optional" },
-              { name: "Nazra Quran", category: "Optional" },
-              { name: "Computer / ICT", category: "Optional" },
-              { name: "Art & Design / Music / P.E.", category: "Optional" }
-            ]
-          },
-          "Class 6": {
-            tag: "General School System — Middle (Classes 6 to 8) — Open Options",
-            rule: "Compulsory and Elective both available as Open Options. Student is free to choose.",
-            subjects: [
-              { name: "English", category: "Optional" },
-              { name: "Urdu", category: "Optional" },
-              { name: "Mathematics", category: "Optional" },
-              { name: "General Science", category: "Optional" },
-              { name: "History", category: "Optional" },
-              { name: "Geography", category: "Optional" },
-              { name: "Computer Education / ICT / Robotics", category: "Optional" },
-              { name: "Islamiat or Ethics", category: "Optional" },
-              { name: "Tarjuma-tul-Quran", category: "Optional" },
-              { name: "Arabic / Persian / Punjabi / Foreign Language", category: "Optional" },
-              { name: "Art and Drawing / Home Economics / Agriculture / P.E.", category: "Optional" },
-              { name: "Global Perspectives / Global Citizenship", category: "Optional" }
-            ]
-          },
-          "Class 7": {
-            tag: "General School System — Middle (Classes 6 to 8) — Open Options",
-            rule: "Compulsory and Elective both available as Open Options. Student is free to choose.",
-            subjects: [
-              { name: "English", category: "Optional" },
-              { name: "Urdu", category: "Optional" },
-              { name: "Mathematics", category: "Optional" },
-              { name: "General Science", category: "Optional" },
-              { name: "History", category: "Optional" },
-              { name: "Geography", category: "Optional" },
-              { name: "Computer Education / ICT / Robotics", category: "Optional" },
-              { name: "Islamiat or Ethics", category: "Optional" },
-              { name: "Tarjuma-tul-Quran", category: "Optional" },
-              { name: "Arabic / Persian / Punjabi / Foreign Language", category: "Optional" },
-              { name: "Art and Drawing / Home Economics / Agriculture / P.E.", category: "Optional" },
-              { name: "Global Perspectives / Global Citizenship", category: "Optional" }
-            ]
-          },
-          "Class 8": {
-            tag: "General School System — Middle (Classes 6 to 8) — Open Options",
-            rule: "Compulsory and Elective both available as Open Options. Student is free to choose.",
-            subjects: [
-              { name: "English", category: "Optional" },
-              { name: "Urdu", category: "Optional" },
-              { name: "Mathematics", category: "Optional" },
-              { name: "General Science", category: "Optional" },
-              { name: "History", category: "Optional" },
-              { name: "Geography", category: "Optional" },
-              { name: "Computer Education / ICT / Robotics", category: "Optional" },
-              { name: "Islamiat or Ethics", category: "Optional" },
-              { name: "Tarjuma-tul-Quran", category: "Optional" },
-              { name: "Arabic / Persian / Punjabi / Foreign Language", category: "Optional" },
-              { name: "Art and Drawing / Home Economics / Agriculture / P.E.", category: "Optional" },
-              { name: "Global Perspectives / Global Citizenship", category: "Optional" }
-            ]
-          },
-          "Class 9": {
-            tag: "General School System — Secondary (Classes 9 to 10) — Open Options",
-            rule: "Student can choose Matric Stream or Cambridge O Level Stream. All Electives available as Open Options.",
-            subjects: [
-              { name: "English (Open Option)", category: "Optional" },
-              { name: "Urdu (Open Option)", category: "Optional" },
-              { name: "Mathematics / General Mathematics (Open Option)", category: "Optional" },
-              { name: "Islamiat / Pakistan Studies / Tarjuma-tul-Quran", category: "Optional" },
-              { name: "Physics / Chemistry / Biology / Computer Science", category: "Optional" },
-              { name: "Civics / Education / Economics / Commerce / Matric-Tech", category: "Optional" },
-              { name: "Cambridge O Level / IGCSE Electives", category: "Optional" }
-            ]
-          },
-          "Class 10": {
-            tag: "General School System — Secondary (Classes 9 to 10) — Open Options",
-            rule: "Student can choose Matric Stream or Cambridge O Level Stream. All Electives available as Open Options.",
-            subjects: [
-              { name: "English (Open Option)", category: "Optional" },
-              { name: "Urdu (Open Option)", category: "Optional" },
-              { name: "Mathematics / General Mathematics (Open Option)", category: "Optional" },
-              { name: "Islamiat / Pakistan Studies / Tarjuma-tul-Quran", category: "Optional" },
-              { name: "Physics / Chemistry / Biology / Computer Science", category: "Optional" },
-              { name: "Civics / Education / Economics / Commerce / Matric-Tech", category: "Optional" },
-              { name: "Cambridge O Level / IGCSE Electives", category: "Optional" }
-            ]
-          },
-          "Class 11": {
-            tag: "General School System — Higher Secondary (Classes 11 to 12) — Open Options",
-            rule: "Student can choose Intermediate Stream or Cambridge A Level Stream. All Electives available as Open Options.",
-            subjects: [
-              { name: "English / Urdu / Islamiat / Pakistan Studies / Tarjuma-tul-Quran", category: "Optional" },
-              { name: "F.Sc. Pre-Medical / Pre-Engineering Subjects", category: "Optional" },
-              { name: "ICS / I.Com / F.A. Humanities Subjects", category: "Optional" },
-              { name: "Cambridge A Level Stream Subjects", category: "Optional" }
-            ]
-          },
-          "Class 12": {
-            tag: "General School System — Higher Secondary (Classes 11 to 12) — Open Options",
-            rule: "Student can choose Intermediate Stream or Cambridge A Level Stream. All Electives available as Open Options.",
-            subjects: [
-              { name: "English / Urdu / Islamiat / Pakistan Studies / Tarjuma-tul-Quran", category: "Optional" },
-              { name: "F.Sc. Pre-Medical / Pre-Engineering Subjects", category: "Optional" },
-              { name: "ICS / I.Com / F.A. Humanities Subjects", category: "Optional" },
-              { name: "Cambridge A Level Stream Subjects", category: "Optional" }
-            ]
-          }
+          return base;
         }
-      };
+
+        if (num <= 8) {
+          const base = [
+            { name: "English", category: "Compulsory" },
+            { name: "Urdu", category: "Compulsory" },
+            { name: "Mathematics", category: "Compulsory" },
+            { name: "General Science", category: "Compulsory" },
+            { name: "History", category: "Compulsory" },
+            { name: "Geography", category: "Compulsory" },
+            { name: "Islamiat or Ethics", category: "Compulsory" },
+            { name: "Tarjuma-tul-Quran", category: "Compulsory" }
+          ];
+          if (sysId === "government") {
+            base.splice(6, 0, { name: "Computer Education", category: "Compulsory" });
+            base.push(
+              { name: "Arabic", category: "Optional" },
+              { name: "Persian", category: "Optional" },
+              { name: "Punjabi", category: "Optional" },
+              { name: "Art and Drawing", category: "Optional" },
+              { name: "Home Economics", category: "Optional" },
+              { name: "Agriculture", category: "Optional" },
+              { name: "Physical Education", category: "Optional" }
+            );
+          } else if (sysId === "general") {
+            base.push({ name: "Computer / ICT / Robotics", category: "Optional" }, { name: "Global Perspectives", category: "Optional" });
+            return base.map((s) => ({ ...s, category: "Optional" }));
+          } else {
+            base.push(
+              { name: "ICT / Robotics", category: "Optional" },
+              { name: "Global Perspectives", category: "Optional" },
+              { name: "Foreign Language", category: "Optional" }
+            );
+          }
+          return base;
+        }
+
+        if (num === 9 || num === 10) {
+          const comp = [
+            { name: "English", category: "Compulsory" },
+            { name: "Urdu", category: "Compulsory" },
+            { name: "Mathematics", category: "Compulsory" },
+            { name: "Islamiat or Ethics", category: "Compulsory" },
+            { name: "Pakistan Studies", category: "Compulsory" }
+          ];
+          if (sysId === "government") {
+            comp.push(
+              { name: "Tarjuma-tul-Quran", category: "Compulsory" },
+              { name: "Physics (Science)", category: "Optional" },
+              { name: "Chemistry (Science)", category: "Optional" },
+              { name: "Biology / Computer Science (Science)", category: "Optional" },
+              { name: "General Math & General Science (Arts/Commerce)", category: "Optional" },
+              { name: "Civics / Education / Economics / Commerce", category: "Optional" },
+              { name: "Matric-Tech Trades (IT / Agriculture / Health)", category: "Optional" }
+            );
+          } else if (sysId === "general") {
+            return [
+              ...comp.map((s) => ({ ...s, category: "Optional" })),
+              { name: "Physics / Chemistry / Biology / Computer Science", category: "Optional" },
+              { name: "Cambridge O Level / IGCSE Electives", category: "Optional" }
+            ];
+          } else {
+            comp.push(
+              { name: "Physics (O Level / Matric Elective)", category: "Optional" },
+              { name: "Chemistry (O Level / Matric Elective)", category: "Optional" },
+              { name: "Biology / Computer Science (Elective)", category: "Optional" },
+              { name: "Economics / Accounting / Business Studies", category: "Optional" }
+            );
+          }
+          return comp;
+        }
+
+        const interComp = [
+          { name: "English", category: "Compulsory" },
+          { name: "Urdu", category: "Compulsory" },
+          { name: num === 11 ? "Islamiat (Class 11)" : "Pakistan Studies (Class 12)", category: "Compulsory" },
+          { name: "Tarjuma-tul-Quran", category: "Compulsory" }
+        ];
+        if (sysId === "general") {
+          return [
+            ...interComp.map((s) => ({ ...s, category: "Optional" })),
+            { name: "F.Sc. Pre-Medical / Pre-Engineering", category: "Optional" },
+            { name: "ICS / I.Com / F.A. Electives", category: "Optional" },
+            { name: "Cambridge A Level Stream Subjects", category: "Optional" }
+          ];
+        }
+        return [
+          ...interComp,
+          { name: "Physics (F.Sc. / ICS)", category: "Optional" },
+          { name: "Chemistry (F.Sc.)", category: "Optional" },
+          { name: "Biology (F.Sc. Pre-Medical)", category: "Optional" },
+          { name: "Mathematics / Computer Science / Statistics", category: "Optional" },
+          { name: "Accounting / Economics / Business Math", category: "Optional" },
+          { name: "Civics / Education / Psychology / Sociology / History", category: "Optional" }
+        ];
+      }
 
       const fiveSchoolSystems = [
         {
@@ -1860,37 +153,54 @@ if (commitBtn) commitBtn.disabled = true;
           label: "1. Roots School System",
           statusType: "pending",
           statusText: "Separate Creation — Class 3–12 Subjects Loaded",
-          summary: "Roots School System (Classes 3 to 12): Primary with Roots-Intel ICT & Foreign Language (Chinese/German), Middle with ICT/Robotics & Global Perspectives, Secondary Dual Track (BISE Matric & Cambridge O Levels), and Higher Secondary (Intermediate & A Levels)."
+          tag: "Roots School System (Classes 3–12)",
+          rule: "Primary with Roots-Intel ICT & Foreign Language, Middle with ICT/Robotics & Global Perspectives, Secondary (BISE Matric & O Levels), Higher Secondary (Inter & A Levels)."
         },
         {
           id: "american",
           label: "2. American Lyceum System",
           statusType: "pending",
           statusText: "Separate Creation — Class 3–12 Subjects Loaded",
-          summary: "American Lyceum System (Classes 3 to 12): Primary & Middle with ICT/Robotics & Global Perspectives, Secondary Cambridge O Levels/IGCSE (5 Compulsory + 3–5 Electives) & select Matric, and Higher Secondary Intermediate & A Levels."
+          tag: "American Lyceum System (Classes 3–12)",
+          rule: "Primary & Middle with ICT/Robotics & Global Perspectives, Secondary O Levels/IGCSE & select Matric, Higher Secondary Inter & A Levels."
         },
         {
           id: "beacon",
           label: "3. Beaconhouse School System",
           statusType: "pending",
           statusText: "Separate Creation — Class 3–12 Subjects Loaded",
-          summary: "Beaconhouse School System (Classes 3 to 12): Primary with Art & Design, Music/P.E., Middle with ICT/Robotics, Foreign Language & Global Citizenship, Secondary Cambridge O Levels/IGCSE, and Higher Secondary Cambridge A Levels (3–4 Specialized Subjects)."
+          tag: "Beaconhouse School System (Classes 3–12)",
+          rule: "Primary with Art & Design, Middle with ICT/Robotics & Global Citizenship, Secondary O Levels/IGCSE, Higher Secondary Cambridge A Levels."
         },
         {
           id: "general",
           label: "4. General School System",
           statusType: "pending",
           statusText: "Separate Creation — Mix Syllabus & Open Options",
-          summary: "General School System (Any School, Classes 3 to 12): Mix Syllabus with Open Options across Primary, Middle, Secondary (Matric or O Level), and Higher Secondary (Intermediate or A Level). No fixed syllabus binding."
+          tag: "General School System (Classes 3–12 — Open Options)",
+          rule: "Mix syllabus & open options across Classes 3 to 12 without fixed syllabus binding."
         },
         {
           id: "government",
           label: "5. Government Sector / BISE System",
           statusType: "done",
           statusText: "Already Done — Class 3–12 BISE Complete",
-          summary: "Government Sector / BISE System (Classes 3 to 12): Primary (All Compulsory), Middle (9 Compulsory + 1–2 Electives), Secondary/Matric (Science, Humanities/Arts, Commerce, Matric-Tech), and Higher Secondary/Inter (F.Sc., ICS, I.Com, F.A.)."
+          tag: "Government Sector / BISE System (Classes 3–12)",
+          rule: "Primary all compulsory, Middle compulsory + optionals, Matric (Science, Arts, Commerce, Matric-Tech) & Inter (F.Sc., ICS, I.Com, F.A.)."
         }
       ];
+
+      const systemClassSubjectCatalog = {};
+      fiveSchoolSystems.forEach((sys) => {
+        systemClassSubjectCatalog[sys.id] = {};
+        orderedClasses.forEach((cls) => {
+          systemClassSubjectCatalog[sys.id][cls] = {
+            tag: sys.tag,
+            rule: sys.rule,
+            subjects: buildStageSubjects(sys.id, cls)
+          };
+        });
+      });
 
       const officialBoardFeeds = {
         "Board": {
@@ -1986,7 +296,7 @@ if (commitBtn) commitBtn.disabled = true;
           {
             step: 1,
             time: "Initial Setup",
-            note: "Admin Strong Backup Vault initialized with complete Class 3 to Class 12 Subject List & Safe 2MB Upload Engine."
+            note: "Admin Strong Backup Vault initialized with clean Step-by-Step Class 3–12 flow & Safe 2MB Upload Engine."
           }
         ]
       };
@@ -2198,10 +508,12 @@ if (commitBtn) commitBtn.disabled = true;
       checkStatusTriggerBtn?.addEventListener("click", runAdmissionStatusCheck);
 
       pakPortalToggleBtn?.addEventListener("click", () => {
+        intlSubOptions?.classList.remove("open");
         pakSubOptions?.classList.toggle("open");
       });
 
       intlPortalToggleBtn?.addEventListener("click", () => {
+        pakSubOptions?.classList.remove("open");
         intlSubOptions?.classList.toggle("open");
       });
 
@@ -2226,6 +538,7 @@ if (commitBtn) commitBtn.disabled = true;
 
         subViewTitle.textContent = "Page 3 — Pakistani Portal: Option 1 (Classes)";
 
+        let step = 1;
         let activeSystemId = "government";
         let catalogClassKey = "Class 9";
         let chosenSchoolName = "Default School (School-Wise Choice Enabled)";
@@ -2236,440 +549,412 @@ if (commitBtn) commitBtn.disabled = true;
         let scienceBranch = "Computer Science";
         let selectedOptionals = [];
 
-        const orderedClasses = [
-          "Class 3",
-          "Class 4",
-          "Class 5",
-          "Class 6",
-          "Class 7",
-          "Class 8",
-          "Class 9",
-          "Class 10",
-          "Class 11",
-          "Class 12"
-        ];
-
-        subViewBody.innerHTML = `
-          <div class="detail-box">
-            <strong>Click Date Recorded Automatically:</strong> ${clickLog.date} at ${clickLog.time}
-          </div>
-
-          <div class="detail-box">
-            <strong>1. Five School Systems (Select System):</strong>
-            <div id="fiveSystemsGrid" class="system-grid"></div>
-            <div id="systemClassesPortalBox" class="calc-summary-box" style="margin-top:10px;"></div>
-          </div>
-
-          <div class="detail-box">
-            <strong>2. Class 3 to Class 12 Subject List (Class Wise, Subject Wise, Compulsory &amp; Optional):</strong>
-            <label class="field-label" for="catalogClassSelect">Select Class (Class 3 Standard to Class 12 Standard)</label>
-            <select id="catalogClassSelect" class="field-input">
-              ${orderedClasses
-                .map((cKey) => {
-                  const tag = systemClassSubjectCatalog[activeSystemId][cKey].tag;
-                  return `<option value="${cKey}" ${catalogClassKey === cKey ? "selected" : ""}>${cKey} — ${tag}</option>`;
-                })
-                .join("")}
-            </select>
-            <div id="classWiseSubjectListContainer" style="margin-top:8px;"></div>
-          </div>
-
-          <div class="detail-box">
-            <strong>Summary — Compulsory vs Optional Across All Systems:</strong>
-            <ul>
-              <li><strong>Compulsory Subjects (Common in All Systems):</strong> English, Urdu, Mathematics, Islamiat, Quran (Nazra Quran in Primary, Tarjuma-tul-Quran in Middle to Inter), Pakistan Studies in Matric and Inter.</li>
-              <li><strong>Optional / Elective Subjects (Common):</strong> Science (Physics, Chemistry, Biology, Computer Science, Mathematics), Arts (Civics, Education, Psychology, Sociology, History, Economics, Fine Arts, Languages), Commerce (Accounting, Business Math, Banking, Commercial Geography), Extra (Arabic, Persian, Punjabi, Art, Music, Home Economics, Agriculture, Physical Education, ICT, Robotics, Global Perspectives, Foreign Language).</li>
-            </ul>
-          </div>
-
-          <div id="govCompletedWorkflowBox"></div>
-        `;
-
-        const systemsGrid = document.getElementById("fiveSystemsGrid");
-        const sysPortalBox = document.getElementById("systemClassesPortalBox");
-        const catalogClassSelect = document.getElementById("catalogClassSelect");
-        const subjectListContainer = document.getElementById("classWiseSubjectListContainer");
-        const govWorkflowBox = document.getElementById("govCompletedWorkflowBox");
-
         function getEffectiveCategory(sysId, classKey, subjObj) {
           const overrideKey = `${chosenSchoolName}::${sysId}::${classKey}::${subjObj.name}`;
           return customCategoryOverrides[overrideKey] || subjObj.category;
         }
 
-        function refreshClassDropdownLabels() {
-          if (!catalogClassSelect) return;
-          catalogClassSelect.innerHTML = orderedClasses
-            .map((cKey) => {
-              const tag = systemClassSubjectCatalog[activeSystemId][cKey].tag;
-              return `<option value="${cKey}" ${catalogClassKey === cKey ? "selected" : ""}>${cKey} — ${tag}</option>`;
-            })
-            .join("");
-        }
+        function renderStepFlow() {
+          const currentSys = fiveSchoolSystems.find((s) => s.id === activeSystemId) || fiveSchoolSystems[4];
+          const isGovSenior = activeSystemId === "government" && (catalogClassKey === "Class 9" || catalogClassKey === "Class 10" || catalogClassKey === "Class 11" || catalogClassKey === "Class 12");
 
-        function renderFiveSystems() {
-          if (!systemsGrid) return;
-          systemsGrid.innerHTML = fiveSchoolSystems
-            .map((sys) => `
-              <button type="button" class="system-select-btn ${activeSystemId === sys.id ? "active" : ""}" data-sys-id="${sys.id}">
-                <div>${sys.label}</div>
-                <span class="${sys.statusType === "done" ? "tag-done" : "tag-pending"}">${sys.statusText}</span>
-              </button>`
-            )
-            .join("");
+          subViewBody.innerHTML = `
+            <div class="detail-box">
+              <strong>Click Date Recorded Automatically:</strong> ${clickLog.date} at ${clickLog.time}
+            </div>
 
-          systemsGrid.querySelectorAll(".system-select-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              activeSystemId = btn.dataset.sysId || "government";
-              refreshClassDropdownLabels();
-              renderFiveSystems();
-              renderSystemClassesPortal();
-              renderClassWiseSubjects();
-              renderGovCompletedWorkflow();
-            });
-          });
-        }
+            <div class="step-banner">
+              <span>Step ${step}: ${
+                step === 1
+                  ? "Choose School System"
+                  : step === 2
+                  ? `Choose Class (${currentSys.label})`
+                  : step === 3
+                  ? `Subjects (${currentSys.label} • ${catalogClassKey})`
+                  : `Stream & Fee Calculator (${currentSys.label} • ${catalogClassKey})`
+              }</span>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                ${step > 1 ? `<button type="button" class="nav-back-btn" id="stepBackBtn">⬅️ Previous Step</button>` : ""}
+                ${step < 3 ? `<button type="button" class="small-gold-btn" id="stepNextBtn">Next Step ➡️</button>` : ""}
+                ${step === 3 && isGovSenior ? `<button type="button" class="small-gold-btn" id="toStep4Btn">Stream &amp; Fee ➡️</button>` : ""}
+              </div>
+            </div>
 
-        function renderSystemClassesPortal() {
-          const sys = fiveSchoolSystems.find((s) => s.id === activeSystemId) || fiveSchoolSystems[4];
-          if (!sysPortalBox) return;
-
-          sysPortalBox.innerHTML = `
-            <div style="color:#f0cf65;font-weight:800;margin-bottom:4px;">Classes Portal — ${sys.label}</div>
-            <p style="font-size:0.83rem;color:#cbd5e1;margin-bottom:8px;">${sys.summary}</p>
-            <label class="field-label" for="sysSchoolInput">School Name (School-Wise Compulsory / Optional Choice Enabled)</label>
-            <input id="sysSchoolInput" class="field-input" type="text" value="${chosenSchoolName}" placeholder="Enter school name..." />
+            <div id="stepStageContainer"></div>
           `;
 
-          document.getElementById("sysSchoolInput")?.addEventListener("input", (e) => {
-            chosenSchoolName = (e.target.value || "").trim() || "Default School";
-            renderClassWiseSubjects();
+          const stageBox = document.getElementById("stepStageContainer");
+
+          document.getElementById("stepBackBtn")?.addEventListener("click", () => {
+            step = Math.max(1, step - 1);
+            renderStepFlow();
           });
-        }
 
-        function renderClassWiseSubjects() {
-          if (!subjectListContainer) return;
-          const sysCatalog = systemClassSubjectCatalog[activeSystemId] || systemClassSubjectCatalog.government;
-          const entry = sysCatalog[catalogClassKey] || sysCatalog["Class 9"];
-          const compulsoryList = [];
-          const optionalList = [];
-
-          const rowsHtml = entry.subjects
-            .map((subj) => {
-              const effCat = getEffectiveCategory(activeSystemId, catalogClassKey, subj);
-              if (effCat === "Compulsory") compulsoryList.push(subj.name);
-              else optionalList.push(subj.name);
-
-              const badgeClass = effCat === "Compulsory" ? "badge-compulsory" : "badge-optional";
-              return `
-                <div class="subj-catalog-item">
-                  <span><strong>${subj.name}</strong></span>
-                  <span style="display:flex;align-items:center;gap:6px;">
-                    <span class="${badgeClass}">${effCat}</span>
-                    <button type="button" class="small-gold-btn toggle-cat-btn" data-subj-name="${subj.name}" data-default-cat="${subj.category}" style="padding:3px 7px;font-size:0.72rem;">
-                      Switch
-                    </button>
-                  </span>
-                </div>`;
-            })
-            .join("");
-
-          subjectListContainer.innerHTML = `
-            <div style="font-size:0.82rem;color:#cbd5e1;margin-bottom:6px;">
-              <strong>${catalogClassKey} (${entry.tag})</strong><br/>
-              <em>Rule: ${entry.rule}</em>
-            </div>
-            ${rowsHtml}
-            <div class="calc-summary-box" style="margin-top:8px;">
-              <div><strong>Compulsory Subjects (${compulsoryList.length}):</strong> ${compulsoryList.length ? compulsoryList.join(", ") : "None (All Open Options)"}</div>
-              <div style="margin-top:4px;"><strong>Optional / Elective Subjects (${optionalList.length}):</strong> ${optionalList.length ? optionalList.join(", ") : "None"}</div>
-            </div>
-          `;
-
-          subjectListContainer.querySelectorAll(".toggle-cat-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const sName = btn.dataset.subjName;
-              const defCat = btn.dataset.defaultCat;
-              const overrideKey = `${chosenSchoolName}::${activeSystemId}::${catalogClassKey}::${sName}`;
-              const currentCat = customCategoryOverrides[overrideKey] || defCat;
-              const nextCat = currentCat === "Compulsory" ? "Optional" : "Compulsory";
-              customCategoryOverrides[overrideKey] = nextCat;
-              recordAdminChange(`School (${chosenSchoolName}) [${activeSystemId}] ${catalogClassKey} subject '${sName}' set to ${nextCat}.`);
-              renderClassWiseSubjects();
-            });
+          document.getElementById("stepNextBtn")?.addEventListener("click", () => {
+            step = Math.min(3, step + 1);
+            renderStepFlow();
           });
-        }
 
-        catalogClassSelect?.addEventListener("change", (e) => {
-          catalogClassKey = e.target.value;
-          if (catalogClassKey === "Class 11" || catalogClassKey === "Class 12") {
-            levelType = "Inter";
-          } else {
-            levelType = "Matric";
-          }
-          selectedOptionals = [];
-          renderClassWiseSubjects();
-          renderGovCompletedWorkflow();
-        });
+          document.getElementById("toStep4Btn")?.addEventListener("click", () => {
+            levelType = (catalogClassKey === "Class 11" || catalogClassKey === "Class 12") ? "Inter" : "Matric";
+            selectedOptionals = [];
+            step = 4;
+            renderStepFlow();
+          });
 
-        function renderGovCompletedWorkflow() {
-          if (!govWorkflowBox) return;
-          if (activeSystemId !== "government") {
-            govWorkflowBox.innerHTML = `
+          if (step === 1) {
+            stageBox.innerHTML = `
               <div class="detail-box">
-                <strong>System Selection:</strong> Viewing <strong>${fiveSchoolSystems.find((s) => s.id === activeSystemId)?.label}</strong> Class 3–12 subject list above. Select <strong>5. Government Sector / BISE System</strong> to open the BISE Matric/Inter stream &amp; fee calculator.
+                <strong>Step 1 — Select One of the Five School Systems:</strong>
+                <div id="fiveSystemsGrid" class="system-grid"></div>
               </div>
             `;
-            return;
-          }
+            const grid = document.getElementById("fiveSystemsGrid");
+            grid.innerHTML = fiveSchoolSystems
+              .map((sys) => `
+                <button type="button" class="system-select-btn ${activeSystemId === sys.id ? "active" : ""}" data-sys-id="${sys.id}">
+                  <div>${sys.label}</div>
+                  <span class="${sys.statusType === "done" ? "tag-done" : "tag-pending"}">${sys.statusText}</span>
+                </button>`
+              )
+              .join("");
 
-          govWorkflowBox.innerHTML = `
-            <div class="detail-box">
-              <strong>3. Government Sector / BISE System (Already Done) — Matric &amp; Inter Stream Lock:</strong>
-              <div class="type-pill-row">
-                <button type="button" class="type-pill-btn ${levelType === "Matric" ? "active" : ""}" id="lvlMatricBtn">A. Matric (Class 9 &amp; 10)</button>
-                <button type="button" class="type-pill-btn ${levelType === "Inter" ? "active" : ""}" id="lvlInterBtn">B. Inter (Class 11 First Year &amp; Class 12 Second Year)</button>
+            grid.querySelectorAll(".system-select-btn").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                activeSystemId = btn.dataset.sysId || "government";
+                step = 2;
+                renderStepFlow();
+              });
+            });
+          } else if (step === 2) {
+            stageBox.innerHTML = `
+              <div class="detail-box">
+                <strong>Step 2 — ${currentSys.label}: Select Class (Class 3 to Class 12)</strong>
+                <p style="font-size:0.82rem;color:#cbd5e1;margin-top:4px;">${currentSys.rule}</p>
+                <label class="field-label" for="sysSchoolInput">School Name (School-Wise Compulsory / Optional Choice)</label>
+                <input id="sysSchoolInput" class="field-input" type="text" value="${chosenSchoolName}" />
+                <label class="field-label" for="catalogClassSelect">Select Class</label>
+                <select id="catalogClassSelect" class="field-input">
+                  ${orderedClasses
+                    .map((cKey) => `<option value="${cKey}" ${catalogClassKey === cKey ? "selected" : ""}>${cKey} — ${systemClassSubjectCatalog[activeSystemId][cKey].tag}</option>`)
+                    .join("")}
+                </select>
+                <button type="button" id="confirmClassBtn" class="small-gold-btn" style="margin-top:6px;">
+                  View Subjects for ${catalogClassKey} ➡️
+                </button>
+              </div>
+            `;
+
+            document.getElementById("sysSchoolInput")?.addEventListener("input", (e) => {
+              chosenSchoolName = (e.target.value || "").trim() || "Default School";
+            });
+
+            document.getElementById("catalogClassSelect")?.addEventListener("change", (e) => {
+              catalogClassKey = e.target.value;
+            });
+
+            document.getElementById("confirmClassBtn")?.addEventListener("click", () => {
+              step = 3;
+              renderStepFlow();
+            });
+          } else if (step === 3) {
+            const entry = systemClassSubjectCatalog[activeSystemId][catalogClassKey];
+            const compulsoryList = [];
+            const optionalList = [];
+
+            const rowsHtml = entry.subjects
+              .map((subj) => {
+                const effCat = getEffectiveCategory(activeSystemId, catalogClassKey, subj);
+                if (effCat === "Compulsory") compulsoryList.push(subj.name);
+                else optionalList.push(subj.name);
+
+                const badgeClass = effCat === "Compulsory" ? "badge-compulsory" : "badge-optional";
+                return `
+                  <div class="subj-catalog-item">
+                    <span><strong>${subj.name}</strong></span>
+                    <span style="display:flex;align-items:center;gap:6px;">
+                      <span class="${badgeClass}">${effCat}</span>
+                      <button type="button" class="small-gold-btn toggle-cat-btn" data-subj-name="${subj.name}" data-default-cat="${subj.category}" style="padding:3px 7px;font-size:0.72rem;">
+                        Switch
+                      </button>
+                    </span>
+                  </div>`;
+              })
+              .join("");
+
+            stageBox.innerHTML = `
+              <div class="detail-box">
+                <strong>Step 3 — ${currentSys.label} • ${catalogClassKey} Subjects</strong>
+                <div style="font-size:0.8rem;color:#cbd5e1;margin:4px 0 8px;">
+                  <strong>School:</strong> ${chosenSchoolName} • <em>${entry.rule}</em>
+                </div>
+                ${rowsHtml}
+                <div class="calc-summary-box" style="margin-top:8px;">
+                  <div><strong>Compulsory (${compulsoryList.length}):</strong> ${compulsoryList.length ? compulsoryList.join(", ") : "None (All Open Options)"}</div>
+                  <div style="margin-top:4px;"><strong>Optional (${optionalList.length}):</strong> ${optionalList.length ? optionalList.join(", ") : "None"}</div>
+                </div>
+              </div>
+            `;
+
+            stageBox.querySelectorAll(".toggle-cat-btn").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const sName = btn.dataset.subjName;
+                const defCat = btn.dataset.defaultCat;
+                const overrideKey = `${chosenSchoolName}::${activeSystemId}::${catalogClassKey}::${sName}`;
+                const currentCat = customCategoryOverrides[overrideKey] || defCat;
+                const nextCat = currentCat === "Compulsory" ? "Optional" : "Compulsory";
+                customCategoryOverrides[overrideKey] = nextCat;
+                recordAdminChange(`School (${chosenSchoolName}) [${activeSystemId}] ${catalogClassKey} subject '${sName}' set to ${nextCat}.`);
+                renderStepFlow();
+              });
+            });
+          } else if (step === 4) {
+            stageBox.innerHTML = `
+              <div class="detail-box">
+                <strong>Step 4A — Government Sector / BISE Stream Lock (${catalogClassKey}):</strong>
+                <div class="type-pill-row">
+                  <button type="button" class="type-pill-btn ${levelType === "Matric" ? "active" : ""}" id="lvlMatricBtn">A. Matric (Class 9 &amp; 10)</button>
+                  <button type="button" class="type-pill-btn ${levelType === "Inter" ? "active" : ""}" id="lvlInterBtn">B. Inter (Class 11 &amp; 12)</button>
+                </div>
+
+                <div class="field-label">Select Stream (Other Fields Locked)</div>
+                <div id="streamButtonsContainer" class="stream-btn-row"></div>
+                <div id="lockedStreamNotice" style="font-size:0.8rem;color:#22c55e;font-weight:700;margin-bottom:6px;"></div>
+
+                <div class="field-label">Choose Elective Subjects (Up to 3 from Selected Field Only)</div>
+                <div id="optionalSubjectsContainer" class="opt-subject-grid"></div>
               </div>
 
-              <div class="field-label">Select Stream (Other Fields Locked)</div>
-              <div id="streamButtonsContainer" class="stream-btn-row"></div>
-              <div id="lockedStreamNotice" style="font-size:0.8rem;color:#22c55e;font-weight:700;margin-bottom:6px;"></div>
+              <div class="detail-box">
+                <strong>Step 4B — Courses, Revision Sessions, Board Updates &amp; Fee / 5-Month Warranty:</strong>
 
-              <div class="field-label">Choose Elective Subjects (From Selected Field Only)</div>
-              <div id="optionalSubjectsContainer" class="opt-subject-grid"></div>
-            </div>
+                <label class="field-label" for="courseKindSelect">Course Type (One Time vs Month Wise)</label>
+                <select id="courseKindSelect" class="field-input">
+                  <option value="Supplementary Exam Course">1. Supplementary Exam Course (One Time Fee)</option>
+                  <option value="Session Course">2. Session Course (One Time Fee)</option>
+                  <option value="Regular Course">Regular Course (Month Wise Fee)</option>
+                </select>
 
-            <div class="detail-box">
-              <strong>4. Courses, Revision Sessions, Board Updates &amp; Fee / 5-Month Warranty:</strong>
+                <label class="field-label" for="stageAfterSelect">Facility Stage (After 10th &amp; After 12th Only)</label>
+                <select id="stageAfterSelect" class="field-input">
+                  <option value="After 10th">After 10th (Eligible)</option>
+                  <option value="After 12th">After 12th (Eligible)</option>
+                  <option value="After 9th">After 9th (Not Eligible)</option>
+                  <option value="After 11th">After 11th (Not Eligible)</option>
+                </select>
 
-              <label class="field-label" for="courseKindSelect">Course Type (One Time vs Month Wise)</label>
-              <select id="courseKindSelect" class="field-input">
-                <option value="Supplementary Exam Course">1. Supplementary Exam Course (One Time Fee)</option>
-                <option value="Session Course">2. Session Course (One Time Fee)</option>
-                <option value="Regular Course">Regular Course (Month Wise Fee)</option>
-              </select>
+                <label class="field-label" for="revSessionSelect">Separate Revision &amp; Test Session (Starts 5 Months Before Exam)</label>
+                <select id="revSessionSelect" class="field-input">
+                  <option value="1. 9th Revision and Test Session">1. 9th Revision and Test Session (Separate)</option>
+                  <option value="2. 10th Revision and Test Session">2. 10th Revision and Test Session (Separate)</option>
+                  <option value="3. First Year Revision and Test Session">3. First Year Revision and Test Session (Separate)</option>
+                  <option value="4. Second Year Revision and Test Session">4. Second Year Revision and Test Session (Separate)</option>
+                </select>
 
-              <label class="field-label" for="stageAfterSelect">Facility Stage (After 10th &amp; After 12th Only)</label>
-              <select id="stageAfterSelect" class="field-input">
-                <option value="After 10th">After 10th (Eligible)</option>
-                <option value="After 12th">After 12th (Eligible)</option>
-                <option value="After 9th">After 9th (Not Eligible)</option>
-                <option value="After 11th">After 11th (Not Eligible)</option>
-              </select>
+                <label class="field-label" for="boardFeedSelect">Automatic Official Board Updates</label>
+                <select id="boardFeedSelect" class="field-input">
+                  <option value="Board">Board</option>
+                  <option value="Punjab Board">Punjab Board</option>
+                  <option value="Sindh Board">Sindh Board</option>
+                  <option value="AJK Board">AJK Board</option>
+                  <option value="Federal Board">Federal Board</option>
+                </select>
 
-              <label class="field-label" for="revSessionSelect">Separate Revision &amp; Test Session (Starts 5 Months Before Exam)</label>
-              <select id="revSessionSelect" class="field-input">
-                <option value="1. 9th Revision and Test Session">1. 9th Revision and Test Session (Separate)</option>
-                <option value="2. 10th Revision and Test Session">2. 10th Revision and Test Session (Separate)</option>
-                <option value="3. First Year Revision and Test Session">3. First Year Revision and Test Session (Separate)</option>
-                <option value="4. Second Year Revision and Test Session">4. Second Year Revision and Test Session (Separate)</option>
-              </select>
+                <label class="field-label" for="examDateField">Exam Starting Date</label>
+                <input id="examDateField" class="field-input" type="date" value="2027-03-10" />
 
-              <label class="field-label" for="boardFeedSelect">Automatic Official Board Updates</label>
-              <select id="boardFeedSelect" class="field-input">
-                <option value="Board">Board</option>
-                <option value="Punjab Board">Punjab Board</option>
-                <option value="Sindh Board">Sindh Board</option>
-                <option value="AJK Board">AJK Board</option>
-                <option value="Federal Board">Federal Board</option>
-              </select>
+                <label class="field-label" for="subjNumField">Number of Subjects (Charged for 3 Months Equivalent)</label>
+                <input id="subjNumField" class="field-input" type="number" min="1" max="8" value="1" />
 
-              <label class="field-label" for="examDateField">Exam Starting Date</label>
-              <input id="examDateField" class="field-input" type="date" value="2027-03-10" />
+                <label class="field-label" for="baseFeeField">One Month Base Fee (PKR)</label>
+                <input id="baseFeeField" class="field-input" type="number" min="100" step="100" value="2000" />
 
-              <label class="field-label" for="subjNumField">Number of Subjects (Charged for 3 Months Equivalent)</label>
-              <input id="subjNumField" class="field-input" type="number" min="1" max="8" value="1" />
+                <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                  <input id="weightTwoTimesCheck" type="checkbox" checked />
+                  English &amp; Optional Subjects (5-Subject Base) Weightage = Two Times (2x)
+                </label>
 
-              <label class="field-label" for="baseFeeField">One Month Base Fee (PKR)</label>
-              <input id="baseFeeField" class="field-input" type="number" min="100" step="100" value="2000" />
+                <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                  <input id="quranOneTimeBox" type="checkbox" checked />
+                  Quran Facility (One Time)
+                </label>
 
-              <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                <input id="weightTwoTimesCheck" type="checkbox" checked />
-                English &amp; Optional Subjects (5-Subject Base) Weightage = Two Times (2x)
-              </label>
+                <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                  <input id="urduOneTimeBox" type="checkbox" checked />
+                  Urdu Facility (One Time)
+                </label>
 
-              <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                <input id="quranOneTimeBox" type="checkbox" checked />
-                Quran Facility (One Time)
-              </label>
+                <button type="button" id="calcPakClassBtn" class="small-gold-btn" style="margin-top:8px;">
+                  Calculate Fee &amp; Session Plan
+                </button>
 
-              <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                <input id="urduOneTimeBox" type="checkbox" checked />
-                Urdu Facility (One Time)
-              </label>
+                <div id="pakClassCalcResult" class="calc-summary-box"></div>
+              </div>
+            `;
 
-              <button type="button" id="calcPakClassBtn" class="small-gold-btn" style="margin-top:8px;">
-                Calculate Fee &amp; Session Plan
-              </button>
+            const lvlMatricBtn = document.getElementById("lvlMatricBtn");
+            const lvlInterBtn = document.getElementById("lvlInterBtn");
+            const streamContainer = document.getElementById("streamButtonsContainer");
+            const optContainer = document.getElementById("optionalSubjectsContainer");
+            const lockedNotice = document.getElementById("lockedStreamNotice");
+            const boardFeedSelect = document.getElementById("boardFeedSelect");
+            const examDateField = document.getElementById("examDateField");
 
-              <div id="pakClassCalcResult" class="calc-summary-box"></div>
-            </div>
-          `;
+            function renderStreamsAndSubjects() {
+              const streams = levelType === "Matric"
+                ? ["Science", "Arts", "Commerce", "Matric-Tech"]
+                : ["F.Sc. Pre-Medical", "F.Sc. Pre-Engineering", "ICS", "I.Com", "F.A."];
 
-          const lvlMatricBtn = document.getElementById("lvlMatricBtn");
-          const lvlInterBtn = document.getElementById("lvlInterBtn");
-          const streamContainer = document.getElementById("streamButtonsContainer");
-          const optContainer = document.getElementById("optionalSubjectsContainer");
-          const lockedNotice = document.getElementById("lockedStreamNotice");
-          const boardFeedSelect = document.getElementById("boardFeedSelect");
-          const examDateField = document.getElementById("examDateField");
+              if (!streams.includes(selectedStream)) {
+                selectedStream = streams[0];
+              }
 
-          function renderStreamsAndSubjects() {
-            const streams = levelType === "Matric"
-              ? ["Science", "Arts", "Commerce", "Matric-Tech"]
-              : ["F.Sc. Pre-Medical", "F.Sc. Pre-Engineering", "ICS", "I.Com", "F.A."];
+              if (streamContainer) {
+                streamContainer.innerHTML = streams
+                  .map((st, idx) => `
+                    <button type="button" class="stream-pill-btn ${selectedStream === st ? "active" : ""}" data-stream-name="${st}">
+                      ${idx + 1}. ${st}
+                    </button>`
+                  )
+                  .join("");
 
-            if (!streams.includes(selectedStream)) {
-              selectedStream = streams[0];
-            }
-
-            if (streamContainer) {
-              streamContainer.innerHTML = streams
-                .map((st, idx) => `
-                  <button type="button" class="stream-pill-btn ${selectedStream === st ? "active" : ""}" data-stream-name="${st}">
-                    ${idx + 1}. ${st}
-                  </button>`
-                )
-                .join("");
-
-              streamContainer.querySelectorAll(".stream-pill-btn").forEach((sBtn) => {
-                sBtn.addEventListener("click", () => {
-                  const chosenStream = sBtn.dataset.streamName;
-                  if (levelType === "Matric" && chosenStream === "Science") {
-                    onScienceBranchSelected = (branchChoice) => {
-                      scienceBranch = branchChoice;
-                      selectedStream = "Science";
+                streamContainer.querySelectorAll(".stream-pill-btn").forEach((sBtn) => {
+                  sBtn.addEventListener("click", () => {
+                    const chosenStream = sBtn.dataset.streamName;
+                    if (levelType === "Matric" && chosenStream === "Science") {
+                      onScienceBranchSelected = (branchChoice) => {
+                        scienceBranch = branchChoice;
+                        selectedStream = "Science";
+                        selectedOptionals = [];
+                        renderStreamsAndSubjects();
+                        computePakSummary();
+                      };
+                      scienceModal?.classList.add("open");
+                    } else {
+                      selectedStream = chosenStream;
                       selectedOptionals = [];
                       renderStreamsAndSubjects();
                       computePakSummary();
-                    };
-                    scienceModal?.classList.add("open");
-                  } else {
-                    selectedStream = chosenStream;
-                    selectedOptionals = [];
-                    renderStreamsAndSubjects();
+                    }
+                  });
+                });
+              }
+
+              const subjPool = levelType === "Matric"
+                ? (matricFieldSubjects[selectedStream] || [])
+                : (interFieldSubjects[selectedStream] || []);
+
+              if (lockedNotice) {
+                lockedNotice.textContent = levelType === "Matric" && selectedStream === "Science"
+                  ? `Field Locked: Science (${scienceBranch}) — Other streams removed.`
+                  : `Field Locked: ${selectedStream} — Other fields and their subjects are hidden.`;
+              }
+
+              if (optContainer) {
+                optContainer.innerHTML = subjPool
+                  .map((subj) => {
+                    const checked = selectedOptionals.includes(subj);
+                    return `
+                      <label class="opt-check-label">
+                        <input type="checkbox" class="opt-subj-checkbox" value="${subj}" ${checked ? "checked" : ""} />
+                        <span>${subj}</span>
+                      </label>`;
+                  })
+                  .join("");
+
+                optContainer.querySelectorAll(".opt-subj-checkbox").forEach((cb) => {
+                  cb.addEventListener("change", () => {
+                    const allChecked = Array.from(optContainer.querySelectorAll(".opt-subj-checkbox:checked")).map((i) => i.value);
+                    if (allChecked.length > 3) {
+                      cb.checked = false;
+                      return;
+                    }
+                    selectedOptionals = allChecked;
                     computePakSummary();
-                  }
+                  });
                 });
-              });
+              }
             }
 
-            const subjPool = levelType === "Matric"
-              ? (matricFieldSubjects[selectedStream] || [])
-              : (interFieldSubjects[selectedStream] || []);
+            function computePakSummary() {
+              const out = document.getElementById("pakClassCalcResult");
+              if (!out) return;
 
-            if (lockedNotice) {
-              lockedNotice.textContent = levelType === "Matric" && selectedStream === "Science"
-                ? `Field Locked: Science (${scienceBranch}) — Other streams removed.`
-                : `Field Locked: ${selectedStream} — Other fields and their subjects are hidden.`;
+              const courseKind = document.getElementById("courseKindSelect")?.value || "Supplementary Exam Course";
+              const stageAfter = document.getElementById("stageAfterSelect")?.value || "After 10th";
+              const revSession = document.getElementById("revSessionSelect")?.value || "1. 9th Revision and Test Session";
+              const boardVal = boardFeedSelect?.value || "Punjab Board";
+              const examDateVal = examDateField?.value || "2027-03-10";
+              const subjNum = Math.max(1, Number(document.getElementById("subjNumField")?.value || 1));
+              const baseFee = Math.max(100, Number(document.getElementById("baseFeeField")?.value || 2000));
+              const twoTimesWeight = Boolean(document.getElementById("weightTwoTimesCheck")?.checked);
+              const quranOneTime = Boolean(document.getElementById("quranOneTimeBox")?.checked);
+              const urduOneTime = Boolean(document.getElementById("urduOneTimeBox")?.checked);
+
+              const isOneTime = courseKind.includes("One Time Fee");
+              const weightMult = twoTimesWeight ? 2 : 1;
+              const threeMonthFee = subjNum * baseFee * 3 * weightMult;
+              const wholeSessionOneTimeFee = Math.round(baseFee * (5 * 1.5) * subjNum * weightMult);
+              const extrasOneTime = (quranOneTime ? Math.round(baseFee * 0.5) : 0) + (urduOneTime ? Math.round(baseFee * 0.5) : 0);
+              const totalPayable = isOneTime ? (wholeSessionOneTimeFee + extrasOneTime) : (threeMonthFee + extrasOneTime);
+
+              const timeline = computeBoardTimeline(boardVal, examDateVal);
+              const eligibleStage = stageAfter === "After 10th" || stageAfter === "After 12th";
+
+              out.innerHTML = `
+                <div><strong>System:</strong> Government Sector / BISE System | <strong>Class:</strong> ${catalogClassKey}</div>
+                <div><strong>Level &amp; Stream:</strong> ${levelType} — ${selectedStream}${levelType === "Matric" && selectedStream === "Science" ? ` (${scienceBranch})` : ""}</div>
+                <div><strong>Selected Elective Subjects (${selectedOptionals.length}/3):</strong> ${selectedOptionals.length ? selectedOptionals.join(", ") : "Select up to 3 subjects above"}</div>
+                <div><strong>Stage Rule:</strong> <span style="color:${eligibleStage ? "#22c55e" : "#f87171"};font-weight:800;">${stageAfter}</span> (${eligibleStage ? "Facility Available" : "Facility Not Given After 9th / 11th"})</div>
+                <div><strong>Revision &amp; Test Session:</strong> ${revSession} — Starts <strong>${timeline.revStartFormatted}</strong> (5 months before Exam Date <strong>${timeline.examDateFormatted}</strong>)</div>
+                <div><strong>Second Annual Rule:</strong> ${timeline.postResultMode ? "Result Out — Second Annual Preparation Active" : "Starts Immediately After Result"}</div>
+                <div><strong>Official Board Feed:</strong> ${timeline.feed.board} — <em>${timeline.feed.officialUpdate}</em></div>
+                <hr style="border:none;border-top:1px solid rgba(212,175,55,0.3);margin:7px 0;" />
+                <div><strong>Course Fee Mode:</strong> ${courseKind}</div>
+                <div><strong>3-Month Subject Fee (${subjNum} Subject(s), Weight ${weightMult}x):</strong> PKR ${threeMonthFee.toLocaleString()}</div>
+                <div><strong>5-Month Warranty Session Fee (5 Months × 1.5 = 7.5 Multiple):</strong> PKR ${wholeSessionOneTimeFee.toLocaleString()}</div>
+                <div><strong>One Time Facilities (Quran &amp; Urdu):</strong> PKR ${extrasOneTime.toLocaleString()}</div>
+                <div style="margin-top:6px;color:#f0cf65;font-size:0.92rem;font-weight:800;">
+                  Total Calculated Fee: PKR ${totalPayable.toLocaleString()}
+                </div>
+              `;
             }
 
-            if (optContainer) {
-              optContainer.innerHTML = subjPool
-                .map((subj) => {
-                  const checked = selectedOptionals.includes(subj);
-                  return `
-                    <label class="opt-check-label">
-                      <input type="checkbox" class="opt-subj-checkbox" value="${subj}" ${checked ? "checked" : ""} />
-                      <span>${subj}</span>
-                    </label>`;
-                })
-                .join("");
+            lvlMatricBtn?.addEventListener("click", () => {
+              levelType = "Matric";
+              lvlMatricBtn.classList.add("active");
+              lvlInterBtn?.classList.remove("active");
+              selectedOptionals = [];
+              renderStreamsAndSubjects();
+              computePakSummary();
+            });
 
-              optContainer.querySelectorAll(".opt-subj-checkbox").forEach((cb) => {
-                cb.addEventListener("change", () => {
-                  const allChecked = Array.from(optContainer.querySelectorAll(".opt-subj-checkbox:checked")).map((i) => i.value);
-                  if (allChecked.length > 3) {
-                    cb.checked = false;
-                    return;
-                  }
-                  selectedOptionals = allChecked;
-                  computePakSummary();
-                });
-              });
-            }
-          }
+            lvlInterBtn?.addEventListener("click", () => {
+              levelType = "Inter";
+              lvlInterBtn.classList.add("active");
+              lvlMatricBtn?.classList.remove("active");
+              selectedOptionals = [];
+              renderStreamsAndSubjects();
+              computePakSummary();
+            });
 
-          function computePakSummary() {
-            const out = document.getElementById("pakClassCalcResult");
-            if (!out) return;
+            boardFeedSelect?.addEventListener("change", () => {
+              const feed = officialBoardFeeds[boardFeedSelect.value];
+              if (feed && examDateField) examDateField.value = feed.examStartDate;
+              computePakSummary();
+            });
 
-            const courseKind = document.getElementById("courseKindSelect")?.value || "Supplementary Exam Course";
-            const stageAfter = document.getElementById("stageAfterSelect")?.value || "After 10th";
-            const revSession = document.getElementById("revSessionSelect")?.value || "1. 9th Revision and Test Session";
-            const boardVal = boardFeedSelect?.value || "Punjab Board";
-            const examDateVal = examDateField?.value || "2027-03-10";
-            const subjNum = Math.max(1, Number(document.getElementById("subjNumField")?.value || 1));
-            const baseFee = Math.max(100, Number(document.getElementById("baseFeeField")?.value || 2000));
-            const twoTimesWeight = Boolean(document.getElementById("weightTwoTimesCheck")?.checked);
-            const quranOneTime = Boolean(document.getElementById("quranOneTimeBox")?.checked);
-            const urduOneTime = Boolean(document.getElementById("urduOneTimeBox")?.checked);
+            document.getElementById("calcPakClassBtn")?.addEventListener("click", () => {
+              computePakSummary();
+              recordAdminChange(`Calculated Government Sector / BISE class fee (${levelType} - ${selectedStream}).`);
+            });
 
-            const isOneTime = courseKind.includes("One Time Fee");
-            const weightMult = twoTimesWeight ? 2 : 1;
-            const threeMonthFee = subjNum * baseFee * 3 * weightMult;
-            const wholeSessionOneTimeFee = Math.round(baseFee * (5 * 1.5) * subjNum * weightMult);
-            const extrasOneTime = (quranOneTime ? Math.round(baseFee * 0.5) : 0) + (urduOneTime ? Math.round(baseFee * 0.5) : 0);
-            const totalPayable = isOneTime ? (wholeSessionOneTimeFee + extrasOneTime) : (threeMonthFee + extrasOneTime);
-
-            const timeline = computeBoardTimeline(boardVal, examDateVal);
-            const eligibleStage = stageAfter === "After 10th" || stageAfter === "After 12th";
-
-            out.innerHTML = `
-              <div><strong>System:</strong> Government Sector / BISE System | <strong>Catalog Class:</strong> ${catalogClassKey}</div>
-              <div><strong>Level &amp; Stream:</strong> ${levelType} — ${selectedStream}${levelType === "Matric" && selectedStream === "Science" ? ` (${scienceBranch})` : ""}</div>
-              <div><strong>Selected Elective Subjects (${selectedOptionals.length}/3):</strong> ${selectedOptionals.length ? selectedOptionals.join(", ") : "Select up to 3 subjects above"}</div>
-              <div><strong>Stage Rule:</strong> <span style="color:${eligibleStage ? "#22c55e" : "#f87171"};font-weight:800;">${stageAfter}</span> (${eligibleStage ? "Facility Available" : "Facility Not Given After 9th / 11th"})</div>
-              <div><strong>Revision &amp; Test Session:</strong> ${revSession} — Starts <strong>${timeline.revStartFormatted}</strong> (5 months before Exam Date <strong>${timeline.examDateFormatted}</strong>)</div>
-              <div><strong>Second Annual Rule:</strong> ${timeline.postResultMode ? "Result Out — Second Annual Preparation Active" : "Starts Immediately After Result"}</div>
-              <div><strong>Official Board Feed:</strong> ${timeline.feed.board} — <em>${timeline.feed.officialUpdate}</em></div>
-              <hr style="border:none;border-top:1px solid rgba(212,175,55,0.3);margin:7px 0;" />
-              <div><strong>Course Fee Mode:</strong> ${courseKind}</div>
-              <div><strong>3-Month Subject Fee (${subjNum} Subject(s), Weight ${weightMult}x):</strong> PKR ${threeMonthFee.toLocaleString()}</div>
-              <div><strong>5-Month Warranty Session Fee (5 Months × 1.5 = 7.5 Multiple, One Time per Subject Count):</strong> PKR ${wholeSessionOneTimeFee.toLocaleString()}</div>
-              <div><strong>One Time Facilities (Quran &amp; Urdu):</strong> PKR ${extrasOneTime.toLocaleString()}</div>
-              <div style="margin-top:6px;color:#f0cf65;font-size:0.92rem;font-weight:800;">
-                Total Calculated Fee: PKR ${totalPayable.toLocaleString()}
-              </div>
-            `;
-          }
-
-          lvlMatricBtn?.addEventListener("click", () => {
-            levelType = "Matric";
-            lvlMatricBtn.classList.add("active");
-            lvlInterBtn?.classList.remove("active");
-            selectedOptionals = [];
             renderStreamsAndSubjects();
             computePakSummary();
-          });
-
-          lvlInterBtn?.addEventListener("click", () => {
-            levelType = "Inter";
-            lvlInterBtn.classList.add("active");
-            lvlMatricBtn?.classList.remove("active");
-            selectedOptionals = [];
-            renderStreamsAndSubjects();
-            computePakSummary();
-          });
-
-          boardFeedSelect?.addEventListener("change", () => {
-            const feed = officialBoardFeeds[boardFeedSelect.value];
-            if (feed && examDateField) examDateField.value = feed.examStartDate;
-            computePakSummary();
-          });
-
-          document.getElementById("calcPakClassBtn")?.addEventListener("click", () => {
-            computePakSummary();
-            recordAdminChange(`Calculated Government Sector / BISE class fee (${levelType} - ${selectedStream}).`);
-          });
-
-          renderStreamsAndSubjects();
-          computePakSummary();
+          }
         }
 
-        renderFiveSystems();
-        renderSystemClassesPortal();
-        renderClassWiseSubjects();
-        renderGovCompletedWorkflow();
+        renderStepFlow();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
