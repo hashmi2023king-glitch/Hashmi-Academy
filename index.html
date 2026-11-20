@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sir Haroon Javaid Hashmi Academy &amp; College</title>
+  <title>Sir Haroon Javaid Hashmi — Global Academy &amp; College</title>
   <style>
     :root {
-      --bg-navy: #07142b;
-      --bg-card: #0b1d3d;
+      --bg-navy: #061329;
+      --bg-card: #0b1e3f;
       --gold: #d4af37;
-      --gold-soft: rgba(212, 175, 55, 0.45);
-      --green-btn: #164b2e;
-      --green-hover: #1e663f;
+      --gold-bright: #f0cf65;
+      --gold-border: rgba(212, 175, 55, 0.55);
+      --green-btn: #154a2d;
+      --green-hover: #1d643d;
       --white: #ffffff;
       --muted: #cbd5e1;
+      --blue-link: #60a5fa;
+      --active-green: #22c55e;
+      --warn-amber: #f59e0b;
+      --danger-red: #f87171;
     }
 
     * {
@@ -27,2626 +32,576 @@
       color: var(--white);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
-      padding: 10px;
-    }
-
-    .app-frame {
-      max-width: 540px;
-      margin: 0 auto;
-      border: 2px solid var(--gold);
-      border-radius: 14px;
       padding: 12px;
-      background: linear-gradient(180deg, #081834 0%, #050f22 100%);
     }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--gold-soft);
-      margin-bottom: 14px;
-    }
-
-    .brand-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-
-    .live-clock {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gold);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .nav-pill {
-      background-color: var(--bg-card);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 999px;
-      padding: 5px 11px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .nav-pill:hover,
-    .nav-pill.active {
-      background-color: var(--green-btn);
-    }
-
-    .hero-section {
-      text-align: center;
-      padding: 8px 4px 14px;
-    }
-
-    .academy-name {
-      font-size: 1.25rem;
-      font-weight: 800;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .poet-line {
-      font-size: 0.85rem;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .urdu-verse {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      margin-bottom: 10px;
-      direction: rtl;
-    }
-
-    .emblem-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 28px;
-      font-size: 1.6rem;
-      margin-bottom: 12px;
-    }
-
-    .welcome-heading {
-      color: var(--gold);
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
-    }
-
-    .director-role {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .sub-campus {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .menu-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .action-btn {
-      width: 100%;
-      background-color: var(--green-btn);
-      color: var(--white);
-      border: 1.5px solid var(--gold);
-      border-radius: 12px;
-      padding: 13px 16px;
-      font-size: 0.96rem;
-      font-weight: 700;
-      text-align: center;
-      cursor: pointer;
-      transition: background-color 0.15s ease, transform 0.08s ease;
-    }
-
-    .action-btn:hover {
-      background-color: var(--green-hover);
-    }
-
-    .action-btn:active {
-      transform: scale(0.99);
-    }
-
-    .panel-box {
-      display: none;
-      margin-top: 14px;
-      background-color: var(--bg-card);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .panel-box.open {
-      display: block;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--gold-soft);
-    }
-
-    .panel-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .close-btn {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-
-    .panel-body {
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: var(--white);
-    }
-
-    .panel-list {
-      margin-top: 8px;
-      padding-left: 18px;
-    }
-
-    .panel-list li {
-      margin-bottom: 6px;
-    }
-  </style>
-</head>
-<body>
-  <div class="app-frame">
-    <header class="top-bar">
-      <div class="brand-title">🎓 Sir Haroon Global Academy</div>
-      <div id="liveClock" class="live-clock">--:--:--</div>
-      <nav class="top-actions" aria-label="Primary Navigation">
-        <button type="button" class="nav-pill active" data-target="home">Home</button>
-        <button type="button" class="nav-pill" data-target="portals">Portals</button>
-        <button type="button" class="nav-pill" data-target="updates">Updates (<span id="updatesCount">0</span>)</button>
-      </nav>
-    </header>
-
-    <section id="homeHero" class="hero-section">
-      <h1 class="academy-name">Sir HAROON JAVAID HASHMI<br />Academy &amp; College</h1>
-      <p class="poet-line">Allama Muhammad Iqbal - شاعر مشرق</p>
-      <p class="urdu-verse">اپنی دنیا آپ پیدا کر اگر زندوں میں ہے تو</p>
-      <div class="emblem-row" aria-hidden="true">
-        <span>🦅</span>
-        <span>🇵🇰</span>
-      </div>
-      <div class="welcome-heading">WELCOME</div>
-      <div class="director-role">Director &amp; Founder - Sir Haroon Javaid Hashmi</div>
-      <div class="sub-campus">Global Academy &amp; College</div>
-    </section>
-
-    <main class="menu-stack">
-      <button type="button" class="action-btn" data-target="portals">Enter - Portals ➡️</button>
-      <button type="button" class="action-btn" data-target="updates">Updates Gateway — OK / Yes vs. No 🔔</button>
-      <button type="button" class="action-btn" data-target="library">Library - Data Bhara Hua - All Boards &amp; Systems</button>
-      <button type="button" class="action-btn" data-target="reference">Reference Portals &amp; Study Apps</button>
-      <button type="button" class="action-btn" data-target="register">Daily Register - Page 83-89</button>
-      <button type="button" class="action-btn" data-target="global-diff">USA / UK / Europe - Farq - Subjects</button>
-      <button type="button" class="action-btn" data-target="courses">Advertisement + Next Courses</button>
-      <button type="button" class="action-btn" data-target="contact">Contact / WhatsApp / Location</button>
-    </main>
-
-    <section id="dynamicPanel" class="panel-box" aria-live="polite">
-      <div class="panel-header">
-        <h2 id="panelTitle" class="panel-title">Section</h2>
-        <button type="button" id="closePanelBtn" class="close-btn">Close</button>
-      </div>
-      <div id="panelBody" class="panel-body"></div>
-    </section>
-  </div>
-
-  <script>
-    (function () {
-      const clockEl = document.getElementById("liveClock");
-      const updatesCountEl = document.getElementById("updatesCount");
-      const panelEl = document.getElementById("dynamicPanel");
-      const panelTitleEl = document.getElementById("panelTitle");
-      const panelBodyEl = document.getElementById("panelBody");
-      const closePanelBtn = document.getElementById("closePanelBtn");
-      const navPills = document.querySelectorAll(".nav-pill");
-
-      const sections = {
-        portals: {
-          title: "Academic Portals",
-          html: `<p>Select a portal workspace:</p>
-                 <ul class="panel-list">
-                   <li><strong>Pakistani Students Portal</strong> — Nursery to Grade 12, Boards, CSS, PMS, Tehsildar, MDCAT, ECAT</li>
-                   <li><strong>International Students Portal</strong> — Global Curriculum &amp; GBP (£) Fee Structure</li>
-                   <li><strong>Teacher LMS Portal</strong> — Classes, Attendance, Lesson Plans &amp; Assessments</li>
-                   <li><strong>Director Admin LMS</strong> — Admissions, Accounts, HR, Payroll &amp; Expansion Controls</li>
-                 </ul>`
-        },
-        updates: {
-          title: "Updates Gateway — OK / Yes vs. No",
-          html: `<p>Active announcements and confirmation queue: <strong>0 pending items</strong>.</p>
-                 <p style="margin-top:8px;">All system modules are initialized and ready for live data integration.</p>`
-        },
-        library: {
-          title: "Library — All Boards & Systems",
-          html: `<p>Digital books, reference guides, and open access academic resources (including DOAB &amp; curriculum shelves).</p>
-                 <ul class="panel-list">
-                   <li>School Boards (Nursery – Grade 12) &amp; Cambridge O/A Levels</li>
-                   <li>Competitive Exams (CSS, PMS, Tehsildar, MDCAT, ECAT)</li>
-                   <li>Languages (IELTS, Urdu, Spanish, German)</li>
-                 </ul>`
-        },
-        reference: {
-          title: "Reference Portals & Study Apps",
-          html: `<p>Curated study portals, open repositories, and exam preparation tools.</p>
-                 <ul class="panel-list">
-                   <li>Directory of Open Access Books (DOAB) — Peer-reviewed academic books</li>
-                   <li>Subject Dictionaries, Past Papers &amp; Revision Portals</li>
-                 </ul>`
-        },
-        register: {
-          title: "Daily Register — Page 83–89",
-          html: `<p>Daily attendance, class log, and student/faculty register records (Pages 83–89).</p>`
-        },
-        "global-diff": {
-          title: "USA / UK / Europe — Curriculum & Subjects Comparison",
-          html: `<p>Key structural differences across major international education tracks:</p>
-                 <ul class="panel-list">
-                   <li><strong>UK:</strong> Key Stages, GCSE / IGCSE, A Levels, UCAS progression</li>
-                   <li><strong>USA:</strong> Elementary, Middle &amp; High School credits, GPA, AP / SAT</li>
-                   <li><strong>Europe:</strong> National qualifications, ECTS higher-ed credit system, multilingual tracks</li>
-                 </ul>`
-        },
-        courses: {
-          title: "Advertisement + Next Courses",
-          html: `<p>Upcoming batches across academic levels, competitive exams, and language courses.</p>`
-        },
-        contact: {
-          title: "Contact / WhatsApp / Location",
-          html: `<p><strong>Director &amp; Founder:</strong> Sir Haroon Javaid Hashmi</p>
-                 <p><strong>Institution:</strong> Sir Haroon Javaid Hashmi Academy &amp; College</p>
-                 <p><strong>Launch Region:</strong> District Gujrat &amp; Global Online Campus</p>`
-        }
-      };
-
-      function updateClock() {
-        const now = new Date();
-        clockEl.textContent = now.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit"
-        });
-      }
-
-      function setActivePill(target) {
-        navPills.forEach((pill) => {
-          pill.classList.toggle("active", pill.dataset.target === target);
-        });
-      }
-
-      function openSection(target) {
-        if (!target || target === "home") {
-          panelEl.classList.remove("open");
-          setActivePill("home");
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          return;
-        }
-        const sec = sections[target];
-        if (!sec) return;
-        panelTitleEl.textContent = sec.title;
-        panelBodyEl.innerHTML = sec.html;
-        panelEl.classList.add("open");
-        setActivePill(target);
-        panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }
-
-      document.addEventListener("click", function (event) {
-        const trigger = event.target.closest("[data-target]");
-        if (trigger) {
-          openSection(trigger.dataset.target);
-        }
-      });
-
-      closePanelBtn.addEventListener("click", function () {
-        panelEl.classList.remove("open");
-        setActivePill("home");
-      });
-
-      updatesCountEl.textContent = "0";
-      updateClock();
-      setInterval(updateClock, 1000);
-    })();
-  </script>
-</body>
-</html>
-<script>
-  (function () {
-    const panelBodyEl = document.getElementById("panelBody");
-    const panelTitleEl = document.getElementById("panelTitle");
-    const panelEl = document.getElementById("dynamicPanel");
-    if (!panelBodyEl || !panelTitleEl || !panelEl) return;
-
-    const libraryCatalog = [
-      { title: "Directory of Open Access Books (DOAB) — Peer-Reviewed Monographs", track: "Open Access / Research", level: "Higher Ed & Reference" },
-      { title: "Foundational English, Urdu & Mathematics (Nursery – Grade 5)", track: "School Boards & Cambridge", level: "Primary" },
-      { title: "Secondary Sciences, Pakistan Studies & Islamiat (Grades 6 – 10)", track: "School Boards & O Levels", level: "Secondary" },
-      { title: "Intermediate & A Level Core Sciences, Humanities & Commerce", track: "FSc / ICS / FA / A Levels", level: "Higher Secondary" },
-      { title: "CSS, PMS & Tehsildar — Syllabus & Current Affairs Compendium", track: "Competitive Exams", level: "Civil Services" },
-      { title: "MDCAT & ECAT — Concept Drills & Past Paper Banks", track: "Entry Tests", level: "Pre-Medical / Engineering" },
-      { title: "IELTS Academic & General + Urdu, Spanish & German Guides", track: "Languages", level: "All Levels" }
-    ];
-
-    const registerPages = {
-      "83": [
-        { roll: "01", name: "Ayesha Tariq", status: "Present" },
-        { roll: "02", name: "Bilal Mahmood", status: "Present" },
-        { roll: "03", name: "Hamza Siddiqui", status: "Absent" }
-      ],
-      "84": [
-        { roll: "04", name: "Zainab Farooq", status: "Present" },
-        { roll: "05", name: "Usman Ghani", status: "Present" },
-        { roll: "06", name: "Maryam Khalid", status: "Leave" }
-      ],
-      "85": [
-        { roll: "07", name: "Ali Raza", status: "Present" },
-        { roll: "08", name: "Hira Naveed", status: "Present" }
-      ],
-      "86": [
-        { roll: "09", name: "Saad Ahmed", status: "Absent" },
-        { roll: "10", name: "Fatima Noor", status: "Present" }
-      ],
-      "87": [
-        { roll: "11", name: "Daniyal Mirza", status: "Present" },
-        { roll: "12", name: "Sanaullah Khan", status: "Present" }
-      ],
-      "88": [
-        { roll: "13", name: "Mahnoor Aslam", status: "Present" },
-        { roll: "14", name: "Taha Javed", status: "Absent" }
-      ],
-      "89": [
-        { roll: "15", name: "Khadija Shah", status: "Present" },
-        { roll: "16", name: "Zohaib Malik", status: "Present" }
-      ]
-    };
-
-    function renderPortalsView() {
-      panelTitleEl.textContent = "Academic Portals";
-      panelBodyEl.innerHTML = `
-        <div style="display:grid;gap:8px;">
-          <button type="button" class="action-btn portal-sub-btn" data-portal="pk">🇵🇰 Pakistani Students Portal (Nursery–Grade 12, Boards, CSS/PMS, MDCAT/ECAT)</button>
-          <button type="button" class="action-btn portal-sub-btn" data-portal="intl">🌍 International Students Portal (GBP £ Fee & Global Tracks)</button>
-          <button type="button" class="action-btn portal-sub-btn" data-portal="teacher">👨‍🏫 Teacher LMS Portal (Classes, Attendance & Syllabus)</button>
-          <button type="button" class="action-btn portal-sub-btn" data-portal="admin">🛡️ Director Admin LMS (Accounts, HR, Payroll & Expansion)</button>
-        </div>
-        <div id="portalDetailBox" style="margin-top:12px;padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
-          Select any portal above to inspect its active modules.
-        </div>
-      `;
-
-      const details = {
-        pk: "<strong>Pakistani Students Portal:</strong> Covers Nursery to Grade 12 across Pakistani boards, CSS, PMS, Tehsildar, MDCAT, ECAT, and language tracks (IELTS, Urdu, Spanish, German).",
-        intl: "<strong>International Students Portal:</strong> Segregated global student track structured with Pound Sterling (£) fee display and international curriculum schedules.",
-        teacher: "<strong>Teacher LMS Portal:</strong> Manages daily class schedules, student attendance marking, lesson plans, and syllabus tracking.",
-        admin: "<strong>Director Admin LMS:</strong> Central control for admissions, fee verification, payroll, HR, faculty hiring, and District Gujrat to global phase toggles."
-      };
-
-      panelBodyEl.querySelectorAll(".portal-sub-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const box = document.getElementById("portalDetailBox");
-          if (box) box.innerHTML = details[btn.dataset.portal] || "";
-        });
-      });
-    }
-
-    function renderLibraryView() {
-      panelTitleEl.textContent = "Library — All Boards & Systems";
-      panelBodyEl.innerHTML = `
-        <input id="libSearchInput" type="text" placeholder="Filter books or subjects..." style="width:100%;padding:9px 11px;border-radius:8px;border:1px solid #d4af37;background:#07142b;color:#fff;margin-bottom:10px;" />
-        <ul id="libResultList" class="panel-list"></ul>
-      `;
-
-      const input = document.getElementById("libSearchInput");
-      const list = document.getElementById("libResultList");
-
-      function drawList(query) {
-        const q = (query || "").trim().toLowerCase();
-        const matches = libraryCatalog.filter(
-          (item) =>
-            item.title.toLowerCase().includes(q) ||
-            item.track.toLowerCase().includes(q) ||
-            item.level.toLowerCase().includes(q)
-        );
-        list.innerHTML = matches.length
-          ? matches.map((m) => `<li><strong>${m.title}</strong> — <em>${m.track}</em> (${m.level})</li>`).join("")
-          : "<li>No matching books found.</li>";
-      }
-
-      drawList("");
-      input.addEventListener("input", (e) => drawList(e.target.value));
-    }
-
-    function renderRegisterView() {
-      panelTitleEl.textContent = "Daily Register — Pages 83–89";
-      const pageKeys = Object.keys(registerPages);
-      panelBodyEl.innerHTML = `
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
-          ${pageKeys
-            .map(
-              (p, idx) =>
-                `<button type="button" class="nav-pill reg-page-btn ${idx === 0 ? "active" : ""}" data-page="${p}">Page ${p}</button>`
-            )
-            .join("")}
-        </div>
-        <div id="registerTableWrap"></div>
-      `;
-
-      const wrap = document.getElementById("registerTableWrap");
-      const statuses = ["Present", "Absent", "Leave"];
-
-      function drawPage(pageNum) {
-        const rows = registerPages[pageNum] || [];
-        wrap.innerHTML = `
-          <table style="width:100%;border-collapse:collapse;font-size:0.86rem;">
-            <thead>
-              <tr style="border-bottom:1px solid #d4af37;text-align:left;">
-                <th style="padding:6px;">Roll</th>
-                <th style="padding:6px;">Name</th>
-                <th style="padding:6px;">Status (Tap to Cycle)</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${rows
-                .map(
-                  (r, i) => `
-                <tr style="border-bottom:1px solid rgba(212,175,55,0.25);">
-                  <td style="padding:6px;">${r.roll}</td>
-                  <td style="padding:6px;">${r.name}</td>
-                  <td style="padding:6px;">
-                    <button type="button" class="close-btn reg-status-btn" data-idx="${i}">${r.status}</button>
-                  </td>
-                </tr>`
-                )
-                .join("")}
-            </tbody>
-          </table>
-        `;
-
-        wrap.querySelectorAll(".reg-status-btn").forEach((sBtn) => {
-          sBtn.addEventListener("click", () => {
-            const idx = Number(sBtn.dataset.idx);
-            const current = rows[idx].status;
-            const next = statuses[(statuses.indexOf(current) + 1) % statuses.length];
-            rows[idx].status = next;
-            sBtn.textContent = next;
-          });
-        });
-      }
-
-      drawPage("83");
-      panelBodyEl.querySelectorAll(".reg-page-btn").forEach((pBtn) => {
-        pBtn.addEventListener("click", () => {
-          panelBodyEl.querySelectorAll(".reg-page-btn").forEach((b) => b.classList.remove("active"));
-          pBtn.classList.add("active");
-          drawPage(pBtn.dataset.page);
-        });
-      });
-    }
-
-    document.addEventListener("click", (event) => {
-      const trigger = event.target.closest("[data-target]");
-      if (!trigger) return;
-      const target = trigger.dataset.target;
-      setTimeout(() => {
-        if (!panelEl.classList.contains("open")) return;
-        if (target === "portals") renderPortalsView();
-        else if (target === "library") renderLibraryView();
-        else if (target === "register") renderRegisterView();
-      }, 0);
-    });
-  })();
-</script>
-<script>
-  (function () {
-    const panelBodyEl = document.getElementById("panelBody");
-    const panelTitleEl = document.getElementById("panelTitle");
-    const panelEl = document.getElementById("dynamicPanel");
-    const updatesCountEl = document.getElementById("updatesCount");
-    if (!panelBodyEl || !panelTitleEl || !panelEl) return;
-
-    const updateQueue = [
-      { id: "u1", text: "Enable Phase 1 Admissions — District Gujrat (Gujrat, Dinga, Kharian, Lalamusa, Sarai Alamgir, Jalalpur Jattan, Gulyana, Daulat Nagar)", status: "Pending" },
-      { id: "u2", text: "Sync DOAB Open Access Book Directory & Curriculum Reference Shelves", status: "Pending" },
-      { id: "u3", text: "Activate International GBP (£) Fee Portal & Remittance Verification Desk", status: "Pending" }
-    ];
-
-    function syncUpdatesBadge() {
-      if (!updatesCountEl) return;
-      const pending = updateQueue.filter((item) => item.status === "Pending").length;
-      updatesCountEl.textContent = String(pending);
-    }
-
-    function renderUpdatesGateway() {
-      panelTitleEl.textContent = "Updates Gateway — OK / Yes vs. No";
-      panelBodyEl.innerHTML = `
-        <p style="margin-bottom:10px;">Approve (<strong>OK / Yes</strong>) or hold (<strong>No</strong>) pending institutional updates:</p>
-        <div id="updatesListWrap" style="display:grid;gap:10px;"></div>
-      `;
-
-      const wrap = document.getElementById("updatesListWrap");
-
-      function drawQueue() {
-        wrap.innerHTML = updateQueue
-          .map(
-            (item, idx) => `
-          <div style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
-            <div style="margin-bottom:8px;">${item.text}</div>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-              <span style="font-size:0.8rem;color:#d4af37;">Status: <strong>${item.status}</strong></span>
-              <div style="display:flex;gap:6px;">
-                <button type="button" class="nav-pill upd-act-btn" data-idx="${idx}" data-val="OK / Yes">OK / Yes</button>
-                <button type="button" class="close-btn upd-act-btn" data-idx="${idx}" data-val="No">No</button>
-              </div>
-            </div>
-          </div>`
-          )
-          .join("");
-
-        wrap.querySelectorAll(".upd-act-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const idx = Number(btn.dataset.idx);
-            updateQueue[idx].status = btn.dataset.val;
-            syncUpdatesBadge();
-            drawQueue();
-          });
-        });
-      }
-
-      drawQueue();
-    }
-
-    function renderReferencePortals() {
-      panelTitleEl.textContent = "Reference Portals & Study Apps";
-      panelBodyEl.innerHTML = `
-        <div style="display:grid;gap:8px;">
-          <a href="https://doabooks.org/" target="_blank" rel="noopener noreferrer" class="action-btn" style="text-decoration:none;display:block;">
-            📚 DOAB — Directory of Open Access Books (111,000+ Peer-Reviewed Books)
-          </a>
-          <div style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
-            <strong>Subject &amp; Exam Study Tools:</strong>
-            <ul class="panel-list">
-              <li>Matric, Intermediate &amp; Cambridge O/A Level Past Paper Archive</li>
-              <li>CSS, PMS &amp; Tehsildar General Knowledge &amp; Current Affairs Digest</li>
-              <li>MDCAT &amp; ECAT Concept Bank + Timed Practice Quizzes</li>
-              <li>IELTS, Urdu, Spanish &amp; German Vocabulary &amp; Pronunciation Lab</li>
-            </ul>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderGlobalComparison() {
-      panelTitleEl.textContent = "USA / UK / Europe — Curriculum & Subjects Comparison";
-      const tracks = {
-        UK: "<strong>United Kingdom (UK):</strong> Key Stages 1–4, GCSE / IGCSE (Grades 9–10), A Levels (Grades 11–12), specialized subject depth (3–4 A Level subjects), UCAS university admission.",
-        USA: "<strong>United States (USA):</strong> Elementary, Middle &amp; High School (Grades 9–12), broad credit-based curriculum, GPA tracking, Honors / AP courses, SAT / ACT readiness.",
-        Europe: "<strong>Europe (Bologna / European Track):</strong> National secondary diplomas, International Baccalaureate (IB) options, multilingual instruction, ECTS higher-education credit transfer."
-      };
-
-      panelBodyEl.innerHTML = `
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
-          <button type="button" class="nav-pill region-btn active" data-region="UK">UK System</button>
-          <button type="button" class="nav-pill region-btn" data-region="USA">USA System</button>
-          <button type="button" class="nav-pill region-btn" data-region="Europe">Europe System</button>
-        </div>
-        <div id="regionDetailBox" style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
-          ${tracks.UK}
-        </div>
-      `;
-
-      const box = document.getElementById("regionDetailBox");
-      panelBodyEl.querySelectorAll(".region-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          panelBodyEl.querySelectorAll(".region-btn").forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          box.innerHTML = tracks[btn.dataset.region] || "";
-        });
-      });
-    }
-
-    function renderCoursesAndAds() {
-      panelTitleEl.textContent = "Advertisement + Next Courses";
-      panelBodyEl.innerHTML = `
-        <div style="padding:10px;border:1px solid #d4af37;border-radius:10px;background:#07142b;margin-bottom:10px;">
-          <strong style="color:#d4af37;">Admissions Open — Online &amp; Campus Batches</strong>
-          <ul class="panel-list">
-            <li>School &amp; College: Nursery to Grade 12 (Pakistani Boards &amp; Cambridge O/A Levels)</li>
-            <li>Competitive Exams: CSS, PMS, Tehsildar, MDCAT &amp; ECAT Evening Sessions</li>
-            <li>Global Languages: IELTS, Urdu, Spanish &amp; German Live Classes</li>
-          </ul>
-        </div>
-        <button type="button" id="enrollAlertBtn" class="action-btn">Register Course Interest</button>
-        <div id="enrollStatusMsg" style="margin-top:8px;font-size:0.85rem;color:#d4af37;"></div>
-      `;
-
-      const enrollBtn = document.getElementById("enrollAlertBtn");
-      const statusMsg = document.getElementById("enrollStatusMsg");
-      enrollBtn.addEventListener("click", () => {
-        statusMsg.textContent = "Course inquiry logged. Open Contact / WhatsApp / Location to confirm seat & fee plan.";
-      });
-    }
-
-    function renderContactSection() {
-      panelTitleEl.textContent = "Contact / WhatsApp / Location";
-      panelBodyEl.innerHTML = `
-        <div style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;display:grid;gap:6px;">
-          <div><strong>Director &amp; Founder:</strong> Sir Haroon Javaid Hashmi</div>
-          <div><strong>Institution:</strong> Sir Haroon Javaid Hashmi Academy &amp; College</div>
-          <div><strong>Phase 1 Hubs:</strong> Gujrat, Dinga, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar</div>
-          <div><strong>Global Desk:</strong> Online International Campus (UK / USA / Europe / Worldwide)</div>
-        </div>
-      `;
-    }
-
-    syncUpdatesBadge();
-
-    document.addEventListener("click", (event) => {
-      const trigger = event.target.closest("[data-target]");
-      if (!trigger) return;
-      const target = trigger.dataset.target;
-      setTimeout(() => {
-        if (!panelEl.classList.contains("open")) return;
-        if (target === "updates") renderUpdatesGateway();
-        else if (target === "reference") renderReferencePortals();
-        else if (target === "global-diff") renderGlobalComparison();
-        else if (target === "courses") renderCoursesAndAds();
-        else if (target === "contact") renderContactSection();
-      }, 0);
-    });
-  })();
-</script>
-<script>
-  (function () {
-    const panelBodyEl = document.getElementById("panelBody");
-    const panelTitleEl = document.getElementById("panelTitle");
-    if (!panelBodyEl || !panelTitleEl) return;
-
-    const expansionPhases = [
-      { phase: "Phase 1", area: "District Gujrat (Gujrat, Dinga, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar)", active: true },
-      { phase: "Phase 2", area: "Regional / Division Expansion", active: false },
-      { phase: "Phase 3", area: "Provincial Expansion", active: false },
-      { phase: "Phase 4", area: "National Expansion", active: false },
-      { phase: "Phase 5", area: "Global International Campus (GBP £ Track)", active: false }
-    ];
-
-    function mountAdminAndTeacherTools(portalKey) {
-      const box = document.getElementById("portalDetailBox");
-      if (!box) return;
-
-      if (portalKey === "teacher") {
-        box.innerHTML = `
-          <div style="margin-bottom:8px;"><strong>Teacher LMS Workspace:</strong> Manage classes, lesson plans, and daily syllabus logs.</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
-            <button type="button" id="logLessonBtn" class="nav-pill">Mark Today's Syllabus Completed</button>
-            <button type="button" id="alertAbsentBtn" class="close-btn">Send Absentee Alert Notice</button>
-          </div>
-          <div id="teacherActionOutput" style="font-size:0.84rem;color:#d4af37;">Ready for class actions.</div>
-        `;
-        const out = document.getElementById("teacherActionOutput");
-        document.getElementById("logLessonBtn")?.addEventListener("click", () => {
-          if (out) out.textContent = "Syllabus progress logged for today's active session.";
-        });
-        document.getElementById("alertAbsentBtn")?.addEventListener("click", () => {
-          if (out) out.textContent = "Absentee alert queued for parent, faculty, and admin log.";
-        });
-      }
-
-      if (portalKey === "admin") {
-        box.innerHTML = `
-          <div style="margin-bottom:8px;"><strong>Director Admin LMS — Expansion &amp; Operations Controls:</strong></div>
-          <div id="phaseSwitchList" style="display:grid;gap:6px;margin-bottom:10px;"></div>
-          <div style="font-size:0.84rem;color:#cbd5e1;">
-            Modules active: Admissions, Accounts &amp; Fee Verification, HR &amp; Payroll, Faculty Hiring (CV &amp; Experience), Timetables &amp; Syllabi.
-          </div>
-        `;
-        const list = document.getElementById("phaseSwitchList");
-        function renderPhases() {
-          if (!list) return;
-          list.innerHTML = expansionPhases
-            .map(
-              (p, i) => `
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid rgba(212,175,55,0.35);border-radius:8px;background:#0b1d3d;">
-                <span style="font-size:0.82rem;"><strong>${p.phase}:</strong> ${p.area}</span>
-                <button type="button" class="nav-pill phase-toggle-btn ${p.active ? "active" : ""}" data-pidx="${i}">
-                  ${p.active ? "Active" : "Off"}
-                </button>
-              </div>`
-            )
-            .join("");
-
-          list.querySelectorAll(".phase-toggle-btn").forEach((tBtn) => {
-            tBtn.addEventListener("click", () => {
-              const idx = Number(tBtn.dataset.pidx);
-              expansionPhases[idx].active = !expansionPhases[idx].active;
-              renderPhases();
-            });
-          });
-        }
-        renderPhases();
-      }
-    }
-
-    document.addEventListener("click", (event) => {
-      const subBtn = event.target.closest(".portal-sub-btn");
-      if (!subBtn) return;
-      const key = subBtn.dataset.portal;
-      setTimeout(() => {
-        if (key === "teacher" || key === "admin") {
-          mountAdminAndTeacherTools(key);
-        }
-      }, 0);
-    });
-  })();
-</script>
-<script>
-  (function () {
-    const panelBodyEl = document.getElementById("panelBody");
-    if (!panelBodyEl) return;
-
-    function enhanceStudentPortals(portalKey) {
-      const box = document.getElementById("portalDetailBox");
-      if (!box) return;
-
-      if (portalKey === "pk" || portalKey === "intl") {
-        const isIntl = portalKey === "intl";
-        const currencyLabel = isIntl ? "GBP (£) — International Remittance / Bank Transfer" : "PKR (Rs.) — Meezan Bank / EasyPaisa";
-        box.innerHTML = `
-          <div style="margin-bottom:8px;">
-            <strong>${isIntl ? "International Students Portal (GBP £)" : "Pakistani Students Portal (PKR)"}</strong>
-          </div>
-          <div style="font-size:0.85rem;margin-bottom:10px;">
-            Channel: <strong>${currencyLabel}</strong>
-          </div>
-          <div style="display:grid;gap:6px;margin-bottom:8px;">
-            <input id="feeStudentInput" type="text" placeholder="Student Full Name" style="width:100%;padding:8px;border-radius:8px;border:1px solid #d4af37;background:#0b1d3d;color:#fff;" />
-            <input id="feeAmountInput" type="text" placeholder="${isIntl ? "Amount in GBP (£)" : "Amount in PKR"}" style="width:100%;padding:8px;border-radius:8px;border:1px solid #d4af37;background:#0b1d3d;color:#fff;" />
-            <button type="button" id="verifyFeeReceiptBtn" class="action-btn">Generate 3-Way Fee Receipt</button>
-          </div>
-          <div id="feeReceiptOutput" style="font-size:0.83rem;color:#d4af37;"></div>
-        `;
-
-        document.getElementById("verifyFeeReceiptBtn")?.addEventListener("click", () => {
-          const name = (document.getElementById("feeStudentInput")?.value || "").trim() || "Student";
-          const amt = (document.getElementById("feeAmountInput")?.value || "").trim() || (isIntl ? "£100" : "Rs. 5,000");
-          const ref = "SHJ-" + Date.now().toString().slice(-6);
-          const out = document.getElementById("feeReceiptOutput");
-          if (out) {
-            out.innerHTML = `Receipt <strong>${ref}</strong> issued for <strong>${name}</strong> (${amt}) — logged for Parent, Payment Desk &amp; Director Audit.`;
-          }
-        });
-      }
-
-      if (portalKey === "admin") {
-        const extraWrap = document.createElement("div");
-        extraWrap.style.marginTop = "12px";
-        extraWrap.style.paddingTop = "10px";
-        extraWrap.style.borderTop = "1px solid rgba(212,175,55,0.35)";
-        extraWrap.innerHTML = `
-          <div style="margin-bottom:6px;"><strong>Universal Announcement Broadcaster &amp; Faculty Desk:</strong></div>
-          <input id="broadcastMsgInput" type="text" placeholder="Type official academy announcement..." style="width:100%;padding:8px;border-radius:8px;border:1px solid #d4af37;background:#0b1d3d;color:#fff;margin-bottom:6px;" />
-          <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            <button type="button" id="sendBroadcastBtn" class="nav-pill">Broadcast Notice</button>
-            <button type="button" id="openHiringLogBtn" class="close-btn">Faculty Hiring Queue (CV &amp; Exp.)</button>
-          </div>
-          <div id="adminExtraOutput" style="margin-top:8px;font-size:0.83rem;color:#d4af37;"></div>
-        `;
-        box.appendChild(extraWrap);
-
-        document.getElementById("sendBroadcastBtn")?.addEventListener("click", () => {
-          const msg = (document.getElementById("broadcastMsgInput")?.value || "").trim();
-          const out = document.getElementById("adminExtraOutput");
-          if (out) {
-            out.textContent = msg
-              ? `Broadcast queued across Portal Ticker & Social Channels: "${msg}"`
-              : "Enter an announcement message first.";
-          }
-        });
-
-        document.getElementById("openHiringLogBtn")?.addEventListener("click", () => {
-          const out = document.getElementById("adminExtraOutput");
-          if (out) {
-            out.textContent = "Faculty Hiring Desk ready: accepts applicant CV, degree credentials, and verified teaching experience letters.";
-          }
-        });
-      }
-    }
-
-    document.addEventListener("click", (event) => {
-      const subBtn = event.target.closest(".portal-sub-btn");
-      if (!subBtn) return;
-      const key = subBtn.dataset.portal;
-      setTimeout(() => {
-        enhanceStudentPortals(key);
-      }, 10);
-    });
-  })();
-</script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sir Haroon Javaid Hashmi Academy &amp; College</title>
-  <style>
-    :root {
-      --bg-navy: #07142b;
-      --bg-card: #0b1d3d;
-      --gold: #d4af37;
-      --gold-soft: rgba(212, 175, 55, 0.45);
-      --green-btn: #164b2e;
-      --green-hover: #1e663f;
-      --white: #ffffff;
-      --muted: #cbd5e1;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      padding: 10px;
-    }
-
-    .app-frame {
-      max-width: 540px;
+    .book-stage {
+      max-width: 700px;
       margin: 0 auto;
-      border: 2px solid var(--gold);
-      border-radius: 14px;
-      padding: 12px;
-      background: linear-gradient(180deg, #081834 0%, #050f22 100%);
+      perspective: 1800px;
     }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--gold-soft);
-      margin-bottom: 14px;
-    }
-
-    .brand-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-
-    .live-clock {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gold);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .nav-pill {
-      background-color: var(--bg-card);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 999px;
-      padding: 5px 11px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .nav-pill:hover,
-    .nav-pill.active {
-      background-color: var(--green-btn);
-    }
-
-    .hero-section {
-      text-align: center;
-      padding: 8px 4px 14px;
-    }
-
-    .academy-name {
-      font-size: 1.25rem;
-      font-weight: 800;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .poet-line {
-      font-size: 0.85rem;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .urdu-verse {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      margin-bottom: 10px;
-      direction: rtl;
-    }
-
-    .emblem-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 28px;
-      font-size: 1.6rem;
-      margin-bottom: 12px;
-    }
-
-    .welcome-heading {
-      color: var(--gold);
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
-    }
-
-    .director-role {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .sub-campus {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .menu-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .action-btn {
-      width: 100%;
-      background-color: var(--green-btn);
-      color: var(--white);
-      border: 1.5px solid var(--gold);
-      border-radius: 12px;
-      padding: 13px 16px;
-      font-size: 0.96rem;
-      font-weight: 700;
-      text-align: center;
-      cursor: pointer;
-      transition: background-color 0.15s ease, transform 0.08s ease;
-    }
-
-    .action-btn:hover {
-      background-color: var(--green-hover);
-    }
-
-    .action-btn:active {
-      transform: scale(0.99);
-    }
-
-    .panel-box {
-      display: none;
-      margin-top: 14px;
-      background-color: var(--bg-card);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .panel-box.open {
-      display: block;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--gold-soft);
-    }
-
-    .panel-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .close-btn {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-
-    .panel-body {
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: var(--white);
-    }
-
-    .panel-list {
-      margin-top: 8px;
-      padding-left: 18px;
-    }
-
-    .panel-list li {
-      margin-bottom: 6px;
-    }
-
-    .field-input {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--gold);
-      background: var(--bg-navy);
-      color: var(--white);
-      font-size: 0.88rem;
-    }
-
-    .sub-box {
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px solid var(--gold-soft);
-      border-radius: 10px;
-      background: var(--bg-navy);
-    }
-
-    .reg-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.86rem;
-    }
-
-    .reg-table th,
-    .reg-table td {
-      padding: 6px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-      text-align: left;
-    }
-  </style>
-</head>
-<body>
-  <div class="app-frame">
-    <header class="top-bar">
-      <div class="brand-title">🎓 Sir Haroon Global Academy</div>
-      <div id="liveClock" class="live-clock">--:--:--</div>
-      <nav class="top-actions" aria-label="Primary Navigation">
-        <button type="button" class="nav-pill active" data-target="home">Home</button>
-        <button type="button" class="nav-pill" data-target="portals">Portals</button>
-        <button type="button" class="nav-pill" data-target="updates">Updates (<span id="updatesCount">3</span>)</button>
-      </nav>
-    </header>
-
-    <section id="homeHero" class="hero-section">
-      <h1 class="academy-name">Sir HAROON JAVAID HASHMI<br />Academy &amp; College</h1>
-      <p class="poet-line">Allama Muhammad Iqbal - شاعر مشرق</p>
-      <p class="urdu-verse">اپنی دنیا آپ پیدا کر اگر زندوں میں ہے تو</p>
-      <div class="emblem-row" aria-hidden="true">
-        <span>🦅</span>
-        <span>🇵🇰</span>
-      </div>
-      <div class="welcome-heading">WELCOME</div>
-      <div class="director-role">Director &amp; Founder - Sir Haroon Javaid Hashmi</div>
-      <div class="sub-campus">Global Academy &amp; College</div>
-    </section>
-
-    <main class="menu-stack">
-      <button type="button" class="action-btn" data-target="portals">Enter - Portals ➡️</button>
-      <button type="button" class="action-btn" data-target="updates">Updates Gateway — OK / Yes vs. No 🔔</button>
-      <button type="button" class="action-btn" data-target="library">Library - Data Bhara Hua - All Boards &amp; Systems</button>
-      <button type="button" class="action-btn" data-target="reference">Reference Portals &amp; Study Apps</button>
-      <button type="button" class="action-btn" data-target="register">Daily Register - Page 83-89</button>
-      <button type="button" class="action-btn" data-target="global-diff">USA / UK / Europe - Farq - Subjects</button>
-      <button type="button" class="action-btn" data-target="courses">Advertisement + Next Courses</button>
-      <button type="button" class="action-btn" data-target="contact">Contact / WhatsApp / Location</button>
-    </main>
-
-    <section id="dynamicPanel" class="panel-box" aria-live="polite">
-      <div class="panel-header">
-        <h2 id="panelTitle" class="panel-title">Section</h2>
-        <button type="button" id="closePanelBtn" class="close-btn">Close</button>
-      </div>
-      <div id="panelBody" class="panel-body"></div>
-    </section>
-  </div>
-
-  <script>
-    (function () {
-      const clockEl = document.getElementById("liveClock");
-      const updatesCountEl = document.getElementById("updatesCount");
-      const panelEl = document.getElementById("dynamicPanel");
-      const panelTitleEl = document.getElementById("panelTitle");
-      const panelBodyEl = document.getElementById("panelBody");
-      const closePanelBtn = document.getElementById("closePanelBtn");
-      const navPills = document.querySelectorAll(".nav-pill");
-
-      const libraryCatalog = [
-        { title: "Directory of Open Access Books (DOAB) — 111,000+ Peer-Reviewed Books", track: "Open Access / Research", level: "Higher Ed & Reference" },
-        { title: "Foundational English, Urdu & Mathematics (Nursery – Grade 5)", track: "School Boards & Cambridge", level: "Primary" },
-        { title: "Secondary Sciences, Pakistan Studies & Islamiat (Grades 6 – 10)", track: "School Boards & O Levels", level: "Secondary" },
-        { title: "Intermediate & A Level Core Sciences, Humanities & Commerce", track: "FSc / ICS / FA / A Levels", level: "Higher Secondary" },
-        { title: "CSS, PMS & Tehsildar — Syllabus & Current Affairs Compendium", track: "Competitive Exams", level: "Civil Services" },
-        { title: "MDCAT & ECAT — Concept Drills & Past Paper Banks", track: "Entry Tests", level: "Pre-Medical / Engineering" },
-        { title: "IELTS Academic & General + Urdu, Spanish & German Guides", track: "Languages", level: "All Levels" }
-      ];
-
-      const registerPages = {
-        "83": [
-          { roll: "01", name: "Ayesha Tariq", status: "Present" },
-          { roll: "02", name: "Bilal Mahmood", status: "Present" },
-          { roll: "03", name: "Hamza Siddiqui", status: "Absent" }
-        ],
-        "84": [
-          { roll: "04", name: "Zainab Farooq", status: "Present" },
-          { roll: "05", name: "Usman Ghani", status: "Present" },
-          { roll: "06", name: "Maryam Khalid", status: "Leave" }
-        ],
-        "85": [
-          { roll: "07", name: "Ali Raza", status: "Present" },
-          { roll: "08", name: "Hira Naveed", status: "Present" }
-        ],
-        "86": [
-          { roll: "09", name: "Saad Ahmed", status: "Absent" },
-          { roll: "10", name: "Fatima Noor", status: "Present" }
-        ],
-        "87": [
-          { roll: "11", name: "Daniyal Mirza", status: "Present" },
-          { roll: "12", name: "Sanaullah Khan", status: "Present" }
-        ],
-        "88": [
-          { roll: "13", name: "Mahnoor Aslam", status: "Present" },
-          { roll: "14", name: "Taha Javed", status: "Absent" }
-        ],
-        "89": [
-          { roll: "15", name: "Khadija Shah", status: "Present" },
-          { roll: "16", name: "Zohaib Malik", status: "Present" }
-        ]
-      };
-
-      const updateQueue = [
-        { id: "u1", text: "Enable Phase 1 Admissions — District Gujrat (Gujrat, Dinga, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar)", status: "Pending" },
-        { id: "u2", text: "Sync DOAB Open Access Book Directory & Curriculum Reference Shelves", status: "Pending" },
-        { id: "u3", text: "Activate International GBP (£) Fee Portal & Remittance Verification Desk", status: "Pending" }
-      ];
-
-      const expansionPhases = [
-        { phase: "Phase 1", area: "District Gujrat (Gujrat, Dinga, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar)", active: true },
-        { phase: "Phase 2", area: "Regional / Division Expansion", active: false },
-        { phase: "Phase 3", area: "Provincial Expansion", active: false },
-        { phase: "Phase 4", area: "National Expansion", active: false },
-        { phase: "Phase 5", area: "Global International Campus (GBP £ Track)", active: false }
-      ];
-
-      function updateClock() {
-        const now = new Date();
-        clockEl.textContent = now.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit"
-        });
-      }
-
-      function syncUpdatesBadge() {
-        if (!updatesCountEl) return;
-        const pending = updateQueue.filter((item) => item.status === "Pending").length;
-        updatesCountEl.textContent = String(pending);
-      }
-
-      function setActivePill(target) {
-        navPills.forEach((pill) => {
-          pill.classList.toggle("active", pill.dataset.target === target);
-        });
-      }
-
-      function renderPortalsView() {
-        panelTitleEl.textContent = "Academic Portals";
-        panelBodyEl.innerHTML = `
-          <div style="display:grid;gap:8px;">
-            <button type="button" class="action-btn portal-sub-btn" data-portal="pk">🇵🇰 Pakistani Students Portal (Nursery–Grade 12, Boards, CSS/PMS, MDCAT/ECAT)</button>
-            <button type="button" class="action-btn portal-sub-btn" data-portal="intl">🌍 International Students Portal (GBP £ Fee & Global Tracks)</button>
-            <button type="button" class="action-btn portal-sub-btn" data-portal="teacher">👨‍🏫 Teacher LMS Portal (Classes, Attendance & Syllabus)</button>
-            <button type="button" class="action-btn portal-sub-btn" data-portal="admin">🛡️ Director Admin LMS (Accounts, HR, Payroll & Expansion)</button>
-          </div>
-          <div id="portalDetailBox" class="sub-box">Select any portal above to open its tools.</div>
-        `;
-
-        const box = document.getElementById("portalDetailBox");
-        panelBodyEl.querySelectorAll(".portal-sub-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const key = btn.dataset.portal;
-            if (!box) return;
-
-            if (key === "pk" || key === "intl") {
-              const isIntl = key === "intl";
-              box.innerHTML = `
-                <div style="margin-bottom:6px;"><strong>${isIntl ? "International Students Portal (GBP £)" : "Pakistani Students Portal (PKR)"}</strong></div>
-                <div style="font-size:0.84rem;margin-bottom:8px;">Channel: <strong>${isIntl ? "GBP (£) International Remittance / Transfer" : "PKR Meezan Bank / EasyPaisa"}</strong></div>
-                <div style="display:grid;gap:6px;">
-                  <input id="feeStudentInput" class="field-input" type="text" placeholder="Student Full Name" />
-                  <input id="feeAmountInput" class="field-input" type="text" placeholder="${isIntl ? "Amount in GBP (£)" : "Amount in PKR"}" />
-                  <button type="button" id="verifyFeeReceiptBtn" class="action-btn">Generate 3-Way Fee Receipt</button>
-                </div>
-                <div id="feeReceiptOutput" style="margin-top:8px;font-size:0.83rem;color:#d4af37;"></div>
-              `;
-              document.getElementById("verifyFeeReceiptBtn")?.addEventListener("click", () => {
-                const name = (document.getElementById("feeStudentInput")?.value || "").trim() || "Student";
-                const amt = (document.getElementById("feeAmountInput")?.value || "").trim() || (isIntl ? "£100" : "Rs. 5,000");
-                const ref = "SHJ-" + Date.now().toString().slice(-6);
-                const out = document.getElementById("feeReceiptOutput");
-                if (out) {
-                  out.innerHTML = `Receipt <strong>${ref}</strong> issued for <strong>${name}</strong> (${amt}) — logged for Parent, Payment Desk &amp; Director Audit.`;
-                }
-              });
-            } else if (key === "teacher") {
-              box.innerHTML = `
-                <div style="margin-bottom:8px;"><strong>Teacher LMS Workspace:</strong> Manage classes, lesson plans, and daily syllabus logs.</div>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
-                  <button type="button" id="logLessonBtn" class="nav-pill">Mark Today's Syllabus Completed</button>
-                  <button type="button" id="alertAbsentBtn" class="close-btn">Send Absentee Alert Notice</button>
-                </div>
-                <div id="teacherActionOutput" style="font-size:0.84rem;color:#d4af37;">Ready for class actions.</div>
-              `;
-              const out = document.getElementById("teacherActionOutput");
-              document.getElementById("logLessonBtn")?.addEventListener("click", () => {
-                if (out) out.textContent = "Syllabus progress logged for today's active session.";
-              });
-              document.getElementById("alertAbsentBtn")?.addEventListener("click", () => {
-                if (out) out.textContent = "Absentee alert queued for parent, faculty, and admin log.";
-              });
-            } else if (key === "admin") {
-              box.innerHTML = `
-                <div style="margin-bottom:8px;"><strong>Director Admin LMS — Expansion &amp; Operations Controls:</strong></div>
-                <div id="phaseSwitchList" style="display:grid;gap:6px;margin-bottom:10px;"></div>
-                <div style="padding-top:8px;border-top:1px solid rgba(212,175,55,0.35);">
-                  <div style="margin-bottom:6px;"><strong>Universal Announcement Broadcaster &amp; Faculty Desk:</strong></div>
-                  <input id="broadcastMsgInput" class="field-input" type="text" placeholder="Type official academy announcement..." style="margin-bottom:6px;" />
-                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <button type="button" id="sendBroadcastBtn" class="nav-pill">Broadcast Notice</button>
-                    <button type="button" id="openHiringLogBtn" class="close-btn">Faculty Hiring Queue (CV &amp; Exp.)</button>
-                  </div>
-                  <div id="adminExtraOutput" style="margin-top:8px;font-size:0.83rem;color:#d4af37;"></div>
-                </div>
-              `;
-              const list = document.getElementById("phaseSwitchList");
-              function renderPhases() {
-                if (!list) return;
-                list.innerHTML = expansionPhases
-                  .map(
-                    (p, i) => `
-                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid rgba(212,175,55,0.35);border-radius:8px;background:#0b1d3d;">
-                      <span style="font-size:0.82rem;"><strong>${p.phase}:</strong> ${p.area}</span>
-                      <button type="button" class="nav-pill phase-toggle-btn ${p.active ? "active" : ""}" data-pidx="${i}">
-                        ${p.active ? "Active" : "Off"}
-                      </button>
-                    </div>`
-                  )
-                  .join("");
-
-                list.querySelectorAll(".phase-toggle-btn").forEach((tBtn) => {
-                  tBtn.addEventListener("click", () => {
-                    const idx = Number(tBtn.dataset.pidx);
-                    expansionPhases[idx].active = !expansionPhases[idx].active;
-                    renderPhases();
-                  });
-                });
-              }
-              renderPhases();
-
-              document.getElementById("sendBroadcastBtn")?.addEventListener("click", () => {
-                const msg = (document.getElementById("broadcastMsgInput")?.value || "").trim();
-                const out = document.getElementById("adminExtraOutput");
-                if (out) {
-                  out.textContent = msg
-                    ? `Broadcast queued across Portal Ticker & Social Channels: "${msg}"`
-                    : "Enter an announcement message first.";
-                }
-              });
-
-              document.getElementById("openHiringLogBtn")?.addEventListener("click", () => {
-                const out = document.getElementById("adminExtraOutput");
-                if (out) {
-                  out.textContent = "Faculty Hiring Desk ready: accepts applicant CV, degree credentials, and verified teaching experience letters.";
-                }
-              });
-            }
-          });
-        });
-      }
-
-      function renderUpdatesGateway() {
-        panelTitleEl.textContent = "Updates Gateway — OK / Yes vs. No";
-        panelBodyEl.innerHTML = `
-          <p style="margin-bottom:10px;">Approve (<strong>OK / Yes</strong>) or hold (<strong>No</strong>) pending institutional updates:</p>
-          <div id="updatesListWrap" style="display:grid;gap:10px;"></div>
-        `;
-        const wrap = document.getElementById("updatesListWrap");
-
-        function drawQueue() {
-          if (!wrap) return;
-          wrap.innerHTML = updateQueue
-            .map(
-              (item, idx) => `
-              <div class="sub-box">
-                <div style="margin-bottom:8px;">${item.text}</div>
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-                  <span style="font-size:0.8rem;color:#d4af37;">Status: <strong>${item.status}</strong></span>
-                  <div style="display:flex;gap:6px;">
-                    <button type="button" class="nav-pill upd-act-btn" data-idx="${idx}" data-val="OK / Yes">OK / Yes</button>
-                    <button type="button" class="close-btn upd-act-btn" data-idx="${idx}" data-val="No">No</button>
-                  </div>
-                </div>
-              </div>`
-            )
-            .join("");
-
-          wrap.querySelectorAll(".upd-act-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const idx = Number(btn.dataset.idx);
-              updateQueue[idx].status = btn.dataset.val;
-              syncUpdatesBadge();
-              drawQueue();
-            });
-          });
-        }
-        drawQueue();
-      }
-
-      function renderLibraryView() {
-        panelTitleEl.textContent = "Library — All Boards & Systems";
-        panelBodyEl.innerHTML = `
-          <input id="libSearchInput" class="field-input" type="text" placeholder="Filter books, boards, exams, or languages..." style="margin-bottom:10px;" />
-          <ul id="libResultList" class="panel-list"></ul>
-        `;
-        const input = document.getElementById("libSearchInput");
-        const list = document.getElementById("libResultList");
-
-        function drawList(query) {
-          if (!list) return;
-          const q = (query || "").trim().toLowerCase();
-          const matches = libraryCatalog.filter(
-            (item) =>
-              item.title.toLowerCase().includes(q) ||
-              item.track.toLowerCase().includes(q) ||
-              item.level.toLowerCase().includes(q)
-          );
-          list.innerHTML = matches.length
-            ? matches.map((m) => `<li><strong>${m.title}</strong> — <em>${m.track}</em> (${m.level})</li>`).join("")
-            : "<li>No matching books found.</li>";
-        }
-
-        drawList("");
-        input?.addEventListener("input", (e) => drawList(e.target.value));
-      }
-
-      function renderReferencePortals() {
-        panelTitleEl.textContent = "Reference Portals & Study Apps";
-        panelBodyEl.innerHTML = `
-          <div style="display:grid;gap:8px;">
-            <a href="https://doabooks.org/" target="_blank" rel="noopener noreferrer" class="action-btn" style="text-decoration:none;display:block;">
-              📚 DOAB — Directory of Open Access Books
-            </a>
-            <div class="sub-box">
-              <strong>Subject &amp; Exam Study Tools:</strong>
-              <ul class="panel-list">
-                <li>Matric, Intermediate &amp; Cambridge O/A Level Past Paper Archive</li>
-                <li>CSS, PMS &amp; Tehsildar General Knowledge &amp; Current Affairs Digest</li>
-                <li>MDCAT &amp; ECAT Concept Bank + Timed Practice Quizzes</li>
-                <li>IELTS, Urdu, Spanish &amp; German Vocabulary &amp; Pronunciation Lab</li>
-              </ul>
-            </div>
-          </div>
-        `;
-      }
-
-      function renderRegisterView() {
-        panelTitleEl.textContent = "Daily Register — Pages 83–89";
-        const pageKeys = Object.keys(registerPages);
-        panelBodyEl.innerHTML = `
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
-            ${pageKeys
-              .map(
-                (p, idx) =>
-                  `<button type="button" class="nav-pill reg-page-btn ${idx === 0 ? "active" : ""}" data-page="${p}">Page ${p}</button>`
-              )
-              .join("")}
-          </div>
-          <div id="registerTableWrap"></div>
-        `;
-        const wrap = document.getElementById("registerTableWrap");
-        const statuses = ["Present", "Absent", "Leave"];
-
-        function drawPage(pageNum) {
-          if (!wrap) return;
-          const rows = registerPages[pageNum] || [];
-          wrap.innerHTML = `
-            <table class="reg-table">
-              <thead>
-                <tr>
-                  <th>Roll</th>
-                  <th>Name</th>
-                  <th>Status (Tap)</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${rows
-                  .map(
-                    (r, i) => `
-                  <tr>
-                    <td>${r.roll}</td>
-                    <td>${r.name}</td>
-                    <td><button type="button" class="close-btn reg-status-btn" data-idx="${i}">${r.status}</button></td>
-                  </tr>`
-                  )
-                  .join("")}
-              </tbody>
-            </table>
-          `;
-          wrap.querySelectorAll(".reg-status-btn").forEach((sBtn) => {
-            sBtn.addEventListener("click", () => {
-              const idx = Number(sBtn.dataset.idx);
-              const current = rows[idx].status;
-              const next = statuses[(statuses.indexOf(current) + 1) % statuses.length];
-              rows[idx].status = next;
-              sBtn.textContent = next;
-            });
-          });
-        }
-
-        drawPage("83");
-        panelBodyEl.querySelectorAll(".reg-page-btn").forEach((pBtn) => {
-          pBtn.addEventListener("click", () => {
-            panelBodyEl.querySelectorAll(".reg-page-btn").forEach((b) => b.classList.remove("active"));
-            pBtn.classList.add("active");
-            drawPage(pBtn.dataset.page);
-          });
-        });
-      }
-
-      function renderGlobalComparison() {
-        panelTitleEl.textContent = "USA / UK / Europe — Curriculum & Subjects Comparison";
-        const tracks = {
-          UK: "<strong>United Kingdom (UK):</strong> Key Stages 1–4, GCSE / IGCSE (Grades 9–10), A Levels (Grades 11–12), specialized subject depth (3–4 A Level subjects), UCAS university admission.",
-          USA: "<strong>United States (USA):</strong> Elementary, Middle &amp; High School (Grades 9–12), broad credit-based curriculum, GPA tracking, Honors / AP courses, SAT / ACT readiness.",
-          Europe: "<strong>Europe (Bologna / European Track):</strong> National secondary diplomas, International Baccalaureate (IB) options, multilingual instruction, ECTS higher-education credit transfer."
-        };
-        panelBodyEl.innerHTML = `
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
-            <button type="button" class="nav-pill region-btn active" data-region="UK">UK System</button>
-            <button type="button" class="nav-pill region-btn" data-region="USA">USA System</button>
-            <button type="button" class="nav-pill region-btn" data-region="Europe">Europe System</button>
-          </div>
-          <div id="regionDetailBox" class="sub-box">${tracks.UK}</div>
-        `;
-        const box = document.getElementById("regionDetailBox");
-        panelBodyEl.querySelectorAll(".region-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            panelBodyEl.querySelectorAll(".region-btn").forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-            if (box) box.innerHTML = tracks[btn.dataset.region] || "";
-          });
-        });
-      }
-
-      function renderCoursesAndAds() {
-        panelTitleEl.textContent = "Advertisement + Next Courses";
-        panelBodyEl.innerHTML = `
-          <div class="sub-box" style="margin-bottom:10px;">
-            <strong style="color:#d4af37;">Admissions Open — Online &amp; Campus Batches</strong>
-            <ul class="panel-list">
-              <li>School &amp; College: Nursery to Grade 12 (Pakistani Boards &amp; Cambridge O/A Levels)</li>
-              <li>Competitive Exams: CSS, PMS, Tehsildar, MDCAT &amp; ECAT Evening Sessions</li>
-              <li>Global Languages: IELTS, Urdu, Spanish &amp; German Live Classes</li>
-            </ul>
-          </div>
-          <button type="button" id="enrollAlertBtn" class="action-btn">Register Course Interest</button>
-          <div id="enrollStatusMsg" style="margin-top:8px;font-size:0.85rem;color:#d4af37;"></div>
-        `;
-        document.getElementById("enrollAlertBtn")?.addEventListener("click", () => {
-          const msg = document.getElementById("enrollStatusMsg");
-          if (msg) msg.textContent = "Course inquiry logged. Open Contact / WhatsApp / Location to confirm seat & fee plan.";
-        });
-      }
-
-      function renderContactSection() {
-        panelTitleEl.textContent = "Contact / WhatsApp / Location";
-        panelBodyEl.innerHTML = `
-          <div class="sub-box" style="display:grid;gap:6px;">
-            <div><strong>Director &amp; Founder:</strong> Sir Haroon Javaid Hashmi</div>
-            <div><strong>Institution:</strong> Sir Haroon Javaid Hashmi Academy &amp; College</div>
-            <div><strong>Phase 1 Hubs:</strong> Gujrat, Dinga, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar</div>
-            <div><strong>Global Desk:</strong> Online International Campus (UK / USA / Europe / Worldwide)</div>
-          </div>
-        `;
-      }
-
-      function openSection(target) {
-        if (!target || target === "home") {
-          panelEl.classList.remove("open");
-          setActivePill("home");
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          return;
-        }
-
-        panelEl.classList.add("open");
-        setActivePill(target);
-
-        if (target === "portals") renderPortalsView();
-        else if (target === "updates") renderUpdatesGateway();
-        else if (target === "library") renderLibraryView();
-        else if (target === "reference") renderReferencePortals();
-        else if (target === "register") renderRegisterView();
-        else if (target === "global-diff") renderGlobalComparison();
-        else if (target === "courses") renderCoursesAndAds();
-        else if (target === "contact") renderContactSection();
-
-        panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }
-
-      document.addEventListener("click", (event) => {
-        const trigger = event.target.closest("[data-target]");
-        if (trigger) {
-          openSection(trigger.dataset.target);
-        }
-      });
-
-      closePanelBtn?.addEventListener("click", () => {
-        panelEl.classList.remove("open");
-        setActivePill("home");
-      });
-
-      syncUpdatesBadge();
-      updateClock();
-      setInterval(updateClock, 1000);
-    })();
-  </script>
-</body>
-</html>
-<script>
-  (function () {
-    const STORAGE_KEY = "SHJ_ACADEMY_STATE_V1";
-    const appFrame = document.querySelector(".app-frame");
-    const panelBodyEl = document.getElementById("panelBody");
-    const panelTitleEl = document.getElementById("panelTitle");
-    const panelEl = document.getElementById("dynamicPanel");
-    const updatesCountEl = document.getElementById("updatesCount");
-    if (!appFrame || !panelBodyEl || !panelTitleEl || !panelEl) return;
-
-    const tickerStyle = document.createElement("style");
-    tickerStyle.textContent = `
-      .ticker-strip {
-        overflow: hidden;
-        white-space: nowrap;
-        border: 1px solid rgba(212, 175, 55, 0.45);
-        border-radius: 8px;
-        background: #07142b;
-        padding: 6px 0;
-        margin-bottom: 10px;
-        font-size: 0.8rem;
-      }
-      .ticker-track {
-        display: inline-block;
-        padding-left: 100%;
-        animation: shjMarquee 24s linear infinite;
-        color: #d4af37;
-        font-weight: 600;
-      }
-      .ticker-strip.promo .ticker-track {
-        color: #ffffff;
-        animation-duration: 30s;
-      }
-      @keyframes shjMarquee {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-100%); }
-      }
-    `;
-    document.head.appendChild(tickerStyle);
-
-    const noticeTicker = document.createElement("div");
-    noticeTicker.className = "ticker-strip";
-    noticeTicker.innerHTML = `<div class="ticker-track">📢 NOTICE: Sir Haroon Javaid Hashmi Academy &amp; College • Phase 1 District Gujrat Active • DOAB Open Access Books Integrated • Teacher &amp; Director LMS Ready</div>`;
-
-    const promoTicker = document.createElement("div");
-    promoTicker.className = "ticker-strip promo";
-    promoTicker.innerHTML = `<div class="ticker-track">🎓 COURSES &amp; PORTALS: Nursery–Grade 12 • Boards &amp; O/A Levels • CSS, PMS, Tehsildar, MDCAT, ECAT • IELTS, Urdu, Spanish &amp; German • International GBP (£) &amp; Local PKR Tracks</div>`;
-
-    const heroEl = document.getElementById("homeHero");
-    if (heroEl && !document.querySelector(".ticker-strip")) {
-      heroEl.insertAdjacentElement("afterend", noticeTicker);
-      noticeTicker.insertAdjacentElement("afterend", promoTicker);
-    }
-
-    function loadSavedState() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : { receipts: [], broadcastLog: [] };
-      } catch (e) {
-        return { receipts: [], broadcastLog: [] };
-      }
-    }
-
-    function saveState(state) {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (e) {}
-    }
-
-    const appState = loadSavedState();
-
-    document.addEventListener("click", (event) => {
-      if (event.target && event.target.id === "verifyFeeReceiptBtn") {
-        setTimeout(() => {
-          const out = document.getElementById("feeReceiptOutput");
-          if (out && out.textContent.trim()) {
-            appState.receipts.unshift({
-              entry: out.textContent.trim(),
-              time: new Date().toLocaleTimeString()
-            });
-            appState.receipts = appState.receipts.slice(0, 20);
-            saveState(appState);
-          }
-        }, 10);
-      }
-
-      if (event.target && event.target.id === "sendBroadcastBtn") {
-        setTimeout(() => {
-          const msg = (document.getElementById("broadcastMsgInput")?.value || "").trim();
-          if (msg) {
-            appState.broadcastLog.unshift({
-              msg: msg,
-              time: new Date().toLocaleTimeString()
-            });
-            appState.broadcastLog = appState.broadcastLog.slice(0, 20);
-            saveState(appState);
-            noticeTicker.querySelector(".ticker-track").textContent =
-              `📢 LATEST BROADCAST (${new Date().toLocaleTimeString()}): ${msg} • Sir Haroon Javaid Hashmi Academy & College`;
-          }
-        }, 10);
-      }
-
-      if (event.target && event.target.closest('[data-target="contact"]')) {
-        setTimeout(() => {
-          if (!panelEl.classList.contains("open")) return;
-          const auditBox = document.createElement("div");
-          auditBox.className = "sub-box";
-          auditBox.innerHTML = `
-            <div style="margin-bottom:6px;"><strong>Saved Local Audit Summary:</strong></div>
-            <div style="font-size:0.82rem;margin-bottom:8px;">
-              Receipts Logged: <strong>${appState.receipts.length}</strong> | Broadcasts Sent: <strong>${appState.broadcastLog.length}</strong>
-            </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-              <button type="button" id="printViewBtn" class="nav-pill">Print / Save PDF View</button>
-              <button type="button" id="clearAuditBtn" class="close-btn">Clear Saved Log</button>
-            </div>
-          `;
-          panelBodyEl.appendChild(auditBox);
-
-          document.getElementById("printViewBtn")?.addEventListener("click", () => {
-            window.print();
-          });
-
-          document.getElementById("clearAuditBtn")?.addEventListener("click", () => {
-            appState.receipts = [];
-            appState.broadcastLog = [];
-            saveState(appState);
-            auditBox.querySelector("div:nth-child(2)").innerHTML =
-              "Receipts Logged: <strong>0</strong> | Broadcasts Sent: <strong>0</strong>";
-          });
-        }, 15);
-      }
-    });
-
-    if (updatesCountEl && typeof updatesCountEl.textContent === "string") {
-      updatesCountEl.textContent = updatesCountEl.textContent || "3";
-    }
-  })();
-</script>
-<script>
-  (function () {
-    const FACULTY_KEY = "SHJ_FACULTY_QUEUE_V1";
-    const panelBodyEl = document.getElementById("panelBody");
-    if (!panelBodyEl) return;
-
-    function loadFacultyQueue() {
-      try {
-        const raw = localStorage.getItem(FACULTY_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        return [];
-      }
-    }
-
-    function saveFacultyQueue(list) {
-      try {
-        localStorage.setItem(FACULTY_KEY, JSON.stringify(list));
-      } catch (e) {}
-    }
-
-    const facultyQueue = loadFacultyQueue();
-
-    document.addEventListener("click", (event) => {
-      if (event.target && event.target.id === "openHiringLogBtn") {
-        setTimeout(() => {
-          const out = document.getElementById("adminExtraOutput");
-          if (!out) return;
-          out.innerHTML = `
-            <div class="sub-box" style="margin-top:8px;">
-              <div style="margin-bottom:6px;color:#fff;"><strong>Faculty Hiring Application &amp; Timetable Generator:</strong></div>
-              <div style="display:grid;gap:6px;margin-bottom:8px;">
-                <input id="facNameInput" class="field-input" type="text" placeholder="Applicant Full Name & Degree" />
-                <input id="facSubjectInput" class="field-input" type="text" placeholder="Subject / Track (e.g. O/A Levels, CSS, MDCAT, IELTS)" />
-                <input id="facExpInput" class="field-input" type="text" placeholder="CV & Experience Summary (e.g. 5 yrs teaching + experience letter)" />
-                <button type="button" id="saveFacultyBtn" class="nav-pill">Add Faculty Record</button>
-              </div>
-              <div id="facultyListDisplay" style="font-size:0.82rem;color:#cbd5e1;margin-bottom:10px;"></div>
-              <div style="padding-top:8px;border-top:1px solid rgba(212,175,55,0.35);">
-                <div style="margin-bottom:6px;color:#fff;"><strong>Auto Timetable &amp; Syllabus Slot Builder:</strong></div>
-                <input id="ttClassInput" class="field-input" type="text" placeholder="Class / Batch & Day (e.g. Grade 10 / CSS — Mon–Fri)" style="margin-bottom:6px;" />
-                <input id="ttTopicInput" class="field-input" type="text" placeholder="Syllabus Unit / Period Slot (e.g. Ch. 4 — 5:00 PM PKT)" style="margin-bottom:6px;" />
-                <button type="button" id="generateSlotBtn" class="close-btn">Generate Timetable &amp; Syllabus Line</button>
-                <div id="timetableOutput" style="margin-top:6px;font-size:0.82rem;color:#d4af37;"></div>
-              </div>
-            </div>
-          `;
-
-          function drawFacultyList() {
-            const disp = document.getElementById("facultyListDisplay");
-            if (!disp) return;
-            if (!facultyQueue.length) {
-              disp.textContent = "No faculty records logged yet.";
-              return;
-            }
-            disp.innerHTML = facultyQueue
-              .map(
-                (f, idx) =>
-                  `<div>${idx + 1}. <strong>${f.name}</strong> — ${f.subject} (${f.exp})</div>`
-              )
-              .join("");
-          }
-
-          drawFacultyList();
-
-          document.getElementById("saveFacultyBtn")?.addEventListener("click", () => {
-            const name = (document.getElementById("facNameInput")?.value || "").trim();
-            const subject = (document.getElementById("facSubjectInput")?.value || "").trim();
-            const exp = (document.getElementById("facExpInput")?.value || "").trim();
-            if (!name || !subject) return;
-            facultyQueue.unshift({
-              name,
-              subject,
-              exp: exp || "CV & Experience Verified"
-            });
-            saveFacultyQueue(facultyQueue.slice(0, 30));
-            drawFacultyList();
-          });
-
-          document.getElementById("generateSlotBtn")?.addEventListener("click", () => {
-            const cls = (document.getElementById("ttClassInput")?.value || "").trim() || "General Batch";
-            const top = (document.getElementById("ttTopicInput")?.value || "").trim() || "Core Syllabus Module";
-            const ttOut = document.getElementById("timetableOutput");
-            if (ttOut) {
-              ttOut.textContent = `Scheduled: [${cls}] -> ${top} (Synced to Teacher & Student View)`;
-            }
-          });
-        }, 10);
-      }
-    });
-  })();
-</script>
-<script>
-  (function () {
-    const styleEl = document.createElement("style");
-    styleEl.textContent = `
-      button, .nav-pill, .action-btn, .close-btn {
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: rgba(212, 175, 55, 0.25);
-        position: relative;
-        z-index: 2;
-      }
-      @media print {
-        body {
-          background: #ffffff !important;
-          color: #000000 !important;
-        }
-        .app-frame {
-          border-color: #000000 !important;
-          background: #ffffff !important;
-          color: #000000 !important;
-          max-width: 100% !important;
-        }
-        .action-btn, .nav-pill, .close-btn, .ticker-strip {
-          display: none !important;
-        }
-        .panel-box {
-          display: block !important;
-          background: #ffffff !important;
-          color: #000000 !important;
-          border-color: #000000 !important;
-        }
-      }
-    `;
-    document.head.appendChild(styleEl);
-
-    window.addEventListener("error", function (err) {
-      const panelEl = document.getElementById("dynamicPanel");
-      const panelTitleEl = document.getElementById("panelTitle");
-      const panelBodyEl = document.getElementById("panelBody");
-      if (panelEl && panelTitleEl && panelBodyEl) {
-        panelTitleEl.textContent = "System Diagnostic Notice";
-        panelBodyEl.textContent = "A script issue was caught safely: " + (err && err.message ? err.message : "Unknown error");
-        panelEl.classList.add("open");
-      }
-    });
-  })();
-</script>
-<!-- PART 10: QUICK-JUMP CONTROLS, KEYBOARD SHORTCUTS & MODULE DIAGNOSTICS -->
-<script>
-  (function () {
-    const panelEl = document.getElementById("dynamicPanel");
-    const panelTitleEl = document.getElementById("panelTitle");
-    const panelBodyEl = document.getElementById("panelBody");
-    const menuStack = document.querySelector(".menu-stack");
-    if (!panelEl || !panelTitleEl || !panelBodyEl || !menuStack) return;
-
-    const quickBar = document.createElement("div");
-    quickBar.id = "part10QuickBar";
-    quickBar.style.cssText =
-      "display:flex;gap:6px;flex-wrap:wrap;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid rgba(212,175,55,0.35);";
-    quickBar.innerHTML = `
-      <button type="button" class="close-btn" data-target="portals">Quick: Portals</button>
-      <button type="button" class="close-btn" data-target="library">Quick: Library</button>
-      <button type="button" class="close-btn" data-target="register">Quick: Register</button>
-      <button type="button" id="part10DiagBtn" class="close-btn">Part 10 Status</button>
-    `;
-
-    if (!document.getElementById("part10QuickBar")) {
-      menuStack.insertAdjacentElement("afterend", quickBar);
-    }
-
-    document.getElementById("part10DiagBtn")?.addEventListener("click", function () {
-      const buttonsCount = document.querySelectorAll("button").length;
-      const hasClock = Boolean(document.getElementById("liveClock"));
-      const hasPanel = Boolean(document.getElementById("dynamicPanel"));
-      panelTitleEl.textContent = "Part 10 — System & Module Diagnostic";
-      panelBodyEl.innerHTML = `
-        <div class="sub-box">
-          <div><strong>Active Buttons Wired:</strong> ${buttonsCount}</div>
-          <div><strong>Live Clock Element:</strong> ${hasClock ? "OK" : "Missing"}</div>
-          <div><strong>Dynamic Panel Container:</strong> ${hasPanel ? "OK" : "Missing"}</div>
-          <div><strong>Keyboard Shortcuts:</strong> Press <strong>Esc</strong> to close panel • <strong>Alt+P</strong> for Portals • <strong>Alt+L</strong> for Library</div>
-        </div>
-      `;
-      panelEl.classList.add("open");
-      panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && panelEl.classList.contains("open")) {
-        panelEl.classList.remove("open");
-      } else if (event.altKey && event.key.toLowerCase() === "p") {
-        document.querySelector('.action-btn[data-target="portals"]')?.click();
-      } else if (event.altKey && event.key.toLowerCase() === "l") {
-        document.querySelector('.action-btn[data-target="library"]')?.click();
-      }
-    });
-  })();
-</script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sir Haroon Javaid Hashmi Academy &amp; College</title>
-  <style>
-    :root {
-      --bg-navy: #07142b;
-      --bg-card: #0b1d3d;
-      --gold: #d4af37;
-      --gold-soft: rgba(212, 175, 55, 0.45);
-      --green-btn: #164b2e;
-      --green-hover: #1e663f;
-      --white: #ffffff;
-      --muted: #cbd5e1;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      padding: 10px;
-    }
-
-    button,
-    .nav-pill,
-    .action-btn,
-    .close-btn {
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: rgba(212, 175, 55, 0.25);
+    .page-card {
       position: relative;
-      z-index: 2;
-    }
-
-    .app-frame {
-      max-width: 540px;
-      margin: 0 auto;
       border: 2px solid var(--gold);
-      border-radius: 14px;
-      padding: 12px;
-      background: linear-gradient(180deg, #081834 0%, #050f22 100%);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.18), transparent 55%),
+        linear-gradient(180deg, #091b3a 0%, #050e20 100%);
+      padding: 16px 18px 20px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      transform-origin: left center;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
     }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--gold-soft);
-      margin-bottom: 14px;
+    .page-card.flipping {
+      transform: rotateY(-75deg);
+      opacity: 0.25;
     }
 
-    .brand-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-
-    .live-clock {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gold);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .nav-pill {
-      background-color: var(--bg-card);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 999px;
-      padding: 5px 11px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .nav-pill:hover,
-    .nav-pill.active {
-      background-color: var(--green-btn);
-    }
-
-    .hero-section {
-      text-align: center;
-      padding: 8px 4px 12px;
-    }
-
-    .academy-name {
-      font-size: 1.25rem;
-      font-weight: 800;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .poet-line {
-      font-size: 0.85rem;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .urdu-verse {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      margin-bottom: 10px;
-      direction: rtl;
-    }
-
-    .emblem-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 28px;
-      font-size: 1.6rem;
-      margin-bottom: 12px;
-    }
-
-    .welcome-heading {
-      color: var(--gold);
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
-    }
-
-    .director-role {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .sub-campus {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .ticker-strip {
-      overflow: hidden;
-      white-space: nowrap;
-      border: 1px solid var(--gold-soft);
-      border-radius: 8px;
-      background: var(--bg-navy);
-      padding: 6px 0;
-      margin-bottom: 10px;
-      font-size: 0.8rem;
-    }
-
-    .ticker-track {
-      display: inline-block;
-      padding-left: 100%;
-      animation: shjMarquee 24s linear infinite;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .ticker-strip.promo .ticker-track {
-      color: var(--white);
-      animation-duration: 30s;
-    }
-
-    @keyframes shjMarquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-
-    .menu-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .action-btn {
-      width: 100%;
-      background-color: var(--green-btn);
-      color: var(--white);
-      border: 1.5px solid var(--gold);
-      border-radius: 12px;
-      padding: 13px 16px;
-      font-size: 0.96rem;
-      font-weight: 700;
-      text-align: center;
-      cursor: pointer;
-      transition: background-color 0.15s ease, transform 0.08s ease;
-    }
-
-    .action-btn:hover {
-      background-color: var(--green-hover);
-    }
-
-    .action-btn:active {
-      transform: scale(0.99);
-    }
-
-    .panel-box {
+    .hidden-view {
       display: none;
-      margin-top: 14px;
-      background-color: var(--bg-card);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 14px;
     }
 
-    .panel-box.open {
-      display: block;
-    }
-
-    .panel-header {
+    .top-meta-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--gold-soft);
-    }
-
-    .panel-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .close-btn {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-
-    .panel-body {
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: var(--white);
-    }
-
-    .panel-list {
-      margin-top: 8px;
-      padding-left: 18px;
-    }
-
-    .panel-list li {
-      margin-bottom: 6px;
-    }
-
-    .field-input {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--gold);
-      background: var(--bg-navy);
-      color: var(--white);
-      font-size: 0.88rem;
-    }
-
-    .sub-box {
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px solid var(--gold-soft);
-      border-radius: 10px;
-      background: var(--bg-navy);
-    }
-
-    .reg-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.86rem;
-    }
-
-    .reg-table th,
-    .reg-table td {
-      padding: 6px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-      text-align: left;
-    }
-
-    @media print {
-      body {
-        background: #ffffff !important;
-        color: #000000 !important;
-      }
-      .app-frame {
-        border-color: #000000 !important;
-        background: #ffffff !important;
-        color: #000000 !important;
-        max-width: 100% !important;
-      }
-      .action-btn,
-      .nav-pill,
-      .close-btn,
-      .ticker-strip {
-        display: none !important;
-      }
-      .panel-box {
-        display: block !important;
-        background: #ffffff !important;
-        color: #000000 !important;
-        border-color: #000000 !important;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="app-frame">
-    <header class="top-bar">
-      <div class="brand-title">🎓 Sir Haroon Global Academy</div>
-      <div id="liveClock" class="live-clock">--:--:--</div>
-      <nav class="top-actions" aria-label="Primary Navigation">
-        <button type="button" class="nav-pill active" data-target="home">Home</button>
-        <button type="button" class="nav-pill" data-target="portals">Portals</button>
-        <button type="button" class="nav-pill" data-target="updates">Updates (<span id="updatesCount">3</span>)</button>
-      </nav>
-    </header>
-
-    <section id="homeHero" class="hero-section">
-      <h1 class="academy-name">Sir HAROON JAVAID HASHMI<br />Academy &amp; College</h1>
-      <p class="poet-line">Allama Muhammad Iqbal - شاعر مشرق</p>
-      <p class="urdu-verse">اپنی دنیا آپ پیدا کر اگر زندوں میں ہے تو</p>
-      <div class="emblem-row" aria-hidden="true">
-        <span>🦅</span>
-        <span>🇵🇰</span>
-      </div>
-      <div class="welcome-heading">WELCOME</div>
-      <div class="director-role">Director &amp; Founder - Sir Haroon Javaid Hashmi</div>
-      <div class="sub-campus">Global Academy &amp; College</div>
-    </section>
-
-    <div class="ticker-strip">
-      <div id="noticeTickerText" class="ticker-track">
-        📢 NOTICE: Sir Haroon Javaid Hashmi Academy &amp; College • Phase 1 District Gujrat Active • DOAB Open Access Books Integrated • Teacher &amp; Director LMS Ready
-      </div>
-    </div>
-
-    <div class="ticker-strip promo">
-      <div class="ticker-track">
-        🎓 COURSES &amp; PORTALS: Nursery–Grade 12 • Boards &amp; O/A Levels • CSS, PMS, Tehsildar, MDCAT, ECAT • IELTS, Urdu, Spanish &amp; German • International GBP (£) &amp; Local PKR Tracks
-      </div>
-    </div>
-
-    <main class="menu-stack">
-      <button type="button" class="action-btn" data-target="portals">Enter - Portals ➡️</button>
-      <button type="button" class="action-btn" data-target="updates">Updates Gateway — OK / Yes vs. No 🔔</button>
-      <button type="button" class="action-btn" data-target="library">Library - Data Bhara Hua - All Boards &amp; Systems</button>
-      <button type="button" class="action-btn" data-target="reference">Reference Portals &amp; Study Apps</button>
-      <button type="button" class="action-btn" data-target="register">Daily Register - Page 83-89</button>
-      <button type="button" class="action-btn" data-target="global-diff">USA / UK / Europe - Farq - Subjects</button>
-      <button type="button" class="action-btn" data-target="courses">Advertisement + Next Courses</button>
-      <button type="button" class="action-btn" data-target="contact">Contact / WhatsApp / Location</button>
-    </main>
-
-    <section id="dynamicPanel" class="panel-box" aria-live="polite">
-      <div class="panel-header">
-        <h2 id="panelTitle" class="panel-title">Section</h2>
-        <button type="button" id="closePanelBtn" class="close-btn">Close</button>
-      </div>
-      <div id="panelBody" class="panel-body"></div>
-    </section>
-  </div>
-
-  <script>
-    (function () {
-      const STORAGE_KEY = "SHJ_COMPLETE_APP_V1";
-      const clockEl = document.getElementById("liveClock");
-      const updatesCountEl = document.getElementById("updatesCount");
-      const panelEl = document.getElementById("dynamicPanel");
-      const panelTitleEl = document.getElementById("panelTitle");
-      const panelBodyEl = document.getElementById("panelBody");
-      const closePanelBtn = document.getElementById("closePanelBtn");
-      const navPills = document.querySelectorAll(".nav-pill");
-      const noticeTickerText = document.getElementById("noticeTickerText");
-
-      const libraryCatalog = [
-        { title: "Directory of Open Access Books (DOAB) — 111,000+ Peer-Reviewed Books", track: "Open Access / Research", level: "Higher Ed & Reference" },
-        { title: "Foundational English, Urdu & Mathematics (Nursery – Grade 5)", track: "School Boards & Cambridge", level: "Primary" },
-        { title: "Secondary Sciences, Pakistan Studies & Islamiat (Grades 6 – 10)", track: "School Boards & O Levels", level: "Secondary" },
-        { title: "Intermediate & A Level Core Sciences, Humanities & Commerce", track: "FSc / ICS / FA / A Levels", level: "Higher Secondary" },
-        { title: "CSS, PMS & Tehsildar — Syllabus & Current Affairs Compendium", track: "Competitive Exams", level: "Civil Services" },
-        { title: "MDCAT & ECAT — Concept Drills & Past Paper Banks", track: "Entry Tests", level: "Pre-Medical / Engineering" },
-        { title: "IELTS Academic & General + Urdu, Spanish & German Guides", track: "Languages", level: "All Levels" }
-      ];
-
-      const defaultState = {
-        registerPages: {
-          "83": [
-            { roll: "01", name: "Ayesha Tariq", status: "Present" },
-            { roll: "02", name: "Bilal Mahmood", status: "Present" },
-            { roll: "03", name: "Hamza Siddiqui", status: "Absent" }
-          ],
-          "84": [
-            { roll: "04", name: "Zainab Farooq", status: "Present" },
-            { roll: "05", name: "Usman Ghani", status: "Present" },
-            { roll: "06", name: "Maryam Khalid", status: "Leave" }
-          ],
-          "85": [
-            { roll: "07", name: "Ali Raza", status: "Present" },
-            { roll: "08", name: "Hira Naveed", status: "Present" }
-          ],
-          "86": [
-            { roll: "09", name: "Saad Ahmed", status: "Absent" },
-            { roll: "10", name: "Fatima Noor", status: "Present" }
-          ],
-          "87": [
-            { roll: "11", name: "Daniyal Mirza", status: "Present" },
-            { roll
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sir Haroon Javaid Hashmi Academy &amp; College</title>
-  <style>
-    :root {
-      --bg-navy: #07142b;
-      --bg-card: #0b1d3d;
-      --gold: #d4af37;
-      --gold-soft: rgba(212, 175, 55, 0.45);
-      --green-btn: #164b2e;
-      --green-hover: #1e663f;
-      --white: #ffffff;
-      --muted: #cbd5e1;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-navy);
-      color: var(--white);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      padding: 10px;
-    }
-
-    button,
-    .nav-pill,
-    .action-btn,
-    .close-btn {
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: rgba(212, 175, 55, 0.25);
-      position: relative;
-      z-index: 2;
-    }
-
-    .app-frame {
-      max-width: 540px;
-      margin: 0 auto;
-      border: 2px solid var(--gold);
-      border-radius: 14px;
-      padding: 12px;
-      background: linear-gradient(180deg, #081834 0%, #050f22 100%);
-    }
-
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 8px;
       flex-wrap: wrap;
       padding-bottom: 10px;
-      border-bottom: 1px solid var(--gold-soft);
       margin-bottom: 12px;
+      border-bottom: 1px solid var(--gold-border);
     }
 
-    .brand-title {
-      font-size: 0.92rem;
+    .lms-badge {
+      font-size: 0.78rem;
       font-weight: 700;
-      color: var(--white);
+      color: var(--gold);
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      padding: 4px 10px;
+      border-radius: 999px;
     }
 
     .live-clock {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--gold-bright);
       font-variant-numeric: tabular-nums;
       background: var(--bg-card);
-      border: 1px solid var(--gold-soft);
-      padding: 3px 8px;
+      border: 1px solid var(--gold-border);
+      padding: 4px 10px;
       border-radius: 6px;
     }
 
-    .top-actions {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      width: 100%;
-      justify-content: flex-start;
+    /* PAGE 1: WELCOME PHOTO */
+    .welcome-photo-wrap {
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      overflow: hidden;
+      background-color: #050f24;
+      margin-bottom: 12px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
     }
 
-    .nav-pill {
-      background-color: var(--bg-card);
+    .welcome-photo-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .photo-fallback-notice {
+      display: none;
+      padding: 14px;
+      text-align: center;
+      font-size: 0.86rem;
+      color: var(--gold-bright);
+      line-height: 1.5;
+    }
+
+    .quote-section {
+      background: rgba(11, 30, 63, 0.92);
+      border-left: 3px solid var(--gold);
+      border-right: 3px solid var(--gold);
+      border-radius: 10px;
+      padding: 11px 14px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .quote-text {
+      font-size: 0.98rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--gold-bright);
+      margin-bottom: 5px;
+    }
+
+    .director-attribution {
+      font-size: 0.88rem;
+      font-weight: 800;
       color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 999px;
-      padding: 5px 11px;
-      font-size: 0.78rem;
-      font-weight: 600;
+    }
+
+    /* LANGUAGE BAR */
+    .language-bar-box {
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--gold);
+      border-radius: 11px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .language-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .language-label {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--gold-bright);
+      white-space: nowrap;
+    }
+
+    .language-empty-box {
+      flex: 1 1 auto;
+      min-width: 0;
+      background-color: var(--bg-navy);
+      border: 1.5px solid var(--gold);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--white);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .language-empty-box.empty-placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .language-scroll-drawer {
+      display: none;
+      margin-top: 8px;
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      background-color: #050e20;
+      padding: 8px;
+    }
+
+    .language-scroll-drawer.open {
+      display: block;
+    }
+
+    .lang-search-input {
+      width: 100%;
+      padding: 7px 10px;
+      margin-bottom: 6px;
+      border-radius: 6px;
+      border: 1px solid var(--gold-border);
+      background-color: var(--bg-navy);
+      color: var(--white);
+      font-size: 0.84rem;
+    }
+
+    .language-scroll-list {
+      max-height: 165px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg-navy);
+      display: grid;
+      gap: 4px;
+      padding-right: 4px;
+    }
+
+    .language-scroll-list::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    .language-scroll-list::-webkit-scrollbar-track {
+      background: var(--bg-navy);
+      border-radius: 4px;
+    }
+
+    .language-scroll-list::-webkit-scrollbar-thumb {
+      background-color: var(--gold);
+      border-radius: 4px;
+    }
+
+    .lang-option-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--white);
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 0.84rem;
       cursor: pointer;
     }
 
-    .nav-pill:hover,
-    .nav-pill.active {
+    .lang-option-btn:hover,
+    .lang-option-btn.selected {
       background-color: var(--green-btn);
+      border-color: var(--gold);
     }
 
-    .hero-section {
-      text-align: center;
-      padding: 6px 4px 10px;
+    .flip-side-bar {
+      display: flex;
+      justify-content: flex-end;
     }
 
-    .academy-name {
-      font-size: 1.22rem;
+    .flip-page-btn {
+      background: linear-gradient(135deg, #d4af37 0%, #b38b1d 100%);
+      color: #061329;
+      border: 1px solid var(--gold-bright);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.86rem;
       font-weight: 800;
-      line-height: 1.3;
-      margin-bottom: 6px;
+      cursor: pointer;
     }
 
-    .poet-line {
-      font-size: 0.85rem;
-      color: var(--gold);
-      margin-bottom: 4px;
-    }
-
-    .urdu-verse {
+    /* PAGE 2: PORTAL PAGE */
+    .page-heading {
       font-size: 1.12rem;
-      line-height: 1.65;
-      margin-bottom: 8px;
-      direction: rtl;
-    }
-
-    .emblem-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 28px;
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-    }
-
-    .welcome-heading {
-      color: var(--gold);
-      font-size: 1.02rem;
       font-weight: 800;
-      letter-spacing: 0.05em;
-      margin-bottom: 3px;
+      color: var(--gold-bright);
     }
 
-    .director-role {
-      font-size: 0.92rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .sub-campus {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .ticker-box {
-      border: 1px solid var(--gold-soft);
-      border-radius: 8px;
-      background: var(--bg-navy);
-      padding: 7px 10px;
-      margin-bottom: 8px;
-      font-size: 0.8rem;
-      color: var(--gold);
-      line-height: 1.4;
-    }
-
-    .ticker-box.promo {
+    .nav-back-btn {
+      background-color: var(--green-btn);
       color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    .quick-admin-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 10px;
+    .portal-card {
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 11px;
     }
 
-    .menu-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-top: 4px;
-    }
-
-    .action-btn {
+    .portal-card-btn {
       width: 100%;
       background-color: var(--green-btn);
       color: var(--white);
       border: 1.5px solid var(--gold);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 12px 14px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 800;
       cursor: pointer;
+      text-align: center;
+      transition: background-color 0.15s ease;
     }
 
-    .action-btn:hover {
+    .portal-card-btn:hover {
       background-color: var(--green-hover);
     }
 
-    .panel-box {
+    .portal-sub-options {
       display: none;
-      margin-top: 14px;
-      background-color: var(--bg-card);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--gold-border);
     }
 
-    .panel-box.open {
+    .portal-sub-options.open {
+      display: grid;
+    }
+
+    .sub-choice-btn {
+      background-color: var(--bg-navy);
+      color: var(--gold-bright);
+      border: 1.5px solid var(--gold);
+      border-radius: 9px;
+      padding: 10px 10px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .sub-choice-btn:hover {
+      background-color: var(--green-btn);
+      color: var(--white);
+    }
+
+    .fourth-status-strip {
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 4px;
+    }
+
+    .status-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .status-label-btn {
+      background-color: var(--gold);
+      color: #061329;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .admission-bar-input {
+      flex: 1 1 200px;
+      min-width: 0;
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1.5px solid var(--gold);
+      background-color: var(--bg-navy);
+      color: var(--white);
+      font-size: 0.88rem;
+    }
+
+    .admission-bar-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .status-result-card {
+      display: none;
+      margin-top: 10px;
+      padding: 11px;
+      border-radius: 10px;
+      background-color: var(--bg-navy);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .status-result-card.show {
       display: block;
     }
 
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--gold-soft);
+    .status-result-card.is-active {
+      border: 1.5px solid var(--active-green);
     }
 
-    .panel-title {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--gold);
+    .status-result-card.is-inactive {
+      border: 1.5px solid var(--danger-red);
     }
 
-    .close-btn {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 5px 10px;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-
-    .panel-body {
-      font-size: 0.88rem;
+    /* PAGE 3 & SUB-VIEWS */
+    .detail-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 11px;
+      padding: 12px;
+      margin-bottom: 12px;
+      font-size: 0.86rem;
       line-height: 1.55;
-      color: var(--white);
     }
 
-    .panel-list {
-      margin-top: 8px;
+    .detail-box ul {
+      margin-top: 6px;
       padding-left: 18px;
     }
 
-    .panel-list li {
+    .detail-box li {
+      margin-bottom: 5px;
+    }
+
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .system-select-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: 9px;
+      padding: 9px 11px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .system-select-btn.active {
+      background-color: var(--green-btn);
+      color: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+
+    .tag-done {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #22c55e;
+    }
+
+    .tag-pending {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #f59e0b;
+    }
+
+    .subj-catalog-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--bg-navy);
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      padding: 7px 10px;
       margin-bottom: 6px;
+      font-size: 0.82rem;
+    }
+
+    .badge-compulsory {
+      background-color: rgba(34, 197, 94, 0.18);
+      color: #4ade80;
+      border: 1px solid #22c55e;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .badge-optional {
+      background-color: rgba(240, 207, 101, 0.16);
+      color: #f0cf65;
+      border: 1px solid #d4af37;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .stream-btn-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+
+    .stream-pill-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .stream-pill-btn.active {
+      background-color: var(--green-btn);
+      color: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+
+    .opt-subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 6px;
+      margin: 8px 0;
+    }
+
+    .opt-check-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-navy);
+      border: 1px solid var(--gold-border);
+      border-radius: 7px;
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .course-main-stack {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .course-opt-btn {
+      width: 100%;
+      background-color: var(--green-btn);
+      color: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .course-opt-btn:hover,
+    .course-opt-btn.active {
+      background-color: var(--green-hover);
+      border-color: var(--gold-bright);
+    }
+
+    .type-pill-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+
+    .type-pill-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .type-pill-btn.active {
+      background-color: var(--gold);
+      color: #061329;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      margin-top: 8px;
+      margin-bottom: 4px;
     }
 
     .field-input {
@@ -2654,27 +609,99 @@
       padding: 8px 10px;
       border-radius: 8px;
       border: 1px solid var(--gold);
-      background: var(--bg-navy);
+      background-color: var(--bg-navy);
       color: var(--white);
-      font-size: 0.86rem;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
     }
 
-    .sub-box {
+    .small-gold-btn {
+      background-color: var(--gold);
+      color: #061329;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .calc-summary-box {
       margin-top: 10px;
-      padding: 10px;
-      border: 1px solid var(--gold-soft);
+      background-color: #050e20;
+      border: 1.5px solid var(--gold);
       border-radius: 10px;
-      background: var(--bg-navy);
+      padding: 11px;
+      font-size: 0.85rem;
+      line-height: 1.6;
     }
 
-    .reg-table {
+    /* SCIENCE CHOICE MODAL */
+    .science-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 8, 20, 0.78);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .science-modal-backdrop.open {
+      display: flex;
+    }
+
+    .science-modal-box {
+      width: 100%;
+      max-width: 380px;
+      background: var(--bg-card);
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .science-choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .admin-tab-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .admin-tab-btn.active {
+      background-color: var(--gold);
+      color: #061329;
+    }
+
+    .backup-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      margin-top: 8px;
     }
 
-    .reg-table th,
-    .reg-table td {
+    .backup-table th,
+    .backup-table td {
       padding: 6px;
       border-bottom: 1px solid rgba(212, 175, 55, 0.25);
       text-align: left;
@@ -2682,371 +709,149 @@
   </style>
 </head>
 <body>
-  <div class="app-frame">
-    <header class="top-bar">
-      <div class="brand-title">🎓 Sir Haroon Global Academy</div>
-      <div id="liveClock" class="live-clock">00:00:00</div>
-      <nav class="top-actions" aria-label="Primary Navigation">
-        <button type="button" class="nav-pill active" data-target="home">Home</button>
-        <button type="button" class="nav-pill" data-target="portals">Portals</button>
-        <button type="button" class="nav-pill" data-target="updates">Updates (<span id="updatesCount">3</span>)</button>
-      </nav>
-    </header>
-
-    <section id="homeHero" class="hero-section">
-      <h1 class="academy-name">Sir HAROON JAVAID HASHMI<br />Academy &amp; College</h1>
-      <p class="poet-line">Allama Muhammad Iqbal - شاعر مشرق</p>
-      <p class="urdu-verse">اپنی دنیا آپ پیدا کر اگر زندوں میں ہے تو</p>
-      <div class="emblem-row" aria-hidden="true">
-        <span>🦅</span>
-        <span>🇵🇰</span>
+  <div class="book-stage">
+    <!-- PAGE 1: WELCOME PAGE -->
+    <section id="welcomePage" class="page-card" aria-label="Page 1 Welcome Page">
+      <div class="top-meta-row">
+        <span class="lms-badge" data-i18n="page1Badge">Page 1 • Welcome Page</span>
+        <span id="liveClock" class="live-clock">--:--:--</span>
       </div>
-      <div class="welcome-heading">WELCOME</div>
-      <div class="director-role">Director &amp; Founder - Sir Haroon Javaid Hashmi</div>
-      <div class="sub-campus">Global Academy &amp; College</div>
+
+      <div class="welcome-photo-wrap">
+        <img
+          id="welcomePhotoImg"
+          class="welcome-photo-img"
+          src="IMG-20261120-WA2906_2.jpg"
+          alt="Sir Haroon Javaid Hashmi Academy & College — Welcome"
+        />
+        <div id="photoFallbackNotice" class="photo-fallback-notice">
+          Place <strong>IMG-20261120-WA2906_2.jpg</strong> in the same folder as <strong>index.html</strong> to display the Welcome Page photo.
+        </div>
+      </div>
+
+      <div class="quote-section">
+        <p class="quote-text">“A man can be destroyed but not defeated”</p>
+        <p class="director-attribution">Director Haroon Javaid Hashmi</p>
+      </div>
+
+      <div class="language-bar-box">
+        <div class="language-row">
+          <span class="language-label" data-i18n="languageLabel">Language:</span>
+          <button
+            type="button"
+            id="languageEmptyBox"
+            class="language-empty-box empty-placeholder"
+            aria-expanded="false"
+          >
+            <span id="selectedLanguageText">Select Language (Worldwide)</span>
+            <span>▼</span>
+          </button>
+        </div>
+
+        <div id="languageScrollDrawer" class="language-scroll-drawer">
+          <input
+            type="text"
+            id="languageSearchInput"
+            class="lang-search-input"
+            placeholder="Search any language in the world..."
+          />
+          <div id="languageScrollList" class="language-scroll-list" role="listbox"></div>
+        </div>
+      </div>
+
+      <div class="flip-side-bar">
+        <button type="button" id="flipToPortalsBtn" class="flip-page-btn" data-i18n="flipPageBtn">
+          Flip Page ➡️
+        </button>
+      </div>
     </section>
 
-    <div id="noticeTickerText" class="ticker-box">
-      📢 NOTICE: Phase 1 District Gujrat Active • DOAB Books Integrated • LMS Ready
-    </div>
-
-    <div class="ticker-box promo">
-      🎓 TRACKS: Nursery–Grade 12 • Boards &amp; O/A Levels • CSS, PMS, Tehsildar, MDCAT, ECAT • IELTS, Urdu, Spanish &amp; German • PKR &amp; GBP (£)
-    </div>
-
-    <div class="quick-admin-strip">
-      <button type="button" id="openUpdatesDirectBtn" class="close-btn">🔔 Updates Gateway</button>
-      <button type="button" id="openAdminDirectBtn" class="close-btn">🛡️ Director Admin LMS</button>
-    </div>
-
-    <main class="menu-stack">
-      <button type="button" class="action-btn" data-target="portals">Enter - Portals ➡️</button>
-      <button type="button" class="action-btn" data-target="updates">Updates Gateway — OK / Yes vs. No 🔔</button>
-      <button type="button" class="action-btn" data-target="library">Library - Data Bhara Hua - All Boards &amp; Systems</button>
-      <button type="button" class="action-btn" data-target="reference">Reference Portals &amp; Study Apps</button>
-      <button type="button" class="action-btn" data-target="register">Daily Register - Page 83-89</button>
-      <button type="button" class="action-btn" data-target="global-diff">USA / UK / Europe - Farq - Subjects</button>
-      <button type="button" class="action-btn" data-target="courses">Advertisement + Next Courses</button>
-      <button type="button" class="action-btn" data-target="contact">Contact / WhatsApp / Location</button>
-    </main>
-
-    <section id="dynamicPanel" class="panel-box" aria-live="polite">
-      <div class="panel-header">
-        <h2 id="panelTitle" class="panel-title">Section</h2>
-        <button type="button" id="closePanelBtn" class="close-btn">Close</button>
+    <!-- PAGE 2: PORTAL PAGE -->
+    <section id="portalPage" class="page-card hidden-view" aria-label="Page 2 Portal Page">
+      <div class="top-meta-row">
+        <h2 class="page-heading" data-i18n="portalPageHeading">Portal Page</h2>
+        <button type="button" class="nav-back-btn" data-go-page="welcome-page" data-i18n="backWelcomeBtn">
+          ⬅️ Welcome Page
+        </button>
       </div>
-      <div id="panelBody" class="panel-body"></div>
+
+      <!-- 1. PAKISTANI STUDENTS PORTAL -->
+      <div class="portal-card">
+        <button type="button" id="pakPortalToggleBtn" class="portal-card-btn" data-i18n="pakPortalBtn">
+          1. Pakistani Students Portal
+        </button>
+        <div id="pakSubOptions" class="portal-sub-options">
+          <button type="button" class="sub-choice-btn" data-open-page3="pakistani" data-entry-type="Classes" data-i18n="classesOpt">
+            1. Classes
+          </button>
+          <button type="button" class="sub-choice-btn" data-open-page3="pakistani" data-entry-type="Courses" data-i18n="coursesOpt">
+            2. Courses
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. INTERNATIONAL STUDENTS PORTAL -->
+      <div class="portal-card">
+        <button type="button" id="intlPortalToggleBtn" class="portal-card-btn" data-i18n="intlPortalBtn">
+          2. International Students Portal
+        </button>
+        <div id="intlSubOptions" class="portal-sub-options">
+          <button type="button" class="sub-choice-btn" data-open-page3="international" data-entry-type="Classes" data-i18n="classesOpt">
+            1. Classes
+          </button>
+          <button type="button" class="sub-choice-btn" data-open-page3="international" data-entry-type="Courses" data-i18n="coursesOpt">
+            2. Courses
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. ADMIN PORTAL -->
+      <div class="portal-card">
+        <button type="button" class="portal-card-btn" data-go-page="admin-portal" data-i18n="adminPortalBtn">
+          3. Admin Portal
+        </button>
+      </div>
+
+      <!-- 4. CHECK ADMISSION STATUS + BAR -->
+      <div class="fourth-status-strip">
+        <div class="status-bar-row">
+          <button type="button" id="checkStatusTriggerBtn" class="status-label-btn" data-i18n="checkAdmStatusLabel">
+            Check Admission Status
+          </button>
+          <input
+            id="admissionNumberBar"
+            class="admission-bar-input"
+            type="text"
+            placeholder="Write Admission Number & Press Enter (e.g. SHJ-101 or SHJ-104)"
+            aria-label="Admission Number"
+          />
+        </div>
+        <div id="admissionStatusResultCard" class="status-result-card"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 3 & SUB-VIEWS -->
+    <section id="subViewPage" class="page-card hidden-view" aria-live="polite">
+      <div class="top-meta-row">
+        <h2 id="subViewTitle" class="page-heading">Page 3</h2>
+        <button type="button" class="nav-back-btn" data-go-page="portal-page" data-i18n="backPortalPageBtn">
+          ⬅️ Portal Page
+        </button>
+      </div>
+      <div id="subViewBody"></div>
     </section>
   </div>
 
-  <script>
-    (function () {
-      const STORAGE_KEY = "SHJ_FIXED_APP_V2";
-      const clockEl = document.getElementById("liveClock");
-      const updatesCountEl = document.getElementById("updatesCount");
-      const panelEl = document.getElementById("dynamicPanel");
-      const panelTitleEl = document.getElementById("panelTitle");
-      const panelBodyEl = document.getElementById("panelBody");
-      const closePanelBtn = document.getElementById("closePanelBtn");
-      const navPills = document.querySelectorAll(".nav-pill");
-      const noticeTickerText = document.getElementById("noticeTickerText");
-
-      const libraryCatalog = [
-        { title: "Directory of Open Access Books (DOAB) — Open Access Books", track: "Open Access", level: "Reference & Higher Ed" },
-        { title: "Nursery – Grade 5 (Roots, American Lyceum, Beaconhouse & Boards)", track: "Primary", level: "School" },
-        { title: "Grades 6 – 10 & O Levels (Science, Arts & Boards)", track: "Secondary", level: "School / O Level" },
-        { title: "Grades 11 – 12 & A Levels (FSc, ICS, FA & A Levels)", track: "Higher Secondary", level: "College / A Level" },
-        { title: "CSS, PMS & Tehsildar Preparation", track: "Competitive Exams", level: "Civil Services" },
-        { title: "MDCAT & ECAT Entry Test Prep", track: "Entry Tests", level: "Medical / Engineering" },
-        { title: "IELTS, Urdu, Spanish & German", track: "Languages", level: "All Levels" }
-      ];
-
-      const defaultState = {
-        registerPages: {
-          "83": [{ roll: "01", name: "Ayesha Tariq", status: "Present" }, { roll: "02", name: "Bilal Mahmood", status: "Present" }],
-          "84": [{ roll: "03", name: "Hamza Siddiqui", status: "Absent" }, { roll: "04", name: "Zainab Farooq", status: "Present" }],
-          "85": [{ roll: "05", name: "Usman Ghani", status: "Present" }, { roll: "06", name: "Maryam Khalid", status: "Leave" }],
-          "86": [{ roll: "07", name: "Ali Raza", status: "Present" }, { roll: "08", name: "Hira Naveed", status: "Present" }],
-          "87": [{ roll: "09", name: "Saad Ahmed", status: "Absent" }, { roll: "10", name: "Fatima Noor", status: "Present" }],
-          "88": [{ roll: "11", name: "Daniyal Mirza", status: "Present" }, { roll: "12", name: "Sanaullah Khan", status: "Present" }],
-          "89": [{ roll: "13", name: "Mahnoor Aslam", status: "Present" }, { roll: "14", name: "Taha Javed", status: "Absent" }]
-        },
-        updateQueue: [
-          { id: "u1", text: "Phase 1 District Gujrat (Gujrat, Dinga, Kharian, Lalamusa, Sarai Alamgir, Jalalpur Jattan, Gulyana, Daulat Nagar)", status: "Pending" },
-          { id: "u2", text: "DOAB Open Access Library & Curriculum Sync", status: "Pending" },
-          { id: "u3", text: "International GBP (£) & Local PKR Fee Desk", status: "Pending" }
-        ],
-        expansionPhases: [
-          { phase: "Phase 1", area: "District Gujrat", active: true },
-          { phase: "Phase 2", area: "Division Level", active: false },
-          { phase: "Phase 3", area: "Provincial Level", active: false },
-          { phase: "Phase 4", area: "National Level", active: false },
-          { phase: "Phase 5", area: "Global (GBP £)", active: false }
-        ],
-        receipts: [],
-        broadcasts: [],
-        faculty: []
-      };
-
-      function loadState() {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) return JSON.parse(JSON.stringify(defaultState));
-          return Object.assign(JSON.parse(JSON.stringify(defaultState)), JSON.parse(raw));
-        } catch (e) {
-          return JSON.parse(JSON.stringify(defaultState));
-        }
-      }
-
-      function saveState() {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        } catch (e) {}
-      }
-
-      const state = loadState();
-
-      function updateClock() {
-        if (!clockEl) return;
-        const now = new Date();
-        const hh = String(now.getHours()).padStart(2, "0");
-        const mm = String(now.getMinutes()).padStart(2, "0");
-        const ss = String(now.getSeconds()).padStart(2, "0");
-        clockEl.textContent = `${hh}:${mm}:${ss}`;
-      }
-
-      function syncUpdatesBadge() {
-        if (!updatesCountEl) return;
-        updatesCountEl.textContent = String(state.updateQueue.filter((x) => x.status === "Pending").length);
-      }
-
-      function setActivePill(target) {
-        navPills.forEach((pill) => pill.classList.toggle("active", pill.dataset.target === target));
-      }
-
-      function renderAdminDirectView() {
-        panelEl.classList.add("open");
-        panelTitleEl.textContent = "Director Admin LMS (Control Center)";
-        panelBodyEl.innerHTML = `
-          <div style="margin-bottom:8px;"><strong>5-Phase Expansion Switches:</strong></div>
-          <div id="phaseSwitchList" style="display:grid;gap:6px;margin-bottom:10px;"></div>
-          <div class="sub-box">
-            <div style="margin-bottom:6px;"><strong>Broadcast Announcement:</strong></div>
-            <input id="broadcastMsgInput" class="field-input" type="text" placeholder="Write notice..." style="margin-bottom:6px;" />
-            <button type="button" id="sendBroadcastBtn" class="nav-pill">Send Broadcast</button>
-            <div id="adminExtraOutput" style="margin-top:8px;color:#d4af37;"></div>
-          </div>
-        `;
-        const list = document.getElementById("phaseSwitchList");
-        function drawPhases() {
-          if (!list) return;
-          list.innerHTML = state.expansionPhases
-            .map((p, i) => `
-              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 8px;border:1px solid rgba(212,175,55,0.35);border-radius:8px;background:#07142b;">
-                <span><strong>${p.phase}:</strong> ${p.area}</span>
-                <button type="button" class="nav-pill phase-toggle-btn ${p.active ? "active" : ""}" data-pidx="${i}">${p.active ? "Active" : "Off"}</button>
-              </div>`)
-            .join("");
-          list.querySelectorAll(".phase-toggle-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const i = Number(btn.dataset.pidx);
-              state.expansionPhases[i].active = !state.expansionPhases[i].active;
-              saveState();
-              drawPhases();
-            });
-          });
-        }
-        drawPhases();
-
-        document.getElementById("sendBroadcastBtn")?.addEventListener("click", () => {
-          const msg = (document.getElementById("broadcastMsgInput")?.value || "").trim();
-          const out = document.getElementById("adminExtraOutput");
-          if (!msg) return;
-          state.broadcasts.unshift(msg);
-          saveState();
-          if (noticeTickerText) noticeTickerText.textContent = `📢 NOTICE: ${msg}`;
-          if (out) out.textContent = `Updated: "${msg}"`;
-        });
-        panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }
-
-      function renderUpdatesGateway() {
-        panelTitleEl.textContent = "Updates Gateway — OK / Yes vs. No";
-        panelBodyEl.innerHTML = `<div id="updatesListWrap" style="display:grid;gap:8px;"></div>`;
-        const wrap = document.getElementById("updatesListWrap");
-        function drawQueue() {
-          if (!wrap) return;
-          wrap.innerHTML = state.updateQueue
-            .map((item, idx) => `
-              <div class="sub-box">
-                <div style="margin-bottom:6px;">${item.text}</div>
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-                  <span style="color:#d4af37;">Status: <strong>${item.status}</strong></span>
-                  <div style="display:flex;gap:6px;">
-                    <button type="button" class="nav-pill upd-act-btn" data-idx="${idx}" data-val="OK / Yes">OK / Yes</button>
-                    <button type="button" class="close-btn upd-act-btn" data-idx="${idx}" data-val="No">No</button>
-                  </div>
-                </div>
-              </div>`)
-            .join("");
-          wrap.querySelectorAll(".upd-act-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const i = Number(btn.dataset.idx);
-              state.updateQueue[i].status = btn.dataset.val;
-              saveState();
-              syncUpdatesBadge();
-              drawQueue();
-            });
-          });
-        }
-        drawQueue();
-      }
-
-      function renderPortalsView() {
-        panelTitleEl.textContent = "Academic Portals";
-        panelBodyEl.innerHTML = `
-          <div style="display:grid;gap:8px;">
-            <button type="button" class="action-btn portal-sub-btn" data-portal="pk">🇵🇰 Pakistani Students Portal (PKR)</button>
-            <button type="button" class="action-btn portal-sub-btn" data-portal="intl">🌍 International Students Portal (GBP £)</button>
-            <button type="button" class="action-btn portal-sub-btn" data-portal="teacher">👨‍🏫 Teacher LMS Portal</button>
-            <button type="button" class="action-btn portal-sub-btn" data-portal="admin">🛡️ Director Admin LMS</button>
-          </div>
-          <div id="portalDetailBox" class="sub-box">Select a portal above.</div>
-        `;
-        const box = document.getElementById("portalDetailBox");
-        panelBodyEl.querySelectorAll(".portal-sub-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const key = btn.dataset.portal;
-            if (key === "admin") {
-              renderAdminDirectView();
-              return;
-            }
-            if (box) {
-              const labels = {
-                pk: "Pakistani Students Portal: Nursery–Grade 12, Boards, CSS/PMS, Tehsildar, MDCAT/ECAT, Languages (PKR).",
-                intl: "International Students Portal: Global Curriculum & GBP (£) Fee Structure.",
-                teacher: "Teacher LMS Portal: Daily Class Log, Syllabus & Attendance."
-              };
-              box.textContent = labels[key] || "";
-            }
-          });
-        });
-      }
-
-      function renderLibraryView() {
-        panelTitleEl.textContent = "Library — All Boards & Systems";
-        panelBodyEl.innerHTML = `
-          <input id="libSearchInput" class="field-input" type="text" placeholder="Search books, boards, exams..." style="margin-bottom:8px;" />
-          <ul id="libResultList" class="panel-list"></ul>
-        `;
-        const input = document.getElementById("libSearchInput");
-        const list = document.getElementById("libResultList");
-        function drawList(q) {
-          const term = (q || "").trim().toLowerCase();
-          const items = libraryCatalog.filter((x) => (x.title + x.track + x.level).toLowerCase().includes(term));
-          if (list) {
-            list.innerHTML = items.map((m) => `<li><strong>${m.title}</strong> — ${m.track}</li>`).join("") || "<li>No match</li>";
-          }
-        }
-        drawList("");
-        input?.addEventListener("input", (e) => drawList(e.target.value));
-      }
-
-      function renderReferenceView() {
-        panelTitleEl.textContent = "Reference Portals & Study Apps";
-        panelBodyEl.innerHTML = `
-          <a href="https://doabooks.org/" target="_blank" rel="noopener noreferrer" class="action-btn" style="text-decoration:none;display:block;">
-            📚 DOAB — Directory of Open Access Books
-          </a>
-        `;
-      }
-
-      function renderRegisterView() {
-        panelTitleEl.textContent = "Daily Register — Pages 83–89";
-        const pages = Object.keys(state.registerPages);
-        const statuses = ["Present", "Absent", "Leave"];
-        panelBodyEl.innerHTML = `
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
-            ${pages.map((p, i) => `<button type="button" class="nav-pill reg-page-btn ${i === 0 ? "active" : ""}" data-page="${p}">Page ${p}</button>`).join("")}
-          </div>
-          <div id="registerTableWrap"></div>
-        `;
-        const wrap = document.getElementById("registerTableWrap");
-        function drawPage(p) {
-          const rows = state.registerPages[p] || [];
-          if (!wrap) return;
-          wrap.innerHTML = `
-            <table class="reg-table">
-              <thead><tr><th>Roll</th><th>Name</th><th>Status</th></tr></thead>
-              <tbody>
-                ${rows.map((r, idx) => `<tr><td>${r.roll}</td><td>${r.name}</td><td><button type="button" class="close-btn reg-status-btn" data-idx="${idx}">${r.status}</button></td></tr>`).join("")}
-              </tbody>
-            </table>
-          `;
-          wrap.querySelectorAll(".reg-status-btn").forEach((b) => {
-            b.addEventListener("click", () => {
-              const idx = Number(b.dataset.idx);
-              rows[idx].status = statuses[(statuses.indexOf(rows[idx].status) + 1) % statuses.length];
-              saveState();
-              b.textContent = rows[idx].status;
-            });
-          });
-        }
-        drawPage("83");
-        panelBodyEl.querySelectorAll(".reg-page-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            panelBodyEl.querySelectorAll(".reg-page-btn").forEach((x) => x.classList.remove("active"));
-            btn.classList.add("active");
-            drawPage(btn.dataset.page);
-          });
-        });
-      }
-
-      function openSection(target) {
-        if (!target || target === "home") {
-          panelEl.classList.remove("open");
-          setActivePill("home");
-          return;
-        }
-        panelEl.classList.add("open");
-        setActivePill(target);
-        if (target === "portals") renderPortalsView();
-        else if (target === "updates") renderUpdatesGateway();
-        else if (target === "library") renderLibraryView();
-        else if (target === "reference") renderReferenceView();
-        else if (target === "register") renderRegisterView();
-        else if (target === "global-diff") {
-          panelTitleEl.textContent = "USA / UK / Europe — Curriculum Comparison";
-          panelBodyEl.innerHTML = `<div class="sub-box"><strong>UK:</strong> GCSE / A Levels • <strong>USA:</strong> High School Credits / GPA / AP • <strong>Europe:</strong> National / IB / ECTS</div>`;
-        } else if (target === "courses") {
-          panelTitleEl.textContent = "Advertisement + Next Courses";
-          panelBodyEl.innerHTML = `<div class="sub-box">Nursery–Grade 12, Boards, O/A Levels, CSS, PMS, Tehsildar, MDCAT, ECAT, IELTS, Urdu, Spanish &amp; German.</div>`;
-        } else if (target === "contact") {
-          panelTitleEl.textContent = "Contact / WhatsApp / Location";
-          panelBodyEl.innerHTML = `<div class="sub-box"><strong>Director:</strong> Sir Haroon Javaid Hashmi<br /><strong>Hubs:</strong> District Gujrat &amp; Global Online Campus</div>`;
-        }
-        panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }
-
-      document.addEventListener("click", (event) => {
-        const trigger = event.target.closest("[data-target]");
-        if (trigger) openSection(trigger.dataset.target);
-      });
-
-      document.getElementById("openUpdatesDirectBtn")?.addEventListener("click", () => openSection("updates"));
-      document.getElementById("openAdminDirectBtn")?.addEventListener("click", renderAdminDirectView);
-      closePanelBtn?.addEventListener("click", () => {
-        panelEl.classList.remove("open");
-        setActivePill("home");
-      });
-
-      if (state.broadcasts.length > 0 && noticeTickerText) {
-        noticeTickerText.textContent = `📢 NOTICE: ${state.broadcasts[0]}`;
-      }
-      syncUpdatesBadge();
-      updateClock();
-      setInterval(updateClock, 1000);
-    })();
-  </script>
-</body>
-</html>
+  <!-- MATRIC SCIENCE SMALL WINDOW: COMPUTER SCIENCE OR BIOLOGY -->
+  <div id="scienceBranchModal" class="science-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="sciModalTitle">
+    <div class="science-modal-box">
+      <h3 id="sciModalTitle" style="color:#f0cf65;font-size:1rem;font-weight:800;">Science Stream Selection</h3>
+      <p style="color:#cbd5e1;font-size:0.86rem;margin-top:6px;">
+        Choose one branch to continue in Science:
+      </p>
+      <div class="science-choice-grid">
+        <button type="button" id="pickComputerScienceBtn" class="portal-card-btn">Computer Science</button>
+        <button type="button" id="pickBiologyBtn" class="portal-card-btn">Biology</button>
+      </div>
+    </div>
+  </div>
