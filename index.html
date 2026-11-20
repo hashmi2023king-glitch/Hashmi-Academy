@@ -5122,3 +5122,63 @@
   </script>
 </body>
 </html>
+<section id="facultyHiringPortalSection" class="detail-box" style="margin-top:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+    <strong style="color:#f0cf65;font-size:1rem;">Faculty Hiring &amp; Teacher Application Portal</strong>
+    <span class="lms-badge">Online Academy &amp; Campus Recruitment</span>
+  </div>
+
+  <p style="color:#cbd5e1;font-size:0.84rem;margin-bottom:10px;">
+    Apply to teach Pakistani Board / O &amp; A Level classes, Competitive Exams, or International &amp; Language tracks under Director Haroon Javaid Hashmi.
+  </p>
+
+  <label class="field-label" for="facFullNameInput" style="margin-top:0;">Teacher Full Name</label>
+  <input id="facFullNameInput" class="field-input" type="text" placeholder="Enter teacher full name..." />
+
+  <label class="field-label" for="facContactInput">Email Address &amp; Contact / WhatsApp</label>
+  <input id="facContactInput" class="field-input" type="text" placeholder="teacher@email.com | +92-3XX-XXXXXXX" />
+
+  <label class="field-label" for="facQualificationSelect">Highest Qualification</label>
+  <select id="facQualificationSelect" class="field-input">
+    <option value="M.Phil / MS">M.Phil / MS</option>
+    <option value="Master's (MA / MSc / M.Com / MBA)">Master's (MA / MSc / M.Com / MBA)</option>
+    <option value="BS (4-Year Honours) / B.Ed">BS (4-Year Honours) / B.Ed</option>
+    <option value="CSS / PMS / Subject Specialist">CSS / PMS / Subject Specialist</option>
+  </select>
+
+  <label class="field-label" for="facExperienceSelect">Teaching Experience</label>
+  <select id="facExperienceSelect" class="field-input">
+    <option value="1–2 Years">1–2 Years</option>
+    <option value="3–5 Years">3–5 Years</option>
+    <option value="5–10 Years">5–10 Years</option>
+    <option value="10+ Years (Senior Faculty)">10+ Years (Senior Faculty)</option>
+  </select>
+
+  <label class="field-label" for="facPortalTrackSelect">Preferred Teaching Track</label>
+  <select id="facPortalTrackSelect" class="field-input">
+    <option value="Pakistani Students Portal (Classes 3–12 & Competitive)">Pakistani Students Portal (Classes 3–12 &amp; Competitive)</option>
+    <option value="International Students Portal (O/A Level, IELTS & Languages)">International Students Portal (O/A Level, IELTS &amp; Languages)</option>
+    <option value="Both Pakistani & International Portals">Both Pakistani &amp; International Portals</option>
+  </select>
+
+  <label class="field-label" for="facSubjectsInput">Subjects &amp; Classes You Can Teach</label>
+  <input id="facSubjectsInput" class="field-input" type="text" placeholder="e.g. Physics, Mathematics, English, IELTS, Accounting..." />
+
+  <label class="field-label" for="facAvailabilitySelect">Preferred Shift / Time Zone</label>
+  <select id="facAvailabilitySelect" class="field-input">
+    <option value="Pakistan Evening / Night Shift (PKT)">Pakistan Evening / Night Shift (PKT)</option>
+    <option value="UK / European Hours (GMT / BST / CET)">UK / European Hours (GMT / BST / CET)</option>
+    <option value="Gulf / Middle East Hours (GST / AST)">Gulf / Middle East Hours (GST / AST)</option>
+    <option value="Flexible Online & Campus Slots">Flexible Online &amp; Campus Slots</option>
+  </select>
+
+  <label class="field-label" for="facCvFileInput">Attach CV / Credentials (Max 2 MB — Optional)</label>
+  <input id="facCvFileInput" class="field-input" type="file" accept=".pdf,.doc,.docx,image/*" />
+  <p id="facCvStatusPill" class="upload-status-pill" style="margin-bottom:8px;">CV Status: Optional (Less than 2 MB)</p>
+
+  <div id="facApplicationSummaryBox" class="calc-summary-box"></div>
+  <button type="button" id="facSubmitApplicationBtn" class="gold-submit-btn">
+    Submit Faculty Application
+  </button>
+  <div id="facSubmittedReceiptBox" class="calc-summary-box" style="display:none;margin-top:10px;"></div>
+</section>
