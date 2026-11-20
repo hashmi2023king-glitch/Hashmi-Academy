@@ -1922,3 +1922,475 @@
     });
   })();
 </script>
+<!-- PART 10: QUICK-JUMP CONTROLS, KEYBOARD SHORTCUTS & MODULE DIAGNOSTICS -->
+<script>
+  (function () {
+    const panelEl = document.getElementById("dynamicPanel");
+    const panelTitleEl = document.getElementById("panelTitle");
+    const panelBodyEl = document.getElementById("panelBody");
+    const menuStack = document.querySelector(".menu-stack");
+    if (!panelEl || !panelTitleEl || !panelBodyEl || !menuStack) return;
+
+    const quickBar = document.createElement("div");
+    quickBar.id = "part10QuickBar";
+    quickBar.style.cssText =
+      "display:flex;gap:6px;flex-wrap:wrap;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid rgba(212,175,55,0.35);";
+    quickBar.innerHTML = `
+      <button type="button" class="close-btn" data-target="portals">Quick: Portals</button>
+      <button type="button" class="close-btn" data-target="library">Quick: Library</button>
+      <button type="button" class="close-btn" data-target="register">Quick: Register</button>
+      <button type="button" id="part10DiagBtn" class="close-btn">Part 10 Status</button>
+    `;
+
+    if (!document.getElementById("part10QuickBar")) {
+      menuStack.insertAdjacentElement("afterend", quickBar);
+    }
+
+    document.getElementById("part10DiagBtn")?.addEventListener("click", function () {
+      const buttonsCount = document.querySelectorAll("button").length;
+      const hasClock = Boolean(document.getElementById("liveClock"));
+      const hasPanel = Boolean(document.getElementById("dynamicPanel"));
+      panelTitleEl.textContent = "Part 10 — System & Module Diagnostic";
+      panelBodyEl.innerHTML = `
+        <div class="sub-box">
+          <div><strong>Active Buttons Wired:</strong> ${buttonsCount}</div>
+          <div><strong>Live Clock Element:</strong> ${hasClock ? "OK" : "Missing"}</div>
+          <div><strong>Dynamic Panel Container:</strong> ${hasPanel ? "OK" : "Missing"}</div>
+          <div><strong>Keyboard Shortcuts:</strong> Press <strong>Esc</strong> to close panel • <strong>Alt+P</strong> for Portals • <strong>Alt+L</strong> for Library</div>
+        </div>
+      `;
+      panelEl.classList.add("open");
+      panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && panelEl.classList.contains("open")) {
+        panelEl.classList.remove("open");
+      } else if (event.altKey && event.key.toLowerCase() === "p") {
+        document.querySelector('.action-btn[data-target="portals"]')?.click();
+      } else if (event.altKey && event.key.toLowerCase() === "l") {
+        document.querySelector('.action-btn[data-target="library"]')?.click();
+      }
+    });
+  })();
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sir Haroon Javaid Hashmi Academy &amp; College</title>
+  <style>
+    :root {
+      --bg-navy: #07142b;
+      --bg-card: #0b1d3d;
+      --gold: #d4af37;
+      --gold-soft: rgba(212, 175, 55, 0.45);
+      --green-btn: #164b2e;
+      --green-hover: #1e663f;
+      --white: #ffffff;
+      --muted: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      padding: 10px;
+    }
+
+    button,
+    .nav-pill,
+    .action-btn,
+    .close-btn {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(212, 175, 55, 0.25);
+      position: relative;
+      z-index: 2;
+    }
+
+    .app-frame {
+      max-width: 540px;
+      margin: 0 auto;
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      padding: 12px;
+      background: linear-gradient(180deg, #081834 0%, #050f22 100%);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gold-soft);
+      margin-bottom: 14px;
+    }
+
+    .brand-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .live-clock {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-pill {
+      background-color: var(--bg-card);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .nav-pill:hover,
+    .nav-pill.active {
+      background-color: var(--green-btn);
+    }
+
+    .hero-section {
+      text-align: center;
+      padding: 8px 4px 12px;
+    }
+
+    .academy-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .poet-line {
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .urdu-verse {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin-bottom: 10px;
+      direction: rtl;
+    }
+
+    .emblem-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .welcome-heading {
+      color: var(--gold);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .director-role {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .sub-campus {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .ticker-strip {
+      overflow: hidden;
+      white-space: nowrap;
+      border: 1px solid var(--gold-soft);
+      border-radius: 8px;
+      background: var(--bg-navy);
+      padding: 6px 0;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: shjMarquee 24s linear infinite;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .ticker-strip.promo .ticker-track {
+      color: var(--white);
+      animation-duration: 30s;
+    }
+
+    @keyframes shjMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .menu-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .action-btn {
+      width: 100%;
+      background-color: var(--green-btn);
+      color: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.08s ease;
+    }
+
+    .action-btn:hover {
+      background-color: var(--green-hover);
+    }
+
+    .action-btn:active {
+      transform: scale(0.99);
+    }
+
+    .panel-box {
+      display: none;
+      margin-top: 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .panel-box.open {
+      display: block;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gold-soft);
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .close-btn {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .panel-body {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--white);
+    }
+
+    .panel-list {
+      margin-top: 8px;
+      padding-left: 18px;
+    }
+
+    .panel-list li {
+      margin-bottom: 6px;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--gold);
+      background: var(--bg-navy);
+      color: var(--white);
+      font-size: 0.88rem;
+    }
+
+    .sub-box {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid var(--gold-soft);
+      border-radius: 10px;
+      background: var(--bg-navy);
+    }
+
+    .reg-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+
+    .reg-table th,
+    .reg-table td {
+      padding: 6px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      text-align: left;
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .app-frame {
+        border-color: #000000 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        max-width: 100% !important;
+      }
+      .action-btn,
+      .nav-pill,
+      .close-btn,
+      .ticker-strip {
+        display: none !important;
+      }
+      .panel-box {
+        display: block !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-frame">
+    <header class="top-bar">
+      <div class="brand-title">🎓 Sir Haroon Global Academy</div>
+      <div id="liveClock" class="live-clock">--:--:--</div>
+      <nav class="top-actions" aria-label="Primary Navigation">
+        <button type="button" class="nav-pill active" data-target="home">Home</button>
+        <button type="button" class="nav-pill" data-target="portals">Portals</button>
+        <button type="button" class="nav-pill" data-target="updates">Updates (<span id="updatesCount">3</span>)</button>
+      </nav>
+    </header>
+
+    <section id="homeHero" class="hero-section">
+      <h1 class="academy-name">Sir HAROON JAVAID HASHMI<br />Academy &amp; College</h1>
+      <p class="poet-line">Allama Muhammad Iqbal - شاعر مشرق</p>
+      <p class="urdu-verse">اپنی دنیا آپ پیدا کر اگر زندوں میں ہے تو</p>
+      <div class="emblem-row" aria-hidden="true">
+        <span>🦅</span>
+        <span>🇵🇰</span>
+      </div>
+      <div class="welcome-heading">WELCOME</div>
+      <div class="director-role">Director &amp; Founder - Sir Haroon Javaid Hashmi</div>
+      <div class="sub-campus">Global Academy &amp; College</div>
+    </section>
+
+    <div class="ticker-strip">
+      <div id="noticeTickerText" class="ticker-track">
+        📢 NOTICE: Sir Haroon Javaid Hashmi Academy &amp; College • Phase 1 District Gujrat Active • DOAB Open Access Books Integrated • Teacher &amp; Director LMS Ready
+      </div>
+    </div>
+
+    <div class="ticker-strip promo">
+      <div class="ticker-track">
+        🎓 COURSES &amp; PORTALS: Nursery–Grade 12 • Boards &amp; O/A Levels • CSS, PMS, Tehsildar, MDCAT, ECAT • IELTS, Urdu, Spanish &amp; German • International GBP (£) &amp; Local PKR Tracks
+      </div>
+    </div>
+
+    <main class="menu-stack">
+      <button type="button" class="action-btn" data-target="portals">Enter - Portals ➡️</button>
+      <button type="button" class="action-btn" data-target="updates">Updates Gateway — OK / Yes vs. No 🔔</button>
+      <button type="button" class="action-btn" data-target="library">Library - Data Bhara Hua - All Boards &amp; Systems</button>
+      <button type="button" class="action-btn" data-target="reference">Reference Portals &amp; Study Apps</button>
+      <button type="button" class="action-btn" data-target="register">Daily Register - Page 83-89</button>
+      <button type="button" class="action-btn" data-target="global-diff">USA / UK / Europe - Farq - Subjects</button>
+      <button type="button" class="action-btn" data-target="courses">Advertisement + Next Courses</button>
+      <button type="button" class="action-btn" data-target="contact">Contact / WhatsApp / Location</button>
+    </main>
+
+    <section id="dynamicPanel" class="panel-box" aria-live="polite">
+      <div class="panel-header">
+        <h2 id="panelTitle" class="panel-title">Section</h2>
+        <button type="button" id="closePanelBtn" class="close-btn">Close</button>
+      </div>
+      <div id="panelBody" class="panel-body"></div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "SHJ_COMPLETE_APP_V1";
+      const clockEl = document.getElementById("liveClock");
+      const updatesCountEl = document.getElementById("updatesCount");
+      const panelEl = document.getElementById("dynamicPanel");
+      const panelTitleEl = document.getElementById("panelTitle");
+      const panelBodyEl = document.getElementById("panelBody");
+      const closePanelBtn = document.getElementById("closePanelBtn");
+      const navPills = document.querySelectorAll(".nav-pill");
+      const noticeTickerText = document.getElementById("noticeTickerText");
+
+      const libraryCatalog = [
+        { title: "Directory of Open Access Books (DOAB) — 111,000+ Peer-Reviewed Books", track: "Open Access / Research", level: "Higher Ed & Reference" },
+        { title: "Foundational English, Urdu & Mathematics (Nursery – Grade 5)", track: "School Boards & Cambridge", level: "Primary" },
+        { title: "Secondary Sciences, Pakistan Studies & Islamiat (Grades 6 – 10)", track: "School Boards & O Levels", level: "Secondary" },
+        { title: "Intermediate & A Level Core Sciences, Humanities & Commerce", track: "FSc / ICS / FA / A Levels", level: "Higher Secondary" },
+        { title: "CSS, PMS & Tehsildar — Syllabus & Current Affairs Compendium", track: "Competitive Exams", level: "Civil Services" },
+        { title: "MDCAT & ECAT — Concept Drills & Past Paper Banks", track: "Entry Tests", level: "Pre-Medical / Engineering" },
+        { title: "IELTS Academic & General + Urdu, Spanish & German Guides", track: "Languages", level: "All Levels" }
+      ];
+
+      const defaultState = {
+        registerPages: {
+          "83": [
+            { roll: "01", name: "Ayesha Tariq", status: "Present" },
+            { roll: "02", name: "Bilal Mahmood", status: "Present" },
+            { roll: "03", name: "Hamza Siddiqui", status: "Absent" }
+          ],
+          "84": [
+            { roll: "04", name: "Zainab Farooq", status: "Present" },
+            { roll: "05", name: "Usman Ghani", status: "Present" },
+            { roll: "06", name: "Maryam Khalid", status: "Leave" }
+          ],
+          "85": [
+            { roll: "07", name: "Ali Raza", status: "Present" },
+            { roll: "08", name: "Hira Naveed", status: "Present" }
+          ],
+          "86": [
+            { roll: "09", name: "Saad Ahmed", status: "Absent" },
+            { roll: "10", name: "Fatima Noor", status: "Present" }
+          ],
+          "87": [
+            { roll: "11", name: "Daniyal Mirza", status: "Present" },
+            { roll
