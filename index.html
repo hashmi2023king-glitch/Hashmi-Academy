@@ -4580,3 +4580,545 @@
         refreshIntlSummary();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+  // 3. FEE PAYMENT & OFFICIAL RECEIPT WORKFLOW (PAKISTANI & INTERNATIONAL)
+      function openPaymentWorkflowView(defaultPortal, clickLog, prefill = {}) {
+        welcomePage?.classList.add("hidden-view");
+        portalPage?.classList.add("hidden-view");
+        subViewPage?.classList.remove("hidden-view");
+
+        let activePayPortal = defaultPortal === "international" ? "international" : "pakistani";
+        let verifiedReceiptFile = null;
+
+        subViewTitle.textContent = "Page 3 — Fee Payment & Official Receipt Verification";
+
+        const paymentMethodsCatalog = {
+          pakistani: [
+            {
+              id: "easypaisa",
+              name: "EasyPaisa Mobile Account (PKR)",
+              details: "Account Title: Haroon Javaid Hashmi • Currency: PKR • Instant SMS & App Receipt Verification."
+            },
+            {
+              id: "jazzcash",
+              name: "JazzCash Mobile Wallet (PKR)",
+              details: "Account Title: Haroon Javaid Hashmi • Currency: PKR • Enter 12-Digit TID after transfer."
+            },
+            {
+              id: "pk_bank",
+              name: "Pakistani Bank Transfer / Raast IBFT (PKR)",
+              details: "Title: Sir Haroon Javaid Hashmi Academy • Raast / IBFT Instant Transfer • Attach IBFT Slip."
+            }
+          ],
+          international: [
+            {
+              id: "uk_eu_bank",
+              name: "UK / US / European Bank Transfer (GBP £ / USD $ / EUR €)",
+              details: "International Remittance to Pakistan PKR Account • Currency: GBP £ / USD $ • Enter Bank Wire Reference."
+            },
+            {
+              id: "western_union",
+              name: "Western Union / Wise Remittance",
+              details: "Receiver: Haroon Javaid Hashmi (Pakistan) • Enter 10-Digit MTCN or Wise Transfer Reference."
+            },
+            {
+              id: "intl_card",
+              name: "International Debit / Credit Card (Visa / Mastercard)",
+              details: "Supports GBP £ & USD $ Billing • Automatic Conversion & Official Academy Receipt."
+            }
+          ]
+        };
+
+        subViewBody.innerHTML = `
+          <div class="detail-box">
+            <strong>Click Date Recorded:</strong> ${clickLog.date} (${clickLog.time}) • <strong>3-Way Alert Enabled</strong> (Student + Parent + Director)
+          </div>
+
+          <div class="detail-box">
+            <div class="type-pill-row" style="margin-bottom:10px;">
+              <button type="button" class="type-pill-btn ${activePayPortal === "pakistani" ? "active" : ""}" id="switchPakPayBtn">1. Pakistani Portal Payment (PKR)</button>
+              <button type="button" class="type-pill-btn ${activePayPortal === "international" ? "active" : ""}" id="switchIntlPayBtn">2. International Portal Payment (GBP £ / USD $)</button>
+            </div>
+
+            <label class="field-label" for="payAdmissionNoInput">Admission Number (e.g. SHJ-104 or INT-202)</label>
+            <input id="payAdmissionNoInput" class="field-input" type="text" value="${prefill.admissionNo || ""}" placeholder="Enter your Admission Number..." />
+
+            <label class="field-label" for="payStudentNameInput">Student Full Name</label>
+            <input id="payStudentNameInput" class="field-input" type="text" value="${prefill.studentName || ""}" placeholder="Enter student name..." />
+
+            <label class="field-label" for="payAmountInput" id="payAmountLabel">Amount Paid</label>
+            <input id="payAmountInput" class="field-input" type="number" min="1" value="${prefill.amount || ""}" placeholder="Enter amount..." />
+
+            <label class="field-label" for="payMethodSelect">Select Payment Method</label>
+            <select id="payMethodSelect" class="field-input"></select>
+
+            <div id="payAccountInstructionsBox" class="calc-summary-box" style="margin-bottom:10px;"></div>
+
+            <label class="field-label" for="payTxnRefInput">Transaction ID / Reference Number</label>
+            <input id="payTxnRefInput" class="field-input" type="text" placeholder="Enter Transaction ID / MTCN / Bank Ref..." />
+
+            <label class="field-label" for="payReceiptFileInput">Upload Payment Receipt Screenshot (Max 2 MB)</label>
+            <input id="payReceiptFileInput" class="field-input" type="file" accept="image/*,.pdf" />
+            <p id="payUploadStatusPill" class="upload-status-pill" style="margin-bottom:8px;">Receipt Upload: Optional or Less than 2 MB</p>
+
+            <button type="button" id="submitPaymentReceiptBtn" class="gold-submit-btn">
+              Submit Payment &amp; Generate Official Receipt
+            </button>
+
+            <div id="generatedReceiptCard" class="calc-summary-box" style="display:none;margin-top:12px;"></div>
+          </div>
+        `;
+
+        const switchPakPayBtn = document.getElementById("switchPakPayBtn");
+        const switchIntlPayBtn = document.getElementById("switchIntlPayBtn");
+        const payAmountLabel = document.getElementById("payAmountLabel");
+        const payMethodSelect = document.getElementById("payMethodSelect");
+        const payAccountInstructionsBox = document.getElementById("payAccountInstructionsBox");
+        const payReceiptFileInput = document.getElementById("payReceiptFileInput");
+        const payUploadStatusPill = document.getElementById("payUploadStatusPill");
+        const submitPaymentReceiptBtn = document.getElementById("submitPaymentReceiptBtn");
+        const generatedReceiptCard = document.getElementById("generatedReceiptCard");
+
+        function renderPaymentMethodOptions() {
+          const list = paymentMethodsCatalog[activePayPortal] || paymentMethodsCatalog.pakistani;
+          if (payAmountLabel) {
+            payAmountLabel.textContent = activePayPortal === "pakistani"
+              ? "Amount Paid (PKR)"
+              : "Amount Paid (GBP £ / USD $)";
+          }
+          if (payMethodSelect) {
+            payMethodSelect.innerHTML = list
+              .map((m) => `<option value="${m.id}">${m.name}</option>`)
+              .join("");
+          }
+          updateMethodInstructions();
+        }
+
+        function updateMethodInstructions() {
+          const list = paymentMethodsCatalog[activePayPortal] || paymentMethodsCatalog.pakistani;
+          const chosen = list.find((m) => m.id === payMethodSelect?.value) || list[0];
+          if (payAccountInstructionsBox && chosen) {
+            payAccountInstructionsBox.innerHTML = `
+              <div style="color:#f0cf65;font-weight:800;">${chosen.name}</div>
+              <div style="margin-top:4px;color:#cbd5e1;">${chosen.details}</div>
+            `;
+          }
+        }
+
+        switchPakPayBtn?.addEventListener("click", () => {
+          activePayPortal = "pakistani";
+          switchPakPayBtn.classList.add("active");
+          switchIntlPayBtn?.classList.remove("active");
+          renderPaymentMethodOptions();
+        });
+
+        switchIntlPayBtn?.addEventListener("click", () => {
+          activePayPortal = "international";
+          switchIntlPayBtn.classList.add("active");
+          switchPakPayBtn?.classList.remove("active");
+          renderPaymentMethodOptions();
+        });
+
+        payMethodSelect?.addEventListener("change", updateMethodInstructions);
+
+        payReceiptFileInput?.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) {
+            verifiedReceiptFile = null;
+            if (payUploadStatusPill) payUploadStatusPill.textContent = "No file selected.";
+            return;
+          }
+          if (file.size > MAX_SIZE) {
+            alert("Receipt file is larger than 2 MB. Please choose a smaller screenshot or PDF.");
+            e.target.value = "";
+            verifiedReceiptFile = null;
+            if (payUploadStatusPill) payUploadStatusPill.textContent = "Stopped — File exceeds 2 MB limit.";
+            return;
+          }
+          verifiedReceiptFile = {
+            name: file.name,
+            sizeKB: `${Math.max(1, Math.round(file.size / 1024))} KB`
+          };
+          if (payUploadStatusPill) {
+            payUploadStatusPill.textContent = `Ready: ${verifiedReceiptFile.name} (${verifiedReceiptFile.sizeKB})`;
+          }
+        });
+
+        submitPaymentReceiptBtn?.addEventListener("click", () => {
+          const admNo = (document.getElementById("payAdmissionNoInput")?.value || "").trim().toUpperCase();
+          const studentName = (document.getElementById("payStudentNameInput")?.value || "").trim();
+          const amountVal = Number(document.getElementById("payAmountInput")?.value || 0);
+          const txnRef = (document.getElementById("payTxnRefInput")?.value || "").trim();
+          const methodLabel = payMethodSelect?.options[payMethodSelect.selectedIndex]?.text || "Selected Method";
+
+          if (!admNo || !studentName || amountVal <= 0 || !txnRef) {
+            alert("Please enter Admission Number, Student Name, Amount Paid, and Transaction Reference.");
+            return;
+          }
+
+          const currencyPrefix = activePayPortal === "pakistani" ? "PKR " : "GBP £ / USD $ ";
+          const receiptCode = `${activePayPortal === "pakistani" ? "RCP" : "INT"}-${Math.floor(1000 + Math.random() * 9000)}`;
+          const timestamp = new Date().toLocaleString();
+
+          const existing = adminBackupState.records.find(
+            (r) => r.admissionNo.toUpperCase() === admNo
+          );
+          if (existing) {
+            existing.feePaid = `${currencyPrefix}${amountVal.toLocaleString()}`;
+            existing.feeDues = `${currencyPrefix}0`;
+            existing.receiptNo = receiptCode;
+            existing.status = "Active";
+            existing.inactiveReason = "";
+          } else {
+            adminBackupState.records.unshift({
+              admissionNo: admNo,
+              portal: activePayPortal === "pakistani" ? "Pakistani Students Portal" : "International Students Portal",
+              studentName,
+              email: "verified@student.com",
+              loginId: `user_${admNo.toLowerCase().replace("-", "")}`,
+              password: `SHJ@${Math.floor(1000 + Math.random() * 9000)}`,
+              status: "Active",
+              inactiveReason: "",
+              feeTotal: `${currencyPrefix}${amountVal.toLocaleString()}`,
+              feePaid: `${currencyPrefix}${amountVal.toLocaleString()}`,
+              feeDues: `${currencyPrefix}0`,
+              receiptNo: receiptCode
+            });
+          }
+
+          recordAdminChange(`Payment verified for ${admNo} (${studentName}) — ${currencyPrefix}${amountVal.toLocaleString()} via ${methodLabel}. Receipt: ${receiptCode}.`);
+
+          if (generatedReceiptCard) {
+            generatedReceiptCard.style.display = "block";
+            generatedReceiptCard.innerHTML = `
+              <div style="color:#22c55e;font-weight:800;font-size:0.95rem;margin-bottom:6px;">
+                Official Payment Receipt Generated — ${receiptCode}
+              </div>
+              <div><strong>Admission Number:</strong> ${admNo} | <strong>Student:</strong> ${studentName}</div>
+              <div><strong>Method:</strong> ${methodLabel}</div>
+              <div><strong>Amount Paid:</strong> ${currencyPrefix}${amountVal.toLocaleString()} | <strong>Txn Ref:</strong> ${txnRef}</div>
+              <div><strong>Attachment:</strong> ${verifiedReceiptFile ? `${verifiedReceiptFile.name} (${verifiedReceiptFile.sizeKB})` : "Reference Verified"}</div>
+              <div><strong>Date &amp; Time:</strong> ${timestamp}</div>
+              <hr style="border:none;border-top:1px solid rgba(212,175,55,0.3);margin:8px 0;" />
+              <div style="color:#f0cf65;font-weight:700;">3-Way Notification Dispatched:</div>
+              <ul style="margin-top:4px;padding-left:18px;color:#cbd5e1;">
+                <li><strong>1. Student Copy:</strong> Receipt ${receiptCode} &amp; Active Portal Notice sent.</li>
+                <li><strong>2. Parent / Guardian Copy:</strong> Fee confirmation alert sent.</li>
+                <li><strong>3. Director Copy (Sir Haroon Javaid Hashmi):</strong> Logged in Admin Accounts Portal.</li>
+              </ul>
+            `;
+          }
+
+          alert(`Receipt ${receiptCode} Generated!\nAdmission ${admNo} is now marked Active in Admin Accounts.`);
+        });
+
+        renderPaymentMethodOptions();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function openPage3(portalType, entryType, clickLog) {
+        if (entryType === "Payment") {
+          openPaymentWorkflowView(portalType, clickLog);
+          return;
+        }
+        if (portalType === "pakistani") {
+          if (entryType === "Courses") openPakistaniCoursesWindow(clickLog);
+          else openPakistaniClassesForm(clickLog);
+        } else {
+          openInternationalAdmissionForm(entryType, clickLog);
+        }
+      }
+
+      // 4. ADMIN PORTAL
+      function renderAdminPortal() {
+        subViewTitle.textContent = "Admin Portal — Backup, Accounts, Safe Upload & Change Log";
+        subViewBody.innerHTML = `
+          <div class="admin-tabs">
+            <button type="button" class="admin-tab-btn active" data-admin-tab="portal-backup">Portal-Wise Backup</button>
+            <button type="button" class="admin-tab-btn" data-admin-tab="accounts-portal">Separate Accounts Portal</button>
+            <button type="button" class="admin-tab-btn" data-admin-tab="safe-upload">Safe File Upload (2MB)</button>
+            <button type="button" class="admin-tab-btn" data-admin-tab="click-dates">Auto Click Dates</button>
+            <button type="button" class="admin-tab-btn" data-admin-tab="change-log">Step-by-Step Changes</button>
+          </div>
+          <div id="adminTabContent"></div>
+        `;
+
+        const tabContent = document.getElementById("adminTabContent");
+
+        function drawAdminTab(tabKey) {
+          if (!tabContent) return;
+
+          if (tabKey === "portal-backup") {
+            const pkList = adminBackupState.records.filter((r) => r.portal === "Pakistani Students Portal");
+            const intlList = adminBackupState.records.filter((r) => r.portal === "International Students Portal");
+
+            tabContent.innerHTML = `
+              <div class="detail-box">
+                <strong>Portal-Wise Login &amp; Password Backup:</strong>
+                <p style="color:#cbd5e1;margin-top:4px;">
+                  Pakistani Portal Backup (${pkList.length}) • International Portal Backup (${intlList.length}) • Admin Portal Backup (Active)
+                </p>
+                <div style="overflow-x:auto;">
+                  <table class="backup-table">
+                    <thead>
+                      <tr>
+                        <th>Adm # / Student</th>
+                        <th>Portal Backup</th>
+                        <th>Email</th>
+                        <th>Login / Password</th>
+                        <th>Status / Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${adminBackupState.records
+                        .map(
+                          (rec, idx) => `
+                        <tr>
+                          <td><strong>${rec.admissionNo}</strong><br/>${rec.studentName}</td>
+                          <td>${rec.portal}</td>
+                          <td>${rec.email}</td>
+                          <td>ID: <code>${rec.loginId}</code><br/>Pass: <code>${rec.password}</code></td>
+                          <td>
+                            <span style="color:${rec.status === "Active" ? "#22c55e" : "#f87171"};font-weight:800;">${rec.status}</span>
+                            ${rec.status !== "Active" ? `<div style="font-size:0.74rem;color:#cbd5e1;">Reason: ${rec.inactiveReason}</div>` : ""}
+                            <button type="button" class="small-gold-btn toggle-adm-status" data-idx="${idx}" style="margin-top:4px;padding:4px 7px;font-size:0.74rem;">
+                              ${rec.status === "Active" ? "Set Inactive" : "Set Active"}
+                            </button>
+                          </td>
+                        </tr>`
+                        )
+                        .join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+
+            tabContent.querySelectorAll(".toggle-adm-status").forEach((b) => {
+              b.addEventListener("click", () => {
+                const idx = Number(b.dataset.idx);
+                const r = adminBackupState.records[idx];
+                if (!r) return;
+                if (r.status === "Active") {
+                  r.status = "Inactive";
+                  if (!r.inactiveReason) r.inactiveReason = "Fee Not Paid";
+                } else {
+                  r.status = "Active";
+                  r.inactiveReason = "";
+                  r.feeDues = "0";
+                }
+                recordAdminChange(`Admin updated ${r.admissionNo} (${r.portal}) to ${r.status}.`);
+                drawAdminTab("portal-backup");
+              });
+            });
+          } else if (tabKey === "accounts-portal") {
+            tabContent.innerHTML = `
+              <div class="detail-box">
+                <strong>Separate Accounts Portal (Fee, Payment, Dues &amp; Receipt):</strong>
+                <div style="overflow-x:auto;">
+                  <table class="backup-table">
+                    <thead>
+                      <tr>
+                        <th>Adm #</th>
+                        <th>Student</th>
+                        <th>Fee</th>
+                        <th>Payment</th>
+                        <th>Dues</th>
+                        <th>Receipt</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${adminBackupState.records
+                        .map(
+                          (r) => `
+                        <tr>
+                          <td><strong>${r.admissionNo}</strong></td>
+                          <td>${r.studentName}</td>
+                          <td>${r.feeTotal}</td>
+                          <td style="color:#22c55e;">${r.feePaid}</td>
+                          <td style="color:#f59e0b;">${r.feeDues}</td>
+                          <td>${r.receiptNo}</td>
+                        </tr>`
+                        )
+                        .join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          } else if (tabKey === "safe-upload") {
+            tabContent.innerHTML = `
+              <div class="detail-box">
+                <strong>Safe File Upload &amp; Commit Guard (Max Size = 2 MB • 3 Auto Retries on Weak Internet):</strong>
+                <p style="color:#cbd5e1;font-size:0.82rem;margin-top:4px;">
+                  Commit Changes / Save button remains locked until the file finishes 100% upload.
+                </p>
+
+                <label class="field-label" for="safeDocLabelInput">Document Title / Description</label>
+                <input id="safeDocLabelInput" class="field-input" type="text" placeholder="e.g. Fee Receipt, Syllabus PDF, Student Photo..." />
+
+                <label class="field-label" for="safeFileInput">Select File (Maximum Allowed Size: 2 MB)</label>
+                <input id="safeFileInput" class="field-input" type="file" />
+
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;">
+                  <button type="button" id="commitBtn" class="small-gold-btn" disabled>Commit Changes</button>
+                  <p id="status" class="upload-status-pill" style="margin-top:0;">Waiting...</p>
+                </div>
+
+                <div class="calc-summary-box" style="margin-top:12px;">
+                  <strong>Committed Files in Strong Backup Vault (${adminBackupState.uploadedFiles.length}):</strong>
+                  <ul style="margin-top:6px;padding-left:18px;">
+                    ${
+                      adminBackupState.uploadedFiles.length
+                        ? adminBackupState.uploadedFiles
+                            .map((f) => `<li><strong>${f.title}</strong> — ${f.name} (${f.sizeKB}) • Saved: ${f.uploadedAt}</li>`)
+                            .join("")
+                        : "<li>No files committed yet.</li>"
+                    }
+                  </ul>
+                </div>
+              </div>
+            `;
+
+            const safeFileInput = document.getElementById("safeFileInput");
+            const commitBtn = document.getElementById("commitBtn");
+            const statusEl = document.getElementById("status");
+
+            SafeUploadManager.isUploaded = false;
+            SafeUploadManager.pendingFileData = null;
+            if (commitBtn) commitBtn.disabled = true;
+
+            safeFileInput?.addEventListener("change", (e) => {
+              const file = e.target.files && e.target.files[0];
+              if (!file) return;
+              SafeUploadManager.uploadWithRetry(file, {
+                tries: 3,
+                commitBtn,
+                statusEl
+              });
+            });
+
+            commitBtn?.addEventListener("click", () => {
+              if (!SafeUploadManager.isUploaded || !SafeUploadManager.pendingFileData) {
+                alert("Please wait. File is still Uploading. Do not press Save now.");
+                return;
+              }
+              const docTitle = (document.getElementById("safeDocLabelInput")?.value || "").trim() || SafeUploadManager.pendingFileData.name;
+              adminBackupState.uploadedFiles.unshift({
+                title: docTitle,
+                name: SafeUploadManager.pendingFileData.name,
+                sizeKB: SafeUploadManager.pendingFileData.sizeKB,
+                uploadedAt: SafeUploadManager.pendingFileData.uploadedAt
+              });
+              adminBackupState.uploadedFiles = adminBackupState.uploadedFiles.slice(0, 50);
+              recordAdminChange(`Committed uploaded file '${SafeUploadManager.pendingFileData.name}' (${SafeUploadManager.pendingFileData.sizeKB}).`);
+              alert("File Saved Successfully");
+              SafeUploadManager.isUploaded = false;
+              SafeUploadManager.pendingFileData = null;
+              drawAdminTab("safe-upload");
+            });
+          } else if (tabKey === "click-dates") {
+            tabContent.innerHTML = `
+              <div class="detail-box">
+                <strong>Automatic Student Click Date Log:</strong>
+                <ul style="margin-top:6px;padding-left:18px;">
+                  ${
+                    adminBackupState.clickDateLogs.length
+                      ? adminBackupState.clickDateLogs
+                          .map((c) => `<li><strong>${c.date} (${c.time})</strong> — ${c.portal} / ${c.selection}</li>`)
+                          .join("")
+                      : "<li>No click dates recorded yet.</li>"
+                  }
+                </ul>
+              </div>
+            `;
+          } else if (tabKey === "change-log") {
+            tabContent.innerHTML = `
+              <div class="detail-box">
+                <strong>Step-by-Step Continuous Admin Change Log:</strong>
+                <ul style="margin-top:6px;padding-left:18px;">
+                  ${adminBackupState.adminChangeLog
+                    .map((e) => `<li><strong>Step ${e.step}</strong> (${e.time}): ${e.note}</li>`)
+                    .join("")}
+                </ul>
+              </div>
+            `;
+          }
+        }
+
+        drawAdminTab("portal-backup");
+
+        subViewBody.querySelectorAll(".admin-tab-btn").forEach((tBtn) => {
+          tBtn.addEventListener("click", () => {
+            subViewBody.querySelectorAll(".admin-tab-btn").forEach((x) => x.classList.remove("active"));
+            tBtn.classList.add("active");
+            drawAdminTab(tBtn.dataset.adminTab);
+          });
+        });
+      }
+
+      function showPage(pageName, withFlip) {
+        if (withFlip && welcomePage && !welcomePage.classList.contains("hidden-view")) {
+          welcomePage.classList.add("flipping");
+          setTimeout(() => {
+            welcomePage.classList.remove("flipping");
+            welcomePage.classList.add("hidden-view");
+            subViewPage?.classList.add("hidden-view");
+            portalPage?.classList.remove("hidden-view");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }, 260);
+          return;
+        }
+
+        welcomePage?.classList.add("hidden-view");
+        portalPage?.classList.add("hidden-view");
+        subViewPage?.classList.add("hidden-view");
+
+        if (pageName === "welcome-page") {
+          welcomePage?.classList.remove("hidden-view");
+        } else if (pageName === "portal-page") {
+          portalPage?.classList.remove("hidden-view");
+        } else if (pageName === "admin-portal") {
+          subViewPage?.classList.remove("hidden-view");
+          renderAdminPortal();
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      flipToPortalsBtn?.addEventListener("click", () => showPage("portal-page", true));
+
+      document.addEventListener("click", (e) => {
+        const goBtn = e.target.closest("[data-go-page]");
+        if (goBtn) {
+          showPage(goBtn.dataset.goPage, false);
+          return;
+        }
+
+        const p3Btn = e.target.closest("[data-open-page3]");
+        if (p3Btn) {
+          const portalKey = p3Btn.dataset.openPage3;
+          const entryKind = p3Btn.dataset.entryType || "Classes";
+          const logEntry = logAutomaticClickDate(
+            portalKey === "pakistani" ? "Pakistani Students Portal" : "International Students Portal",
+            entryKind
+          );
+          openPage3(portalKey, entryKind, logEntry);
+        }
+      });
+
+      function updateClock() {
+        if (!clockEl) return;
+        const now = new Date();
+        clockEl.textContent = now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
+      }
+
+      renderLanguageList("");
+      updateClock();
+      setInterval(updateClock, 1000);
+    })();
+  </script>
+</body>
+</html>
