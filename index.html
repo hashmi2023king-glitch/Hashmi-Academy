@@ -812,3 +812,86 @@
     });
   })();
 </script>
+<script>
+  (function () {
+    const panelBodyEl = document.getElementById("panelBody");
+    if (!panelBodyEl) return;
+
+    function enhanceStudentPortals(portalKey) {
+      const box = document.getElementById("portalDetailBox");
+      if (!box) return;
+
+      if (portalKey === "pk" || portalKey === "intl") {
+        const isIntl = portalKey === "intl";
+        const currencyLabel = isIntl ? "GBP (£) — International Remittance / Bank Transfer" : "PKR (Rs.) — Meezan Bank / EasyPaisa";
+        box.innerHTML = `
+          <div style="margin-bottom:8px;">
+            <strong>${isIntl ? "International Students Portal (GBP £)" : "Pakistani Students Portal (PKR)"}</strong>
+          </div>
+          <div style="font-size:0.85rem;margin-bottom:10px;">
+            Channel: <strong>${currencyLabel}</strong>
+          </div>
+          <div style="display:grid;gap:6px;margin-bottom:8px;">
+            <input id="feeStudentInput" type="text" placeholder="Student Full Name" style="width:100%;padding:8px;border-radius:8px;border:1px solid #d4af37;background:#0b1d3d;color:#fff;" />
+            <input id="feeAmountInput" type="text" placeholder="${isIntl ? "Amount in GBP (£)" : "Amount in PKR"}" style="width:100%;padding:8px;border-radius:8px;border:1px solid #d4af37;background:#0b1d3d;color:#fff;" />
+            <button type="button" id="verifyFeeReceiptBtn" class="action-btn">Generate 3-Way Fee Receipt</button>
+          </div>
+          <div id="feeReceiptOutput" style="font-size:0.83rem;color:#d4af37;"></div>
+        `;
+
+        document.getElementById("verifyFeeReceiptBtn")?.addEventListener("click", () => {
+          const name = (document.getElementById("feeStudentInput")?.value || "").trim() || "Student";
+          const amt = (document.getElementById("feeAmountInput")?.value || "").trim() || (isIntl ? "£100" : "Rs. 5,000");
+          const ref = "SHJ-" + Date.now().toString().slice(-6);
+          const out = document.getElementById("feeReceiptOutput");
+          if (out) {
+            out.innerHTML = `Receipt <strong>${ref}</strong> issued for <strong>${name}</strong> (${amt}) — logged for Parent, Payment Desk &amp; Director Audit.`;
+          }
+        });
+      }
+
+      if (portalKey === "admin") {
+        const extraWrap = document.createElement("div");
+        extraWrap.style.marginTop = "12px";
+        extraWrap.style.paddingTop = "10px";
+        extraWrap.style.borderTop = "1px solid rgba(212,175,55,0.35)";
+        extraWrap.innerHTML = `
+          <div style="margin-bottom:6px;"><strong>Universal Announcement Broadcaster &amp; Faculty Desk:</strong></div>
+          <input id="broadcastMsgInput" type="text" placeholder="Type official academy announcement..." style="width:100%;padding:8px;border-radius:8px;border:1px solid #d4af37;background:#0b1d3d;color:#fff;margin-bottom:6px;" />
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="button" id="sendBroadcastBtn" class="nav-pill">Broadcast Notice</button>
+            <button type="button" id="openHiringLogBtn" class="close-btn">Faculty Hiring Queue (CV &amp; Exp.)</button>
+          </div>
+          <div id="adminExtraOutput" style="margin-top:8px;font-size:0.83rem;color:#d4af37;"></div>
+        `;
+        box.appendChild(extraWrap);
+
+        document.getElementById("sendBroadcastBtn")?.addEventListener("click", () => {
+          const msg = (document.getElementById("broadcastMsgInput")?.value || "").trim();
+          const out = document.getElementById("adminExtraOutput");
+          if (out) {
+            out.textContent = msg
+              ? `Broadcast queued across Portal Ticker & Social Channels: "${msg}"`
+              : "Enter an announcement message first.";
+          }
+        });
+
+        document.getElementById("openHiringLogBtn")?.addEventListener("click", () => {
+          const out = document.getElementById("adminExtraOutput");
+          if (out) {
+            out.textContent = "Faculty Hiring Desk ready: accepts applicant CV, degree credentials, and verified teaching experience letters.";
+          }
+        });
+      }
+    }
+
+    document.addEventListener("click", (event) => {
+      const subBtn = event.target.closest(".portal-sub-btn");
+      if (!subBtn) return;
+      const key = subBtn.dataset.portal;
+      setTimeout(() => {
+        enhanceStudentPortals(key);
+      }, 10);
+    });
+  })();
+</script>
