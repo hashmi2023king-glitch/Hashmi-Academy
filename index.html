@@ -1,3 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sir Haroon Javaid Hashmi — Global Academy &amp; College</title>
+  <style>
+    :root {
+      --bg-navy: #061329;
+      --bg-card: #0b1e3f;
+      --gold: #d4af37;
+      --gold-bright: #f0cf65;
+      --gold-border: rgba(212, 175, 55, 0.55);
+      --green-btn: #154a2d;
+      --green-hover: #1d643d;
+      --white: #ffffff;
+      --muted: #cbd5e1;
+      --blue-link: #60a5fa;
+      --active-green: #22c55e;
+      --warn-amber: #f59e0b;
+      --danger-red: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      padding: 12px;
+    }
+
+    .book-stage {
+      max-width: 700px;
+      margin: 0 auto;
+      perspective: 1800px;
+    }
+
+    .page-card {
+      position: relative;
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.18), transparent 55%),
+        linear-gradient(180deg, #091b3a 0%, #050e20 100%);
+      padding: 16px 18px 20px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      transform-origin: left center;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    }
+
+    .page-card.flipping {
+      transform: rotateY(-75deg);
+      opacity: 0.25;
+    }
+
+    .hidden-view {
+      display: none;
+    }
+
+    .top-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--gold-border);
+    }
+
+    .lms-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .live-clock {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      font-variant-numeric: tabular-nums;
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .welcome-photo-wrap {
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      overflow: hidden;
+      background-color: #050f24;
+      margin-bottom: 12px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
+    }
+
+    .welcome-photo-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .photo-fallback-notice {
+      display: none;
+      padding: 14px;
+      text-align: center;
+      font-size: 0.86rem;
+      color: var(--gold-bright);
+      line-height: 1.5;
+    }
+
+    .quote-section {
+      background: rgba(11, 30, 63, 0.92);
+      border-left: 3px solid var(--gold);
+      border-right: 3px solid var(--gold);
+      border-radius: 10px;
+      padding: 11px 14px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .quote-text {
+      font-size: 0.98rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--gold-bright);
+      margin-bottom: 5px;
+    }
+
+    .director-attribution {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .language-bar-box {
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--gold);
+      border-radius: 11px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .language-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .language-label {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--gold-bright);
+      white-space: nowrap;
+    }
+
+    .language-empty-box {
+      flex: 1 1 auto;
+      min-width: 0;
+      background-color: var(--bg-navy);
+      border: 1.5px solid var(--gold);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--white);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .language-empty-box.empty-placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .language-scroll-drawer {
+      display: none;
+      margin-top: 8px;
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      background-color: #050e20;
+      padding: 8px;
+    }
+
+    .language-scroll-drawer.open {
+      display: block;
+    }
+
+    .lang-search-input {
+      width: 100%;
+      padding: 7px 10px;
+      margin-bottom: 6px;
+      border-radius: 6px;
+      border: 1px solid var(--gold-border);
+      background-color: var(--bg-navy);
+      color: var(--white);
+      font-size: 0.84rem;
+    }
+
+    .language-scroll-list {
+      max-height: 165px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg-navy);
+      display: grid;
+      gap: 4px;
+      padding-right: 4px;
+    }
+
+    .language-scroll-list::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    .language-scroll-list::-webkit-scrollbar-track {
+      background: var(--bg-navy);
+      border-radius: 4px;
+    }
+
+    .language-scroll-list::-webkit-scrollbar-thumb {
+      background-color: var(--gold);
+      border-radius: 4px;
+    }
+
+    .lang-option-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--white);
+      padding: 6px 9px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    .lang-option-btn:hover,
+    .lang-option-btn.selected {
+      background-color: var(--green-btn);
+      border-color: var(--gold);
+    }
+
+    .flip-side-bar {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .flip-page-btn {
+      background: linear-gradient(135deg, #d4af37 0%, #b38b1d 100%);
+      color: #061329;
+      border: 1px solid var(--gold-bright);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.86rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .page-heading {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--gold-bright);
+    }
+
+    .nav-back-btn {
+      background-color: var(--green-btn);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .portal-card {
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 11px;
+    }
+
+    .portal-card-btn {
+      width: 100%;
+      background-color: var(--green-btn);
+      color: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.15s ease;
+    }
+
+    .portal-card-btn:hover {
+      background-color: var(--green-hover);
+    }
+
+    .portal-sub-options {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--gold-border);
+    }
+
+    .portal-sub-options.open {
+      display: grid;
+    }
+
+    .sub-choice-btn {
+      background-color: var(--bg-navy);
+      color: var(--gold-bright);
+      border: 1.5px solid var(--gold);
+      border-radius: 9px;
+      padding: 10px 10px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .sub-choice-btn:hover {
+      background-color: var(--green-btn);
+      color: var(--white);
+    }
+
+    .fourth-status-strip {
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 4px;
+    }
+
+    .status-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .status-label-btn {
+      background-color: var(--gold);
+      color: #061329;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .admission-bar-input {
+      flex: 1 1 200px;
+      min-width: 0;
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1.5px solid var(--gold);
+      background-color: var(--bg-navy);
+      color: var(--white);
+      font-size: 0.88rem;
+    }
+
+    .admission-bar-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .status-result-card {
+      display: none;
+      margin-top: 10px;
+      padding: 11px;
+      border-radius: 10px;
+      background-color: var(--bg-navy);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .status-result-card.show {
+      display: block;
+    }
+
+    .status-result-card.is-active {
+      border: 1.5px solid var(--active-green);
+    }
+
+    .status-result-card.is-inactive {
+      border: 1.5px solid var(--danger-red);
+    }
+
+    .detail-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 11px;
+      padding: 12px;
+      margin-bottom: 12px;
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .detail-box ul {
+      margin-top: 6px;
+      padding-left: 18px;
+    }
+
+    .detail-box li {
+      margin-bottom: 5px;
+    }
+
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .system-select-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: 9px;
+      padding: 9px 11px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .system-select-btn.active {
+      background-color: var(--green-btn);
+      color: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+
+    .tag-done {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #22c55e;
+    }
+
+    .tag-pending {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #f59e0b;
+    }
+
+    .subj-catalog-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--bg-navy);
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      padding: 7px 10px;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+    }
+
+    .badge-compulsory {
+      background-color: rgba(34, 197, 94, 0.18);
+      color: #4ade80;
+      border: 1px solid #22c55e;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .badge-optional {
+      background-color: rgba(240, 207, 101, 0.16);
+      color: #f0cf65;
+      border: 1px solid #d4af37;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .stream-btn-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+
+    .stream-pill-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .stream-pill-btn.active {
+      background-color: var(--green-btn);
+      color: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+
+    .opt-subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 6px;
+      margin: 8px 0;
+    }
+
+    .opt-check-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-navy);
+      border: 1px solid var(--gold-border);
+      border-radius: 7px;
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .course-main-stack {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .course-opt-btn {
+      width: 100%;
+      background-color: var(--green-btn);
+      color: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .course-opt-btn:hover,
+    .course-opt-btn.active {
+      background-color: var(--green-hover);
+      border-color: var(--gold-bright);
+    }
+
+    .type-pill-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+
+    .type-pill-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .type-pill-btn.active {
+      background-color: var(--gold);
+      color: #061329;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--gold);
+      background-color: var(--bg-navy);
+      color: var(--white);
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .small-gold-btn {
+      background-color: var(--gold);
+      color: #061329;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .small-gold-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .calc-summary-box {
+      margin-top: 10px;
+      background-color: #050e20;
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 11px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .upload-status-pill {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 5px 10px;
+      border-radius: 7px;
+      background-color: var(--bg-navy);
+      border: 1px solid var(--gold-border);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+    }
+
+    .science-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 8, 20, 0.78);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .science-modal-backdrop.open {
+      display: flex;
+    }
+
+    .science-modal-box {
+      width: 100%;
+      max-width: 380px;
+      background: var(--bg-card);
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .science-choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .admin-tab-btn {
+      background-color: var(--bg-navy);
+      color: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .admin-tab-btn.active {
+      background-color: var(--gold);
+      color: #061329;
+    }
+
+    .backup-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+
+    .backup-table th,
+    .backup-table td {
+      padding: 6px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="book-stage">
+    <section id="welcomePage" class="page-card" aria-label="Page 1 Welcome Page">
+      <div class="top-meta-row">
+        <span class="lms-badge" data-i18n="page1Badge">Page 1 • Welcome Page</span>
+        <span id="liveClock" class="live-clock">--:--:--</span>
+      </div>
+
+      <div class="welcome-photo-wrap">
+        <img
+          id="welcomePhotoImg"
+          class="welcome-photo-img"
+          src="IMG-20261120-WA2906_2.jpg"
+          alt="Sir Haroon Javaid Hashmi Academy & College — Welcome"
+        />
+        <div id="photoFallbackNotice" class="photo-fallback-notice">
+          Place <strong>IMG-20261120-WA2906_2.jpg</strong> in the same folder as <strong>index.html</strong> to display the Welcome Page photo.
+        </div>
+      </div>
+
+      <div class="quote-section">
+        <p class="quote-text">“A man can be destroyed but not defeated”</p>
+        <p class="director-attribution">Director Haroon Javaid Hashmi</p>
+      </div>
+
+      <div class="language-bar-box">
+        <div class="language-row">
+          <span class="language-label" data-i18n="languageLabel">Language:</span>
+          <button
+            type="button"
+            id="languageEmptyBox"
+            class="language-empty-box empty-placeholder"
+            aria-expanded="false"
+          >
+            <span id="selectedLanguageText">Select Language (Worldwide)</span>
+            <span>▼</span>
+          </button>
+        </div>
+
+        <div id="languageScrollDrawer" class="language-scroll-drawer">
+          <input
+            type="text"
+            id="languageSearchInput"
+            class="lang-search-input"
+            placeholder="Search any language in the world..."
+          />
+          <div id="languageScrollList" class="language-scroll-list" role="listbox"></div>
+        </div>
+      </div>
+
+      <div class="flip-side-bar">
+        <button type="button" id="flipToPortalsBtn" class="flip-page-btn" data-i18n="flipPageBtn">
+          Flip Page ➡️
+        </button>
+      </div>
+    </section>
+
+    <section id="portalPage" class="page-card hidden-view" aria-label="Page 2 Portal Page">
+      <div class="top-meta-row">
+        <h2 class="page-heading" data-i18n="portalPageHeading">Portal Page</h2>
+        <button type="button" class="nav-back-btn" data-go-page="welcome-page" data-i18n="backWelcomeBtn">
+          ⬅️ Welcome Page
+        </button>
+      </div>
+
+      <div class="portal-card">
+        <button type="button" id="pakPortalToggleBtn" class="portal-card-btn" data-i18n="pakPortalBtn">
+          1. Pakistani Students Portal
+        </button>
+        <div id="pakSubOptions" class="portal-sub-options">
+          <button type="button" class="sub-choice-btn" data-open-page3="pakistani" data-entry-type="Classes" data-i18n="classesOpt">
+            1. Classes
+          </button>
+          <button type="button" class="sub-choice-btn" data-open-page3="pakistani" data-entry-type="Courses" data-i18n="coursesOpt">
+            2. Courses
+          </button>
+        </div>
+      </div>
+
+      <div class="portal-card">
+        <button type="button" id="intlPortalToggleBtn" class="portal-card-btn" data-i18n="intlPortalBtn">
+          2. International Students Portal
+        </button>
+        <div id="intlSubOptions" class="portal-sub-options">
+          <button type="button" class="sub-choice-btn" data-open-page3="international" data-entry-type="Classes" data-i18n="classesOpt">
+            1. Classes
+          </button>
+          <button type="button" class="sub-choice-btn" data-open-page3="international" data-entry-type="Courses" data-i18n="coursesOpt">
+            2. Courses
+          </button>
+        </div>
+      </div>
+
+      <div class="portal-card">
+        <button type="button" class="portal-card-btn" data-go-page="admin-portal" data-i18n="adminPortalBtn">
+          3. Admin Portal
+        </button>
+      </div>
+
+      <div class="fourth-status-strip">
+        <div class="status-bar-row">
+          <button type="button" id="checkStatusTriggerBtn" class="status-label-btn" data-i18n="checkAdmStatusLabel">
+            Check Admission Status
+          </button>
+          <input
+            id="admissionNumberBar"
+            class="admission-bar-input"
+            type="text"
+            placeholder="Write Admission Number & Press Enter (e.g. SHJ-101 or SHJ-104)"
+            aria-label="Admission Number"
+          />
+        </div>
+        <div id="admissionStatusResultCard" class="status-result-card"></div>
+      </div>
+    </section>
+
+    <section id="subViewPage" class="page-card hidden-view" aria-live="polite">
+      <div class="top-meta-row">
+        <h2 id="subViewTitle" class="page-heading">Page 3</h2>
+        <button type="button" class="nav-back-btn" data-go-page="portal-page" data-i18n="backPortalPageBtn">
+          ⬅️ Portal Page
+        </button>
+      </div>
+      <div id="subViewBody"></div>
+    </section>
+  </div>
+
+  <div id="scienceBranchModal" class="science-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="sciModalTitle">
+    <div class="science-modal-box">
+      <h3 id="sciModalTitle" style="color:#f0cf65;font-size:1rem;font-weight:800;">Science Stream Selection</h3>
+      <p style="color:#cbd5e1;font-size:0.86rem;margin-top:6px;">
+        Choose one branch to continue in Science:
+      </p>
+      <div class="science-choice-grid">
+        <button type="button" id="pickComputerScienceBtn" class="portal-card-btn">Computer Science</button>
+        <button type="button" id="pickBiologyBtn" class="portal-card-btn">Biology</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const BACKUP_STORAGE_KEY = "SHJ_ADMIN_STRONG_BACKUP_FINAL_V4";
+      const MAX_SIZE = 2 * 1024 * 1024;
+
+      const clockEl = document.getElementById("liveClock");
+      const welcomePhotoImg = document.getElementById("welcomePhotoImg");
+      const photoFallbackNotice = document.getElementById("photoFallbackNotice");
+
+      const welcomePage = document.getElementById("welcomePage");
+      const portalPage = document.getElementById("portalPage");
+      const subViewPage = document.getElementById("subViewPage");
+      const subViewTitle = document.getElementById("subViewTitle");
+      const subViewBody = document.getElementById("subViewBody");
+
+      const languageEmptyBox = document.getElementById("languageEmptyBox");
+      const selectedLanguageText = document.getElementById("selectedLanguageText");
+      const languageScrollDrawer = document.getElementById("languageScrollDrawer");
+      const languageSearchInput = document.getElementById("languageSearchInput");
+      const languageScrollList = document.getElementById("languageScrollList");
+
+      const flipToPortalsBtn = document.getElementById("flipToPortalsBtn");
+      const pakPortalToggleBtn = document.getElementById("pakPortalToggleBtn");
+      const pakSubOptions = document.getElementById("pakSubOptions");
+      const intlPortalToggleBtn = document.getElementById("intlPortalToggleBtn");
+      const intlSubOptions = document.getElementById("intlSubOptions");
+
+      const checkStatusTriggerBtn = document.getElementById("checkStatusTriggerBtn");
+      const admissionNumberBar = document.getElementById("admissionNumberBar");
+      const admissionStatusResultCard = document.getElementById("admissionStatusResultCard");
+
+      const scienceModal = document.getElementById("scienceBranchModal");
+      const pickComputerScienceBtn = document.getElementById("pickComputerScienceBtn");
+      const pickBiologyBtn = document.getElementById("pickBiologyBtn");
+
+      let onScienceBranchSelected = null;
+
+      const SafeUploadManager = {
+        isUploaded: false,
+        pendingFileData: null,
+
+        checkFile(file) {
+          if (!file) {
+            alert("Please select a file first.");
+            return false;
+          }
+          if (file.size > MAX_SIZE) {
+            alert("File is too large. Please select a file less than 2 MB.");
+            return false;
+          }
+          return true;
+        },
+
+        showStatus(statusEl, state, customText) {
+          if (!statusEl) return;
+          if (customText) {
+            statusEl.innerText = customText;
+          } else if (state === "uploading") {
+            statusEl.innerText = "Uploading... Please wait";
+          } else if (state === "uploaded") {
+            statusEl.innerText = "Uploaded - Now you can press Save";
+          } else if (state === "failed") {
+            statusEl.innerText = "Upload Failed - Try again on strong Internet";
+          } else {
+            statusEl.innerText = "Waiting...";
+          }
+        },
+
+        async sendToServer(file) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve({
+                name: file.name,
+                sizeBytes: file.size,
+                sizeKB: `${Math.max(1, Math.round(file.size / 1024))} KB`,
+                type: file.type || "application/octet-stream",
+                uploadedAt: new Date().toLocaleString()
+              });
+            }, 650);
+          });
+        },
+
+        async uploadWithRetry(file, options = {}) {
+          const tries = options.tries || 3;
+          const commitBtn = options.commitBtn || null;
+          const statusEl = options.statusEl || null;
+
+          this.isUploaded = false;
+          this.pendingFileData = null;
 if (commitBtn) commitBtn.disabled = true;
 
           if (!this.checkFile(file)) {
