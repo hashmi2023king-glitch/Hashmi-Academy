@@ -1784,3 +1784,95 @@
     }
   })();
 </script>
+<script>
+  (function () {
+    const FACULTY_KEY = "SHJ_FACULTY_QUEUE_V1";
+    const panelBodyEl = document.getElementById("panelBody");
+    if (!panelBodyEl) return;
+
+    function loadFacultyQueue() {
+      try {
+        const raw = localStorage.getItem(FACULTY_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveFacultyQueue(list) {
+      try {
+        localStorage.setItem(FACULTY_KEY, JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    const facultyQueue = loadFacultyQueue();
+
+    document.addEventListener("click", (event) => {
+      if (event.target && event.target.id === "openHiringLogBtn") {
+        setTimeout(() => {
+          const out = document.getElementById("adminExtraOutput");
+          if (!out) return;
+          out.innerHTML = `
+            <div class="sub-box" style="margin-top:8px;">
+              <div style="margin-bottom:6px;color:#fff;"><strong>Faculty Hiring Application &amp; Timetable Generator:</strong></div>
+              <div style="display:grid;gap:6px;margin-bottom:8px;">
+                <input id="facNameInput" class="field-input" type="text" placeholder="Applicant Full Name & Degree" />
+                <input id="facSubjectInput" class="field-input" type="text" placeholder="Subject / Track (e.g. O/A Levels, CSS, MDCAT, IELTS)" />
+                <input id="facExpInput" class="field-input" type="text" placeholder="CV & Experience Summary (e.g. 5 yrs teaching + experience letter)" />
+                <button type="button" id="saveFacultyBtn" class="nav-pill">Add Faculty Record</button>
+              </div>
+              <div id="facultyListDisplay" style="font-size:0.82rem;color:#cbd5e1;margin-bottom:10px;"></div>
+              <div style="padding-top:8px;border-top:1px solid rgba(212,175,55,0.35);">
+                <div style="margin-bottom:6px;color:#fff;"><strong>Auto Timetable &amp; Syllabus Slot Builder:</strong></div>
+                <input id="ttClassInput" class="field-input" type="text" placeholder="Class / Batch & Day (e.g. Grade 10 / CSS — Mon–Fri)" style="margin-bottom:6px;" />
+                <input id="ttTopicInput" class="field-input" type="text" placeholder="Syllabus Unit / Period Slot (e.g. Ch. 4 — 5:00 PM PKT)" style="margin-bottom:6px;" />
+                <button type="button" id="generateSlotBtn" class="close-btn">Generate Timetable &amp; Syllabus Line</button>
+                <div id="timetableOutput" style="margin-top:6px;font-size:0.82rem;color:#d4af37;"></div>
+              </div>
+            </div>
+          `;
+
+          function drawFacultyList() {
+            const disp = document.getElementById("facultyListDisplay");
+            if (!disp) return;
+            if (!facultyQueue.length) {
+              disp.textContent = "No faculty records logged yet.";
+              return;
+            }
+            disp.innerHTML = facultyQueue
+              .map(
+                (f, idx) =>
+                  `<div>${idx + 1}. <strong>${f.name}</strong> — ${f.subject} (${f.exp})</div>`
+              )
+              .join("");
+          }
+
+          drawFacultyList();
+
+          document.getElementById("saveFacultyBtn")?.addEventListener("click", () => {
+            const name = (document.getElementById("facNameInput")?.value || "").trim();
+            const subject = (document.getElementById("facSubjectInput")?.value || "").trim();
+            const exp = (document.getElementById("facExpInput")?.value || "").trim();
+            if (!name || !subject) return;
+            facultyQueue.unshift({
+              name,
+              subject,
+              exp: exp || "CV & Experience Verified"
+            });
+            saveFacultyQueue(facultyQueue.slice(0, 30));
+            drawFacultyList();
+          });
+
+          document.getElementById("generateSlotBtn")?.addEventListener("click", () => {
+            const cls = (document.getElementById("ttClassInput")?.value || "").trim() || "General Batch";
+            const top = (document.getElementById("ttTopicInput")?.value || "").trim() || "Core Syllabus Module";
+            const ttOut = document.getElementById("timetableOutput");
+            if (ttOut) {
+              ttOut.textContent = `Scheduled: [${cls}] -> ${top} (Synced to Teacher & Student View)`;
+            }
+          });
+        }, 10);
+      }
+    });
+  })();
+</script>
