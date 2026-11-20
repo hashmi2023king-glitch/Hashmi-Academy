@@ -570,3 +570,162 @@
     });
   })();
 </script>
+<script>
+  (function () {
+    const panelBodyEl = document.getElementById("panelBody");
+    const panelTitleEl = document.getElementById("panelTitle");
+    const panelEl = document.getElementById("dynamicPanel");
+    const updatesCountEl = document.getElementById("updatesCount");
+    if (!panelBodyEl || !panelTitleEl || !panelEl) return;
+
+    const updateQueue = [
+      { id: "u1", text: "Enable Phase 1 Admissions — District Gujrat (Gujrat, Dinga, Kharian, Lalamusa, Sarai Alamgir, Jalalpur Jattan, Gulyana, Daulat Nagar)", status: "Pending" },
+      { id: "u2", text: "Sync DOAB Open Access Book Directory & Curriculum Reference Shelves", status: "Pending" },
+      { id: "u3", text: "Activate International GBP (£) Fee Portal & Remittance Verification Desk", status: "Pending" }
+    ];
+
+    function syncUpdatesBadge() {
+      if (!updatesCountEl) return;
+      const pending = updateQueue.filter((item) => item.status === "Pending").length;
+      updatesCountEl.textContent = String(pending);
+    }
+
+    function renderUpdatesGateway() {
+      panelTitleEl.textContent = "Updates Gateway — OK / Yes vs. No";
+      panelBodyEl.innerHTML = `
+        <p style="margin-bottom:10px;">Approve (<strong>OK / Yes</strong>) or hold (<strong>No</strong>) pending institutional updates:</p>
+        <div id="updatesListWrap" style="display:grid;gap:10px;"></div>
+      `;
+
+      const wrap = document.getElementById("updatesListWrap");
+
+      function drawQueue() {
+        wrap.innerHTML = updateQueue
+          .map(
+            (item, idx) => `
+          <div style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
+            <div style="margin-bottom:8px;">${item.text}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+              <span style="font-size:0.8rem;color:#d4af37;">Status: <strong>${item.status}</strong></span>
+              <div style="display:flex;gap:6px;">
+                <button type="button" class="nav-pill upd-act-btn" data-idx="${idx}" data-val="OK / Yes">OK / Yes</button>
+                <button type="button" class="close-btn upd-act-btn" data-idx="${idx}" data-val="No">No</button>
+              </div>
+            </div>
+          </div>`
+          )
+          .join("");
+
+        wrap.querySelectorAll(".upd-act-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const idx = Number(btn.dataset.idx);
+            updateQueue[idx].status = btn.dataset.val;
+            syncUpdatesBadge();
+            drawQueue();
+          });
+        });
+      }
+
+      drawQueue();
+    }
+
+    function renderReferencePortals() {
+      panelTitleEl.textContent = "Reference Portals & Study Apps";
+      panelBodyEl.innerHTML = `
+        <div style="display:grid;gap:8px;">
+          <a href="https://doabooks.org/" target="_blank" rel="noopener noreferrer" class="action-btn" style="text-decoration:none;display:block;">
+            📚 DOAB — Directory of Open Access Books (111,000+ Peer-Reviewed Books)
+          </a>
+          <div style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
+            <strong>Subject &amp; Exam Study Tools:</strong>
+            <ul class="panel-list">
+              <li>Matric, Intermediate &amp; Cambridge O/A Level Past Paper Archive</li>
+              <li>CSS, PMS &amp; Tehsildar General Knowledge &amp; Current Affairs Digest</li>
+              <li>MDCAT &amp; ECAT Concept Bank + Timed Practice Quizzes</li>
+              <li>IELTS, Urdu, Spanish &amp; German Vocabulary &amp; Pronunciation Lab</li>
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGlobalComparison() {
+      panelTitleEl.textContent = "USA / UK / Europe — Curriculum & Subjects Comparison";
+      const tracks = {
+        UK: "<strong>United Kingdom (UK):</strong> Key Stages 1–4, GCSE / IGCSE (Grades 9–10), A Levels (Grades 11–12), specialized subject depth (3–4 A Level subjects), UCAS university admission.",
+        USA: "<strong>United States (USA):</strong> Elementary, Middle &amp; High School (Grades 9–12), broad credit-based curriculum, GPA tracking, Honors / AP courses, SAT / ACT readiness.",
+        Europe: "<strong>Europe (Bologna / European Track):</strong> National secondary diplomas, International Baccalaureate (IB) options, multilingual instruction, ECTS higher-education credit transfer."
+      };
+
+      panelBodyEl.innerHTML = `
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+          <button type="button" class="nav-pill region-btn active" data-region="UK">UK System</button>
+          <button type="button" class="nav-pill region-btn" data-region="USA">USA System</button>
+          <button type="button" class="nav-pill region-btn" data-region="Europe">Europe System</button>
+        </div>
+        <div id="regionDetailBox" style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;">
+          ${tracks.UK}
+        </div>
+      `;
+
+      const box = document.getElementById("regionDetailBox");
+      panelBodyEl.querySelectorAll(".region-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          panelBodyEl.querySelectorAll(".region-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          box.innerHTML = tracks[btn.dataset.region] || "";
+        });
+      });
+    }
+
+    function renderCoursesAndAds() {
+      panelTitleEl.textContent = "Advertisement + Next Courses";
+      panelBodyEl.innerHTML = `
+        <div style="padding:10px;border:1px solid #d4af37;border-radius:10px;background:#07142b;margin-bottom:10px;">
+          <strong style="color:#d4af37;">Admissions Open — Online &amp; Campus Batches</strong>
+          <ul class="panel-list">
+            <li>School &amp; College: Nursery to Grade 12 (Pakistani Boards &amp; Cambridge O/A Levels)</li>
+            <li>Competitive Exams: CSS, PMS, Tehsildar, MDCAT &amp; ECAT Evening Sessions</li>
+            <li>Global Languages: IELTS, Urdu, Spanish &amp; German Live Classes</li>
+          </ul>
+        </div>
+        <button type="button" id="enrollAlertBtn" class="action-btn">Register Course Interest</button>
+        <div id="enrollStatusMsg" style="margin-top:8px;font-size:0.85rem;color:#d4af37;"></div>
+      `;
+
+      const enrollBtn = document.getElementById("enrollAlertBtn");
+      const statusMsg = document.getElementById("enrollStatusMsg");
+      enrollBtn.addEventListener("click", () => {
+        statusMsg.textContent = "Course inquiry logged. Open Contact / WhatsApp / Location to confirm seat & fee plan.";
+      });
+    }
+
+    function renderContactSection() {
+      panelTitleEl.textContent = "Contact / WhatsApp / Location";
+      panelBodyEl.innerHTML = `
+        <div style="padding:10px;border:1px solid rgba(212,175,55,0.45);border-radius:10px;background:#07142b;display:grid;gap:6px;">
+          <div><strong>Director &amp; Founder:</strong> Sir Haroon Javaid Hashmi</div>
+          <div><strong>Institution:</strong> Sir Haroon Javaid Hashmi Academy &amp; College</div>
+          <div><strong>Phase 1 Hubs:</strong> Gujrat, Dinga, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar</div>
+          <div><strong>Global Desk:</strong> Online International Campus (UK / USA / Europe / Worldwide)</div>
+        </div>
+      `;
+    }
+
+    syncUpdatesBadge();
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-target]");
+      if (!trigger) return;
+      const target = trigger.dataset.target;
+      setTimeout(() => {
+        if (!panelEl.classList.contains("open")) return;
+        if (target === "updates") renderUpdatesGateway();
+        else if (target === "reference") renderReferencePortals();
+        else if (target === "global-diff") renderGlobalComparison();
+        else if (target === "courses") renderCoursesAndAds();
+        else if (target === "contact") renderContactSection();
+      }, 0);
+    });
+  })();
+</script>
