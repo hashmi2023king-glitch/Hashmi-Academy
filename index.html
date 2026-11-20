@@ -3564,4 +3564,1019 @@
           revStartFormatted: revStart.toLocaleDateString()
         };
       }
-      
+      // 1A. PAKISTANI STUDENTS PORTAL -> CLASSES (ADMISSION FORM)
+      function openPakistaniClassesForm(clickLog) {
+        welcomePage?.classList.add("hidden-view");
+        portalPage?.classList.add("hidden-view");
+        subViewPage?.classList.remove("hidden-view");
+
+        subViewTitle.textContent = "Page 3 — Pakistani Students Portal: Admission Form";
+
+        const state = {
+          studentName: "",
+          email: "",
+          religion: "Muslim",
+          board: "",
+          medium: "",
+          className: "",
+          schoolSystem: "",
+          streamCategory: "",
+          scienceSubBranch: "",
+          optionalSubjects: []
+        };
+
+        subViewBody.innerHTML = `
+          <div class="detail-box">
+            <strong>Click Date Recorded Automatically:</strong> ${clickLog.date} at ${clickLog.time}
+          </div>
+
+          <div class="detail-box">
+            <label class="field-label" for="admStudentNameInput" style="margin-top:0;">Student Full Name</label>
+            <input id="admStudentNameInput" class="field-input" type="text" placeholder="Enter student full name..." />
+
+            <label class="field-label" for="admStudentEmailInput">Student / Parent Email Address (For Login &amp; Password Delivery)</label>
+            <input id="admStudentEmailInput" class="field-input" type="email" placeholder="example@email.com" />
+
+            <label class="field-label" for="admReligionSelect">Religion (Class 3 to Class 8 Islamiat vs Ethics Rule)</label>
+            <select id="admReligionSelect" class="field-input">
+              <option value="Muslim">Muslim (Islamiat &amp; Quran)</option>
+              <option value="Non-Muslim">Non-Muslim (Ethics / اخلاقیات)</option>
+            </select>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">1. Board</span>
+                <span class="step-selected" id="admBoardSelected">Not Selected Yet</span>
+              </div>
+              <button type="button" class="open-win-btn" id="admOpenBoardBtn">Select Board</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">2. Medium</span>
+                <span class="step-selected" id="admMediumSelected">Not Selected Yet</span>
+              </div>
+              <button type="button" class="open-win-btn" id="admOpenMediumBtn">Select Medium</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">3. Class</span>
+                <span class="step-selected" id="admClassSelected">Not Selected Yet</span>
+              </div>
+              <button type="button" class="open-win-btn" id="admOpenClassBtn">Select Class</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">4. School System</span>
+                <span class="step-selected" id="admSystemSelected">Not Selected Yet</span>
+              </div>
+              <button type="button" class="open-win-btn" id="admOpenSystemBtn">Select School System</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">5. Courses / Stream Line</span>
+                <span class="step-selected" id="admStreamSelected">Not Selected Yet</span>
+              </div>
+              <button type="button" class="open-win-btn" id="admOpenStreamBtn">Select Stream / Course</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">6. Subjects (Compulsory Locked &amp; Optional Selection)</span>
+                <span class="step-selected" id="admSubjectsSelected">Click "Open Subjects" to view &amp; choose</span>
+              </div>
+              <button type="button" class="open-win-btn" id="admOpenSubjectsBtn">Open Subjects</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <strong style="color:#f0cf65;">7. Course Type, Revision Session &amp; Fee Plan:</strong>
+
+            <label class="field-label" for="admCourseKindSelect">Course Type (One Time vs Month Wise)</label>
+            <select id="admCourseKindSelect" class="field-input">
+              <option value="Supplementary Exam Course (One Time Fee)">1. Supplementary Exam Course (One Time Fee)</option>
+              <option value="Session Course (One Time Fee)">2. Session Course (One Time Fee)</option>
+              <option value="Regular Course (Month Wise Fee)">Regular Course (Month Wise Fee)</option>
+            </select>
+
+            <label class="field-label" for="admStageAfterSelect">Facility Stage (After 10th &amp; After 12th Only)</label>
+            <select id="admStageAfterSelect" class="field-input">
+              <option value="After 10th">After 10th (Eligible)</option>
+              <option value="After 12th">After 12th (Eligible)</option>
+              <option value="After 9th">After 9th (Not Eligible)</option>
+              <option value="After 11th">After 11th (Not Eligible)</option>
+            </select>
+
+            <label class="field-label" for="admRevSessionSelect">Separate Revision &amp; Test Session (Starts 5 Months Before Exam)</label>
+            <select id="admRevSessionSelect" class="field-input">
+              <option value="1. 9th Revision and Test Session">1. 9th Revision and Test Session (Separate)</option>
+              <option value="2. 10th Revision and Test Session">2. 10th Revision and Test Session (Separate)</option>
+              <option value="3. First Year Revision and Test Session">3. First Year Revision and Test Session (Separate)</option>
+              <option value="4. Second Year Revision and Test Session">4. Second Year Revision and Test Session (Separate)</option>
+            </select>
+
+            <label class="field-label" for="admExamDateInput">Exam Starting Date</label>
+            <input id="admExamDateInput" class="field-input" type="date" value="2027-03-10" />
+
+            <label class="field-label" for="admBaseFeeInput">One Month Base Fee (PKR)</label>
+            <input id="admBaseFeeInput" class="field-input" type="number" min="100" step="100" value="2000" />
+
+            <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+              <input id="admWeight2xCheck" type="checkbox" checked />
+              English &amp; Optional Subjects (5-Subject Base) Weightage = Two Times (2x)
+            </label>
+
+            <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+              <input id="admQuranOneTimeCheck" type="checkbox" checked />
+              Quran Facility (One Time)
+            </label>
+
+            <label class="field-label" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+              <input id="admUrduOneTimeCheck" type="checkbox" checked />
+              Urdu Facility (One Time)
+            </label>
+          </div>
+
+          <div id="admLiveSummaryPanel" class="calc-summary-box"></div>
+          <button type="button" id="admSubmitFinalBtn" class="gold-submit-btn">Submit Admission Form &amp; Generate Admission Number</button>
+          <button type="button" id="admProceedToPayBtn" class="open-win-btn" style="width:100%;margin-top:8px;">Proceed to Fee Payment &amp; Receipt ➡️</button>
+        `;
+
+        function getClassNumber() {
+          const match = (state.className || "").match(/\d+/);
+          return match ? parseInt(match[0], 10) : 9;
+        }
+
+        function getCompulsorySubjects() {
+          const clsNum = getClassNumber();
+          const isPrimary = clsNum >= 3 && clsNum <= 5;
+          const isMiddle = clsNum >= 6 && clsNum <= 8;
+          const isMatric = clsNum === 9 || clsNum === 10;
+          const isInter = clsNum === 11 || clsNum === 12;
+
+          const list = ["English", "Urdu", "Mathematics"];
+
+          if (isPrimary || isMiddle) {
+            list.push(state.religion === "Non-Muslim" ? "Ethics (Non-Muslim Only)" : "Islamiat");
+          }
+
+          if (isPrimary) {
+            list.push(clsNum === 3 ? "General Knowledge" : "General Science");
+            if (clsNum >= 4) list.push("Social Studies");
+            if (state.religion === "Muslim") list.push("Nazra Quran");
+          } else if (isMiddle) {
+            list.push("General Science", "History", "Geography", "Computer Education");
+            if (state.religion === "Muslim") list.push("Tarjuma-tul-Quran");
+          } else if (isMatric) {
+            list.push(state.religion === "Non-Muslim" ? "Ethics" : "Islamiat", "Pakistan Studies");
+            if (state.religion === "Muslim") list.push("Tarjuma-tul-Quran");
+          } else if (isInter) {
+            if (clsNum === 11) {
+              list.push(state.religion === "Non-Muslim" ? "Ethics (1st Year)" : "Islamiat (1st Year)");
+            } else {
+              list.push("Pakistan Studies (2nd Year)");
+            }
+            if (state.religion === "Muslim") list.push("Tarjuma-tul-Quran");
+          }
+
+          return list;
+        }
+
+        function getAvailableOptionalPool() {
+          if (state.streamCategory === "Science") {
+            return streamOptionsMap.Science[state.scienceSubBranch] || streamOptionsMap.Science["Computer Science"];
+          }
+          if (state.streamCategory && streamOptionsMap[state.streamCategory]) {
+            return streamOptionsMap[state.streamCategory];
+          }
+          return ["General Science", "Computer / ICT", "Art & Drawing", "Arabic / Persian / Punjabi", "Economics", "Home Economics"];
+        }
+
+        function refreshAdmissionSummary() {
+          state.studentName = document.getElementById("admStudentNameInput")?.value.trim() || "";
+          state.email = document.getElementById("admStudentEmailInput")?.value.trim() || "";
+          state.religion = document.getElementById("admReligionSelect")?.value || "Muslim";
+
+          document.getElementById("admBoardSelected").textContent = state.board ? `Selected: ${state.board}` : "Not Selected Yet";
+          document.getElementById("admMediumSelected").textContent = state.medium ? `Selected: ${state.medium}` : "Not Selected Yet";
+          document.getElementById("admClassSelected").textContent = state.className ? `Selected: ${state.className}` : "Not Selected Yet";
+          document.getElementById("admSystemSelected").textContent = state.schoolSystem ? `Selected: ${state.schoolSystem}` : "Not Selected Yet";
+
+          const streamLabel = state.streamCategory === "Science"
+            ? `${state.streamCategory} (${state.scienceSubBranch || "Branch Pending"})`
+            : state.streamCategory;
+
+          document.getElementById("admStreamSelected").textContent = streamLabel ? `Selected: ${streamLabel}` : "Not Selected Yet";
+
+          const compList = getCompulsorySubjects();
+          document.getElementById("admSubjectsSelected").textContent =
+            `Compulsory Locked: ${compList.length} | Optional Chosen: ${state.optionalSubjects.length}`;
+
+          const courseKind = document.getElementById("admCourseKindSelect")?.value || "Supplementary Exam Course (One Time Fee)";
+          const stageAfter = document.getElementById("admStageAfterSelect")?.value || "After 10th";
+          const revSession = document.getElementById("admRevSessionSelect")?.value || "1. 9th Revision and Test Session";
+          const examDateVal = document.getElementById("admExamDateInput")?.value || "2027-03-10";
+          const baseFee = Math.max(100, Number(document.getElementById("admBaseFeeInput")?.value || 2000));
+          const twoTimesWeight = Boolean(document.getElementById("admWeight2xCheck")?.checked);
+          const quranOneTime = Boolean(document.getElementById("admQuranOneTimeCheck")?.checked);
+          const urduOneTime = Boolean(document.getElementById("admUrduOneTimeCheck")?.checked);
+
+          const subjCount = Math.max(1, state.optionalSubjects.length || 1);
+          const weightMult = twoTimesWeight ? 2 : 1;
+          const isOneTime = courseKind.includes("One Time Fee");
+          const threeMonthFee = subjCount * baseFee * 3 * weightMult;
+          const wholeSessionFee = Math.round(baseFee * (5 * 1.5) * subjCount * weightMult);
+          const extrasOneTime = (quranOneTime ? Math.round(baseFee * 0.5) : 0) + (urduOneTime ? Math.round(baseFee * 0.5) : 0);
+          const totalPayable = isOneTime ? (wholeSessionFee + extrasOneTime) : (threeMonthFee + extrasOneTime);
+
+          const timeline = computeBoardTimeline(state.board || "Punjab Board", examDateVal);
+          const eligibleStage = stageAfter === "After 10th" || stageAfter === "After 12th";
+
+          document.getElementById("admLiveSummaryPanel").innerHTML = `
+            <div style="color:#f0cf65;font-weight:800;margin-bottom:6px;">Complete Admission Form Summary</div>
+            <div><strong>Student Name:</strong> ${state.studentName || "Not Entered"} (${state.religion})</div>
+            <div><strong>1. Board:</strong> ${state.board || "—"}</div>
+            <div><strong>2. Medium:</strong> ${state.medium || "—"}</div>
+            <div><strong>3. Class:</strong> ${state.className || "—"}</div>
+            <div><strong>4. School System:</strong> ${state.schoolSystem || "—"}</div>
+            <div><strong>5. Courses / Stream Line:</strong> ${streamLabel || "—"}</div>
+            <div><strong>Locked Compulsory Subjects:</strong> ${compList.join(", ")}</div>
+            <div><strong>Chosen Optional Subjects:</strong> ${state.optionalSubjects.length ? state.optionalSubjects.join(", ") : "None Selected Yet"}</div>
+            <hr style="border:none;border-top:1px solid rgba(212,175,55,0.3);margin:7px 0;" />
+            <div><strong>Stage Facility:</strong> <span style="color:${eligibleStage ? "#22c55e" : "#f87171"};font-weight:800;">${stageAfter}</span> (${eligibleStage ? "Eligible" : "Not Eligible After 9th/11th"})</div>
+            <div><strong>Revision Session:</strong> ${revSession} — Starts <strong>${timeline.revStartFormatted}</strong> (Exam: <strong>${timeline.examDateFormatted}</strong>)</div>
+            <div><strong>Official Board Update:</strong> ${timeline.feed.board} — <em>${timeline.feed.officialUpdate}</em></div>
+            <div style="margin-top:6px;color:#f0cf65;font-size:0.92rem;font-weight:800;">
+              Total Calculated Fee (${courseKind}): PKR ${totalPayable.toLocaleString()}
+            </div>
+          `;
+          return totalPayable;
+        }
+
+        document.getElementById("admOpenBoardBtn")?.addEventListener("click", () => {
+          openPopup("1. Select Board", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            boardsList.forEach((b) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.board === b ? "active" : ""}`;
+              btn.textContent = b;
+              btn.addEventListener("click", () => {
+                state.board = b;
+                const feed = officialBoardFeeds[b];
+                const examInput = document.getElementById("admExamDateInput");
+                if (feed && examInput) examInput.value = feed.examStartDate;
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        document.getElementById("admOpenMediumBtn")?.addEventListener("click", () => {
+          openPopup("2. Select Medium", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            mediumsList.forEach((m) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.medium === m ? "active" : ""}`;
+              btn.textContent = m;
+              btn.addEventListener("click", () => {
+                state.medium = m;
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        document.getElementById("admOpenClassBtn")?.addEventListener("click", () => {
+          openPopup("3. Select Class", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            classesList.forEach((c) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.className === c ? "active" : ""}`;
+              btn.textContent = c;
+              btn.addEventListener("click", () => {
+                state.className = c;
+                state.optionalSubjects = [];
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        document.getElementById("admOpenSystemBtn")?.addEventListener("click", () => {
+          openPopup("4. Select School System", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            schoolSystemsList.forEach((sys) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.schoolSystem === sys ? "active" : ""}`;
+              btn.textContent = sys;
+              btn.addEventListener("click", () => {
+                state.schoolSystem = sys;
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        document.getElementById("admOpenStreamBtn")?.addEventListener("click", () => {
+          openPopup("5. Courses / Stream Line", (container) => {
+            const mainGrid = document.createElement("div");
+            mainGrid.className = "choice-grid";
+            const branchHolder = document.createElement("div");
+            branchHolder.style.marginTop = "12px";
+
+            function renderScienceSubChoice() {
+              branchHolder.innerHTML = `
+                <div class="field-label">Science Branch — Choose One:</div>
+                <div class="choice-grid">
+                  <button type="button" class="choice-btn ${state.scienceSubBranch === "Computer Science" ? "active" : ""}" id="admSciCompBtn">Computer Science</button>
+                  <button type="button" class="choice-btn ${state.scienceSubBranch === "Biology Science" ? "active" : ""}" id="admSciBioBtn">Biology Science</button>
+                </div>
+              `;
+              branchHolder.querySelector("#admSciCompBtn").addEventListener("click", () => {
+                state.streamCategory = "Science";
+                state.scienceSubBranch = "Computer Science";
+                state.optionalSubjects = [];
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              branchHolder.querySelector("#admSciBioBtn").addEventListener("click", () => {
+                state.streamCategory = "Science";
+                state.scienceSubBranch = "Biology Science";
+                state.optionalSubjects = [];
+                refreshAdmissionSummary();
+                closePopup();
+              });
+            }
+
+            ["Arts", "Science", "Commerce", "Course"].forEach((cat) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.streamCategory === cat ? "active" : ""}`;
+              btn.textContent = cat;
+              btn.addEventListener("click", () => {
+                if (cat === "Science") {
+                  state.streamCategory = "Science";
+                  renderScienceSubChoice();
+                } else {
+                  state.streamCategory = cat;
+                  state.scienceSubBranch = "";
+                  state.optionalSubjects = [];
+                  refreshAdmissionSummary();
+                  closePopup();
+                }
+              });
+              mainGrid.appendChild(btn);
+            });
+
+            container.appendChild(mainGrid);
+            container.appendChild(branchHolder);
+            if (state.streamCategory === "Science") renderScienceSubChoice();
+          });
+        });
+
+        document.getElementById("admOpenSubjectsBtn")?.addEventListener("click", () => {
+          refreshAdmissionSummary();
+          openPopup("6. Subjects — Compulsory (Locked) & Optional", (container) => {
+            const compList = getCompulsorySubjects();
+            const optPool = getAvailableOptionalPool();
+            const clsNum = getClassNumber();
+
+            const compTitle = document.createElement("div");
+            compTitle.className = "field-label";
+            compTitle.style.marginTop = "0";
+            compTitle.textContent = "Compulsory Subjects (Locked):";
+            container.appendChild(compTitle);
+
+            if (clsNum >= 3 && clsNum <= 8) {
+              const relNote = document.createElement("div");
+              relNote.style.cssText = "font-size:0.8rem;color:#f0cf65;margin-bottom:8px;";
+              relNote.textContent =
+                state.religion === "Non-Muslim"
+                  ? "Class 3–8 Rule: Non-Muslim student selected — Ethics is included."
+                  : "Class 3–8 Rule: Muslim student selected — Ethics is for Non-Muslim students only.";
+              container.appendChild(relNote);
+            }
+
+            compList.forEach((subj) => {
+              const row = document.createElement("div");
+              row.className = "subj-row";
+              row.innerHTML = `<span><strong>${subj}</strong></span><span class="locked-tag">Locked Compulsory</span>`;
+              container.appendChild(row);
+            });
+
+            const optTitle = document.createElement("div");
+            optTitle.className = "field-label";
+            optTitle.textContent = "Optional Subjects (Choose Yourself):";
+            container.appendChild(optTitle);
+
+            optPool.forEach((optName) => {
+              const label = document.createElement("label");
+              label.className = "opt-check-box";
+              const cb = document.createElement("input");
+              cb.type = "checkbox";
+              cb.checked = state.optionalSubjects.includes(optName);
+              cb.addEventListener("change", () => {
+                if (cb.checked) {
+                  if (!state.optionalSubjects.includes(optName)) state.optionalSubjects.push(optName);
+                } else {
+                  state.optionalSubjects = state.optionalSubjects.filter((x) => x !== optName);
+                }
+                refreshAdmissionSummary();
+              });
+              const span = document.createElement("span");
+              span.textContent = optName;
+              label.appendChild(cb);
+              label.appendChild(span);
+              container.appendChild(label);
+            });
+
+            const doneBtn = document.createElement("button");
+            doneBtn.type = "button";
+            doneBtn.className = "gold-submit-btn";
+            doneBtn.textContent = "Save Subject Selection";
+            doneBtn.addEventListener("click", () => {
+              refreshAdmissionSummary();
+              closePopup();
+            });
+            container.appendChild(doneBtn);
+          });
+        });
+
+        [
+          "admStudentNameInput", "admStudentEmailInput", "admReligionSelect",
+          "admCourseKindSelect", "admStageAfterSelect", "admRevSessionSelect",
+          "admExamDateInput", "admBaseFeeInput", "admWeight2xCheck",
+          "admQuranOneTimeCheck", "admUrduOneTimeCheck"
+        ].forEach((id) => {
+          const el = document.getElementById(id);
+          el?.addEventListener("input", refreshAdmissionSummary);
+          el?.addEventListener("change", refreshAdmissionSummary);
+        });
+
+        let lastGeneratedPakAdm = "";
+
+        document.getElementById("admSubmitFinalBtn")?.addEventListener("click", () => {
+          const totalFee = refreshAdmissionSummary();
+          if (!state.studentName || !state.board || !state.medium || !state.className || !state.schoolSystem) {
+            alert("Please complete Student Name, Board, Medium, Class, and School System first.");
+            return;
+          }
+          const newAdmNo = `SHJ-${105 + adminBackupState.records.length}`;
+          lastGeneratedPakAdm = newAdmNo;
+          adminBackupState.records.unshift({
+            admissionNo: newAdmNo,
+            portal: "Pakistani Students Portal",
+            studentName: state.studentName,
+            email: state.email || "student@example.com",
+            loginId: `pk_${newAdmNo.toLowerCase().replace("-", "")}`,
+            password: `SHJ@${Math.floor(1000 + Math.random() * 9000)}`,
+            status: "Inactive",
+            inactiveReason: "Fee Verification Pending",
+            feeTotal: `PKR ${totalFee.toLocaleString()}`,
+            feePaid: "PKR 0",
+            feeDues: `PKR ${totalFee.toLocaleString()}`,
+            receiptNo: "PENDING"
+          });
+          recordAdminChange(`Submitted Pakistani Admission Form for ${state.studentName} (${newAdmNo}) — ${state.board}, ${state.className}.`);
+          alert(`Admission Form Submitted!\nAdmission Number: ${newAdmNo}\nProceed to Fee Payment to activate your account.`);
+        });
+
+        document.getElementById("admProceedToPayBtn")?.addEventListener("click", () => {
+          const totalFee = refreshAdmissionSummary();
+          openPaymentWorkflowView("pakistani", clickLog, {
+            admissionNo: lastGeneratedPakAdm,
+            studentName: state.studentName,
+            amount: totalFee
+          });
+        });
+
+        refreshAdmissionSummary();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // 1B. PAKISTANI STUDENTS PORTAL -> COURSES
+      function openPakistaniCoursesWindow(clickLog) {
+        welcomePage?.classList.add("hidden-view");
+        portalPage?.classList.add("hidden-view");
+        subViewPage?.classList.remove("hidden-view");
+
+        subViewTitle.textContent = "Page 3 — Pakistani Portal: Courses";
+        subViewBody.innerHTML = `
+          <div class="detail-box">
+            <strong>Click Recorded:</strong> ${clickLog.date} (${clickLog.time}) | <strong>Portal 1 -> Option 2: Courses</strong>
+          </div>
+
+          <div class="course-main-stack">
+            <button type="button" class="course-opt-btn active" data-course-win="competitive">
+              1. Competitive Examinations Courses
+            </button>
+            <button type="button" class="course-opt-btn" data-course-win="languages">
+              2. Language Courses
+            </button>
+            <button type="button" class="course-opt-btn" data-course-win="section">
+              3. Section Courses
+            </button>
+          </div>
+
+          <div id="coursesSubWindow" class="detail-box"></div>
+        `;
+
+        const subWin = document.getElementById("coursesSubWindow");
+
+        function renderCompetitiveWindow() {
+          if (!subWin) return;
+          subWin.innerHTML = `
+            <div style="color:#f0cf65;font-weight:800;font-size:0.95rem;margin-bottom:6px;">
+              Competitive Examinations Courses Window
+            </div>
+            <label class="field-label" for="compCourseSelect">Select Competitive Examination Course</label>
+            <select id="compCourseSelect" class="field-input">
+              <option value="CSS / PMS Preparation Course">CSS / PMS Preparation Course</option>
+              <option value="MDCAT / ECAT Entry Test Course">MDCAT / ECAT Entry Test Course</option>
+              <option value="One-Paper MCQs / PPSC / FPSC Batch">One-Paper MCQs / PPSC / FPSC Batch</option>
+            </select>
+            <button type="button" id="openCompCourseBtn" class="small-gold-btn">Open Competitive Course</button>
+            <div id="compCourseMsg" class="calc-summary-box" style="display:none;"></div>
+          `;
+          document.getElementById("openCompCourseBtn")?.addEventListener("click", () => {
+            const cName = document.getElementById("compCourseSelect")?.value || "";
+            const msg = document.getElementById("compCourseMsg");
+            if (msg) {
+              msg.style.display = "block";
+              msg.innerHTML = `<strong>Opened:</strong> ${cName}`;
+            }
+          });
+        }
+
+        function renderLanguagesWindow() {
+          if (!subWin) return;
+          const langs = ["English", "Urdu", "Arabic", "French", "German", "Chinese", "Turkish", "Persian", "Punjabi", "Sindhi", "Pashto", "Balochi"];
+          let selectedType = "Spoken";
+
+          subWin.innerHTML = `
+            <div style="color:#f0cf65;font-weight:800;font-size:0.95rem;margin-bottom:6px;">
+              Languages Window — Spoken, Academic &amp; General
+            </div>
+            <label class="field-label" for="langSelectBox">Choose Language</label>
+            <select id="langSelectBox" class="field-input">
+              ${langs.map((l) => `<option value="${l}">${l}</option>`).join("")}
+            </select>
+
+            <div class="field-label">Select Type (1. Spoken • 2. Academic • 3. General)</div>
+            <div class="type-pill-row">
+              <button type="button" class="type-pill-btn active" data-ltype="Spoken">1. Spoken</button>
+              <button type="button" class="type-pill-btn" data-ltype="Academic">2. Academic</button>
+              <button type="button" class="type-pill-btn" data-ltype="General">3. General</button>
+            </div>
+
+            <div id="langInfoBox" class="calc-summary-box"></div>
+
+            <div class="calc-summary-box" style="margin-top:10px;">
+              <strong style="color:#f0cf65;">Practice Test:</strong>
+              <label class="field-label" for="practiceTestInput">Write a sample response for your Practice Test</label>
+              <input id="practiceTestInput" class="field-input" type="text" placeholder="Enter your practice test answer..." />
+              <button type="button" id="runPracticeTestBtn" class="small-gold-btn">Submit Practice Test</button>
+              <div id="practiceTestResult" style="margin-top:8px;font-weight:700;color:#22c55e;"></div>
+            </div>
+          `;
+
+          const langBox = document.getElementById("langSelectBox");
+          const infoBox = document.getElementById("langInfoBox");
+
+          function refreshLangBox() {
+            const chosen = langBox?.value || "English";
+            if (!infoBox) return;
+            infoBox.innerHTML = `
+              <div><strong>Language:</strong> ${chosen} | <strong>Type:</strong> ${selectedType}</div>
+              <div><strong>Classes Available:</strong> Spoken Classes, Academic Classes &amp; General Classes</div>
+              <div><strong>Language Facilities:</strong> Guided instruction, study resources, and Practice Test included.</div>
+            `;
+          }
+
+          refreshLangBox();
+          langBox?.addEventListener("change", refreshLangBox);
+
+          subWin.querySelectorAll(".type-pill-btn").forEach((b) => {
+            b.addEventListener("click", () => {
+              subWin.querySelectorAll(".type-pill-btn").forEach((x) => x.classList.remove("active"));
+              b.classList.add("active");
+              selectedType = b.dataset.ltype || "Spoken";
+              refreshLangBox();
+            });
+          });
+
+          document.getElementById("runPracticeTestBtn")?.addEventListener("click", () => {
+            const val = (document.getElementById("practiceTestInput")?.value || "").trim();
+            const res = document.getElementById("practiceTestResult");
+            if (!res) return;
+            if (!val) {
+              res.style.color = "#f59e0b";
+              res.textContent = "Please enter an answer to submit the Practice Test.";
+              return;
+            }
+            res.style.color = "#22c55e";
+            res.textContent = `Practice Test submitted for ${langBox?.value} (${selectedType}). Status: Completed.`;
+          });
+        }
+
+        function renderSectionCoursesWindow() {
+          if (!subWin) return;
+          const sectionSubjects = [
+            "English", "Urdu", "Mathematics", "Physics", "Chemistry", "Biology",
+            "Computer Science", "Islamiat", "Ethics", "Pakistan Studies",
+            "Tarjuma-tul-Quran", "Principles of Accounting", "Economics", "Civics", "Education"
+          ];
+
+          subWin.innerHTML = `
+            <div style="color:#f0cf65;font-weight:800;font-size:0.95rem;margin-bottom:6px;">
+              Section Courses Window (Subject-Wise Courses)
+            </div>
+            <label class="field-label" for="secChooseInput">Choose &amp; Select Subject Course</label>
+            <select id="secChooseInput" class="field-input">
+              ${sectionSubjects.map((s) => `<option value="${s} Course">${s} Course</option>`).join("")}
+            </select>
+            <button type="button" id="openSecCourseWinBtn" class="small-gold-btn">Open Selected Course Window</button>
+            <div id="secCourseWinBox" class="calc-summary-box" style="display:none;"></div>
+          `;
+          document.getElementById("openSecCourseWinBtn")?.addEventListener("click", () => {
+            const chosen = document.getElementById("secChooseInput")?.value || "";
+            const box = document.getElementById("secCourseWinBox");
+            if (box) {
+              box.style.display = "block";
+              box.innerHTML = `<strong>Course Window Opened:</strong> ${chosen}`;
+            }
+          });
+        }
+
+        renderCompetitiveWindow();
+
+        subViewBody.querySelectorAll(".course-opt-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            subViewBody.querySelectorAll(".course-opt-btn").forEach((x) => x.classList.remove("active"));
+            btn.classList.add("active");
+            if (btn.dataset.courseWin === "competitive") renderCompetitiveWindow();
+            else if (btn.dataset.courseWin === "languages") renderLanguagesWindow();
+            else if (btn.dataset.courseWin === "section") renderSectionCoursesWindow();
+          });
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // 2. INTERNATIONAL STUDENTS PORTAL (CLASSES & COURSES ADMISSION FORM)
+      function openInternationalAdmissionForm(entryType, clickLog) {
+        welcomePage?.classList.add("hidden-view");
+        portalPage?.classList.add("hidden-view");
+        subViewPage?.classList.remove("hidden-view");
+
+        subViewTitle.textContent = `Page 3 — International Students Portal (${entryType})`;
+
+        const intlState = {
+          studentName: "",
+          email: "",
+          country: "United Kingdom (UK)",
+          timeZone: "GMT / BST (UK)",
+          curriculum: entryType === "Courses" ? "IELTS & English Proficiency" : "",
+          gradeLevel: "",
+          subjects: [],
+          currency: "GBP",
+          plan: "Monthly 1-on-1 / Small Group"
+        };
+
+        const internationalCurricula = [
+          "Cambridge O Level / IGCSE",
+          "Cambridge AS & A Level",
+          "International School Grades (Grades 1–12)",
+          "IELTS & English Proficiency",
+          "Foreign & Heritage Languages (Urdu, Spanish, German, Arabic)"
+        ];
+
+        const gradeLevelsByCurriculum = {
+          "Cambridge O Level / IGCSE": ["O Level Year 1 / IGCSE 9", "O Level Year 2 / IGCSE 10"],
+          "Cambridge AS & A Level": ["AS Level (Year 12)", "A2 Level (Year 13)"],
+          "International School Grades (Grades 1–12)": [
+            "Grades 1–3 (Foundation)", "Grades 4–6 (Upper Primary)", "Grades 7–8 (Middle)",
+            "Grades 9–10 (Secondary)", "Grades 11–12 (Senior Secondary)"
+          ],
+          "IELTS & English Proficiency": ["Academic IELTS", "General Training IELTS", "Spoken & Business English"],
+          "Foreign & Heritage Languages (Urdu, Spanish, German, Arabic)": [
+            "Beginner (A1)", "Elementary (A2)", "Intermediate (B1)", "Upper-Intermediate (B2)"
+          ]
+        };
+
+        const subjectsByCurriculum = {
+          "Cambridge O Level / IGCSE": [
+            "English Language (1123)", "Mathematics D (4024)", "Additional Mathematics (4037)",
+            "Physics (5054)", "Chemistry (5070)", "Biology (5090)", "Computer Science (2210)",
+            "Accounting (7707)", "Business Studies (7115)", "Economics (2281)", "Pakistan Studies / History"
+          ],
+          "Cambridge AS & A Level": [
+            "Mathematics (9709)", "Physics (9702)", "Chemistry (9701)", "Biology (9700)",
+            "Computer Science (9618)", "Accounting (9706)", "Business (9609)", "Economics (9708)", "English General Paper (8021)"
+          ],
+          "International School Grades (Grades 1–12)": [
+            "English Language & Literature", "Mathematics", "General / Integrated Science",
+            "Social Studies / World History", "Computer & Digital Skills", "Ethics / Moral Education"
+          ],
+          "IELTS & English Proficiency": [
+            "Listening Mastery", "Reading Comprehension", "Academic & Report Writing", "Speaking Fluency & Mock Tests"
+          ],
+          "Foreign & Heritage Languages (Urdu, Spanish, German, Arabic)": [
+            "Urdu (Spoken, Reading & Writing)", "Spanish (Spoken & Grammar)",
+            "German (Spoken & Grammar)", "Arabic (Quranic & Modern Standard)"
+          ]
+        };
+
+        const unitRateByCurrency = {
+          GBP: { symbol: "£", code: "GBP", perSubject: 45 },
+          USD: { symbol: "$", code: "USD", perSubject: 60 },
+          PKR: { symbol: "PKR ", code: "PKR", perSubject: 8500 }
+        };
+
+        subViewBody.innerHTML = `
+          <div class="detail-box">
+            <strong>Click Date Recorded Automatically:</strong> ${clickLog.date} at ${clickLog.time} • <strong>Track:</strong> ${entryType}
+          </div>
+
+          <div class="detail-box">
+            <label class="field-label" for="intlStudentNameInput" style="margin-top:0;">Student Full Name</label>
+            <input id="intlStudentNameInput" class="field-input" type="text" placeholder="Enter international student name..." />
+
+            <label class="field-label" for="intlStudentEmailInput">Student / Guardian Email (For Login &amp; Password)</label>
+            <input id="intlStudentEmailInput" class="field-input" type="email" placeholder="student@international-domain.com" />
+
+            <label class="field-label" for="intlCountrySelect">Country / Region</label>
+            <select id="intlCountrySelect" class="field-input">
+              <option value="United Kingdom (UK)">United Kingdom (UK)</option>
+              <option value="United States (USA)">United States (USA)</option>
+              <option value="Canada">Canada</option>
+              <option value="European Union (Germany / Spain / France)">European Union (Germany / Spain / France)</option>
+              <option value="United Arab Emirates (UAE / Gulf)">United Arab Emirates (UAE / Gulf)</option>
+              <option value="Saudi Arabia (KSA)">Saudi Arabia (KSA)</option>
+              <option value="Australia">Australia</option>
+              <option value="Other International Country">Other International Country</option>
+            </select>
+
+            <label class="field-label" for="intlTimeZoneSelect">Preferred Study Time Zone</label>
+            <select id="intlTimeZoneSelect" class="field-input">
+              <option value="GMT / BST (UK)">GMT / BST (UK)</option>
+              <option value="EST / PST (USA &amp; Canada)">EST / PST (USA &amp; Canada)</option>
+              <option value="CET / CEST (Europe)">CET / CEST (Europe)</option>
+              <option value="GST (UAE) / AST (KSA)">GST (UAE) / AST (KSA)</option>
+              <option value="PKT (Pakistan Standard Time)">PKT (Pakistan Standard Time)</option>
+            </select>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">1. International Curriculum / Programme</span>
+                <span class="step-selected" id="intlCurrSelectedText">Not Selected Yet</span>
+              </div>
+              <button type="button" class="open-win-btn" id="intlOpenCurrBtn">Select Curriculum</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">2. Grade / Level</span>
+                <span class="step-selected" id="intlGradeSelectedText">Not Selected Yet</span>
+              </div>
+              <button type="button" class="open-win-btn" id="intlOpenGradeBtn">Select Grade / Level</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="step-row">
+              <div class="step-label-group">
+                <span class="step-title">3. Subjects &amp; Language Modules</span>
+                <span class="step-selected" id="intlSubjectsSelectedText">0 Modules Selected</span>
+              </div>
+              <button type="button" class="open-win-btn" id="intlOpenSubjectsBtn">Select Subjects</button>
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <label class="field-label" for="intlCurrencySelect" style="margin-top:0;">Billing Currency</label>
+            <select id="intlCurrencySelect" class="field-input">
+              <option value="GBP">British Pound (GBP £)</option>
+              <option value="USD">US Dollar (USD $)</option>
+              <option value="PKR">Pakistani Rupee (PKR)</option>
+            </select>
+
+            <label class="field-label" for="intlPlanSelect">Study Plan</label>
+            <select id="intlPlanSelect" class="field-input">
+              <option value="Monthly 1-on-1 / Small Group">Monthly 1-on-1 / Small Group</option>
+              <option value="Exam &amp; Revision Intensive">Exam &amp; Revision Intensive</option>
+              <option value="Language Fluency Track">Language Fluency Track</option>
+            </select>
+          </div>
+
+          <div id="intlLiveSummaryBox" class="calc-summary-box"></div>
+          <button type="button" id="intlSubmitAdmissionBtn" class="gold-submit-btn">Submit International Admission</button>
+          <button type="button" id="intlProceedToPayBtn" class="open-win-btn" style="width:100%;margin-top:8px;">Proceed to International Payment &amp; Receipt ➡️</button>
+        `;
+
+        function refreshIntlSummary() {
+          intlState.studentName = document.getElementById("intlStudentNameInput")?.value.trim() || "";
+          intlState.email = document.getElementById("intlStudentEmailInput")?.value.trim() || "";
+          intlState.country = document.getElementById("intlCountrySelect")?.value || "United Kingdom (UK)";
+          intlState.timeZone = document.getElementById("intlTimeZoneSelect")?.value || "GMT / BST (UK)";
+          intlState.currency = document.getElementById("intlCurrencySelect")?.value || "GBP";
+          intlState.plan = document.getElementById("intlPlanSelect")?.value || "Monthly 1-on-1 / Small Group";
+
+          document.getElementById("intlCurrSelectedText").textContent =
+            intlState.curriculum ? `Selected: ${intlState.curriculum}` : "Not Selected Yet";
+          document.getElementById("intlGradeSelectedText").textContent =
+            intlState.gradeLevel ? `Selected: ${intlState.gradeLevel}` : "Not Selected Yet";
+          document.getElementById("intlSubjectsSelectedText").textContent =
+            `${intlState.subjects.length} Module(s) Selected`;
+
+          const rateInfo = unitRateByCurrency[intlState.currency] || unitRateByCurrency.GBP;
+          const moduleCount = Math.max(1, intlState.subjects.length);
+          const multiplier = intlState.plan.includes("Intensive") ? 1.35 : 1;
+          const estimatedTotal = Math.round(moduleCount * rateInfo.perSubject * multiplier);
+
+          document.getElementById("intlLiveSummaryBox").innerHTML = `
+            <div style="color:#f0cf65;font-weight:800;margin-bottom:6px;">International Admission Summary</div>
+            <div><strong>Student:</strong> ${intlState.studentName || "Not Entered"} (${intlState.email || "No Email"})</div>
+            <div><strong>Country &amp; Time Zone:</strong> ${intlState.country} • ${intlState.timeZone}</div>
+            <div><strong>1. Curriculum:</strong> ${intlState.curriculum || "—"}</div>
+            <div><strong>2. Grade / Level:</strong> ${intlState.gradeLevel || "—"}</div>
+            <div><strong>3. Selected Subjects / Modules:</strong> ${intlState.subjects.length ? intlState.subjects.join(", ") : "None Selected Yet"}</div>
+            <div><strong>Study Plan:</strong> ${intlState.plan}</div>
+            <div style="margin-top:6px;color:#f0cf65;font-size:0.92rem;font-weight:800;">
+              Estimated Fee: ${rateInfo.symbol}${estimatedTotal.toLocaleString()} ${rateInfo.code}
+            </div>
+          `;
+          return { amount: estimatedTotal, formatted: `${rateInfo.symbol}${estimatedTotal.toLocaleString()} ${rateInfo.code}` };
+        }
+
+        document.getElementById("intlOpenCurrBtn")?.addEventListener("click", () => {
+          openPopup("1. International Curriculum", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            internationalCurricula.forEach((curr) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${intlState.curriculum === curr ? "active" : ""}`;
+              btn.textContent = curr;
+              btn.addEventListener("click", () => {
+                intlState.curriculum = curr;
+                intlState.gradeLevel = "";
+                intlState.subjects = [];
+                refreshIntlSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        document.getElementById("intlOpenGradeBtn")?.addEventListener("click", () => {
+          const grades = gradeLevelsByCurriculum[intlState.curriculum] || [
+            "Grades 1–5", "Grades 6–8", "Grades 9–10 (O Level)", "Grades 11–12 (A Level)", "Language / IELTS Track"
+          ];
+          openPopup("2. Select Grade / Level", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            grades.forEach((g) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${intlState.gradeLevel === g ? "active" : ""}`;
+              btn.textContent = g;
+              btn.addEventListener("click", () => {
+                intlState.gradeLevel = g;
+                refreshIntlSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        document.getElementById("intlOpenSubjectsBtn")?.addEventListener("click", () => {
+          const pool = subjectsByCurriculum[intlState.curriculum] || [
+            "English", "Mathematics", "Science", "Computer Science", "IELTS Preparation", "Language Course"
+          ];
+          openPopup("3. Select International Subjects / Modules", (container) => {
+            pool.forEach((subj) => {
+              const label = document.createElement("label");
+              label.className = "opt-check-box";
+              const cb = document.createElement("input");
+              cb.type = "checkbox";
+              cb.checked = intlState.subjects.includes(subj);
+              cb.addEventListener("change", () => {
+                if (cb.checked) {
+                  if (!intlState.subjects.includes(subj)) intlState.subjects.push(subj);
+                } else {
+                  intlState.subjects = intlState.subjects.filter((x) => x !== subj);
+                }
+                refreshIntlSummary();
+              });
+              const span = document.createElement("span");
+              span.textContent = subj;
+              label.appendChild(cb);
+              label.appendChild(span);
+              container.appendChild(label);
+            });
+
+            const saveBtn = document.createElement("button");
+            saveBtn.type = "button";
+            saveBtn.className = "gold-submit-btn";
+            saveBtn.textContent = "Save Selected Modules";
+            saveBtn.addEventListener("click", () => {
+              refreshIntlSummary();
+              closePopup();
+            });
+            container.appendChild(saveBtn);
+          });
+        });
+
+        [
+          "intlStudentNameInput", "intlStudentEmailInput", "intlCountrySelect",
+          "intlTimeZoneSelect", "intlCurrencySelect", "intlPlanSelect"
+        ].forEach((id) => {
+          const el = document.getElementById(id);
+          el?.addEventListener("input", refreshIntlSummary);
+          el?.addEventListener("change", refreshIntlSummary);
+        });
+
+        let lastGeneratedIntlAdm = "";
+
+        document.getElementById("intlSubmitAdmissionBtn")?.addEventListener("click", () => {
+          const feeInfo = refreshIntlSummary();
+          if (!intlState.studentName || !intlState.curriculum) {
+            alert("Please enter Student Name and select an International Curriculum.");
+            return;
+          }
+          const admId = `INT-${202 + adminBackupState.records.length}`;
+          lastGeneratedIntlAdm = admId;
+          adminBackupState.records.unshift({
+            admissionNo: admId,
+            portal: "International Students Portal",
+            studentName: intlState.studentName,
+            email: intlState.email || "intl@example.com",
+            loginId: `intl_${admId.toLowerCase().replace("-", "")}`,
+            password: `INT@${Math.floor(1000 + Math.random() * 9000)}`,
+            status: "Inactive",
+            inactiveReason: "International Fee / Verification Pending",
+            feeTotal: feeInfo.formatted,
+            feePaid: "0",
+            feeDues: feeInfo.formatted,
+            receiptNo: "PENDING"
+          });
+          recordAdminChange(`Submitted International Admission Form for ${intlState.studentName} (${admId}) — ${intlState.curriculum}.`);
+          alert(`International Admission Recorded!\nAdmission Number: ${admId}\nEstimated Fee: ${feeInfo.formatted}`);
+        });
+
+        document.getElementById("intlProceedToPayBtn")?.addEventListener("click", () => {
+          const feeInfo = refreshIntlSummary();
+          openPaymentWorkflowView("international", clickLog, {
+            admissionNo: lastGeneratedIntlAdm,
+            studentName: intlState.studentName,
+            amount: feeInfo.amount
+          });
+        });
+
+        refreshIntlSummary();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
