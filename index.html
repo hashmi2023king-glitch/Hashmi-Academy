@@ -5307,3 +5307,40 @@
     refreshFacultyPreview();
   })();
 </script>
+<section id="attendanceDiaryAlertSection" class="detail-box" style="margin-top:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+    <strong style="color:#f0cf65;font-size:1rem;">Student Attendance &amp; Daily Diary Alert</strong>
+    <span class="badge-pill">Student • Parent • Director Alert</span>
+  </div>
+
+  <label class="field-label" for="attAdmissionNoInput" style="margin-top:0;">Admission Number (e.g. SHJ-101 or SHJ-201)</label>
+  <input id="attAdmissionNoInput" class="field-input" type="text" placeholder="Enter student Admission Number..." />
+
+  <label class="field-label" for="attStudentNameInput">Student Full Name</label>
+  <input id="attStudentNameInput" class="field-input" type="text" placeholder="Enter student name..." />
+
+  <label class="field-label" for="attClassSubjectInput">Class &amp; Subject</label>
+  <input id="attClassSubjectInput" class="field-input" type="text" placeholder="e.g. Class 9 — Physics / O Level Mathematics..." />
+
+  <label class="field-label" for="attDateInput">Attendance &amp; Diary Date</label>
+  <input id="attDateInput" class="field-input" type="date" />
+
+  <div class="field-label">Attendance Status</div>
+  <div class="type-pill-row" id="attStatusPillGroup">
+    <button type="button" class="type-pill-btn active" data-att-status="Present">Present</button>
+    <button type="button" class="type-pill-btn" data-att-status="Absent">Absent</button>
+    <button type="button" class="type-pill-btn" data-att-status="Late">Late</button>
+    <button type="button" class="type-pill-btn" data-att-status="Leave">Leave</button>
+  </div>
+
+  <label class="field-label" for="dailyDiaryInput">Daily Diary / Homework / Test Note</label>
+  <input id="dailyDiaryInput" class="field-input" type="text" placeholder="e.g. Chapter 4 numericals 1–5; tomorrow short test..." />
+
+  <div id="attDiaryLivePreview" class="calc-summary-box"></div>
+
+  <button type="button" id="dispatchAttDiaryAlertBtn" class="gold-submit-btn">
+    Save Attendance &amp; Send 3-Way Diary Alert
+  </button>
+
+  <div id="attDiaryDispatchedCard" class="calc-summary-box" style="display:none;margin-top:10px;"></div>
+</section>
