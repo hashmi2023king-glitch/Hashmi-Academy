@@ -1283,4 +1283,421 @@
           feed,
           examDateFormatted: examDate.toLocaleDateString(),
           revStartFormatted: r
-          
+          function getClassNumber() {
+          const match = (state.className || "").match(/\d+/);
+          return match ? parseInt(match[0], 10) : 9;
+        }
+
+        function getCompulsorySubjects() {
+          const clsNum = getClassNumber();
+          const isPrimary = clsNum >= 3 && clsNum <= 5;
+          const isMiddle = clsNum >= 6 && clsNum <= 8;
+          const isMatric = clsNum === 9 || clsNum === 10;
+          const isInter = clsNum === 11 || clsNum === 12;
+
+          const list = ["English", "Urdu", "Mathematics"];
+
+          if (isPrimary || isMiddle) {
+            if (state.religion === "Non-Muslim") {
+              list.push("Ethics (Non-Muslim Only)");
+            } else {
+              list.push("Islamiat");
+            }
+          }
+
+          if (isPrimary) {
+            list.push(clsNum === 3 ? "General Knowledge" : "General Science");
+            if (clsNum >= 4) list.push("Social Studies");
+            if (state.religion === "Muslim") list.push("Nazra Quran");
+          } else if (isMiddle) {
+            list.push("General Science", "History", "Geography", "Computer Education");
+            if (state.religion === "Muslim") list.push("Tarjuma-tul-Quran");
+          } else if (isMatric) {
+            list.push(
+              state.religion === "Non-Muslim" ? "Ethics" : "Islamiat",
+              "Pakistan Studies"
+            );
+            if (state.religion === "Muslim") list.push("Tarjuma-tul-Quran");
+          } else if (isInter) {
+            if (clsNum === 11) {
+              list.push(state.religion === "Non-Muslim" ? "Ethics (1st Year)" : "Islamiat (1st Year)");
+            } else {
+              list.push("Pakistan Studies (2nd Year)");
+            }
+            if (state.religion === "Muslim") list.push("Tarjuma-tul-Quran");
+          }
+
+          return list;
+        }
+
+        function getAvailableOptionalPool() {
+          if (state.streamCategory === "Science") {
+            return streamOptionsMap.Science[state.scienceSubBranch] || streamOptionsMap.Science["Computer Science"];
+          }
+          if (state.streamCategory && streamOptionsMap[state.streamCategory]) {
+            return streamOptionsMap[state.streamCategory];
+          }
+          return [
+            "General Science",
+            "Computer / ICT",
+            "Art & Drawing",
+            "Arabic / Persian / Punjabi",
+            "Economics",
+            "Home Economics"
+          ];
+        }
+
+        function refreshAdmissionSummary() {
+          state.studentName = document.getElementById("admStudentNameInput")?.value.trim() || "";
+          state.email = document.getElementById("admStudentEmailInput")?.value.trim() || "";
+          state.religion = document.getElementById("admReligionSelect")?.value || "Muslim";
+
+          document.getElementById("admBoardSelected").textContent = state.board ? `Selected: ${state.board}` : "Not Selected Yet";
+          document.getElementById("admMediumSelected").textContent = state.medium ? `Selected: ${state.medium}` : "Not Selected Yet";
+          document.getElementById("admClassSelected").textContent = state.className ? `Selected: ${state.className}` : "Not Selected Yet";
+          document.getElementById("admSystemSelected").textContent = state.schoolSystem ? `Selected: ${state.schoolSystem}` : "Not Selected Yet";
+
+          const streamLabel = state.streamCategory === "Science"
+            ? `${state.streamCategory} (${state.scienceSubBranch || "Branch Pending"})`
+            : state.streamCategory;
+
+          document.getElementById("admStreamSelected").textContent = streamLabel ? `Selected: ${streamLabel}` : "Not Selected Yet";
+
+          const compList = getCompulsorySubjects();
+          document.getElementById("admSubjectsSelected").textContent =
+            `Compulsory Locked: ${compList.length} | Optional Chosen: ${state.optionalSubjects.length}`;
+
+          const courseKind = document.getElementById("admCourseKindSelect")?.value || "Supplementary Exam Course (One Time Fee)";
+          const stageAfter = document.getElementById("admStageAfterSelect")?.value || "After 10th";
+          const revSession = document.getElementById("admRevSessionSelect")?.value || "1. 9th Revision and Test Session";
+          const examDateVal = document.getElementById("admExamDateInput")?.value || "2027-03-10";
+          const baseFee = Math.max(100, Number(document.getElementById("admBaseFeeInput")?.value || 2000));
+          const twoTimesWeight = Boolean(document.getElementById("admWeight2xCheck")?.checked);
+          const quranOneTime = Boolean(document.getElementById("admQuranOneTimeCheck")?.checked);
+          const urduOneTime = Boolean(document.getElementById("admUrduOneTimeCheck")?.checked);
+
+          const subjCount = Math.max(1, state.optionalSubjects.length || 1);
+          const weightMult = twoTimesWeight ? 2 : 1;
+          const isOneTime = courseKind.includes("One Time Fee");
+          const threeMonthFee = subjCount * baseFee * 3 * weightMult;
+          const wholeSessionFee = Math.round(baseFee * (5 * 1.5) * subjCount * weightMult);
+          const extrasOneTime = (quranOneTime ? Math.round(baseFee * 0.5) : 0) + (urduOneTime ? Math.round(baseFee * 0.5) : 0);
+          const totalPayable = isOneTime ? (wholeSessionFee + extrasOneTime) : (threeMonthFee + extrasOneTime);
+
+          const timeline = computeBoardTimeline(state.board || "Punjab Board", examDateVal);
+          const eligibleStage = stageAfter === "After 10th" || stageAfter === "After 12th";
+
+          document.getElementById("admLiveSummaryPanel").innerHTML = `
+            <div style="color:#f0cf65;font-weight:800;margin-bottom:6px;">Complete Admission Form Summary</div>
+            <div><strong>Student Name:</strong> ${state.studentName || "Not Entered"} (${state.religion})</div>
+            <div><strong>1. Board:</strong> ${state.board || "—"}</div>
+            <div><strong>2. Medium:</strong> ${state.medium || "—"}</div>
+            <div><strong>3. Class:</strong> ${state.className || "—"}</div>
+            <div><strong>4. School System:</strong> ${state.schoolSystem || "—"}</div>
+            <div><strong>5. Courses / Stream Line:</strong> ${streamLabel || "—"}</div>
+            <div><strong>Locked Compulsory Subjects:</strong> ${compList.join(", ")}</div>
+            <div><strong>Chosen Optional Subjects:</strong> ${state.optionalSubjects.length ? state.optionalSubjects.join(", ") : "None Selected Yet"}</div>
+            <hr style="border:none;border-top:1px solid rgba(212,175,55,0.3);margin:7px 0;" />
+            <div><strong>Stage Facility:</strong> <span style="color:${eligibleStage ? "#22c55e" : "#f87171"};font-weight:800;">${stageAfter}</span> (${eligibleStage ? "Eligible" : "Not Eligible After 9th/11th"})</div>
+            <div><strong>Revision Session:</strong> ${revSession} — Starts <strong>${timeline.revStartFormatted}</strong> (Exam: <strong>${timeline.examDateFormatted}</strong>)</div>
+            <div><strong>Official Board Update:</strong> ${timeline.feed.board} — <em>${timeline.feed.officialUpdate}</em></div>
+            <div style="margin-top:6px;color:#f0cf65;font-size:0.92rem;font-weight:800;">
+              Total Calculated Fee (${courseKind}): PKR ${totalPayable.toLocaleString()}
+            </div>
+          `;
+          return totalPayable;
+        }
+
+        // 1. Board Window
+        document.getElementById("admOpenBoardBtn")?.addEventListener("click", () => {
+          openPopup("1. Select Board", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            boardsList.forEach((b) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.board === b ? "active" : ""}`;
+              btn.textContent = b;
+              btn.addEventListener("click", () => {
+                state.board = b;
+                const feed = officialBoardFeeds[b];
+                const examInput = document.getElementById("admExamDateInput");
+                if (feed && examInput) examInput.value = feed.examStartDate;
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        // 2. Medium Window
+        document.getElementById("admOpenMediumBtn")?.addEventListener("click", () => {
+          openPopup("2. Select Medium", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            mediumsList.forEach((m) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.medium === m ? "active" : ""}`;
+              btn.textContent = m;
+              btn.addEventListener("click", () => {
+                state.medium = m;
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        // 3. Class Window
+        document.getElementById("admOpenClassBtn")?.addEventListener("click", () => {
+          openPopup("3. Select Class", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            classesList.forEach((c) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.className === c ? "active" : ""}`;
+              btn.textContent = c;
+              btn.addEventListener("click", () => {
+                state.className = c;
+                state.optionalSubjects = [];
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        // 4. School System Window
+        document.getElementById("admOpenSystemBtn")?.addEventListener("click", () => {
+          openPopup("4. Select School System", (container) => {
+            const grid = document.createElement("div");
+            grid.className = "choice-grid";
+            schoolSystemsList.forEach((sys) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.schoolSystem === sys ? "active" : ""}`;
+              btn.textContent = sys;
+              btn.addEventListener("click", () => {
+                state.schoolSystem = sys;
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              grid.appendChild(btn);
+            });
+            container.appendChild(grid);
+          });
+        });
+
+        // 5. Courses / Stream Line Window
+        document.getElementById("admOpenStreamBtn")?.addEventListener("click", () => {
+          openPopup("5. Courses / Stream Line", (container) => {
+            const mainGrid = document.createElement("div");
+            mainGrid.className = "choice-grid";
+
+            const branchHolder = document.createElement("div");
+            branchHolder.style.marginTop = "12px";
+
+            function renderScienceSubChoice() {
+              branchHolder.innerHTML = `
+                <div class="field-label">Science Branch — Choose One:</div>
+                <div class="choice-grid">
+                  <button type="button" class="choice-btn ${state.scienceSubBranch === "Computer Science" ? "active" : ""}" id="admSciCompBtn">Computer Science</button>
+                  <button type="button" class="choice-btn ${state.scienceSubBranch === "Biology Science" ? "active" : ""}" id="admSciBioBtn">Biology Science</button>
+                </div>
+              `;
+              branchHolder.querySelector("#admSciCompBtn").addEventListener("click", () => {
+                state.streamCategory = "Science";
+                state.scienceSubBranch = "Computer Science";
+                state.optionalSubjects = [];
+                refreshAdmissionSummary();
+                closePopup();
+              });
+              branchHolder.querySelector("#admSciBioBtn").addEventListener("click", () => {
+                state.streamCategory = "Science";
+                state.scienceSubBranch = "Biology Science";
+                state.optionalSubjects = [];
+                refreshAdmissionSummary();
+                closePopup();
+              });
+            }
+
+            ["Arts", "Science", "Commerce", "Course"].forEach((cat) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = `choice-btn ${state.streamCategory === cat ? "active" : ""}`;
+              btn.textContent = cat;
+              btn.addEventListener("click", () => {
+                if (cat === "Science") {
+                  state.streamCategory = "Science";
+                  renderScienceSubChoice();
+                } else {
+                  state.streamCategory = cat;
+                  state.scienceSubBranch = "";
+                  state.optionalSubjects = [];
+                  refreshAdmissionSummary();
+                  closePopup();
+                }
+              });
+              mainGrid.appendChild(btn);
+            });
+
+            container.appendChild(mainGrid);
+            container.appendChild(branchHolder);
+
+            if (state.streamCategory === "Science") {
+              renderScienceSubChoice();
+            }
+          });
+        });
+
+        // 6. Subjects Window
+        document.getElementById("admOpenSubjectsBtn")?.addEventListener("click", () => {
+          refreshAdmissionSummary();
+          openPopup("6. Subjects — Compulsory (Locked) & Optional", (container) => {
+            const compList = getCompulsorySubjects();
+            const optPool = getAvailableOptionalPool();
+            const clsNum = getClassNumber();
+
+            const compTitle = document.createElement("div");
+            compTitle.className = "field-label";
+            compTitle.style.marginTop = "0";
+            compTitle.textContent = "Compulsory Subjects (Locked):";
+            container.appendChild(compTitle);
+
+            if (clsNum >= 3 && clsNum <= 8) {
+              const relNote = document.createElement("div");
+              relNote.style.cssText = "font-size:0.8rem;color:#f0cf65;margin-bottom:8px;";
+              relNote.textContent =
+                state.religion === "Non-Muslim"
+                  ? "Class 3–8 Rule: Non-Muslim student selected — Ethics is included."
+                  : "Class 3–8 Rule: Muslim student selected — Ethics is for Non-Muslim students only.";
+              container.appendChild(relNote);
+            }
+
+            compList.forEach((subj) => {
+              const row = document.createElement("div");
+              row.className = "subj-row";
+              row.innerHTML = `<span><strong>${subj}</strong></span><span class="locked-tag">Locked Compulsory</span>`;
+              container.appendChild(row);
+            });
+
+            const optTitle = document.createElement("div");
+            optTitle.className = "field-label";
+            optTitle.textContent = "Optional Subjects (Choose Yourself):";
+            container.appendChild(optTitle);
+
+            optPool.forEach((optName) => {
+              const label = document.createElement("label");
+              label.className = "opt-check-box";
+              const cb = document.createElement("input");
+              cb.type = "checkbox";
+              cb.checked = state.optionalSubjects.includes(optName);
+              cb.addEventListener("change", () => {
+                if (cb.checked) {
+                  if (!state.optionalSubjects.includes(optName)) {
+                    state.optionalSubjects.push(optName);
+                  }
+                } else {
+                  state.optionalSubjects = state.optionalSubjects.filter((x) => x !== optName);
+                }
+                refreshAdmissionSummary();
+              });
+              const span = document.createElement("span");
+              span.textContent = optName;
+              label.appendChild(cb);
+              label.appendChild(span);
+              container.appendChild(label);
+            });
+
+            const doneBtn = document.createElement("button");
+            doneBtn.type = "button";
+            doneBtn.className = "gold-submit-btn";
+            doneBtn.textContent = "Save Subject Selection";
+            doneBtn.addEventListener("click", () => {
+              refreshAdmissionSummary();
+              closePopup();
+            });
+            container.appendChild(doneBtn);
+          });
+        });
+
+        [
+          "admStudentNameInput",
+          "admStudentEmailInput",
+          "admReligionSelect",
+          "admCourseKindSelect",
+          "admStageAfterSelect",
+          "admRevSessionSelect",
+          "admExamDateInput",
+          "admBaseFeeInput",
+          "admWeight2xCheck",
+          "admQuranOneTimeCheck",
+          "admUrduOneTimeCheck"
+        ].forEach((id) => {
+          const el = document.getElementById(id);
+          el?.addEventListener("input", refreshAdmissionSummary);
+          el?.addEventListener("change", refreshAdmissionSummary);
+        });
+
+        document.getElementById("admSubmitFinalBtn")?.addEventListener("click", () => {
+          const totalFee = refreshAdmissionSummary();
+          if (!state.studentName || !state.board || !state.medium || !state.className || !state.schoolSystem) {
+            alert("Please complete Student Name, Board, Medium, Class, and School System first.");
+            return;
+          }
+          const newAdmNo = `SHJ-${105 + adminBackupState.records.length}`;
+          adminBackupState.records.unshift({
+            admissionNo: newAdmNo,
+            portal: "Pakistani Students Portal",
+            studentName: state.studentName,
+            email: state.email || "student@example.com",
+            loginId: `pk_${newAdmNo.toLowerCase().replace("-", "")}`,
+            password: `SHJ@${Math.floor(1000 + Math.random() * 9000)}`,
+            status: "Inactive",
+            inactiveReason: "Fee Verification Pending",
+            feeTotal: `PKR ${totalFee.toLocaleString()}`,
+            feePaid: "PKR 0",
+            feeDues: `PKR ${totalFee.toLocaleString()}`,
+            receiptNo: "PENDING"
+          });
+          recordAdminChange(`Submitted Admission Form for ${state.studentName} (${newAdmNo}) — ${state.board}, ${state.className}.`);
+          alert(`Admission Form Submitted!\nYour Admission Number is: ${newAdmNo}\nYou can check your status on Page 2 using ${newAdmNo}.`);
+        });
+
+        refreshAdmissionSummary();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // PAGE 3: PAKISTANI PORTAL -> COURSES
+      function openPakistaniCoursesWindow(clickLog) {
+        welcomePage?.classList.add("hidden-view");
+        portalPage?.classList.add("hidden-view");
+        subViewPage?.classList.remove("hidden-view");
+
+        subViewTitle.textContent = "Page 3 — Pakistani Portal: Courses";
+        subViewBody.innerHTML = `
+          <div class="detail-box">
+            <strong>Click Recorded:</strong> ${clickLog.date} (${clickLog.time}) | <strong>Portal 1 -> Option 2: Courses</strong>
+          </div>
+
+          <div class="course-main-stack">
+            <button type="button" class="course-opt-btn active" data-course-win="competitive">
+              1. Competitive Examinations Courses
+            </button>
+            <button type="button" class="course-opt-btn" data-course-win="languages">
+              2. Language Courses
+            </button>
+            <button type="button" class="course-opt-btn" data-course-win="section">
+              3. Section Courses
+            </button>
+          </div>
+
+          <div id="coursesSubWindow" class="detail-box"></
