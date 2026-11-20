@@ -5182,3 +5182,128 @@
   </button>
   <div id="facSubmittedReceiptBox" class="calc-summary-box" style="display:none;margin-top:10px;"></div>
 </section>
+<script>
+  (function () {
+    const facFullNameInput = document.getElementById("facFullNameInput");
+    const facContactInput = document.getElementById("facContactInput");
+    const facQualificationSelect = document.getElementById("facQualificationSelect");
+    const facExperienceSelect = document.getElementById("facExperienceSelect");
+    const facPortalTrackSelect = document.getElementById("facPortalTrackSelect");
+    const facSubjectsInput = document.getElementById("facSubjectsInput");
+    const facAvailabilitySelect = document.getElementById("facAvailabilitySelect");
+    const facCvFileInput = document.getElementById("facCvFileInput");
+    const facCvStatusPill = document.getElementById("facCvStatusPill");
+    const facApplicationSummaryBox = document.getElementById("facApplicationSummaryBox");
+    const facSubmitApplicationBtn = document.getElementById("facSubmitApplicationBtn");
+    const facSubmittedReceiptBox = document.getElementById("facSubmittedReceiptBox");
+
+    let attachedCvMeta = null;
+    const MAX_CV_BYTES = 2 * 1024 * 1024;
+
+    function refreshFacultyPreview() {
+      if (!facApplicationSummaryBox) return;
+      const nameVal = (facFullNameInput?.value || "").trim() || "Not Entered";
+      const qualVal = facQualificationSelect?.value || "—";
+      const expVal = facExperienceSelect?.value || "—";
+      const trackVal = facPortalTrackSelect?.value || "—";
+      const subjVal = (facSubjectsInput?.value || "").trim() || "Not Specified Yet";
+      const shiftVal = facAvailabilitySelect?.value || "—";
+
+      facApplicationSummaryBox.innerHTML = `
+        <div style="color:#f0cf65;font-weight:800;margin-bottom:5px;">Faculty Application Preview</div>
+        <div><strong>Applicant:</strong> ${nameVal}</div>
+        <div><strong>Qualification:</strong> ${qualVal} • <strong>Experience:</strong> ${expVal}</div>
+        <div><strong>Teaching Track:</strong> ${trackVal}</div>
+        <div><strong>Subjects / Classes:</strong> ${subjVal}</div>
+        <div><strong>Availability:</strong> ${shiftVal}</div>
+        <div><strong>CV Attachment:</strong> ${attachedCvMeta ? `${attachedCvMeta.name} (${attachedCvMeta.sizeKB})` : "None attached"}</div>
+      `;
+    }
+
+    facCvFileInput?.addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) {
+        attachedCvMeta = null;
+        if (facCvStatusPill) facCvStatusPill.textContent = "CV Status: Optional (Less than 2 MB)";
+        refreshFacultyPreview();
+        return;
+      }
+      if (file.size > MAX_CV_BYTES) {
+        alert("CV file is larger than 2 MB. Please select a file under 2 MB.");
+        e.target.value = "";
+        attachedCvMeta = null;
+        if (facCvStatusPill) facCvStatusPill.textContent = "Stopped — File exceeds 2 MB limit.";
+        refreshFacultyPreview();
+        return;
+      }
+      attachedCvMeta = {
+        name: file.name,
+        sizeKB: `${Math.max(1, Math.round(file.size / 1024))} KB`
+      };
+      if (facCvStatusPill) {
+        facCvStatusPill.textContent = `CV Ready: ${attachedCvMeta.name} (${attachedCvMeta.sizeKB})`;
+      }
+      refreshFacultyPreview();
+    });
+
+    [
+      facFullNameInput,
+      facContactInput,
+      facQualificationSelect,
+      facExperienceSelect,
+      facPortalTrackSelect,
+      facSubjectsInput,
+      facAvailabilitySelect
+    ].forEach((el) => {
+      el?.addEventListener("input", refreshFacultyPreview);
+      el?.addEventListener("change", refreshFacultyPreview);
+    });
+
+    facSubmitApplicationBtn?.addEventListener("click", () => {
+      const fullName = (facFullNameInput?.value || "").trim();
+      const contact = (facContactInput?.value || "").trim();
+      const subjects = (facSubjectsInput?.value || "").trim();
+
+      if (!fullName || !contact || !subjects) {
+        alert("Please enter Teacher Full Name, Contact/Email, and Subjects/Classes.");
+        return;
+      }
+
+      const appId = `FAC-${301 + Math.floor(Math.random() * 699)}`;
+      const submittedAt = new Date().toLocaleString();
+      const qual = facQualificationSelect?.value || "";
+      const exp = facExperienceSelect?.value || "";
+      const track = facPortalTrackSelect?.value || "";
+      const shift = facAvailabilitySelect?.value || "";
+
+      if (window.adminBackupState && Array.isArray(window.adminBackupState.adminChangeLog)) {
+        const nextStep = window.adminBackupState.adminChangeLog.length + 1;
+        window.adminBackupState.adminChangeLog.unshift({
+          step: nextStep,
+          time: new Date().toLocaleTimeString(),
+          note: `New Faculty Application ${appId} from ${fullName} (${qual}, ${exp}) for ${subjects} [${track}].`
+        });
+        try {
+          localStorage.setItem("SHJ_UNIFIED_PORTAL_BACKUP_V2", JSON.stringify(window.adminBackupState));
+        } catch (e) {}
+      }
+
+      if (facSubmittedReceiptBox) {
+        facSubmittedReceiptBox.style.display = "block";
+        facSubmittedReceiptBox.innerHTML = `
+          <div style="color:#22c55e;font-weight:800;margin-bottom:5px;">
+            Faculty Application Submitted — Reference ID: ${appId}
+          </div>
+          <div><strong>Teacher:</strong> ${fullName} (${contact})</div>
+          <div><strong>Qualification &amp; Experience:</strong> ${qual} • ${exp}</div>
+          <div><strong>Track &amp; Subjects:</strong> ${track} — <em>${subjects}</em></div>
+          <div><strong>Shift:</strong> ${shift} • <strong>Submitted:</strong> ${submittedAt}</div>
+        `;
+      }
+
+      alert(`Application Submitted!\nReference ID: ${appId}\nYour profile has been logged for review.`);
+    });
+
+    refreshFacultyPreview();
+  })();
+</script>
