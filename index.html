@@ -5635,3 +5635,234 @@
     refreshAttDiaryPreview();
   })();
 </script>
+<script>
+  (function () {
+    const switchTimetableTabBtn = document.getElementById("switchTimetableTabBtn");
+    const switchSyllabusTabBtn = document.getElementById("switchSyllabusTabBtn");
+    const autoTimetablePanel = document.getElementById("autoTimetablePanel");
+    const syllabusTrackerPanel = document.getElementById("syllabusTrackerPanel");
+
+    const ttTrackSelect = document.getElementById("ttTrackSelect");
+    const ttSubjectsInput = document.getElementById("ttSubjectsInput");
+    const ttStartTimeInput = document.getElementById("ttStartTimeInput");
+    const ttDaysSelect = document.getElementById("ttDaysSelect");
+    const generateAutoTimetableBtn = document.getElementById("generateAutoTimetableBtn");
+    const generatedTimetableBox = document.getElementById("generatedTimetableBox");
+
+    const sylSubjectSelect = document.getElementById("sylSubjectSelect");
+    const sylNewChapterInput = document.getElementById("sylNewChapterInput");
+    const addSyllabusChapterBtn = document.getElementById("addSyllabusChapterBtn");
+    const syllabusProgressSummary = document.getElementById("syllabusProgressSummary");
+    const syllabusChapterList = document.getElementById("syllabusChapterList");
+
+    const syllabusData = {
+      English: [
+        { title: "Grammar, Tenses & Sentence Structure", done: true },
+        { title: "Comprehension & Essay / Letter Writing", done: true },
+        { title: "Past Papers & Oral / Spoken Practice", done: false }
+      ],
+      Mathematics: [
+        { title: "Algebra, Equations & Sets", done: true },
+        { title: "Geometry, Trigonometry & Graphs", done: false },
+        { title: "Weekly Problem-Solving Drills", done: false }
+      ],
+      Physics: [
+        { title: "Unit 1–2: Measurements & Kinematics", done: true },
+        { title: "Unit 3–4: Dynamics & Turning Effect", done: false },
+        { title: "Numericals & Board Past Paper Test", done: false }
+      ],
+      Chemistry: [
+        { title: "Fundamentals of Chemistry & Atomic Structure", done: true },
+        { title: "Chemical Bonding & States of Matter", done: false }
+      ],
+      Biology: [
+        { title: "Introduction to Biology & Cellular Organization", done: true },
+        { title: "Enzymes, Bioenergetics & Nutrition", done: false }
+      ],
+      "Computer Science": [
+        { title: "Problem Solving, Flowcharts & Algorithms", done: true },
+        { title: "Programming Fundamentals & Data Structures", done: false }
+      ],
+      "Pakistan Studies / Islamiat / Ethics": [
+        { title: "Core Syllabus Units & Key Concepts", done: true },
+        { title: "Revision Notes & Model Test Paper", done: false }
+      ]
+    };
+
+    switchTimetableTabBtn?.addEventListener("click", () => {
+      switchTimetableTabBtn.classList.add("active");
+      switchSyllabusTabBtn?.classList.remove("active");
+      if (autoTimetablePanel) autoTimetablePanel.style.display = "block";
+      if (syllabusTrackerPanel) syllabusTrackerPanel.style.display = "none";
+    });
+
+    switchSyllabusTabBtn?.addEventListener("click", () => {
+      switchSyllabusTabBtn.classList.add("active");
+      switchTimetableTabBtn?.classList.remove("active");
+      if (syllabusTrackerPanel) syllabusTrackerPanel.style.display = "block";
+      if (autoTimetablePanel) autoTimetablePanel.style.display = "none";
+      renderSyllabusTracker();
+    });
+
+    function buildAutomatedTimetable() {
+      if (!generatedTimetableBox) return;
+      const track = ttTrackSelect?.value || "Classes 9–10";
+      const daysPattern = ttDaysSelect?.value || "Mon–Fri (5 Days / Week)";
+      const shiftInfo = (ttStartTimeInput?.value || "04:00 PM PKT").trim();
+      const rawSubjects = (ttSubjectsInput?.value || "English, Mathematics, Science")
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      const subjectsPool = rawSubjects.length ? rawSubjects : ["English", "Mathematics", "Science"];
+      const dayNames = daysPattern.startsWith("Mon–Sat")
+        ? ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        : daysPattern.startsWith("Sat–Sun")
+        ? ["Saturday", "Sunday"]
+        : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+      const rowsHtml = dayNames
+        .map((day, dIdx) => {
+          const period1 = subjectsPool[dIdx % subjectsPool.length];
+          const period2 = subjectsPool[(dIdx + 1) % subjectsPool.length];
+          const period3 = dIdx % 2 === 0 ? "Test / Practice / Q&A" : "Homework Review & Revision";
+          return `
+            <tr>
+              <td><strong>${day}</strong></td>
+              <td>Period 1: ${period1}</td>
+              <td>Period 2: ${period2}</td>
+              <td>Period 3: ${period3}</td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      generatedTimetableBox.innerHTML = `
+        <div style="color:#f0cf65;font-weight:800;margin-bottom:4px;">Generated Weekly Class Timetable</div>
+        <div><strong>Track:</strong> ${track} • <strong>Schedule:</strong> ${daysPattern} • <strong>Shift:</strong> ${shiftInfo}</div>
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table class="backup-table">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Slot A</th>
+                <th>Slot B</th>
+                <th>Slot C (Test / Revision)</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    generateAutoTimetableBtn?.addEventListener("click", () => {
+      buildAutomatedTimetable();
+      if (window.adminBackupState && Array.isArray(window.adminBackupState.adminChangeLog)) {
+        const nextStep = window.adminBackupState.adminChangeLog.length + 1;
+        window.adminBackupState.adminChangeLog.unshift({
+          step: nextStep,
+          time: new Date().toLocaleTimeString(),
+          note: `Generated Automated Class Timetable for ${ttTrackSelect?.value || "Selected Track"} (${ttDaysSelect?.value || "Weekly"}).`
+        });
+        try {
+          localStorage.setItem("SHJ_UNIFIED_PORTAL_BACKUP_V2", JSON.stringify(window.adminBackupState));
+        } catch (e) {}
+      }
+      alert("Automated Class Timetable Generated Successfully.");
+    });
+
+    function renderSyllabusTracker() {
+      const subj = sylSubjectSelect?.value || "English";
+      if (!syllabusData[subj]) syllabusData[subj] = [];
+      const items = syllabusData[subj];
+
+      const totalCount = items.length;
+      const doneCount = items.filter((i) => i.done).length;
+      const pct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
+
+      if (syllabusProgressSummary) {
+        syllabusProgressSummary.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <strong style="color:#f0cf65;">${subj} — Syllabus Completion</strong>
+            <span style="color:#22c55e;font-weight:800;">${doneCount} / ${totalCount} Topics Completed (${pct}%)</span>
+          </div>
+          <div style="margin-top:8px;height:10px;width:100%;background:#0b1e3f;border:1px solid rgba(212,175,55,0.45);border-radius:999px;overflow:hidden;">
+            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,#154a2d,#22c55e);transition:width 0.25s ease;"></div>
+          </div>
+        `;
+      }
+
+      if (syllabusChapterList) {
+        if (!items.length) {
+          syllabusChapterList.innerHTML = `<div class="calc-summary-box">No topics added for ${subj} yet. Add a chapter above.</div>`;
+          return;
+        }
+
+        syllabusChapterList.innerHTML = "";
+        items.forEach((item, idx) => {
+          const row = document.createElement("label");
+          row.className = "opt-check-box";
+          row.style.justifyContent = "space-between";
+
+          const leftWrap = document.createElement("span");
+          leftWrap.style.cssText = "display:flex;align-items:center;gap:8px;";
+
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.checked = Boolean(item.done);
+          cb.addEventListener("change", () => {
+            syllabusData[subj][idx].done = cb.checked;
+            if (window.adminBackupState && Array.isArray(window.adminBackupState.adminChangeLog)) {
+              const nextStep = window.adminBackupState.adminChangeLog.length + 1;
+              window.adminBackupState.adminChangeLog.unshift({
+                step: nextStep,
+                time: new Date().toLocaleTimeString(),
+                note: `Syllabus topic '${item.title}' in ${subj} marked as ${cb.checked ? "Completed" : "Pending"}.`
+              });
+              try {
+                localStorage.setItem("SHJ_UNIFIED_PORTAL_BACKUP_V2", JSON.stringify(window.adminBackupState));
+              } catch (e) {}
+            }
+            renderSyllabusTracker();
+          });
+
+          const textSpan = document.createElement("span");
+          textSpan.textContent = item.title;
+          if (item.done) {
+            textSpan.style.textDecoration = "line-through";
+            textSpan.style.color = "#94a3b8";
+          }
+
+          leftWrap.appendChild(cb);
+          leftWrap.appendChild(textSpan);
+
+          const badgeSpan = document.createElement("span");
+          badgeSpan.className = "locked-tag";
+          badgeSpan.textContent = item.done ? "Completed" : "In Progress";
+
+          row.appendChild(leftWrap);
+          row.appendChild(badgeSpan);
+          syllabusChapterList.appendChild(row);
+        });
+      }
+    }
+
+    addSyllabusChapterBtn?.addEventListener("click", () => {
+      const subj = sylSubjectSelect?.value || "English";
+      const topicTitle = (sylNewChapterInput?.value || "").trim();
+      if (!topicTitle) {
+        alert("Please enter a chapter or topic name to add.");
+        return;
+      }
+      if (!syllabusData[subj]) syllabusData[subj] = [];
+      syllabusData[subj].push({ title: topicTitle, done: false });
+      if (sylNewChapterInput) sylNewChapterInput.value = "";
+      renderSyllabusTracker();
+    });
+
+    sylSubjectSelect?.addEventListener("change", renderSyllabusTracker);
+
+    buildAutomatedTimetable();
+  })();
+</script>
