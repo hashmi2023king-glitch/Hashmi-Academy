@@ -729,3 +729,86 @@
     });
   })();
 </script>
+<script>
+  (function () {
+    const panelBodyEl = document.getElementById("panelBody");
+    const panelTitleEl = document.getElementById("panelTitle");
+    if (!panelBodyEl || !panelTitleEl) return;
+
+    const expansionPhases = [
+      { phase: "Phase 1", area: "District Gujrat (Gujrat, Dinga, Sarai Alamgir, Lalamusa, Kharian, Jalalpur Jattan, Gulyana, Daulat Nagar)", active: true },
+      { phase: "Phase 2", area: "Regional / Division Expansion", active: false },
+      { phase: "Phase 3", area: "Provincial Expansion", active: false },
+      { phase: "Phase 4", area: "National Expansion", active: false },
+      { phase: "Phase 5", area: "Global International Campus (GBP £ Track)", active: false }
+    ];
+
+    function mountAdminAndTeacherTools(portalKey) {
+      const box = document.getElementById("portalDetailBox");
+      if (!box) return;
+
+      if (portalKey === "teacher") {
+        box.innerHTML = `
+          <div style="margin-bottom:8px;"><strong>Teacher LMS Workspace:</strong> Manage classes, lesson plans, and daily syllabus logs.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+            <button type="button" id="logLessonBtn" class="nav-pill">Mark Today's Syllabus Completed</button>
+            <button type="button" id="alertAbsentBtn" class="close-btn">Send Absentee Alert Notice</button>
+          </div>
+          <div id="teacherActionOutput" style="font-size:0.84rem;color:#d4af37;">Ready for class actions.</div>
+        `;
+        const out = document.getElementById("teacherActionOutput");
+        document.getElementById("logLessonBtn")?.addEventListener("click", () => {
+          if (out) out.textContent = "Syllabus progress logged for today's active session.";
+        });
+        document.getElementById("alertAbsentBtn")?.addEventListener("click", () => {
+          if (out) out.textContent = "Absentee alert queued for parent, faculty, and admin log.";
+        });
+      }
+
+      if (portalKey === "admin") {
+        box.innerHTML = `
+          <div style="margin-bottom:8px;"><strong>Director Admin LMS — Expansion &amp; Operations Controls:</strong></div>
+          <div id="phaseSwitchList" style="display:grid;gap:6px;margin-bottom:10px;"></div>
+          <div style="font-size:0.84rem;color:#cbd5e1;">
+            Modules active: Admissions, Accounts &amp; Fee Verification, HR &amp; Payroll, Faculty Hiring (CV &amp; Experience), Timetables &amp; Syllabi.
+          </div>
+        `;
+        const list = document.getElementById("phaseSwitchList");
+        function renderPhases() {
+          if (!list) return;
+          list.innerHTML = expansionPhases
+            .map(
+              (p, i) => `
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid rgba(212,175,55,0.35);border-radius:8px;background:#0b1d3d;">
+                <span style="font-size:0.82rem;"><strong>${p.phase}:</strong> ${p.area}</span>
+                <button type="button" class="nav-pill phase-toggle-btn ${p.active ? "active" : ""}" data-pidx="${i}">
+                  ${p.active ? "Active" : "Off"}
+                </button>
+              </div>`
+            )
+            .join("");
+
+          list.querySelectorAll(".phase-toggle-btn").forEach((tBtn) => {
+            tBtn.addEventListener("click", () => {
+              const idx = Number(tBtn.dataset.pidx);
+              expansionPhases[idx].active = !expansionPhases[idx].active;
+              renderPhases();
+            });
+          });
+        }
+        renderPhases();
+      }
+    }
+
+    document.addEventListener("click", (event) => {
+      const subBtn = event.target.closest(".portal-sub-btn");
+      if (!subBtn) return;
+      const key = subBtn.dataset.portal;
+      setTimeout(() => {
+        if (key === "teacher" || key === "admin") {
+          mountAdminAndTeacherTools(key);
+        }
+      }, 0);
+    });
+  })();
+</script>
