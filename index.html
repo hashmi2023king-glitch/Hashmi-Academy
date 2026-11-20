@@ -5522,3 +5522,116 @@
     <div id="syllabusChapterList" style="margin-top:8px;"></div>
   </div>
 </section>
+<script>
+  (function () {
+    const attAdmissionNoInput = document.getElementById("attAdmissionNoInput");
+    const attStudentNameInput = document.getElementById("attStudentNameInput");
+    const attClassSubjectInput = document.getElementById("attClassSubjectInput");
+    const attDateInput = document.getElementById("attDateInput");
+    const attStatusPillGroup = document.getElementById("attStatusPillGroup");
+    const dailyDiaryInput = document.getElementById("dailyDiaryInput");
+    const attDiaryLivePreview = document.getElementById("attDiaryLivePreview");
+    const dispatchAttDiaryAlertBtn = document.getElementById("dispatchAttDiaryAlertBtn");
+    const attDiaryDispatchedCard = document.getElementById("attDiaryDispatchedCard");
+
+    let selectedAttStatus = "Present";
+
+    if (attDateInput && !attDateInput.value) {
+      const todayIso = new Date().toISOString().slice(0, 10);
+      attDateInput.value = todayIso;
+    }
+
+    function refreshAttDiaryPreview() {
+      if (!attDiaryLivePreview) return;
+      const admNo = (attAdmissionNoInput?.value || "").trim().toUpperCase() || "Not Entered";
+      const sName = (attStudentNameInput?.value || "").trim() || "Not Entered";
+      const clsSubj = (attClassSubjectInput?.value || "").trim() || "Not Specified";
+      const dateVal = attDateInput?.value || new Date().toISOString().slice(0, 10);
+      const diaryText = (dailyDiaryInput?.value || "").trim() || "No diary note entered yet.";
+
+      const statusColor =
+        selectedAttStatus === "Present"
+          ? "#22c55e"
+          : selectedAttStatus === "Absent"
+          ? "#f87171"
+          : "#f59e0b";
+
+      attDiaryLivePreview.innerHTML = `
+        <div style="color:#f0cf65;font-weight:800;margin-bottom:5px;">Attendance &amp; Diary Alert Preview</div>
+        <div><strong>Adm #:</strong> ${admNo} | <strong>Student:</strong> ${sName}</div>
+        <div><strong>Class / Subject:</strong> ${clsSubj} | <strong>Date:</strong> ${dateVal}</div>
+        <div><strong>Attendance:</strong> <span style="color:${statusColor};font-weight:800;">${selectedAttStatus}</span></div>
+        <div><strong>Daily Diary:</strong> ${diaryText}</div>
+      `;
+    }
+
+    attStatusPillGroup?.querySelectorAll(".type-pill-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        attStatusPillGroup.querySelectorAll(".type-pill-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedAttStatus = btn.dataset.attStatus || "Present";
+        refreshAttDiaryPreview();
+      });
+    });
+
+    [
+      attAdmissionNoInput,
+      attStudentNameInput,
+      attClassSubjectInput,
+      attDateInput,
+      dailyDiaryInput
+    ].forEach((el) => {
+      el?.addEventListener("input", refreshAttDiaryPreview);
+      el?.addEventListener("change", refreshAttDiaryPreview);
+    });
+
+    dispatchAttDiaryAlertBtn?.addEventListener("click", () => {
+      const admNo = (attAdmissionNoInput?.value || "").trim().toUpperCase();
+      const sName = (attStudentNameInput?.value || "").trim();
+      const clsSubj = (attClassSubjectInput?.value || "").trim() || "General Class";
+      const dateVal = attDateInput?.value || new Date().toISOString().slice(0, 10);
+      const diaryText = (dailyDiaryInput?.value || "").trim() || "Standard daily class completed.";
+
+      if (!admNo || !sName) {
+        alert("Please enter both Admission Number and Student Full Name.");
+        return;
+      }
+
+      const sentTime = new Date().toLocaleTimeString();
+
+      if (window.adminBackupState && Array.isArray(window.adminBackupState.adminChangeLog)) {
+        const nextStep = window.adminBackupState.adminChangeLog.length + 1;
+        window.adminBackupState.adminChangeLog.unshift({
+          step: nextStep,
+          time: sentTime,
+          note: `Attendance (${selectedAttStatus}) & Diary alert logged for ${sName} [${admNo}] — ${clsSubj} on ${dateVal}.`
+        });
+        try {
+          localStorage.setItem("SHJ_UNIFIED_PORTAL_BACKUP_V2", JSON.stringify(window.adminBackupState));
+        } catch (e) {}
+      }
+
+      if (attDiaryDispatchedCard) {
+        attDiaryDispatchedCard.style.display = "block";
+        attDiaryDispatchedCard.innerHTML = `
+          <div style="color:#22c55e;font-weight:800;margin-bottom:5px;">
+            3-Way Attendance &amp; Daily Diary Alert Sent (${sentTime})
+          </div>
+          <div><strong>Student:</strong> ${sName} (${admNo}) • <strong>Status:</strong> <strong>${selectedAttStatus}</strong></div>
+          <div><strong>Date &amp; Subject:</strong> ${dateVal} — ${clsSubj}</div>
+          <div><strong>Diary Note:</strong> ${diaryText}</div>
+          <hr style="border:none;border-top:1px solid rgba(212,175,55,0.3);margin:7px 0;" />
+          <ul style="margin-top:4px;padding-left:18px;color:#cbd5e1;">
+            <li><strong>1. Student Alert:</strong> Attendance (${selectedAttStatus}) &amp; homework diary posted.</li>
+            <li><strong>2. Parent / Guardian Alert:</strong> Daily attendance &amp; diary summary shared.</li>
+            <li><strong>3. Director Log (Sir Haroon Javaid Hashmi):</strong> Recorded in Admin Change Log.</li>
+          </ul>
+        `;
+      }
+
+      alert(`Attendance (${selectedAttStatus}) & Daily Diary Alert recorded for ${sName} (${admNo}).`);
+    });
+
+    refreshAttDiaryPreview();
+  })();
+</script>
