@@ -5457,3 +5457,68 @@
     refreshAttDiaryPreview();
   })();
 </script>
+<section id="timetableSyllabusTrackerSection" class="detail-box" style="margin-top:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+    <strong style="color:#f0cf65;font-size:1rem;">Automated Class Timetable &amp; Syllabus Tracker</strong>
+    <span class="lms-badge">Schedule &amp; Progress</span>
+  </div>
+
+  <div class="type-pill-row" style="margin-bottom:10px;">
+    <button type="button" class="type-pill-btn active" id="switchTimetableTabBtn">1. Automated Class Timetable</button>
+    <button type="button" class="type-pill-btn" id="switchSyllabusTabBtn">2. Syllabus &amp; Chapter Tracker</button>
+  </div>
+
+  <!-- TAB 1: AUTOMATED TIMETABLE -->
+  <div id="autoTimetablePanel">
+    <label class="field-label" for="ttTrackSelect" style="margin-top:0;">Select Class / Programme Track</label>
+    <select id="ttTrackSelect" class="field-input">
+      <option value="Classes 3–8 (Foundational & Middle)">Classes 3–8 (Foundational &amp; Middle)</option>
+      <option value="Classes 9–10 (Matric / Secondary Board)">Classes 9–10 (Matric / Secondary Board)</option>
+      <option value="Classes 11–12 (Intermediate / 1st & 2nd Year)">Classes 11–12 (Intermediate / 1st &amp; 2nd Year)</option>
+      <option value="O Level / A Level & International Track">O Level / A Level &amp; International Track</option>
+      <option value="Competitive Exams & Language Track">Competitive Exams &amp; Language Track</option>
+    </select>
+
+    <label class="field-label" for="ttSubjectsInput">Subjects / Modules (Comma Separated)</label>
+    <input id="ttSubjectsInput" class="field-input" type="text" value="English, Mathematics, Physics, Computer Science, Islamiat" />
+
+    <label class="field-label" for="ttStartTimeInput">Daily Start Time &amp; Shift</label>
+    <input id="ttStartTimeInput" class="field-input" type="text" value="04:00 PM PKT (Evening Session)" />
+
+    <label class="field-label" for="ttDaysSelect">Weekly Study Days</label>
+    <select id="ttDaysSelect" class="field-input">
+      <option value="Mon–Fri (5 Days / Week)">Mon–Fri (5 Days / Week)</option>
+      <option value="Mon–Sat (6 Days / Week)">Mon–Sat (6 Days / Week)</option>
+      <option value="Sat–Sun (Weekend Intensive)">Sat–Sun (Weekend Intensive)</option>
+    </select>
+
+    <button type="button" id="generateAutoTimetableBtn" class="gold-submit-btn">
+      Generate Automated Class Timetable
+    </button>
+
+    <div id="generatedTimetableBox" class="calc-summary-box" style="margin-top:10px;"></div>
+  </div>
+
+  <!-- TAB 2: SYLLABUS TRACKER -->
+  <div id="syllabusTrackerPanel" style="display:none;">
+    <label class="field-label" for="sylSubjectSelect" style="margin-top:0;">Select Subject / Course</label>
+    <select id="sylSubjectSelect" class="field-input">
+      <option value="English">English</option>
+      <option value="Mathematics">Mathematics</option>
+      <option value="Physics">Physics</option>
+      <option value="Chemistry">Chemistry</option>
+      <option value="Biology">Biology</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="Pakistan Studies / Islamiat / Ethics">Pakistan Studies / Islamiat / Ethics</option>
+    </select>
+
+    <label class="field-label" for="sylNewChapterInput">Add Chapter / Topic to Track</label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <input id="sylNewChapterInput" class="field-input" type="text" style="flex:1 1 220px;margin-bottom:0;" placeholder="e.g. Chapter 1: Kinematics & Motion..." />
+      <button type="button" id="addSyllabusChapterBtn" class="small-gold-btn">Add Topic</button>
+    </div>
+
+    <div id="syllabusProgressSummary" class="calc-summary-box" style="margin-top:10px;"></div>
+    <div id="syllabusChapterList" style="margin-top:8px;"></div>
+  </div>
+</section>
