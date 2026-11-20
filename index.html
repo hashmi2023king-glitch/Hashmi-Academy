@@ -1701,3 +1701,87 @@
           </div>
 
           <div id="coursesSubWindow" class="detail-box"></
+<div id="intlPortalAdmissionModule" class="detail-box">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+    <strong style="color:#f0cf65;font-size:1rem;">International Students Portal — Admission Form</strong>
+    <span class="badge-pill" id="intlEntryBadge">International Track</span>
+  </div>
+
+  <label class="field-label" for="intlStudentNameInput" style="margin-top:0;">Student Full Name</label>
+  <input id="intlStudentNameInput" class="field-input" type="text" placeholder="Enter international student name..." />
+
+  <label class="field-label" for="intlStudentEmailInput">Student / Guardian Email (For Login &amp; Password)</label>
+  <input id="intlStudentEmailInput" class="field-input" type="email" placeholder="student@international-domain.com" />
+
+  <label class="field-label" for="intlCountrySelect">Country / Region</label>
+  <select id="intlCountrySelect" class="field-input">
+    <option value="United Kingdom (UK)">United Kingdom (UK)</option>
+    <option value="United States (USA)">United States (USA)</option>
+    <option value="Canada">Canada</option>
+    <option value="European Union (Germany / Spain / France)">European Union (Germany / Spain / France)</option>
+    <option value="United Arab Emirates (UAE / Gulf)">United Arab Emirates (UAE / Gulf)</option>
+    <option value="Saudi Arabia (KSA)">Saudi Arabia (KSA)</option>
+    <option value="Australia">Australia</option>
+    <option value="Other International Country">Other International Country</option>
+  </select>
+
+  <label class="field-label" for="intlTimeZoneSelect">Preferred Study Time Zone</label>
+  <select id="intlTimeZoneSelect" class="field-input">
+    <option value="GMT / BST (UK)">GMT / BST (UK)</option>
+    <option value="EST / PST (USA &amp; Canada)">EST / PST (USA &amp; Canada)</option>
+    <option value="CET / CEST (Europe)">CET / CEST (Europe)</option>
+    <option value="GST (UAE) / AST (KSA)">GST (UAE) / AST (KSA)</option>
+    <option value="PKT (Pakistan Standard Time)">PKT (Pakistan Standard Time)</option>
+  </select>
+
+  <!-- 1. INTERNATIONAL CURRICULUM / PROGRAMME -->
+  <div class="detail-box" style="margin-top:12px;">
+    <div class="step-row">
+      <div class="step-label-group">
+        <span class="step-title">1. International Curriculum / Programme</span>
+        <span class="step-selected" id="intlCurrSelectedText">Not Selected Yet</span>
+      </div>
+      <button type="button" class="open-win-btn" id="intlOpenCurrBtn">Select Curriculum</button>
+    </div>
+  </div>
+
+  <!-- 2. GRADE / LEVEL -->
+  <div class="detail-box">
+    <div class="step-row">
+      <div class="step-label-group">
+        <span class="step-title">2. Grade / Level</span>
+        <span class="step-selected" id="intlGradeSelectedText">Not Selected Yet</span>
+      </div>
+      <button type="button" class="open-win-btn" id="intlOpenGradeBtn">Select Grade / Level</button>
+    </div>
+  </div>
+
+  <!-- 3. SUBJECTS / LANGUAGE COURSE SELECTION -->
+  <div class="detail-box">
+    <div class="step-row">
+      <div class="step-label-group">
+        <span class="step-title">3. Subjects &amp; Language Modules</span>
+        <span class="step-selected" id="intlSubjectsSelectedText">0 Modules Selected</span>
+      </div>
+      <button type="button" class="open-win-btn" id="intlOpenSubjectsBtn">Select Subjects</button>
+    </div>
+  </div>
+
+  <!-- 4. CURRENCY & PLAN -->
+  <label class="field-label" for="intlCurrencySelect">Billing Currency</label>
+  <select id="intlCurrencySelect" class="field-input">
+    <option value="GBP">British Pound (GBP £)</option>
+    <option value="USD">US Dollar (USD $)</option>
+    <option value="PKR">Pakistani Rupee (PKR)</option>
+  </select>
+
+  <label class="field-label" for="intlPlanSelect">Study Plan</label>
+  <select id="intlPlanSelect" class="field-input">
+    <option value="Monthly 1-on-1 / Small Group">Monthly 1-on-1 / Small Group</option>
+    <option value="Exam &amp; Revision Intensive">Exam &amp; Revision Intensive</option>
+    <option value="Language Fluency Track">Language Fluency Track</option>
+  </select>
+
+  <div id="intlLiveSummaryBox" class="calc-summary-box"></div>
+  <button type="button" id="intlSubmitAdmissionBtn" class="gold-submit-btn">Submit International Admission</button>
+</div>
