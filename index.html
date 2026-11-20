@@ -1785,3 +1785,262 @@
   <div id="intlLiveSummaryBox" class="calc-summary-box"></div>
   <button type="button" id="intlSubmitAdmissionBtn" class="gold-submit-btn">Submit International Admission</button>
 </div>
+<script>
+  (function () {
+    const intlState = {
+      studentName: "",
+      email: "",
+      country: "United Kingdom (UK)",
+      timeZone: "GMT / BST (UK)",
+      curriculum: "",
+      gradeLevel: "",
+      subjects: [],
+      currency: "GBP",
+      plan: "Monthly 1-on-1 / Small Group"
+    };
+
+    const internationalCurricula = [
+      "Cambridge O Level / IGCSE",
+      "Cambridge AS & A Level",
+      "International School Grades (Grades 1–12)",
+      "IELTS & English Proficiency",
+      "Foreign & Heritage Languages (Urdu, Spanish, German, Arabic)"
+    ];
+
+    const gradeLevelsByCurriculum = {
+      "Cambridge O Level / IGCSE": ["O Level Year 1 / IGCSE 9", "O Level Year 2 / IGCSE 10"],
+      "Cambridge AS & A Level": ["AS Level (Year 12)", "A2 Level (Year 13)"],
+      "International School Grades (Grades 1–12)": [
+        "Grades 1–3 (Foundation)",
+        "Grades 4–6 (Upper Primary)",
+        "Grades 7–8 (Middle)",
+        "Grades 9–10 (Secondary)",
+        "Grades 11–12 (Senior Secondary)"
+      ],
+      "IELTS & English Proficiency": ["Academic IELTS", "General Training IELTS", "Spoken & Business English"],
+      "Foreign & Heritage Languages (Urdu, Spanish, German, Arabic)": [
+        "Beginner (A1)",
+        "Elementary (A2)",
+        "Intermediate (B1)",
+        "Upper-Intermediate (B2)"
+      ]
+    };
+
+    const subjectsByCurriculum = {
+      "Cambridge O Level / IGCSE": [
+        "English Language (1123)",
+        "Mathematics D (4024)",
+        "Additional Mathematics (4037)",
+        "Physics (5054)",
+        "Chemistry (5070)",
+        "Biology (5090)",
+        "Computer Science (2210)",
+        "Accounting (7707)",
+        "Business Studies (7115)",
+        "Economics (2281)",
+        "Pakistan Studies / History / Geography"
+      ],
+      "Cambridge AS & A Level": [
+        "Mathematics (9709)",
+        "Physics (9702)",
+        "Chemistry (9701)",
+        "Biology (9700)",
+        "Computer Science (9618)",
+        "Accounting (9706)",
+        "Business (9609)",
+        "Economics (9708)",
+        "English General Paper (8021)"
+      ],
+      "International School Grades (Grades 1–12)": [
+        "English Language & Literature",
+        "Mathematics",
+        "General / Integrated Science",
+        "Social Studies / World History",
+        "Computer & Digital Skills",
+        "Ethics / Moral Education"
+      ],
+      "IELTS & English Proficiency": [
+        "Listening Mastery",
+        "Reading Comprehension",
+        "Academic & Report Writing",
+        "Speaking Fluency & Mock Tests"
+      ],
+      "Foreign & Heritage Languages (Urdu, Spanish, German, Arabic)": [
+        "Urdu (Spoken, Reading & Writing)",
+        "Spanish (Spoken & Grammar)",
+        "German (Spoken & Grammar)",
+        "Arabic (Quranic & Modern Standard)"
+      ]
+    };
+
+    const unitRateByCurrency = {
+      GBP: { symbol: "£", code: "GBP", perSubject: 45 },
+      USD: { symbol: "$", code: "USD", perSubject: 60 },
+      PKR: { symbol: "PKR ", code: "PKR", perSubject: 8500 }
+    };
+
+    function refreshIntlSummary() {
+      intlState.studentName = document.getElementById("intlStudentNameInput")?.value.trim() || "";
+      intlState.email = document.getElementById("intlStudentEmailInput")?.value.trim() || "";
+      intlState.country = document.getElementById("intlCountrySelect")?.value || "United Kingdom (UK)";
+      intlState.timeZone = document.getElementById("intlTimeZoneSelect")?.value || "GMT / BST (UK)";
+      intlState.currency = document.getElementById("intlCurrencySelect")?.value || "GBP";
+      intlState.plan = document.getElementById("intlPlanSelect")?.value || "Monthly 1-on-1 / Small Group";
+
+      document.getElementById("intlCurrSelectedText").textContent =
+        intlState.curriculum ? `Selected: ${intlState.curriculum}` : "Not Selected Yet";
+
+      document.getElementById("intlGradeSelectedText").textContent =
+        intlState.gradeLevel ? `Selected: ${intlState.gradeLevel}` : "Not Selected Yet";
+
+      document.getElementById("intlSubjectsSelectedText").textContent =
+        `${intlState.subjects.length} Module(s) Selected`;
+
+      const rateInfo = unitRateByCurrency[intlState.currency] || unitRateByCurrency.GBP;
+      const moduleCount = Math.max(1, intlState.subjects.length);
+      const multiplier = intlState.plan.includes("Intensive") ? 1.35 : 1;
+      const estimatedTotal = Math.round(moduleCount * rateInfo.perSubject * multiplier);
+
+      document.getElementById("intlLiveSummaryBox").innerHTML = `
+        <div style="color:#f0cf65;font-weight:800;margin-bottom:6px;">International Admission Summary</div>
+        <div><strong>Student:</strong> ${intlState.studentName || "Not Entered"} (${intlState.email || "No Email"})</div>
+        <div><strong>Country &amp; Time Zone:</strong> ${intlState.country} • ${intlState.timeZone}</div>
+        <div><strong>1. Curriculum:</strong> ${intlState.curriculum || "—"}</div>
+        <div><strong>2. Grade / Level:</strong> ${intlState.gradeLevel || "—"}</div>
+        <div><strong>3. Selected Subjects / Modules:</strong> ${intlState.subjects.length ? intlState.subjects.join(", ") : "None Selected Yet"}</div>
+        <div><strong>Study Plan:</strong> ${intlState.plan}</div>
+        <div style="margin-top:6px;color:#f0cf65;font-size:0.92rem;font-weight:800;">
+          Estimated Fee: ${rateInfo.symbol}${estimatedTotal.toLocaleString()} ${rateInfo.code}
+        </div>
+      `;
+      return `${rateInfo.symbol}${estimatedTotal.toLocaleString()} ${rateInfo.code}`;
+    }
+
+    document.getElementById("intlOpenCurrBtn")?.addEventListener("click", () => {
+      if (typeof openPopup !== "function") return;
+      openPopup("1. International Curriculum", (container) => {
+        const grid = document.createElement("div");
+        grid.className = "choice-grid";
+        internationalCurricula.forEach((curr) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = `choice-btn ${intlState.curriculum === curr ? "active" : ""}`;
+          btn.textContent = curr;
+          btn.addEventListener("click", () => {
+            intlState.curriculum = curr;
+            intlState.gradeLevel = "";
+            intlState.subjects = [];
+            refreshIntlSummary();
+            if (typeof closePopup === "function") closePopup();
+          });
+          grid.appendChild(btn);
+        });
+        container.appendChild(grid);
+      });
+    });
+
+    document.getElementById("intlOpenGradeBtn")?.addEventListener("click", () => {
+      if (typeof openPopup !== "function") return;
+      const grades = gradeLevelsByCurriculum[intlState.curriculum] || [
+        "Grades 1–5", "Grades 6–8", "Grades 9–10 (O Level)", "Grades 11–12 (A Level)", "Language / IELTS Track"
+      ];
+      openPopup("2. Select Grade / Level", (container) => {
+        const grid = document.createElement("div");
+        grid.className = "choice-grid";
+        grades.forEach((g) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = `choice-btn ${intlState.gradeLevel === g ? "active" : ""}`;
+          btn.textContent = g;
+          btn.addEventListener("click", () => {
+            intlState.gradeLevel = g;
+            refreshIntlSummary();
+            if (typeof closePopup === "function") closePopup();
+          });
+          grid.appendChild(btn);
+        });
+        container.appendChild(grid);
+      });
+    });
+
+    document.getElementById("intlOpenSubjectsBtn")?.addEventListener("click", () => {
+      if (typeof openPopup !== "function") return;
+      const pool = subjectsByCurriculum[intlState.curriculum] || [
+        "English", "Mathematics", "Science", "Computer Science", "IELTS Preparation", "Language Course"
+      ];
+      openPopup("3. Select International Subjects / Modules", (container) => {
+        pool.forEach((subj) => {
+          const label = document.createElement("label");
+          label.className = "opt-check-box";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.checked = intlState.subjects.includes(subj);
+          cb.addEventListener("change", () => {
+            if (cb.checked) {
+              if (!intlState.subjects.includes(subj)) intlState.subjects.push(subj);
+            } else {
+              intlState.subjects = intlState.subjects.filter((x) => x !== subj);
+            }
+            refreshIntlSummary();
+          });
+          const span = document.createElement("span");
+          span.textContent = subj;
+          label.appendChild(cb);
+          label.appendChild(span);
+          container.appendChild(label);
+        });
+
+        const saveBtn = document.createElement("button");
+        saveBtn.type = "button";
+        saveBtn.className = "gold-submit-btn";
+        saveBtn.textContent = "Save Selected Modules";
+        saveBtn.addEventListener("click", () => {
+          refreshIntlSummary();
+          if (typeof closePopup === "function") closePopup();
+        });
+        container.appendChild(saveBtn);
+      });
+    });
+
+    [
+      "intlStudentNameInput",
+      "intlStudentEmailInput",
+      "intlCountrySelect",
+      "intlTimeZoneSelect",
+      "intlCurrencySelect",
+      "intlPlanSelect"
+    ].forEach((id) => {
+      const el = document.getElementById(id);
+      el?.addEventListener("input", refreshIntlSummary);
+      el?.addEventListener("change", refreshIntlSummary);
+    });
+
+    document.getElementById("intlSubmitAdmissionBtn")?.addEventListener("click", () => {
+      const feeText = refreshIntlSummary();
+      if (!intlState.studentName || !intlState.curriculum) {
+        alert("Please enter Student Name and select an International Curriculum.");
+        return;
+      }
+      const admId = `INT-${202 + Math.floor(Math.random() * 700)}`;
+      if (window.adminBackupState && Array.isArray(window.adminBackupState.records)) {
+        window.adminBackupState.records.unshift({
+          admissionNo: admId,
+          portal: "International Students Portal",
+          studentName: intlState.studentName,
+          email: intlState.email || "intl@example.com",
+          loginId: `intl_${admId.toLowerCase().replace("-", "")}`,
+          password: `INT@${Math.floor(1000 + Math.random() * 9000)}`,
+          status: "Inactive",
+          inactiveReason: "International Fee / Verification Pending",
+          feeTotal: feeText,
+          feePaid: "0",
+          feeDues: feeText,
+          receiptNo: "PENDING"
+        });
+      }
+      alert(`International Admission Recorded!\nAdmission Number: ${admId}\nEstimated Fee: ${feeText}`);
+    });
+
+    refreshIntlSummary();
+  })();
+</script>
